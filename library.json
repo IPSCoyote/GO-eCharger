@@ -1,8 +1,8 @@
 {
 "id": "{5B0EF2BA-4897-49D0-9A0A-43DAA92EAC72}",
 "author": "Coyote",
-"name": "go-eCharger",
-"url": "",
+"name": "GO-eCharger",
+"url": "https://github.com/IPSCoyote/GO-eCharger",
 "compatibility": { "version": "4.2", "date": 1491343200 },
 "version": "0.1",
 "build": 0,
