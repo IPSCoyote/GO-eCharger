@@ -8,7 +8,7 @@ Nicht verwenden! Don't use it yet!
 
 1. [Funktionsumfang](#1-funktionsumfang) 
 2. [Systemanforderungen](#2-systemanforderungen)
-3. [Installation](#3-Installation)
+3. [Installation](#3-installation)
 
 ## 1. Funktionsumfang
 
