@@ -1,0 +1,12 @@
+{
+    "translations": {
+        "de": { 
+            //--- Form Fields
+            "IP Address": "IP Adresse",
+            "Connect GO-eCharger": "GO-eCharger verbinden",
+            
+            //--- Status Messages
+            "GO-eCharger connected successfully": "GO-eCharger erfolgreich verbunden",
+            "GO-eCharger not found": "GO-eCharger nicht gefunden",
+        }
+    }
