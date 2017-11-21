@@ -1,2 +1,3 @@
-# GO-eCharger
-IP-Symcon Module 
+### IP-Symcon Modul für die GO-eCharger Wallbox
+
+Versuchstadium ;)
