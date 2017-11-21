@@ -1,3 +1,3 @@
 ### IP-Symcon Modul für die GO-eCharger Wallbox
 
-Versuchstadium ;)
+Nicht verwenden! Don't use it yet!
