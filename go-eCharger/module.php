@@ -18,15 +18,15 @@
         }
  
         //=== Modul Funktionen =========================================================================================
-        /* Own module functions called via the defined prefix GOE_* 
+        /* Own module functions called via the defined prefix GOeCharger_* 
         *
-        * GOECharger_CheckConnection($id);
+        * GOeCharger_CheckConnection($id);
         *
         */
         
         public function CheckConnection($ID) {
           /* Check the connection to the go-eCharger */
-          echo "GOE_CheckConnection for instance ".$ID;
+          echo "GOeCharger_CheckConnection for instance ".$ID;
         }
     }
 ?>
