@@ -20,7 +20,7 @@
         //=== Modul Funktionen =========================================================================================
         /* Own module functions called via the defined prefix GOE_* 
         *
-        * GOE_CheckConnection($id);
+        * GOECharger_CheckConnection($id);
         *
         */
         
