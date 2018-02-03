@@ -3,7 +3,7 @@
     [
       { "type": "Label", "label": "Settings go-eCharger 1:" },
       { "type": "ValidationTextBox", "name": "IPAddressCharger1", "caption": "IP Address Charger 1" },
-      { "type": "Select", "name": "AmpCharger1", "caption": "Maximum Ampere Charger 1",
+      { "type": "Select", "name": "MaxAmpCharger1", "caption": "Maximum Ampere Charger 1",
         "options": [
            { "label": "6A - 4,14kw",  "value": 6 },
            { "label": "10A - 6,9kw",  "value": 10 },
