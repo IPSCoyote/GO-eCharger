@@ -29,9 +29,9 @@
         *
         */
         
-        public function CheckConnection($ID) {
+        public function TestConnection() {
           /* Check the connection to the go-eCharger */
-          echo "GOeCharger_CheckConnection for instance ".$ID;
+          $this->sendDebug( "go-eCharger", "TestConnection()", 0 );  
         }
     }
 ?>
