@@ -4,6 +4,9 @@
             //--- Form Fields
             "IP Address": "IP Adresse",
             
+            //--- Buttons
+            "Test Connection": "Verbindung testen",
+            
             //--- Status Messages
             "GO-eCharger connected successfully": "GO-eCharger gefunden",
             "GO-eCharger not found": "GO-eCharger nicht gefunden",
