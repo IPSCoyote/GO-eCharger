@@ -36,7 +36,7 @@
             
           $IPAddress = trim($this->ReadPropertyString("IPAddressCharger1"));
             
-          if ( $IPAddress = "0.0.0.0" ) {
+          if ( $IPAddress == "0.0.0.0" ) {
               $this->SetStatus(200); // no configuration done
               return;
           } elseif (filter_var($IPAddress, FILTER_VALIDATE_IP) == false) { 
