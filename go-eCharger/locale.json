@@ -1,9 +1,10 @@
 {
     "translations": {
         "de": { 
-            "IP Address": "IP Adresse",
+            "IP Address Charger 1": "IP Adresse",
             "Test Connection": "Verbindung testen",
             "GO-eCharger connected successfully": "GO-eCharger gefunden",
             "GO-eCharger not found": "GO-eCharger nicht gefunden"
         }
     }
+}
