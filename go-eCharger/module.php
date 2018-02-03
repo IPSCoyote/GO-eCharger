@@ -31,7 +31,7 @@
         
         public function Update() {
           /* Check the connection to the go-eCharger */
-          $this->sendDebug( "go-eCharger", "TestConnection()", 0 );  
+          $this->sendDebug( "go-eCharger", "Update()", 0 );  
         }
     }
 ?>
