@@ -11,9 +11,9 @@
     [
       { "code": 200, "icon": "inactive", "caption": "no GO-eCharger configured" },
       { "code": 201, "icon": "error", "caption": "no valid IP configured" },
-      { "code": 250, "icon": "active", "caption": "GO-eChargers found" },
-      { "code": 251, "icon": "active", "caption": "all GO-eChargers found" },
-      { "code": 300, "icon": "error",  "caption": "GO-eCharger not found" },
-      { "code": 301, "icon": "error",  "caption": "not all GO-eChargers found" }
+      { "code": 250, "icon": "active", "caption": "GO-eCharger identified" },
+      { "code": 251, "icon": "active", "caption": "all GO-eChargers identified" },
+      { "code": 300, "icon": "error",  "caption": "GO-eCharger not identified" },
+      { "code": 301, "icon": "error",  "caption": "not all GO-eChargers identified" }
     ]
 }
