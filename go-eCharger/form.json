@@ -5,7 +5,7 @@
     ],
     "actions":  
     [
-        { "type": "Button", "label": "Test Connection", "onClick": "$this->testConnection();" }
+        { "type": "Button", "label": "Test Connection", "onClick": "GOeCharger_($id);" }
     ],
     "status":   
     [
