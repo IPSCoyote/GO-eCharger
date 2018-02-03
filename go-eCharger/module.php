@@ -38,14 +38,20 @@
           $connectionOK = true;
             
           // get Status for go-eCharger 1
-          if (filter_var($IPAddress, FILTER_VALIDATE_IP)) {
-            $json = file_get_contents("http://".$IPAddress."/status");  
-            $goECharger1Status = json_decode($json);
-            if ( $goECharger1Status === null ) {
-                $connectionOK = false;
-            }   
-          else { 
-              $connectionOK = false; 
+          //if (filter_var($IPAddress, FILTER_VALIDATE_IP)) {
+          //  $json = file_get_contents("http://".$IPAddress."/status");  
+          //  $goECharger1Status = json_decode($json);
+          //  if ( $goECharger1Status === null ) {
+          //      $connectionOK = false;
+          //  }   
+          //else { 
+          //    $connectionOK = false; 
+          //}
+            
+          if ( $connectionOK == true ) {
+            $this->SetStatus(101);
+          } else {
+            $this->SetStatus(201);
           }
             
         }
