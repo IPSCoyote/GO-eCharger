@@ -9,7 +9,9 @@
     ],
     "status":   
     [
-      { "code": 102, "icon": "active", "caption": "GO-eCharger found" },
-      { "code": 201, "icon": "error",  "caption": "GO-eCharger not found" }
+      { "code": 101, "icon": "active", "caption": "GO-eCharger found" },
+      { "code": 102, "icon": "active", "caption": "all GO-eChargers found" },
+      { "code": 201, "icon": "error",  "caption": "GO-eCharger not found" },
+      { "code": 202, "icon": "error",  "caption": "not all GO-eChargers found" }
     ]
 }
