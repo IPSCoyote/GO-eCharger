@@ -39,12 +39,9 @@
             
           // get Status for go-eCharger 1
           $json = file_get_contents("http://".$IPAddress."/status");  
-          if ( $json !== false ) {
-            $goECharger1Status = json_decode($json);
-              
-            if ( isset($goECharger1Status['sse']) == false ) {
-                $connectionOK = false;
-            } 
+          $goECharger1Status = json_decode($json);
+          if ( $goECharger1Status === null ) {
+              $connectionOK = false;
           }   
           else { 
               $connectionOK = false; 
