@@ -1,17 +1,12 @@
 {
-    //=== Form Fields ==================================================================================================
     "elements": 
     [
       { "type": "ValidationTextBox", "name": "IPAddressCharger1", "caption": "IP Address" }
     ],
-    
-    //=== Actions ======================================================================================================
     "actions":  
     [
         { "type": "Button", "label": "Test Connection", "onClick": "" }
     ],
-    
-    //=== Status Messages ==============================================================================================
     "status":   
     [
       { "code": 102, "icon": "active", "caption": "GO-eCharger found" },
