@@ -5,7 +5,7 @@
     ],
     "actions":  
     [
-        { "type": "Button", "label": "Test Connection", "onClick": "GOeCharger_($id);" }
+        { "type": "Button", "label": "Test Connection", "onClick": "GOeCharger_Update($id);" }
     ],
     "status":   
     [
