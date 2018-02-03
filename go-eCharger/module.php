@@ -34,7 +34,17 @@
           /* Check the connection to the go-eCharger */
           $this->sendDebug( "go-eCharger", "Update()", 0 );  
             
-          $IPAddress = $this->ReadPropertyString("IPAddressCharger1");
+          $IPAddress = trim($this->ReadPropertyString("IPAddressCharger1"));
+            
+          if ( $IPAddress = "0.0.0.0" ) {
+              $this->SetStatus(200); // no configuration done
+              return;
+          } elseif (filter_var($IPAddress, FILTER_VALIDATE_IP) == false) { 
+              $this->SetStatus(201); // no valid IP configured
+              return;
+          }
+           
+          // check, if go-eChargers are there...
           $connectionOK = true;
             
           // get Status for go-eCharger 1
