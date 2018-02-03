@@ -32,6 +32,23 @@
         public function Update() {
           /* Check the connection to the go-eCharger */
           $this->sendDebug( "go-eCharger", "Update()", 0 );  
+            
+          $IPAddress = $this->ReadPropertyString("IPAddressCharger1");
+          $connectionOK = true;
+            
+          // get Status for go-eCharger 1
+          $json = file_get_contents("http://".$IPAddress."/status");  
+          if ( $json !== false ) {
+            $goECharger1Status = json_decode($json);
+              
+            if ( isset( $goECharger1Status['sse'] ) == false ) {
+                $connectionOK = false;
+            } 
+          }   
+          else { 
+              $connectionOK = false; 
+          }
+            
         }
     }
 ?>
