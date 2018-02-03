@@ -11,7 +11,9 @@
              Status-Variables und Modul-Properties for permanent usage should be created here  */
           parent::Create(); 
             
+          // Properties Charger 1
           $this->RegisterPropertyString("IPAddressCharger1", "0.0.0.0");  
+          $this->RegisterPropertyString("MaxAmpCharger1,"6");
         }
  
         public function ApplyChanges() {
