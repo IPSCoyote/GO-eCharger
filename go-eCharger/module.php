@@ -74,7 +74,7 @@
           }
             
           if ( $connectionOK == true ) {
-            $this->SetStatus(250);
+            $this->SetStatus(102);
           } else {
             $this->SetStatus(300);
           }
