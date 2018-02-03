@@ -5,7 +5,7 @@
     ],
     "actions":  
     [
-        { "type": "Button", "label": "Test Connection", "onClick": "" }
+        { "type": "Button", "label": "Test Connection", "onClick": "$this->testConnection();" }
     ],
     "status":   
     [
