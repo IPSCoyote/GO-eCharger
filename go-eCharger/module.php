@@ -50,7 +50,13 @@
           // get Status for go-eCharger 1
           if (filter_var($IPAddress, FILTER_VALIDATE_IP)) {
             try {  
-              $json = file_get_contents("http://".$IPAddress."/status");  
+                $ch    = curl_init("http://".$IPAddress."/status"); 
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); 
+                curl_setopt($ch, CURLOPT_HEADER, 0); 
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+                $json = curl_exec($ch); 
+                curl_close ($ch);  
             } catch (Exception $e) { 
                 $connectionOK = false;
             };
