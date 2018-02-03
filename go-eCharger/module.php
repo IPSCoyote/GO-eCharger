@@ -53,6 +53,8 @@
             $goECharger1Status = json_decode($json);
             if ( $goECharger1Status === null ) {
                 $connectionOK = false;
+            } elseif ( isset( $goEChargerStatus->{'sse'} ) !== true )
+                $connectionOK = false;
           }   
           else { 
               $connectionOK = false; 
