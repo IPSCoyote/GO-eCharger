@@ -49,14 +49,18 @@
             
           // get Status for go-eCharger 1
           if (filter_var($IPAddress, FILTER_VALIDATE_IP)) {
+              $this->sendDebug( "go-eCharger", "IP valid", 0 );
             $json = file_get_contents("http://".$IPAddress."/status");  
             $goECharger1Status = json_decode($json);
             if ( $goECharger1Status === null ) {
+                $this->sendDebug( "go-eCharger", "json invalid", 0 );
                 $connectionOK = false;
             } elseif ( isset( $goEChargerStatus->{'sse'} ) !== true )
+                $this->sendDebug( "go-eCharger", "sse not found", 0 );
                 $connectionOK = false;
           }   
           else { 
+              $this->sendDebug( "go-eCharger", "ip invalid", 0 );
               $connectionOK = false; 
           }
             
