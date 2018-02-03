@@ -2,7 +2,7 @@
     //=== Form Fields ==================================================================================================
     "elements": 
     [
-      { "type": "ValidationTextBox", "name": "IPAddress", "caption": "IP Address" }
+      { "type": "ValidationTextBox", "name": "IPAddressCharger1", "caption": "IP Address" }
     ],
     
     //=== Actions ======================================================================================================
