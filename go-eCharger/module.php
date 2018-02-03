@@ -29,7 +29,7 @@
         *
         */
         
-        public function TestConnection() {
+        public function testConnection() {
           /* Check the connection to the go-eCharger */
           $this->sendDebug( "go-eCharger", "TestConnection()", 0 );  
         }
