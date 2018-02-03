@@ -1,7 +1,7 @@
 {
     "elements": 
     [
-      { "type": "ValidationTextBox", "name": "IPAddressCharger1", "caption": "IP Address" }
+      { "type": "ValidationTextBox", "name": "IPAddressCharger1", "caption": "IP Address Charger 1" }
     ],
     "actions":  
     [
