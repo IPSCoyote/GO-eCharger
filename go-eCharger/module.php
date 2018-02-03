@@ -59,9 +59,9 @@
           }
             
           if ( $connectionOK == true ) {
-            $this->SetStatus(201);
+            $this->SetStatus(250);
           } else {
-            $this->SetStatus(301);
+            $this->SetStatus(300);
           }
             
         }
