@@ -15,6 +15,9 @@
         public function ApplyChanges() {
           /* Called on 'apply changes' in the configuration UI and after creation of the instance */
           parent::ApplyChanges();
+            
+          $this->sendDebug( "go-eCharger", "Apply", 0 );  
+            
         }
  
         //=== Modul Funktionen =========================================================================================
