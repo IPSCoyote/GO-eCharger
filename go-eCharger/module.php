@@ -42,7 +42,7 @@
           if ( $json !== false ) {
             $goECharger1Status = json_decode($json);
               
-            if ( isset( $goECharger1Status['sse'] ) == false ) {
+            if ( isset($goECharger1Status['sse']) == false ) {
                 $connectionOK = false;
             } 
           }   
