@@ -14,7 +14,7 @@
     //=== Status Messages ==============================================================================================
     "status":   
     [
-      { "code": 102, "icon": "active", "caption": "GO-eCharger connected successfully" },
+      { "code": 102, "icon": "active", "caption": "GO-eCharger found" },
       { "code": 201, "icon": "error",  "caption": "GO-eCharger not found" }
     ]
 }
