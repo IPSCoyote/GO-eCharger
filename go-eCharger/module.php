@@ -22,7 +22,7 @@
             
           $this->Update();
         }
- 
+
         //=== Modul Funktionen =========================================================================================
         /* Own module functions called via the defined prefix GOeCharger_* 
         *
@@ -48,7 +48,7 @@
           $connectionOK = true;
             
           // get Status for go-eCharger 1
-          if (filter_var($IPAddress, FILTER_VALIDATE_IP)) {
+          if (filter_var($IPAddress, FILTER_VALIDATE_IP) and ping( $IPAddress, 80, 1 )) {
             try {  
                 $ch    = curl_init("http://".$IPAddress."/status"); 
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
@@ -78,5 +78,22 @@
           }
             
         }
+        
+        //=== Modul Funktionen =========================================================================================
+        /* Own module functions called via the defined prefix GOeCharger_* 
+        *
+        * GOeCharger_CheckConnection($id);
+        *
+        */
+        
+        function ping($host, $port, $timeout) 
+        { 
+          ob_start();
+          $fP = fSockOpen($host, $port, $errno, $errstr, $timeout); 
+          ob_clean();
+          if (!$fP) { return false; } 
+          return true; 
+        }
+        
     }
 ?>
