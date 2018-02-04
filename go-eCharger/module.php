@@ -64,10 +64,10 @@
         
         public function SetMaxAmpere(int $Ampere) {
             // Check input value
-            if ( $Ampere < 6 or $Ampere > 32 ) return false;
+            if ( $Ampere < 6 or $Ampere > 32 ) { return false };
             
             // Check requested Ampere is <= max Ampere set in Instance
-            if ( $Ampere > $this->ReadPropertyString("MaxAmpCharger") ) return false;
+            if ( $Ampere > $this->ReadPropertyString("MaxAmpCharger") ) { return false };
             
             // first calculate the Button values
             $button['0'] = 6; // min. Value
@@ -97,7 +97,7 @@
             
         public function SetCurrentAmpere(int $Ampere, boolean $orMaximum = 0) {
             // Check input value
-            if ( $Ampere < 6 or $Ampere > 32 ) return false;
+            if ( $Ampere < 6 or $Ampere > 32 ) { return false };
             
             // Check requested Ampere is <= max Ampere set in Instance
             $goEChargerStatus = getStatusFromCharger();
@@ -113,7 +113,9 @@
             }
             
             // set current available Ampere
-            setValueToeCharger( 'amp', $setAmpere );       
+            setValueToeCharger( 'amp', $setAmpere );  
+            
+            Update();
         }
             
         //=== Modul Funktionen =========================================================================================
