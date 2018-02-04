@@ -70,17 +70,17 @@
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
             
-            $setAmpere = $Ampere;
-            if ( $setAmpere > $goEChargerStatus->{'ama'} ) {
-                if ( $orMaximum == true ) { 
-                    $setAmpere = $goEChargerStatus->{'ama'}; 
-                } else {
-                    return false;
-                }
-            }
+            //$setAmpere = $Ampere;
+            //if ( $setAmpere > $goEChargerStatus->{'ama'} ) {
+            //    if ( $orMaximum == true ) { 
+            //        $setAmpere = $goEChargerStatus->{'ama'}; 
+            //    } else {
+            //        return false;
+            //    }
+            //}
             
             // set current available Ampere
-            $this->setValueToeCharger( 'amp', $setAmpere );  
+            //$this->setValueToeCharger( 'amp', $setAmpere );  
             
             $this->Update();
         }
