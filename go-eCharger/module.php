@@ -95,6 +95,8 @@
             }  
             
             $this->Update();
+            
+            if ( $resultStatus->{'ama'} == $Ampere ) { return true; } else { return false; }
         }
         
         public function SetCurrentAmpere(int $Ampere, boolean $orMaximum ) {
@@ -115,9 +117,11 @@
             }
             
             // set current available Ampere
-            $this->setValueToeCharger( 'amp', $Ampere );  
+            $resultStatus = $this->setValueToeCharger( 'amp', $Ampere ); 
             
             $this->Update();
+            
+            if ( $resultStatus->{'amp'} == $Ampere ) { return true; } else { return false; }
         }
         
         //=== Modul Funktionen =========================================================================================
