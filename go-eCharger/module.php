@@ -87,8 +87,8 @@
        
           // write values into variables
           SetValue($this->GetIDForIdent("serialID"), $goEChargerStatus->{'sse'});  
-          SetValue($this->GetIDForIdent("error"), $goEChargerStatus->{'err'}); 
-          SetValue($this->GetIDForIdent("availableAMP"), ( $goEChargerStatus->{'amp'} == '0' )); 
+          SetValue($this->GetIDForIdent("error"), ( $goEChargerStatus->{'err'} == 0 ) ); 
+          SetValue($this->GetIDForIdent("availableAMP"), $goEChargerStatus->{'amp'} ); 
           SetValue($this->GetIDForIdent("maxAvailableAMP"), $goEChargerStatus->{'ama'}); 
             
           $goEChargerEnergy = $goEChargerStatus->{'nrg'};
