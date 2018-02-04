@@ -82,7 +82,7 @@
             // set current available Ampere
             $this->setValueToeCharger( 'amp', $setAmpere );  
             
-            $$this->Update();
+            $this->Update();
         }
         
         //=== Modul Funktionen =========================================================================================
