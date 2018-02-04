@@ -144,7 +144,7 @@
                 $profileID = IPS_CreateVariableProfile('GOECHARGER_Error', 0 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Error', 'Ok' );
                 IPS_SetVariableProfileAssociation("GOECHARGER_Error", true, "Ok",     "", 0x00FF00);
-                IPS_SetVariableProfileAssociation("GOECHARGER_Error", false, "Feler", "", 0xFF0000);
+                IPS_SetVariableProfileAssociation("GOECHARGER_Error", false, "Fehler", "", 0xFF0000);
             }  
     
         }
