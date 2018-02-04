@@ -94,7 +94,7 @@
           SetValue($this->GetIDForIdent("availableVP2"), $goEChargerEnergy[1]);            
           SetValue($this->GetIDForIdent("availableVP3"), $goEChargerEnergy[2]);  
             
-          $availableKW = ( $goEChargerEnergy[0] * $goEChargerEnergy[1] * $goEChargerEnergy[2] )/3 * 3 * $goEChargerStatus->{'amp'};
+          $availableKW = ( ( ( $goEChargerEnergy[0] + $goEChargerEnergy[1] + $goEChargerEnergy[2] ) / 3 ) * 3 * $goEChargerStatus->{'amp'} ) / 1000;
           SetValue($this->GetIDForIdent("availableKW"), $availableKW);  
             
         }
