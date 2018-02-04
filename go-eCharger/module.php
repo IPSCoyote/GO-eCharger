@@ -22,11 +22,9 @@
             
           $this->sendDebug( "go-eCharger", "Apply", 0 );  
 
-          // Generate Profiles
-          //$this->registerProfiles();
-            
-          // Generate Variables
-          //$this->registerVariables();
+          // Generate Profiles & Variables
+          $this->registerProfiles();
+          $this->registerVariables();
 
           // Update Data to Variables
           $this->Update();
@@ -107,27 +105,25 @@
           if (!$fP) { return false; } 
           return true; 
         }
-        
+            
         protected function registerProfiles() {
             // Generate Variable Profiles
-            //if ( !IPS_VariableProfileExists('GOECHARGER_Ampere') ) {
-            //    $profileID = IPS_CreateVariableProfile('GOECHARGER_Ampere', 1 );
-            //    IPS_SetVariableProfileDigits($profileID, 0 );
-            //    IPS_SetVariableProfileIcon($profileID, 'Electricity' );
-            //    IPS_SetVariableProfileText($profileID, "", " A" );
-            //}
+            if ( !IPS_VariableProfileExists('GOECHARGER_Ampere') ) {
+                $profileID = IPS_CreateVariableProfile('GOECHARGER_Ampere', 1 );
+                IPS_SetVariableProfileDigits($profileID, 0 );
+                IPS_SetVariableProfileIcon($profileID, 'Electricity' );
+                IPS_SetVariableProfileText($profileID, "", " A" );
+            }
         }
         
         protected function registerVariables() {
             // Generate Variables
-            //if ( $this->GetIDForIdent("SerialID") == false ) {
-            //  $this->RegisterVariableString("SerialID", "Seriennummer","~String",0);
-            //}
-            //if ( $this->GetIDForIdent("CurrentAMP") == false ) {
-            //  $this->RegisterVariableString("CurrentAMP", "derzeit verfügbarer Ladestrom","GOECHARGER_Ampere",1);
-            //}
+            if ( $this->GetIDForIdent("SerialID") == false ) {
+              $this->RegisterVariableString("SerialID", "Seriennummer","~String",0);
+            }
+            if ( $this->GetIDForIdent("CurrentAMP") == false ) {
+              $this->RegisterVariableString("CurrentAMP", "derzeit verfügbarer Ladestrom","GOECHARGER_Ampere",1);
+            }
         }
-    }
-        
     }
 ?>
