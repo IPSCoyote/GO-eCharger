@@ -13,8 +13,7 @@
             
           // Properties Charger 1
           $this->RegisterPropertyString("IPAddressCharger", "0.0.0.0");  
-          $this->RegisterPropertyString("MaxAmpCharger","6");
-            
+          $this->RegisterPropertyString("MaxAmpCharger","6");   
         }
  
         public function ApplyChanges() {
@@ -22,6 +21,9 @@
           parent::ApplyChanges();
             
           $this->sendDebug( "go-eCharger", "Apply", 0 );  
+
+          // Generate Variables
+          $this->RegisterVariableString("SerialID", "Seriennummer","~String",0);
             
           $this->Update();
         }
@@ -81,6 +83,10 @@
           // so from here, $goEChargerStatus is the valid Status JSON from eCharger
           $this->SetStatus(102); // active as go-eCharger found
        
+          // write values into variables
+          SetValue($this->GetIDForIdent("SerialID"), $goEChargerStatus->{'sse'});     
+            
+            
         }
         
         //=== Modul Funktionen =========================================================================================
