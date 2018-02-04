@@ -41,49 +41,9 @@
           /* Check the connection to the go-eCharger */
           $this->sendDebug( "go-eCharger", "Update()", 0 );  
             
-          // get IP of go-eCharger
-          $IPAddress = trim($this->ReadPropertyString("IPAddressCharger"));
+          $goEChargerStatus = getStatusFromCharger();
             
-          // check if IP is ocnfigured and valid
-          if ( $IPAddress == "0.0.0.0" ) {
-              $this->SetStatus(200); // no configuration done
-              return;
-          } elseif (filter_var($IPAddress, FILTER_VALIDATE_IP) == false) { 
-              $this->SetStatus(201); // no valid IP configured
-              return;
-          }
-            
-          // check if any HHTP device on IP can be reached
-          if ( $this->ping( $IPAddress, 80, 1 ) == false ) {
-              $this->SetStatus(202); // no http response
-              return;
-          }
-              
-          // get json from go-eCharger
-          try {  
-              $ch = curl_init("http://".$IPAddress."/status"); 
-              curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
-              curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); 
-              curl_setopt($ch, CURLOPT_HEADER, 0); 
-              curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-              $json = curl_exec($ch); 
-              curl_close ($ch);  
-          } catch (Exception $e) { 
-              $this->SetStatus(203); // no http response
-              return;
-          };
-            
-          $goEChargerStatus = json_decode($json);
-          if ( $goEChargerStatus === null ) {
-              $this->SetStatus(203); // no http response
-              return;
-          } elseif ( isset( $goEChargerStatus->{'sse'} ) == false ) {
-              $this->SetStatus(204); // no go-eCharger
-              return;
-          }   
-            
-          // so from here, $goEChargerStatus is the valid Status JSON from eCharger
-          $this->SetStatus(102); // active as go-eCharger found
+          if ( $goEChargerStatus == false ) { return false; }
        
           // write values into variables
           SetValue($this->GetIDForIdent("serialID"), $goEChargerStatus->{'sse'});  
@@ -99,14 +59,129 @@
           $availableKW = ( ( ( $goEChargerEnergy[0] + $goEChargerEnergy[1] + $goEChargerEnergy[2] ) / 3 ) * 3 * $goEChargerStatus->{'amp'} ) / 1000;
           SetValue($this->GetIDForIdent("availableKW"), $availableKW);  
             
+          return true;
         }
         
+        public function SetMaxAmpere(int $Ampere) {
+            // Check input value
+            if ( $Ampere < 6 or $Ampere > 32 ) return false;
+            
+            // Check requested Ampere is <= max Ampere set in Instance
+            if ( $Ampere > $this->ReadPropertyString("MaxAmpCharger") ) return false;
+            
+            // first calculate the Button values
+            $button['0'] = 6; // min. Value
+            $gaps = round( ( ( $Ampere - 6 ) / 4 ) - 0.5 );
+            $button['1'] = $button['0'] + $gaps;
+            $button['2'] = $button['1'] + $gaps;
+            $button['3'] = $button['2'] + $gaps;
+            $button['4'] = $Ampere; // max. Value
+            
+            // set values to Charger
+            // set button values
+            setValueToeCharger( 'al1', $button['al1'] );
+            setValueToeCharger( 'al2', $button['al2'] );
+            setValueToeCharger( 'al3', $button['al3'] );
+            setValueToeCharger( 'al4', $button['al4'] );
+            setValueToeCharger( 'al5', $button['al5'] );
+            
+            // set max available Ampere
+            $eChargerStatus = setValueToeCharger( 'ama', $Ampere );
+            
+            // set current available Ampere (if too high)
+            if ( $eChargerStatus->{'amp'} > $eChargerStatus->{'ama'} ) {
+              // set current available to max. available, as current was higher than new max.
+              setValueToeCharger( 'amp', $eChargerStatus->{'ama'} );
+            }        
+        }
+            
+        public function SetCurrentAmpere(int $Ampere, boolean $orMaximum = false) {
+            // Check input value
+            if ( $Ampere < 6 or $Ampere > 32 ) return false;
+            
+            // Check requested Ampere is <= max Ampere set in Instance
+            $goEChargerStatus = getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            
+            $setAmpere = $Ampere;
+            if ( $setAmpere > $goEChargerStatus->{'ama'} ) {
+                if ( $orMaximum == true ) { 
+                    $setAmpere = $goEChargerStatus->{'ama'}; 
+                } else {
+                    return false;
+                }
+            }
+            
+            // set current available Ampere
+            setValueToeCharger( 'amp', $setAmpere );       
+        }
+            
         //=== Modul Funktionen =========================================================================================
         /* Own module functions called via the defined prefix GOeCharger_* 
         *
         * GOeCharger_CheckConnection($id);
         *
         */
+        
+        protected function getStatusFromCharger() {
+          // get IP of go-eCharger
+          $IPAddress = trim($this->ReadPropertyString("IPAddressCharger"));
+            
+          // check if IP is ocnfigured and valid
+          if ( $IPAddress == "0.0.0.0" ) {
+              $this->SetStatus(200); // no configuration done
+              return false;
+          } elseif (filter_var($IPAddress, FILTER_VALIDATE_IP) == false) { 
+              $this->SetStatus(201); // no valid IP configured
+              return false;
+          }
+            
+          // check if any HHTP device on IP can be reached
+          if ( $this->ping( $IPAddress, 80, 1 ) == false ) {
+              $this->SetStatus(202); // no http response
+              return false;
+          }
+              
+          // get json from go-eCharger
+          try {  
+              $ch = curl_init("http://".$IPAddress."/status"); 
+              curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
+              curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); 
+              curl_setopt($ch, CURLOPT_HEADER, 0); 
+              curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+              $json = curl_exec($ch); 
+              curl_close ($ch);  
+          } catch (Exception $e) { 
+              $this->SetStatus(203); // no http response
+              return false;
+          };
+            
+          $goEChargerStatus = json_decode($json);
+          if ( $goEChargerStatus === null ) {
+              $this->SetStatus(203); // no http response
+              return false;
+          } elseif ( isset( $goEChargerStatus->{'sse'} ) == false ) {
+              $this->SetStatus(204); // no go-eCharger
+              return false;
+          } 
+            
+          $this->SetStatus(102);
+          return $goEChargerStatus;
+        }
+        
+        protected function setValueToeCharger( $parameter, $value ){
+          try {  
+              $ch = curl_init("http://".trim($this->ReadPropertyString("IPAddressCharger"))."/mqtt?payload=".$parameter."=".$value); 
+              curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
+              curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); 
+              curl_setopt($ch, CURLOPT_HEADER, 0); 
+              curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+              $json = curl_exec($ch); 
+              curl_close ($ch);  
+          } catch (Exception $e) { 
+          };
+          return json_decode($json);
+        }
         
         protected function ping($host, $port, $timeout) 
         { 
