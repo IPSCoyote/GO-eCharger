@@ -73,14 +73,10 @@
           if ( $goEChargerStatus === null ) {
               $this->SetStatus(203); // no http response
               return;
-          } elseif ( isset( $goEChargerStatus->{'sse'} ) !== true ) {
+          } elseif ( isset( $goEChargerStatus->{'sse'} ) == false ) {
               $this->SetStatus(204); // no go-eCharger
               return;
           }   
-          else { 
-              $this->SetStatus(204); // no go-eCharger
-              return;
-          }
             
           // so from here, $goEChargerStatus is the valid Status JSON from eCharger
           $this->SetStatus(102); // active as go-eCharger found
