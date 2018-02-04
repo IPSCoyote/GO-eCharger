@@ -22,9 +22,12 @@
             
           $this->sendDebug( "go-eCharger", "Apply", 0 );  
 
+          // Generate Profiles
+          $this->registerProfiles();
           // Generate Variables
-          $this->RegisterVariableString("SerialID", "Seriennummer","~String",0);
-            
+          $this->registerVariables();
+
+          // Update Data to Variables
           $this->Update();
         }
 
@@ -96,7 +99,7 @@
         *
         */
         
-        function ping($host, $port, $timeout) 
+        protected function ping($host, $port, $timeout) 
         { 
           $this->sendDebug( "go-eCharger", "ping( ".$host.", ".$port." )", 0 );  
           ob_start();
@@ -105,6 +108,27 @@
           if (!$fP) { $this->sendDebug( "go-eCharger", "ping failed", 0 ); return false; } 
           return true; 
         }
+        
+        protected function registerProfiles() {
+            // Generate Variable Profiles
+            if ( !IPS_VariableProfileExists('GOECHARGER_Ampere') ) {
+                IPS_CreateVariableProfile('GOECHARGER_Ampere', 1 );
+                IPS_SetVariableProfileDigits('GOECHARGER', 0 );
+                IPS_SetVariableProfileIcon('GOECHARGER', 'Electricity' );
+                IPS_SetVariableProfileText('GOECHARGER', "", " A" );
+            }
+        }
+        
+        protected function registerVariables() {
+            // Generate Variables
+            if ( $this->GetIDForIdent("SerialID") == false ){
+              $this->RegisterVariableString("SerialID", "Seriennummer","~String",0);
+            }
+            if ( $this->GetIDForIdent("CurrentAMP") == false ){
+              $this->RegisterVariableString("CurrentAMP", "derzeit verfügbarer Ladestrom","GOECHARGER_Ampere",0);
+            }
+        }
+    }
         
     }
 ?>
