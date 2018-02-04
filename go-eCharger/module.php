@@ -134,7 +134,7 @@
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Kilowatt') ) {
                 $profileID = IPS_CreateVariableProfile('GOECHARGER_Kilowatt', 2 );
-                IPS_SetVariableProfileDigits('GOECHARGER_Kilowatt', 1 );
+                IPS_SetVariableProfileDigits('GOECHARGER_Kilowatt', 2 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Kilowatt', 'Electricity' );
                 IPS_SetVariableProfileText('GOECHARGER_Kilowatt', "", " kw" );
             }    
