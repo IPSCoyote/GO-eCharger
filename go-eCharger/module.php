@@ -60,15 +60,20 @@
           return true;
         }
        
-        public function SetMaxAmpere(int $Ampere) {
+        public function SetMaxAmpere(int $Ampere, boolean $orMaximum) {
             // Check input value
-            
-                                  $this->sendDebug( "go-eCharger", "SetMax", 0 );  
             if ( $Ampere < 6 or $Ampere > 32 ) { return false; }
             
             // Check requested Ampere is <= max Ampere set in Instance
-            if ( $Ampere > $this->ReadPropertyString("MaxAmpCharger") ) { return false; }
-                      $this->sendDebug( "go-eCharger", "Ping 1", 0 );  
+            $setAmpere = $Ampere;
+            if ( $setAmpere > $this->ReadPropertyString("MaxAmpCharger") ) { 
+                if ( $orMaximum == true ) {
+                    $setAmpere = $this->ReadPropertyString("MaxAmpCharger");
+                } else {
+                    return false; 
+                }
+            }
+
             // first calculate the Button values
             $button[0] = 6; // min. Value
             $gaps = round( ( ( $Ampere - 6 ) / 4 ) - 0.5 );
