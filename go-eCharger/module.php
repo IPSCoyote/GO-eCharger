@@ -87,6 +87,7 @@
        
           // write values into variables
           SetValue($this->GetIDForIdent("serialID"), $goEChargerStatus->{'sse'});  
+          SetValue($this->GetIDForIdent("error"), $goEChargerStatus->{'err'}); 
           SetValue($this->GetIDForIdent("availableAMP"), $goEChargerStatus->{'amp'}); 
           SetValue($this->GetIDForIdent("maxAvailableAMP"), $goEChargerStatus->{'ama'}); 
             
@@ -138,6 +139,13 @@
                 IPS_SetVariableProfileIcon('GOECHARGER_Kilowatt', 'Electricity' );
                 IPS_SetVariableProfileText('GOECHARGER_Kilowatt', "", " kw" );
             }    
+            
+            if ( !IPS_VariableProfileExists('GOECHARGER_Error') ) {
+                $profileID = IPS_CreateVariableProfile('GOECHARGER_Error', 0 );
+                IPS_SetVariableProfileIcon('GOECHARGER_Error', 'Ok' );
+                IPS_SetVariableProfileAssociation("GOECHARGER_Error", true, "Ok",     "", 0x00FF00);
+                IPS_SetVariableProfileAssociation("GOECHARGER_Error", false, "Feler", "", 0xFF0000);
+            }  
     
         }
         
@@ -145,6 +153,9 @@
             // Generate Variables
             if ( $this->GetIDForIdent("serialID") == false ) {
               $this->RegisterVariableString("serialID", "Seriennummer","~String",0);
+            }
+            if ( $this->GetIDForIdent("error") == false ) {
+              $this->RegisterVariableString("error", "Zustand","GOECHARGER_Error",0);
             }
             
             if ( $this->GetIDForIdent("availableAMP") == false ) {
