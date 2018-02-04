@@ -64,23 +64,23 @@
        
         public function SetCurrentAmpere(int $Ampere, boolean $orMaximum ) {
             // Check input value
-            //if ( $Ampere < 6 or $Ampere > 32 ) { return false };
+            if ( $Ampere < 6 or $Ampere > 32 ) { return false; }
             
             // Check requested Ampere is <= max Ampere set in Instance
             $goEChargerStatus = $this->getStatusFromCharger();
-            //if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus == false ) { return false; }
             
             //$setAmpere = $Ampere;
-            //if ( $setAmpere > $goEChargerStatus->{'ama'} ) {
-            //    if ( $orMaximum == true ) { 
-            //        $setAmpere = $goEChargerStatus->{'ama'}; 
-            //    } else {
-            //        return false;
-            //    }
-            //}
+            if ( $setAmpere > $goEChargerStatus->{'ama'} ) {
+                if ( $orMaximum == true ) { 
+                    $setAmpere = $goEChargerStatus->{'ama'}; 
+                } else {
+                    return false;
+                }
+            }
             
             // set current available Ampere
-            //$this->setValueToeCharger( 'amp', $setAmpere );  
+            $this->setValueToeCharger( 'amp', $setAmpere );  
             
             $this->Update();
         }
