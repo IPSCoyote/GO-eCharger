@@ -104,6 +104,9 @@
             if ( $Ampere < 6 or $Ampere > 32 ) { return false; }
             
             // Check requested Ampere is <= max Ampere set in Instance
+            if ( $Ampere > $this->ReadPropertyString("MaxAmpCharger") ) { return false; }
+            
+            // Check requested Ampere is <= max Ampere set in Instance
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
             
