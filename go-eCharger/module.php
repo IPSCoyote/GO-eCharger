@@ -23,12 +23,13 @@
           $this->sendDebug( "go-eCharger", "Apply", 0 );  
 
           // Generate Profiles
-          $this->registerProfiles();
+          //$this->registerProfiles();
+            
           // Generate Variables
-          $this->registerVariables();
+          //$this->registerVariables();
 
           // Update Data to Variables
-          $this->Update();
+          //$this->Update();
         }
 
         //=== Modul Funktionen =========================================================================================
@@ -101,7 +102,6 @@
         
         protected function ping($host, $port, $timeout) 
         { 
-          $this->sendDebug( "go-eCharger", "ping( ".$host.", ".$port." )", 0 );  
           ob_start();
           $fP = fSockOpen($host, $port, $errno, $errstr, $timeout); 
           ob_clean();
