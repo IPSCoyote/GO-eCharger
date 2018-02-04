@@ -14,6 +14,9 @@
           // Properties Charger 1
           $this->RegisterPropertyString("IPAddressCharger", "0.0.0.0");  
           $this->RegisterPropertyString("MaxAmpCharger","6");   
+            
+          // Timer
+          $this->RegisterTimer("Update", 0, "$this->Update();");
         }
  
         public function ApplyChanges() {
