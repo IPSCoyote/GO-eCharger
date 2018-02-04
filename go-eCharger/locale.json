@@ -3,8 +3,8 @@
         "de": { 
             "IP Address": "IP Adresse",
             "Maximum Ampere": "verfübare Ampere",
-            "Update (idle)": "Updatefrequenz wartend",
-            "Update (charging)": "Updatefrequenz ladend",
+            "Update idle": "Updatefrequenz wartend",
+            "Update charging": "Updatefrequenz ladend",
             "Check Connection": "Verbindung testen",
             "GO-eCharger connected successfully": "GO-eCharger gefunden",
             "GO-eCharger not found": "GO-eCharger nicht gefunden"
