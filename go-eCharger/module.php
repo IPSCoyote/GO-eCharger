@@ -50,7 +50,7 @@
           }
             
           // check if any HHTP device on IP can be reached
-          if ( $this->ping( $IPAddress, 80, 1 ) !== true ) {
+          if ( $this->ping( $IPAddress, 80, 1 ) == false ) {
               $this->SetStatus(202); // no http response
               return;
           }
