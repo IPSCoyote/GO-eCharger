@@ -110,9 +110,9 @@
             // Generate Variable Profiles
             if ( !IPS_VariableProfileExists('GOECHARGER_Ampere') ) {
                 $profileID = IPS_CreateVariableProfile('GOECHARGER_Ampere', 1 );
-                IPS_SetVariableProfileDigits($profileID, 0 );
-                IPS_SetVariableProfileIcon($profileID, 'Electricity' );
-                IPS_SetVariableProfileText($profileID, "", " A" );
+                IPS_SetVariableProfileDigits('GOECHARGER_Ampere', 0 );
+                IPS_SetVariableProfileIcon('GOECHARGER_Ampere', 'Electricity' );
+                IPS_SetVariableProfileText('GOECHARGER_Ampere', "", " A" );
             }
         }
         
