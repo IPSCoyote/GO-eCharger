@@ -1,7 +1,8 @@
 {
     "translations": {
         "de": { 
-            "IP Address Charger": "IP Adresse",
+            "IP Address": "IP Adresse",
+            "Maximum Ampere": "Max. verfübare Ampere",
             "Check Connection": "Verbindung testen",
             "GO-eCharger connected successfully": "GO-eCharger gefunden",
             "GO-eCharger not found": "GO-eCharger nicht gefunden"
