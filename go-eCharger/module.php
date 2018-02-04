@@ -79,11 +79,11 @@
             
             // set values to Charger
             // set button values
-            setValueToeCharger( 'al1', $button['al1'] );
-            setValueToeCharger( 'al2', $button['al2'] );
-            setValueToeCharger( 'al3', $button['al3'] );
-            setValueToeCharger( 'al4', $button['al4'] );
-            setValueToeCharger( 'al5', $button['al5'] );
+            $this->setValueToeCharger( 'al1', $button['al1'] );
+            $this->setValueToeCharger( 'al2', $button['al2'] );
+            $this->setValueToeCharger( 'al3', $button['al3'] );
+            $this->setValueToeCharger( 'al4', $button['al4'] );
+            $this->setValueToeCharger( 'al5', $button['al5'] );
             
             // set max available Ampere
             $eChargerStatus = $this->setValueToeCharger( 'ama', $Ampere );
