@@ -1,8 +1,8 @@
 {
     "elements": 
     [
-      { "type": "ValidationTextBox", "name": "IPAddressCharger1", "caption": "IP Address Charger 1" },
-      { "type": "Select", "name": "MaxAmpCharger1", "caption": "Maximum Ampere Charger 1",
+      { "type": "ValidationTextBox", "name": "IPAddressCharger", "caption": "IP Address Charger" },
+      { "type": "Select", "name": "MaxAmpCharger", "caption": "Maximum Ampere Charger",
         "options": [
            { "label": "6A - 4,14kw",  "value": 6 },
            { "label": "10A - 6,9kw",  "value": 10 },
@@ -16,7 +16,7 @@
     ],
     "actions":  
     [
-        { "type": "Button", "label": "Test Connection", "onClick": "GOeCharger_Update($id);" }
+        { "type": "Button", "label": "Check Connection", "onClick": "GOeCharger_Update($id);" }
     ],
     "status":   
     [
