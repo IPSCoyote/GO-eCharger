@@ -26,8 +26,8 @@
           $this->registerProfiles();
           $this->registerVariables();
 
-          // Update Data to Variables
-          $this->Update();
+          // Set max. Ampere and Update Data to Variables
+          $this->SetMaxAmpere( $this->ReadPropertyString("MaxAmpCharger"), true );
         }
 
         //=== Modul Funktionen =========================================================================================
