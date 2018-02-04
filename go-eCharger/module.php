@@ -18,7 +18,7 @@
           $this->RegisterPropertyInteger("UpdateCharging",0); 
             
           // Timer
-          $this->RegisterTimer("Update", 0, "GOeCharger_Update($_IPS[\'TARGET\']);");
+          $this->RegisterTimer("GOeChargerTimer_UpdateTimer", 0, "GOeCharger_Update($_IPS[\'TARGET\']);");
         }
  
         public function ApplyChanges() {
@@ -34,7 +34,15 @@
           // Set max. Ampere and Update Data to Variables
           $this->SetMaxAmpere( $this->ReadPropertyString("MaxAmpCharger"), true );
         }
-
+        
+    public function Destroy()
+      {
+      $this->UnregisterTimer("GOeChargerTimer_UpdateTimer");
+       
+      //Never delete this line!
+      parent::Destroy();
+      }
+        
         //=== Modul Funktionen =========================================================================================
         /* Own module functions called via the defined prefix GOeCharger_* 
         *
