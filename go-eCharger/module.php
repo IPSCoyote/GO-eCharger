@@ -95,7 +95,7 @@
             }        
         }
             
-        public function SetCurrentAmpere(int $Ampere, boolean $orMaximum = false) {
+        public function SetCurrentAmpere(int $Ampere, boolean $orMaximum = 0) {
             // Check input value
             if ( $Ampere < 6 or $Ampere > 32 ) return false;
             
