@@ -67,7 +67,7 @@
             if ( $Ampere < 6 or $Ampere > 32 ) { return false; }
             
             // Check requested Ampere is <= max Ampere set in Instance
-            if ( $Ampere > $this->ReadPropertyString("MaxAmpCharger") ) { return false };
+            if ( $Ampere > $this->ReadPropertyString("MaxAmpCharger") ) { return false; }
             
             // first calculate the Button values
             $button['0'] = 6; // min. Value
