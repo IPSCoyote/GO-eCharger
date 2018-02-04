@@ -16,7 +16,7 @@
           $this->RegisterPropertyString("MaxAmpCharger","6");   
             
           // Timer
-          $this->RegisterTimer("Update", 0, "$this->Update();");
+          
         }
  
         public function ApplyChanges() {
