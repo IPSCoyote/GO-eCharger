@@ -159,7 +159,7 @@
               $this->RegisterVariableInteger("availableVP3", "verfügbare Spannung Phase 3","GOECHARGER_Voltage",3);
             }
             if ( $this->GetIDForIdent("availableKW") == false ) {
-              $this->RegisterVariableInteger("availableKW", "max. verfügbare Ladeleistung","GOECHARGER_Kilowatt",2);
+              $this->RegisterVariableFloat("availableKW", "max. verfügbare Ladeleistung","GOECHARGER_Kilowatt",2);
             }           
             
         }
