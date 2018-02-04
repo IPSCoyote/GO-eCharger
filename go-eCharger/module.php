@@ -86,13 +86,15 @@
             setValueToeCharger( 'al5', $button['al5'] );
             
             // set max available Ampere
-            $eChargerStatus = setValueToeCharger( 'ama', $Ampere );
+            $eChargerStatus = $this->setValueToeCharger( 'ama', $Ampere );
             
             // set current available Ampere (if too high)
             if ( $eChargerStatus->{'amp'} > $eChargerStatus->{'ama'} ) {
               // set current available to max. available, as current was higher than new max.
-              setValueToeCharger( 'amp', $eChargerStatus->{'ama'} );
-            }        
+              $this->setValueToeCharger( 'amp', $eChargerStatus->{'ama'} );
+            }  
+            
+            $this->Update();
         }
         
         public function SetCurrentAmpere(int $Ampere, boolean $orMaximum ) {
