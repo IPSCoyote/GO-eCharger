@@ -10,7 +10,7 @@
            { "label": "16A - 11kw",   "value": 16 },
            { "label": "20A - 13,8kw", "value": 20 },
            { "label": "24A - 16,6kw", "value": 24 },
-           { "label": "32A - 22kw",   "value": 20 }
+           { "label": "32A - 22kw",   "value": 32 }
          ]
       }
     ],
