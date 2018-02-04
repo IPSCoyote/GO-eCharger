@@ -92,7 +92,10 @@
           $goEChargerEnergy = $goEChargerStatus->{'nrg'};
           SetValue($this->GetIDForIdent("availableVP1"), $goEChargerEnergy[0]);            
           SetValue($this->GetIDForIdent("availableVP2"), $goEChargerEnergy[1]);            
-          SetValue($this->GetIDForIdent("availableVP3"), $goEChargerEnergy[2]);         
+          SetValue($this->GetIDForIdent("availableVP3"), $goEChargerEnergy[2]);  
+            
+          $availableKW = ( $goEChargerEnergy[0] * $goEChargerEnergy[1] * $goEChargerEnergy[2] )/3 * 3 * $goEChargerStatus->{'amp'};
+          SetValue($this->GetIDForIdent("availableKW"), $availableKW);  
             
         }
         
@@ -126,7 +129,14 @@
                 IPS_SetVariableProfileDigits('GOECHARGER_Voltage', 0 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Voltage', 'Electricity' );
                 IPS_SetVariableProfileText('GOECHARGER_Voltage', "", " V" );
-            }        
+            }   
+            
+            if ( !IPS_VariableProfileExists('GOECHARGER_Kilowatt') ) {
+                $profileID = IPS_CreateVariableProfile('GOECHARGER_Kilowatt', 2 );
+                IPS_SetVariableProfileDigits('GOECHARGER_Kilowatt', 1 );
+                IPS_SetVariableProfileIcon('GOECHARGER_Kilowatt', 'Electricity' );
+                IPS_SetVariableProfileText('GOECHARGER_Kilowatt', "", " kw" );
+            }    
     
         }
         
@@ -140,14 +150,18 @@
               $this->RegisterVariableInteger("availableAMP", "derzeit verfügbarer Ladestrom","GOECHARGER_Ampere",1);
             }
             if ( $this->GetIDForIdent("availableVP1") == false ) {
-              $this->RegisterVariableInteger("availableVP1", "verfügbare Spannung Phase 1","GOECHARGER_Voltage",1);
+              $this->RegisterVariableInteger("availableVP1", "verfügbare Spannung Phase 1","GOECHARGER_Voltage",3);
             }
             if ( $this->GetIDForIdent("availableVP2") == false ) {
-              $this->RegisterVariableInteger("availableVP2", "verfügbare Spannung Phase 2","GOECHARGER_Voltage",1);
+              $this->RegisterVariableInteger("availableVP2", "verfügbare Spannung Phase 2","GOECHARGER_Voltage",3);
             }
             if ( $this->GetIDForIdent("availableVP3") == false ) {
-              $this->RegisterVariableInteger("availableVP3", "verfügbare Spannung Phase 3","GOECHARGER_Voltage",1);
+              $this->RegisterVariableInteger("availableVP3", "verfügbare Spannung Phase 3","GOECHARGER_Voltage",3);
             }
+            if ( $this->GetIDForIdent("availableKW") == false ) {
+              $this->RegisterVariableInteger("availableKW", "max. verfügbare Ladeleistung","GOECHARGER_Kilowatt",2);
+            }           
+            
         }
     }
 ?>
