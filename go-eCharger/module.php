@@ -86,7 +86,8 @@
           $this->SetStatus(102); // active as go-eCharger found
        
           // write values into variables
-          SetValue($this->GetIDForIdent("SerialID"), $goEChargerStatus->{'sse'});     
+          SetValue($this->GetIDForIdent("SerialID"), $goEChargerStatus->{'sse'});  
+          SetValue($this->GetIDForIdent("CurrentAMP"), $goEChargerStatus->{'amp'});     
             
         }
         
