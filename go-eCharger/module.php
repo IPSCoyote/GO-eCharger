@@ -50,14 +50,14 @@
           }
             
           // check if any HHTP device on IP can be reached
-          if ( $this->ping( $IPAddress, 80, 1 ) ) {
+          if ( $this->ping( $IPAddress, 80, 1 ) !== true ) {
               $this->SetStatus(202); // no http response
               return;
           }
               
           // get json from go-eCharger
           try {  
-              $ch    = curl_init("http://".$IPAddress."/status"); 
+              $ch = curl_init("http://".$IPAddress."/status"); 
               curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
               curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); 
               curl_setopt($ch, CURLOPT_HEADER, 0); 
