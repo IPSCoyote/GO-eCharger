@@ -6,6 +6,7 @@
             "Update frequencies": "Aktualisierungsfrequenzen (sec.)",
             "Idle": "wartend",
             "Charging": "ladend",
+            "Check Connection": "Verbindung testen",
             "GO-eCharger identified": "GO-eCharger gefunden",
             "Configuration missing": "Konfiguration fehlt",
             "IP invalid": "IP Adresse ungültig",
