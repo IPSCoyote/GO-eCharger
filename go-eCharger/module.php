@@ -100,7 +100,7 @@
           ob_start();
           $fP = fSockOpen($host, $port, $errno, $errstr, $timeout); 
           ob_clean();
-          if (!$fP) { return false; } 
+          if (!$fP) { $this->sendDebug( "go-eCharger", "ping failed", 0 ); return false; } 
           return true; 
         }
         
