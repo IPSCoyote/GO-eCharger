@@ -87,7 +87,8 @@
        
           // write values into variables
           SetValue($this->GetIDForIdent("serialID"), $goEChargerStatus->{'sse'});  
-          SetValue($this->GetIDForIdent("availableAMP"), $goEChargerStatus->{'amp'});  
+          SetValue($this->GetIDForIdent("availableAMP"), $goEChargerStatus->{'amp'}); 
+          SetValue($this->GetIDForIdent("maxAvailableAMP"), $goEChargerStatus->{'ama'}); 
             
           $goEChargerEnergy = $goEChargerStatus->{'nrg'};
           SetValue($this->GetIDForIdent("availableVP1"), $goEChargerEnergy[0]);            
@@ -148,6 +149,9 @@
             
             if ( $this->GetIDForIdent("availableAMP") == false ) {
               $this->RegisterVariableInteger("availableAMP", "derzeit verfügbarer Ladestrom","GOECHARGER_Ampere",1);
+            }
+            if ( $this->GetIDForIdent("maxAvailableAMP") == false ) {
+              $this->RegisterVariableInteger("maxAvailableAMP", "maximal verfügbarer Ladestrom","GOECHARGER_Ampere",1);
             }
             if ( $this->GetIDForIdent("availableVP1") == false ) {
               $this->RegisterVariableInteger("availableVP1", "verfügbare Spannung Phase 1","GOECHARGER_Voltage",3);
