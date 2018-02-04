@@ -12,9 +12,7 @@
            { "label": "24A - 16,6kw",  "value": 24 },
            { "label": "32A - 22kw",    "value": 32 }
          ]
-      },
-      { "type": "NumberSpinner", "name": "UpdateIdle", "caption": "Update (idle)" },
-      { "type": "NumberSpinner", "name": "UpdateCharging", "caption": "Update (charging)" }
+      }
     ],
     "actions":  
     [
