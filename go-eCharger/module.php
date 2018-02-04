@@ -62,6 +62,29 @@
           return true;
         }
        
+        public function SetCurrentAmpere(int $Ampere, boolean $orMaximum = 0) {
+            // Check input value
+            if ( $Ampere < 6 or $Ampere > 32 ) { return false };
+            
+            // Check requested Ampere is <= max Ampere set in Instance
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            
+            $setAmpere = $Ampere;
+            if ( $setAmpere > $goEChargerStatus->{'ama'} ) {
+                if ( $orMaximum == true ) { 
+                    $setAmpere = $goEChargerStatus->{'ama'}; 
+                } else {
+                    return false;
+                }
+            }
+            
+            // set current available Ampere
+            $this->setValueToeCharger( 'amp', $setAmpere );  
+            
+            $$this->Update();
+        }
+        
         //=== Modul Funktionen =========================================================================================
         /* Own module functions called via the defined prefix GOeCharger_* 
         *
