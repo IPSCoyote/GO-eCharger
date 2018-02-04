@@ -13,8 +13,8 @@
            { "label": "32A - 22kw",    "value": 32 }
          ]
       },
-      { "type": "NumberSpinner", "name": "Update (idle)", "caption": "Update (idle)" },
-      { "type": "NumberSpinner", "name": "Update (charging)", "caption": "Update (charging)" }
+      { "type": "NumberSpinner", "name": "Update idle", "caption": "Update (idle)" },
+      { "type": "NumberSpinner", "name": "Update charging", "caption": "Update (charging)" }
     ],
     "actions":  
     [
