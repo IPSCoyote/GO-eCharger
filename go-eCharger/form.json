@@ -1,8 +1,8 @@
 {
     "elements": 
     [
-      { "type": "ValidationTextBox", "name": "IPAddressCharger", "caption": "IP Address Charger" },
-      { "type": "Select", "name": "MaxAmpCharger", "caption": "Maximum Ampere Charger",
+      { "type": "ValidationTextBox", "name": "IPAddressCharger", "caption": "IP Address" },
+      { "type": "Select", "name": "MaxAmpCharger", "caption": "Maximum Ampere",
         "options": [
            { "label": "6A - 4,14kw, 1-phasig 1,38kw",   "value": 6 },
            { "label": "10A - 6,9kw, 1-phasig 2,3kw",    "value": 10 },
