@@ -48,9 +48,6 @@
               $this->SetStatus(201); // no valid IP configured
               return;
           }
-           
-          // check, if go-eCharger is there
-          $connectionOK = true;
             
           // check if any HHTP device on IP can be reached
           if ( $this->ping( $IPAddress, 80, 1 ) ) {
@@ -86,7 +83,11 @@
           }
             
           // so from here, $goEChargerStatus is the valid Status JSON from eCharger
-            
+          $this->SetStatus(102); // active as go-eCharger found
+        
+        
+        
+        
         }
         
         //=== Modul Funktionen =========================================================================================
