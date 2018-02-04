@@ -76,12 +76,12 @@
 
             // first calculate the Button values
             $button[0] = 6; // min. Value
-            $gaps = round( ( ( $Ampere - 6 ) / 4 ) - 0.5 );
+            $gaps = round( ( ( $setAmpere - 6 ) / 4 ) - 0.5 );
             $button[1] = $button[0] + $gaps;
             $button[2] = $button[1] + $gaps;
             $button[3] = $button[2] + $gaps;
-            $button[4] = $Ampere; // max. Value
-                                $this->sendDebug( "go-eCharger", "Ping 2", 0 );    
+            $button[4] = $setAmpere; // max. Value
+
             // set values to Charger
             // set button values
             $this->setValueToeCharger( 'al1', $button[0] );
@@ -89,19 +89,19 @@
             $this->setValueToeCharger( 'al3', $button[2] );
             $this->setValueToeCharger( 'al4', $button[3] );
             $this->setValueToeCharger( 'al5', $button[4] );
-                                  $this->sendDebug( "go-eCharger", "Ping 3", 0 );  
+
             // set max available Ampere
-            $eChargerStatus = $this->setValueToeCharger( 'ama', $Ampere );
-                                  $this->sendDebug( "go-eCharger", "Ping 4", 0 );  
+            $eChargerStatus = $this->setValueToeCharger( 'ama', $setAmpere );
+
             // set current available Ampere (if too high)
             if ( $eChargerStatus->{'amp'} > $eChargerStatus->{'ama'} ) {
               // set current available to max. available, as current was higher than new max.
               $this->setValueToeCharger( 'amp', $eChargerStatus->{'ama'} );
             }  
-                                  $this->sendDebug( "go-eCharger", "Ping 5", 0 );  
+
             $this->Update();
             
-            if ( $eChargerStatus->{'ama'} == $Ampere ) { return true; } else { return false; }
+            if ( $eChargerStatus->{'ama'} == $setAmpere ) { return true; } else { return false; }
         }
         
         public function SetCurrentAmpere(int $Ampere, boolean $orMaximum ) {
