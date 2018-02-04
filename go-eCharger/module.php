@@ -41,7 +41,7 @@
           /* Check the connection to the go-eCharger */
           $this->sendDebug( "go-eCharger", "Update()", 0 );  
             
-          $goEChargerStatus = getStatusFromCharger();
+          $goEChargerStatus = $this->getStatusFromCharger();
             
           if ( $goEChargerStatus == false ) { return false; }
        
