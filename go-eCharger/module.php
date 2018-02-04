@@ -138,13 +138,13 @@
               $this->RegisterVariableInteger("CurrentAMP", "derzeit verfügbarer Ladestrom","GOECHARGER_Ampere",1);
             }
             if ( $this->GetIDForIdent("availableVP1") == false ) {
-              $this->RegisterVariableInteger("CurrentAMP", "verfügbare Spannung Phase 1","GOECHARGER_Voltage",1);
+              $this->RegisterVariableInteger("availableVP1", "verfügbare Spannung Phase 1","GOECHARGER_Voltage",1);
             }
-            if ( $this->GetIDForIdent("availableVP1") == false ) {
-              $this->RegisterVariableInteger("CurrentAMP", "verfügbare Spannung Phase 2","GOECHARGER_Voltage",1);
+            if ( $this->GetIDForIdent("availableVP2") == false ) {
+              $this->RegisterVariableInteger("availableVP2", "verfügbare Spannung Phase 2","GOECHARGER_Voltage",1);
             }
-            if ( $this->GetIDForIdent("availableVP1") == false ) {
-              $this->RegisterVariableInteger("CurrentAMP", "verfügbare Spannung Phase 3","GOECHARGER_Voltage",1);
+            if ( $this->GetIDForIdent("availableVP3") == false ) {
+              $this->RegisterVariableInteger("availableVP3", "verfügbare Spannung Phase 3","GOECHARGER_Voltage",1);
             }
         }
     }
