@@ -20,9 +20,11 @@
     ],
     "status":   
     [
-      { "code": 102, "icon": "active", "caption": "GO-eCharger identified" },
-      { "code": 200, "icon": "inactive", "caption": "no GO-eCharger configured" },
-      { "code": 201, "icon": "error", "caption": "no valid IP configured" },
-      { "code": 202, "icon": "error",  "caption": "GO-eCharger not identified" }
+      { "code": 102, "icon": "active",      "caption": "GO-eCharger identified" },
+      { "code": 200, "icon": "inactive",    "caption": "Configuration missing" },
+      { "code": 201, "icon": "error",       "caption": "IP invalid" },
+      { "code": 202, "icon": "error",       "caption": "No device found on IP" },
+      { "code": 203, "icon": "error",       "caption": "No JSON returned from IP" },
+      { "code": 204, "icon": "error",       "caption": "No go-eCharger available at IP" }
     ]
 }
