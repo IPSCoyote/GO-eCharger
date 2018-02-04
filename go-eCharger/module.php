@@ -70,20 +70,20 @@
             if ( $Ampere > $this->ReadPropertyString("MaxAmpCharger") ) { return false; }
                       $this->sendDebug( "go-eCharger", "Ping 1", 0 );  
             // first calculate the Button values
-            $button['0'] = 6; // min. Value
+            $button[0] = 6; // min. Value
             $gaps = round( ( ( $Ampere - 6 ) / 4 ) - 0.5 );
-            $button['1'] = $button['0'] + $gaps;
-            $button['2'] = $button['1'] + $gaps;
-            $button['3'] = $button['2'] + $gaps;
-            $button['4'] = $Ampere; // max. Value
+            $button[1] = $button[0] + $gaps;
+            $button[2] = $button[1] + $gaps;
+            $button[3] = $button[2] + $gaps;
+            $button[4] = $Ampere; // max. Value
                                 $this->sendDebug( "go-eCharger", "Ping 2", 0 );    
             // set values to Charger
             // set button values
-            $this->setValueToeCharger( 'al1', $button['al1'] );
-            $this->setValueToeCharger( 'al2', $button['al2'] );
-            $this->setValueToeCharger( 'al3', $button['al3'] );
-            $this->setValueToeCharger( 'al4', $button['al4'] );
-            $this->setValueToeCharger( 'al5', $button['al5'] );
+            $this->setValueToeCharger( 'al1', $button[0] );
+            $this->setValueToeCharger( 'al2', $button[1] );
+            $this->setValueToeCharger( 'al3', $button[2] );
+            $this->setValueToeCharger( 'al4', $button[3] );
+            $this->setValueToeCharger( 'al5', $button[4] );
                                   $this->sendDebug( "go-eCharger", "Ping 3", 0 );  
             // set max available Ampere
             $eChargerStatus = $this->setValueToeCharger( 'ama', $Ampere );
