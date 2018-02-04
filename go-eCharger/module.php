@@ -86,8 +86,11 @@
           $this->SetStatus(102); // active as go-eCharger found
        
           // write values into variables
-          SetValue($this->GetIDForIdent("SerialID"), $goEChargerStatus->{'sse'});  
-          SetValue($this->GetIDForIdent("CurrentAMP"), $goEChargerStatus->{'amp'});     
+          SetValue($this->GetIDForIdent("serialID"), $goEChargerStatus->{'sse'});  
+          SetValue($this->GetIDForIdent("availableAMP"), $goEChargerStatus->{'amp'});  
+          SetValue($this->GetIDForIdent("availableVP1"), $goEChargerStatus->{'nrg[0]'});            
+          SetValue($this->GetIDForIdent("availableVP2"), $goEChargerStatus->{'nrg[1]'});            
+          SetValue($this->GetIDForIdent("availableVP2"), $goEChargerStatus->{'nrg[1]'});         
             
         }
         
@@ -115,15 +118,33 @@
                 IPS_SetVariableProfileIcon('GOECHARGER_Ampere', 'Electricity' );
                 IPS_SetVariableProfileText('GOECHARGER_Ampere', "", " A" );
             }
+            
+            if ( !IPS_VariableProfileExists('GOECHARGER_Voltage') ) {
+                $profileID = IPS_CreateVariableProfile('GOECHARGER_Voltage', 1 );
+                IPS_SetVariableProfileDigits('GOECHARGER_Voltage', 0 );
+                IPS_SetVariableProfileIcon('GOECHARGER_Voltage', 'Electricity' );
+                IPS_SetVariableProfileText('GOECHARGER_Voltage', "", " V" );
+            }        
+    
         }
         
         protected function registerVariables() {
             // Generate Variables
-            if ( $this->GetIDForIdent("SerialID") == false ) {
-              $this->RegisterVariableString("SerialID", "Seriennummer","~String",0);
+            if ( $this->GetIDForIdent("serialID") == false ) {
+              $this->RegisterVariableString("serialID", "Seriennummer","~String",0);
             }
-            if ( $this->GetIDForIdent("CurrentAMP") == false ) {
+            
+            if ( $this->GetIDForIdent("availableAMP") == false ) {
               $this->RegisterVariableInteger("CurrentAMP", "derzeit verfügbarer Ladestrom","GOECHARGER_Ampere",1);
+            }
+            if ( $this->GetIDForIdent("availableVP1") == false ) {
+              $this->RegisterVariableInteger("CurrentAMP", "verfügbare Spannung Phase 1","GOECHARGER_Voltage",1);
+            }
+            if ( $this->GetIDForIdent("availableVP1") == false ) {
+              $this->RegisterVariableInteger("CurrentAMP", "verfügbare Spannung Phase 2","GOECHARGER_Voltage",1);
+            }
+            if ( $this->GetIDForIdent("availableVP1") == false ) {
+              $this->RegisterVariableInteger("CurrentAMP", "verfügbare Spannung Phase 3","GOECHARGER_Voltage",1);
             }
         }
     }
