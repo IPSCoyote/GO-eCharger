@@ -90,7 +90,7 @@
           SetValue($this->GetIDForIdent("availableAMP"), $goEChargerStatus->{'amp'});  
             
           $goEChargerEnergy = $goEChargerStatus->{'nrg'};
-          SetValue($this->GetIDForIdent("availableVP1"), $goEChargerEnergy[0]});            
+          SetValue($this->GetIDForIdent("availableVP1"), $goEChargerEnergy[0]);            
           SetValue($this->GetIDForIdent("availableVP2"), $goEChargerEnergy[0]);            
           SetValue($this->GetIDForIdent("availableVP2"), $goEChargerEnergy[0]);         
             
