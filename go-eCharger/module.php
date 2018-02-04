@@ -155,7 +155,7 @@
               $this->RegisterVariableString("serialID", "Seriennummer","~String",0);
             }
             if ( $this->GetIDForIdent("error") == false ) {
-              $this->RegisterVariableString("error", "Zustand","GOECHARGER_Error",0);
+              $this->RegisterVariableBoolean("error", "Zustand","GOECHARGER_Error",0);
             }
             
             if ( $this->GetIDForIdent("availableAMP") == false ) {
