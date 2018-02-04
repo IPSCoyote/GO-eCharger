@@ -61,63 +61,7 @@
             
           return true;
         }
-        
-        public function SetMaxAmpere(int $Ampere) {
-            // Check input value
-            if ( $Ampere < 6 or $Ampere > 32 ) { return false };
-            
-            // Check requested Ampere is <= max Ampere set in Instance
-            if ( $Ampere > $this->ReadPropertyString("MaxAmpCharger") ) { return false };
-            
-            // first calculate the Button values
-            $button['0'] = 6; // min. Value
-            $gaps = round( ( ( $Ampere - 6 ) / 4 ) - 0.5 );
-            $button['1'] = $button['0'] + $gaps;
-            $button['2'] = $button['1'] + $gaps;
-            $button['3'] = $button['2'] + $gaps;
-            $button['4'] = $Ampere; // max. Value
-            
-            // set values to Charger
-            // set button values
-            setValueToeCharger( 'al1', $button['al1'] );
-            setValueToeCharger( 'al2', $button['al2'] );
-            setValueToeCharger( 'al3', $button['al3'] );
-            setValueToeCharger( 'al4', $button['al4'] );
-            setValueToeCharger( 'al5', $button['al5'] );
-            
-            // set max available Ampere
-            $eChargerStatus = setValueToeCharger( 'ama', $Ampere );
-            
-            // set current available Ampere (if too high)
-            if ( $eChargerStatus->{'amp'} > $eChargerStatus->{'ama'} ) {
-              // set current available to max. available, as current was higher than new max.
-              setValueToeCharger( 'amp', $eChargerStatus->{'ama'} );
-            }        
-        }
-            
-        public function SetCurrentAmpere(int $Ampere, boolean $orMaximum = 0) {
-            // Check input value
-            if ( $Ampere < 6 or $Ampere > 32 ) { return false };
-            
-            // Check requested Ampere is <= max Ampere set in Instance
-            $goEChargerStatus = getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
-            
-            $setAmpere = $Ampere;
-            if ( $setAmpere > $goEChargerStatus->{'ama'} ) {
-                if ( $orMaximum == true ) { 
-                    $setAmpere = $goEChargerStatus->{'ama'}; 
-                } else {
-                    return false;
-                }
-            }
-            
-            // set current available Ampere
-            setValueToeCharger( 'amp', $setAmpere );  
-            
-            Update();
-        }
-            
+       
         //=== Modul Funktionen =========================================================================================
         /* Own module functions called via the defined prefix GOeCharger_* 
         *
