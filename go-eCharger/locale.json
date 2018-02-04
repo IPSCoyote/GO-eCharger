@@ -3,7 +3,7 @@
         "de": { 
             "IP Address": "IP Adresse",
             "Maximum Ampere": "verfübare Ampere",
-            "Update frequencies": "Update Frequenzen",
+            "Update frequencies": "Aktualisierungsfrequenzen (sec.)",
             "Idle": "wartend",
             "Charging": "ladend",
             "Check Connection": "Verbindung testen",
