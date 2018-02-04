@@ -18,7 +18,7 @@
           $this->RegisterPropertyInteger("UpdateCharging",0); 
             
           // Timer
-          $this->RegisterTimer("Update", 0, "echo 'Hallo Welt';");
+          $this->RegisterTimer("Update", 0, "$this->Update();");
         }
  
         public function ApplyChanges() {
