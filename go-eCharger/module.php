@@ -137,7 +137,7 @@
             }
             
             if ( $this->GetIDForIdent("availableAMP") == false ) {
-              $this->RegisterVariableInteger("CurrentAMP", "derzeit verfügbarer Ladestrom","GOECHARGER_Ampere",1);
+              $this->RegisterVariableInteger("availableAMP", "derzeit verfügbarer Ladestrom","GOECHARGER_Ampere",1);
             }
             if ( $this->GetIDForIdent("availableVP1") == false ) {
               $this->RegisterVariableInteger("availableVP1", "verfügbare Spannung Phase 1","GOECHARGER_Voltage",1);
