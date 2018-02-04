@@ -125,7 +125,7 @@
               $this->RegisterVariableString("SerialID", "Seriennummer","~String",0);
             }
             if ( $this->GetIDForIdent("CurrentAMP") == false ){
-              $this->RegisterVariableString("CurrentAMP", "derzeit verfügbarer Ladestrom","GOECHARGER_Ampere",0);
+              $this->RegisterVariableString("CurrentAMP", "derzeit verfügbarer Ladestrom","GOECHARGER_Ampere",1);
             }
         }
     }
