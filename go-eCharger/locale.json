@@ -2,7 +2,7 @@
     "translations": {
         "de": { 
             "IP Address": "IP Adresse",
-            "Maximum Ampere": "max. verfübare Ampere",
+            "Maximum Ampere": "max. verf. Ampere",
             "Update frequencies": "Aktualisierungsfrequenzen (sec.)",
             "Idle": "wartend",
             "Charging": "ladend",
