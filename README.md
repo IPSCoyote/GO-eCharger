@@ -60,5 +60,5 @@ GOECHARGER_SetCurrentChargingAmperage( 8 ); // Setze den aktuellen Ladestrom auf
 ```
 Die Funktion liefert *true* oder *false* als Rückgabewert und aktualisiert die Messwerte
 
-### 4.2. Load Balancer
+### 4.2. go-eCharger Load Balancer
 
