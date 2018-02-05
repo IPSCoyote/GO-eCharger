@@ -25,5 +25,11 @@ Das Modul befindet sich im Entwicklungsstadium und ist derzeit **nicht** für di
 
 ## 4. Enthaltene Module
 
-### 4.1. go-ECharger
+### 4.1. go-eCharger
+
+Das Modul "go-eCharger" dient als Schnittstelle zu einem lokal installierten go-eCharger. Es liefert aktuelle Messwerte als Instanzvariablen und bietet einen Zugriff auf Funktionen des go-eChargers.
+
+#### 4.1.1. Messwerte
+#### 4.1.2. Funktionen
+
 ### 4.2. Load Balancer
