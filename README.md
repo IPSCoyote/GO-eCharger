@@ -37,6 +37,9 @@ Das Modul "go-eCharger" dient als Schnittstelle zu einem lokal installierten go-
 + **maximal verfügbarer Ladestrom** (Strom, der an eCharger maximal für das Laden gewählt werden kann)
 + **verfügbare Spannung an Phase 1 / 2 / 3** (die Spannungsversorgung des go-eChargers je Phase)
 + **max. verfügbare Ladeleistung** (berechnet aus der aktuellen Spannungsversorgung sowie dem verfügbaren Ladestrom)
++ **Kabel-Verriegelungsmodus** (0 = Verriegelt, wenn Auto angeschlossen; 1 = Am Ladeende entriegeln; 2 = Immer verriegelt)
++ **Ladeende bei Akkustand** (0.0 kw - 100.0 kw; 0.0 = deaktiviert)
++ **Zugangskontrolle via RFID/APP** (0 = aus; 1 = an)
 
 #### 4.1.2. Funktionen
 
