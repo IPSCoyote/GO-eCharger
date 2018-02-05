@@ -49,7 +49,8 @@ Sollte der maximal verfügbare Ladestrom reduziert werden, so wird ggf. auch der
 ```
 GOECHARGER_SetMaximumChargingAmperage( 16 ); // Setze den maximal verfügbaren Ladestrom auf 16 Ampere
 ```
-Die Funktion liefert *true* oder false als Rückgabewert und aktualisiert die Messwerte
+Die Funktion liefert *true* oder *false* als Rückgabewert und aktualisiert die Messwerte
+
 ##### 4.1.2.3. SetCurrentChargingAmperage(int $Ampere)
 
 ### 4.2. Load Balancer
