@@ -2,7 +2,7 @@
     "translations": {
         "de": { 
             "IP Address": "IP Adresse",
-            "Fuse protection": "Elektrische Absicherung",
+            "Fuse protection": "El. Absicherung",
             "Update frequencies": "Aktualisierungsfrequenzen (sec.)",
             "Idle": "wartend",
             "Charging": "ladend",
