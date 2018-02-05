@@ -33,8 +33,8 @@ Das Modul "go-eCharger" dient als Schnittstelle zu einem lokal installierten go-
 #### 4.1.1. Messwerte
 + Seriennummer
 + Zustand
-+ derzeit verfügbarer Ladestrom 
-+ maximal verfügbarer Ladestrom
++ derzeit verfügbarer Ladestrom (Strom, den ein eFahrzeug bei Anschluss max. bekommt)
++ maximal verfügbarer Ladestrom (Strom, der an eCharger maximal für das Laden gewählt werden kann)
 + verfügbare Spannung Phase 1 / 2 / 3 (die Spannungsversorgung des go-eChargers)
 + max. verfügbare Ladeleistung (berechnet aus der aktuellen Spannungsversorgung sowie dem verfügbaren Ladestrom)
 
