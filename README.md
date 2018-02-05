@@ -44,14 +44,14 @@ Das Modul "go-eCharger" dient als Schnittstelle zu einem lokal installierten go-
 
 #### 4.1.2. Funktionen
 
-##### 4.1.2.1. Update()
+##### 4.1.2.1. Update(int $Instanz)
 Aktualisiert die Messwerte (IPS Variablen) des go-eChargers. Diese Funktion wird auch in Abhängigkeit der eingestellten Aktualisierungsfrequenzen in den Moduleinstellungender ausgeführt, so dass normalerweise ein manueller Aufruf unnötig sein sollte.
 ```
 GOeCharger_Update( $Instanz ); // Aktualisiert die Messwerte (IPS Variablen) des go-eChargers
 ```
 Die Funktion liefert true oder false als Rückgabewert und aktualisiert die Messwerte
 
-##### 4.1.2.2. SetMaximumChargingAmperage(int $Ampere)
+##### 4.1.2.2. SetMaximumChargingAmperage(int $Instanz, int $Ampere)
 Mit dieser Funktion kann der maximal verfügbare Ladestrom des go-eChargers gesetzt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. 
 Diese Funktion hat direkte Auswirkung auf die Einstellungen des go-eChargers sowie einen ggf. aktuell stattfindenden Ladevorgang. Der maximale Ladestrom sollte an die verfügbare Hausinstallation angepasst sein. Die über IPS maximal einstellbare Ladestrom kann über die Moduleinstellungen beschränkt werden!
 Sollte der maximal verfügbare Ladestrom reduziert werden, so wird ggf. auch der aktuell eingestellte Ladestrom entsprechend verringert, sofern er das neue Maximum überschreiten würde.
@@ -60,7 +60,7 @@ GOeCharger_SetMaximumChargingAmperage( $Instanz, 16 ); // Setze den maximal verf
 ```
 Die Funktion liefert *true* oder *false* als Rückgabewert und aktualisiert die Messwerte
 
-##### 4.1.2.3. SetCurrentChargingAmperage(int $Ampere)
+##### 4.1.2.3. SetCurrentChargingAmperage(int $Instanz, int $Ampere)
 Mit dieser Funktion kann der aktuell verfügbare Ladestrom des go-eChargers gesetzt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. Der Wert darf jedoch den derzeitigen, maximal verfügbaren Ladestrom nicht überschreiten!
 Diese Funktion hat direkte Auswirkung auf die Einstellungen des go-eChargers sowie einen ggf. aktuell stattfindenden Ladevorgang.
 ```
@@ -68,19 +68,19 @@ GOeCharger_SetCurrentChargingAmperage( $Instanz, 8 ); // Setze den aktuellen Lad
 ```
 Die Funktion liefert *true* oder *false* als Rückgabewert und aktualisiert die Messwerte
 
-##### 4.1.2.4. SetAccessControl(bool)
+##### 4.1.2.4. SetAccessControl(int $Instanz, bool $aktiv)
 Mit dieser Funktion kann die Zugangssteuerung via RFID oder App des go-eChargers aktiviert oder deaktiviert werden.
 ```
 GOeCharger_SetAccessControl( $Instanz, true ); // aktiviert die Zugangskontrolle 
 ```
 
-##### 4.1.2.5. SetAutomaticChargeStop(float $kw)
+##### 4.1.2.5. SetAutomaticChargeStop(int $Instanz, float $kw)
 Mit dieser Funktion kann der automatische Ladestop des go-eChargers aktiviert werden. Während der Wert '0' den automatischen Ladestop deaktivert, können höhere Werte bis 100 (Maximum) als Ladegrenze in kw angegeben werden. 
 ```
 GOeCharger_SetAutomaticChargeStop( $Instanz, 10.5 ); // aktiviert den automatischen Ladestop bei 10,5 kw
 ```
 
-##### 4.1.2.6. SetCableUnlockMode(int $unlockMode)
+##### 4.1.2.6. SetCableUnlockMode(int $Instanz, int $unlockMode)
 Mit dieser Funktion kann der Verriegelungsmodus des Kabels am go-eCharger eingestellt werden. Dabei gelten folgende Werte:
 + 0 = normaler Modus - Das Kabel bleibt am go-eCharger verriegelt, solange ein Fahrzeug angeschlossen ist
 + 1 = automatischer Modus - Das Kabel wird nach dem Ladeende automatisch entriegelt
@@ -89,7 +89,7 @@ Mit dieser Funktion kann der Verriegelungsmodus des Kabels am go-eCharger einges
 GOeCharger_SetCableUnlockMode( $Instanz, 1 ); // setzt den automatischen Entriegelungsmodus
 ```
 
-##### 4.1.2.7. SetActivation(bool)
+##### 4.1.2.7. SetActivation(int $Instanz, bool $aktiv)
 Mit dieser Funktion der go-eChargers aktiviert oder deaktiviert werden. Im deaktivierten Zustand ist kein Laden möglich!
 ```
 GOeCharger_SetActivation( $Instanz, false ); // deaktiviert den go-eCharger 
