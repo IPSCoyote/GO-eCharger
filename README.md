@@ -32,7 +32,7 @@ Das Modul "go-eCharger" dient als Schnittstelle zu einem lokal installierten go-
 #### 4.1.1. Messwerte
 + Seriennummer
 
-Die Seriennummer des angeschlossenen go-eChargers
+  Die Seriennummer des angeschlossenen go-eChargers
 + Zustand
 + derzeit verfügbarer Ladestrom
 + maximal verfügbarer Ladestrom
