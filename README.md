@@ -22,3 +22,8 @@ Es soll sowohl Zustandsdaten (Anschluss, Ladevorgang, etc.) als auch Schaltaktio
 ## 3. Installation
 
 Das Modul befindet sich im Entwicklungsstadium und ist derzeit **nicht** für die Nutzung freigegeben.
+
+## 4. Enthaltene Module
+
+### 4.1. go-ECharger
+### 4.2. Load Balancer
