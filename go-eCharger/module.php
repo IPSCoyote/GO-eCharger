@@ -60,6 +60,7 @@
           SetValue($this->GetIDForIdent("error"), ( $goEChargerStatus->{'err'} == 0 ) ); 
           SetValue($this->GetIDForIdent("availableAMP"), $goEChargerStatus->{'amp'} ); 
           SetValue($this->GetIDForIdent("maxAvailableAMP"), $goEChargerStatus->{'ama'}); 
+          SetValue($this->GetIDForIdent("accessControl"), $goEChargerStatus->{'ast'});
             
           $goEChargerEnergy = $goEChargerStatus->{'nrg'};
           SetValue($this->GetIDForIdent("availableVP1"), $goEChargerEnergy[0]);            
@@ -266,8 +267,11 @@
             }
             if ( $this->GetIDForIdent("availableKW") == false ) {
               $this->RegisterVariableFloat("availableKW", "max. verfügbare Ladeleistung","GOECHARGER_Kilowatt",2);
-            }           
+            }    
             
+            if ( $this->GetIDForIdent("accessControl") == false ) {
+              $this->RegisterVariableFloat("accessControl", "Zugangskontrolle via RFID/App","~Switch",0);
+            }   
         }
     }
 ?>
