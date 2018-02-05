@@ -9,7 +9,7 @@ Nicht verwenden! Don't use it yet!
 1. [Funktionsumfang](#1-funktionsumfang) 
 2. [Systemanforderungen](#2-systemanforderungen)
 3. [Installation](#3-installation)
-4. [Enthaltene Module](#4-enthaltene)
+4. [Module](#4-module)
 
 ## 1. Funktionsumfang
 
@@ -24,7 +24,7 @@ Es soll sowohl Zustandsdaten (Anschluss, Ladevorgang, etc.) als auch Schaltaktio
 
 Das Modul befindet sich im Entwicklungsstadium und ist derzeit **nicht** für die Nutzung freigegeben.
 
-## 4. Enthaltene Module
+## 4. Module
 
 ### 4.1. go-eCharger
 
