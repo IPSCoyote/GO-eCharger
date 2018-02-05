@@ -9,7 +9,7 @@ Nicht verwenden! Don't use it yet!
 1. [Funktionsumfang](#1-funktionsumfang) 
 2. [Systemanforderungen](#2-systemanforderungen)
 3. [Installation](#3-installation)
-4. [Enthaltene Module](#4-"enthaltene module")
+4. [Enthaltene Module](#4-enthaltene)
 
 ## 1. Funktionsumfang
 
