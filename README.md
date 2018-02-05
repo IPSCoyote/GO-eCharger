@@ -39,5 +39,9 @@ Das Modul "go-eCharger" dient als Schnittstelle zu einem lokal installierten go-
 
 #### 4.1.2. Funktionen
 
+##### 4.1.2.1. Update()
+##### 4.1.2.2. SetMaxAmpere(int $Ampere)
+##### 4.1.2.3. SetCurrentAmpere(int $Ampere)
+
 ### 4.2. Load Balancer
 
