@@ -2,6 +2,14 @@
     "elements": 
     [
       { "type": "ValidationTextBox", "name": "IPAddressCharger", "caption": "IP Address" },
+      { "type": "Select", "name": "MaxAmperage", "caption": "Amp. Home Connection",
+            "options": [
+                { "label": "6A",  "6A - 4,1kw": 6 },
+                { "label": "10A", "10A - 6,9kw": 10 },
+                { "label": "12A", "12A - 8,2kw": 12 },
+                { "label": "16A", "16A - 11kw": 16 },
+                { "label": "32A", "32A - 22kw": 32 }
+        ]},
       { "type": "Label", "label": "Update frequencies" },
       { "type": "NumberSpinner", "name": "UpdateIdle", "caption": "Idle" },
       { "type": "NumberSpinner", "name": "UpdateCharging", "caption": "Charging" }
