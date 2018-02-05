@@ -238,6 +238,14 @@
                 IPS_SetVariableProfileAssociation("GOECHARGER_Error", true, "Ok",     "", 0x00FF00);
                 IPS_SetVariableProfileAssociation("GOECHARGER_Error", false, "Fehler", "", 0xFF0000);
             }  
+            
+            if ( !IPS_VariableProfileExists('GOECHARGER_CableUnlockMode') ) {
+                $profileID = IPS_CreateVariableProfile('GOECHARGER_CableUnlockMode', 1 );
+                IPS_SetVariableProfileIcon('GOECHARGER_CableUnlockMode', 'Plug' );
+                IPS_SetVariableProfileAssociation("GOECHARGER_CableUnlockMode", 0, "Verriegelt, wenn Auto angeschlossen", "", 0x00FF00);
+                IPS_SetVariableProfileAssociation("GOECHARGER_CableUnlockMode", 1, "Am Ladeende entriegeln", "", 0xFFCC00);
+                IPS_SetVariableProfileAssociation("GOECHARGER_CableUnlockMode", 2, "Immer verriegelt", "", 0xFF0000);
+            }  
     
         }
         
@@ -270,8 +278,13 @@
             }    
             
             if ( $this->GetIDForIdent("accessControl") == false ) {
-              $this->RegisterVariableFloat("accessControl", "Zugangskontrolle via RFID/App","~Switch",0);
+              $this->RegisterVariableBoolean("accessControl", "Zugangskontrolle via RFID/App","~Switch",0);
             }   
+            if ( $this->GetIDForIdent("cableUnlockMode") == false ) {
+              $this->RegisterVariableInteger("cableUnlockMode", "Kabel-Verriegelungsmodus","GOECHARGER_CableUnlockMode",0);
+            }               
+            
+            
         }
     }
 ?>
