@@ -136,10 +136,11 @@
         }
         
         public function SetAccessControll(bool $active) {
-            $resultStatus = $this->setValueToeCharger( 'amp', $active ); 
+            if ( $active == true ) { $value = 1; } else { $value = 0; }
+            $resultStatus = $this->setValueToeCharger( 'amp', $value ); 
             // Update all data
             $this->Update();
-            if ( $resultStatus->{'ast'} == $Ampere ) { return true; } else { return false; }
+            if ( $resultStatus->{'ast'} == $value ) { return true; } else { return false; }
         }
             
         public function SetAutomaticChargeStop(int $chargeStopKW) {
@@ -156,7 +157,7 @@
             $resultStatus = $this->setValueToeCharger( 'ust', $unlockMode ); 
             // Update all data
             $this->Update();
-            if ( $resultStatus->{'ust'} == $Ampere ) { return true; } else { return false; }
+            if ( $resultStatus->{'ust'} == $unlockMode ) { return true; } else { return false; }
         }
         
         //=== Modul Funktionen =========================================================================================
