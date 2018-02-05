@@ -62,6 +62,7 @@
           SetValue($this->GetIDForIdent("maxAvailableAMP"), $goEChargerStatus->{'ama'}); 
           SetValue($this->GetIDForIdent("accessControl"), $goEChargerStatus->{'ast'});
           SetValue($this->GetIDForIdent("cableUnlockMode"), $goEChargerStatus->{'ust'});
+          SetValue($this->GetIDForIdent("automaticStop"), $goEChargerStatus->{'dwo'}/10 );
             
           $goEChargerEnergy = $goEChargerStatus->{'nrg'};
           SetValue($this->GetIDForIdent("availableVP1"), $goEChargerEnergy[0]);            
@@ -247,6 +248,20 @@
                 IPS_SetVariableProfileAssociation("GOECHARGER_CableUnlockMode", 1, "Am Ladeende entriegeln", "", 0xFFCC00);
                 IPS_SetVariableProfileAssociation("GOECHARGER_CableUnlockMode", 2, "Immer verriegelt", "", 0xFF0000);
             }  
+            
+            if ( !IPS_VariableProfileExists('GOECHARGER_AutomaticStop') ) {
+                $profileID = IPS_CreateVariableProfile('GOECHARGER_AutomaticStop', 2 );
+                IPS_SetVariableProfileIcon('GOECHARGER_AutomaticStop', 'Battery' );
+                IPS_SetVariableProfileDigits('GOECHARGER_AutomaticStop',1);
+                IPS_SetVariableProfileValues('GOECHARGER_AutomaticStop', 0, 100, 0.1 );
+                IPS_SetVariableProfileAssociation("GOECHARGER_AutomaticStop", 0, "deaktiviert - max. ", "", 0xFF0000);
+                for($i = 1; $i<=9; $i++ ){
+                  IPS_SetVariableProfileAssociation("GOECHARGER_AutomaticStop", $i, number_format($i,0), "", 0xFFFFFF);
+                }
+                for($i = 10; $i<=100; $i+=5 ){
+                  IPS_SetVariableProfileAssociation("GOECHARGER_AutomaticStop", $i, number_format($i,0), "", 0xFFFFFF);
+                }
+            }  
     
         }
         
@@ -284,7 +299,9 @@
             if ( $this->GetIDForIdent("cableUnlockMode") == false ) {
               $this->RegisterVariableInteger("cableUnlockMode", "Kabel-Verriegelungsmodus","GOECHARGER_CableUnlockMode",0);
             }               
-            
+            if ( $this->GetIDForIdent("automaticStop") == false ) {
+              $this->RegisterVariableFloat("automaticStop", "automatisches Ladeende bei Akkustand", "GOECHARGER_AutomaticStop", 0 );
+            }
             
         }
     }
