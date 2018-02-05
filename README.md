@@ -32,12 +32,10 @@ Das Modul "go-eCharger" dient als Schnittstelle zu einem lokal installierten go-
 #### 4.1.1. Messwerte
 + Seriennummer
 + Zustand
-+ derzeit verfügbarer Ladestrom
++ derzeit verfügbarer Ladestrom 
 + maximal verfügbarer Ladestrom
-+ verfügbare Spannung Phase 1 / 2 / 3
-+ verfügbare Spannung Phase 2
-+ verfügbare Spannung Phase 3
-+ max. verfügbare Ladeleistung
++ verfügbare Spannung Phase 1 / 2 / 3 (die Spannungsversorgung des go-eChargers)
++ max. verfügbare Ladeleistung (berechnet aus der aktuellen Spannungsversorgung sowie dem verfügbaren Ladestrom)
 
 #### 4.1.2. Funktionen
 
