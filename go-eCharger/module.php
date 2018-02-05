@@ -145,7 +145,7 @@
             
         public function SetAutomaticChargeStop(int $chargeStopKW) {
             if ( $chargeStopKW < 0 or $chargeStopKW > 100 ) { return false; }
-            $value = number_value( $chargeStopKW*10, 0 );
+            $value = number_format( $chargeStopKW*10, 0 );
             $resultStatus = $this->setValueToeCharger( 'dwo', $value ); 
             // Update all data
             $this->Update();
