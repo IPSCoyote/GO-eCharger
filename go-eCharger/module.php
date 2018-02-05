@@ -75,7 +75,7 @@
         public function SetMaximumChargingAmperage(int $Ampere) {
             // Check input value
             if ( $Ampere < 6 or $Ampere > 32 ) { return false; }
-            if ( $Ampere > $this->ReadPropertyString("MaxAmperage") ) { return false; }
+            if ( $Ampere > $this->ReadPropertyInteger("MaxAmperage") ) { return false; }
             
             // get current settings of goECharger
             $goEChargerStatus = $this->getStatusFromCharger();
@@ -114,7 +114,7 @@
         public function SetCurrentChargingAmperage(int $Ampere) {
             // Check input value
             if ( $Ampere < 6 or $Ampere > 32 ) { return false; }
-            if ( $Ampere > $this->ReadPropertyString("MaxAmperage") ) { return false; }
+            if ( $Ampere > $this->ReadPropertyInteger("MaxAmperage") ) { return false; }
             
             // get current settings of goECharger
             $goEChargerStatus = $this->getStatusFromCharger();
