@@ -30,6 +30,16 @@ Das Modul befindet sich im Entwicklungsstadium und ist derzeit **nicht** für di
 Das Modul "go-eCharger" dient als Schnittstelle zu einem lokal installierten go-eCharger. Es liefert aktuelle Messwerte als Instanzvariablen und bietet einen Zugriff auf Funktionen des go-eChargers. Der go-eCharger muss dabei lokal über eine IP-Adresse erreichbar sein (siehe Installation).
 
 #### 4.1.1. Messwerte
++ Seriennummer
++ Zustand
++ derzeit verfügbarer Ladestrom
++ maximal verfügbarer Ladestrom
++ verfügbare Spannung Phase 1
++ verfügbare Spannung Phase 2
++ verfügbare Spannung Phase 3
++ max. verfügbare Ladeleistung
+
 #### 4.1.2. Funktionen
 
 ### 4.2. Load Balancer
+
