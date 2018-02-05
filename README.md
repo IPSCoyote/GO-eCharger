@@ -43,7 +43,7 @@ Das Modul "go-eCharger" dient als Schnittstelle zu einem lokal installierten go-
 ##### 4.1.2.1. Update()
 Aktualisiert die Messwerte (IPS Variablen) des go-eChargers. Diese Funktion wird auch in Abhängigkeit der eingestellten Aktualisierungsfrequenzen in den Moduleinstellungender ausgeführt, so dass normalerweise ein manueller Aufruf unnötig sein sollte.
 ```
-GOECHARGER_Update(); // Aktualisiert die Messwerte (IPS Variablen) des go-eChargers
+GOeCharger_Update(); // Aktualisiert die Messwerte (IPS Variablen) des go-eChargers
 ```
 
 ##### 4.1.2.2. SetMaximumChargingAmperage(int $Ampere)
@@ -51,7 +51,7 @@ Mit dieser Funktion kann der maximal verfügbare Ladestrom des go-eChargers gese
 Diese Funktion hat direkte Auswirkung auf die Einstellungen des go-eChargers sowie einen ggf. aktuell stattfindenden Ladevorgang. Der maximale Ladestrom sollte an die verfügbare Hausinstallation angepasst sein. Die über IPS maximal einstellbare Ladestrom kann über die Moduleinstellungen beschränkt werden!
 Sollte der maximal verfügbare Ladestrom reduziert werden, so wird ggf. auch der aktuell eingestellte Ladestrom entsprechend verringert, sofern er das neue Maximum überschreiten würde.
 ```
-GOECHARGER_SetMaximumChargingAmperage( 16 ); // Setze den maximal verfügbaren Ladestrom auf 16 Ampere
+GOeCharger_SetMaximumChargingAmperage( 16 ); // Setze den maximal verfügbaren Ladestrom auf 16 Ampere
 ```
 Die Funktion liefert *true* oder *false* als Rückgabewert und aktualisiert die Messwerte
 
@@ -59,7 +59,7 @@ Die Funktion liefert *true* oder *false* als Rückgabewert und aktualisiert die 
 Mit dieser Funktion kann der aktuell verfügbare Ladestrom des go-eChargers gesetzt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. Der Wert darf jedoch den derzeitigen, maximal verfügbaren Ladestrom nicht überschreiten!
 Diese Funktion hat direkte Auswirkung auf die Einstellungen des go-eChargers sowie einen ggf. aktuell stattfindenden Ladevorgang.
 ```
-GOECHARGER_SetCurrentChargingAmperage( 8 ); // Setze den aktuellen Ladestrom auf 8 Ampere
+GOeCharger_SetCurrentChargingAmperage( 8 ); // Setze den aktuellen Ladestrom auf 8 Ampere
 ```
 Die Funktion liefert *true* oder *false* als Rückgabewert und aktualisiert die Messwerte
 
