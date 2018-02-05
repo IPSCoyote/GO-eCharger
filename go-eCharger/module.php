@@ -12,7 +12,8 @@
           parent::Create(); 
             
           // Properties Charger
-          $this->RegisterPropertyString("IPAddressCharger", "0.0.0.0");  
+          $this->RegisterPropertyString("IPAddressCharger", "0.0.0.0"); 
+          $this->RegisterPropertyInteger("MaxAmperage", 6);
           $this->RegisterPropertyInteger("UpdateIdle", 0);  
           $this->RegisterPropertyInteger("UpdateCharging",0); 
             
