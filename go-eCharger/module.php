@@ -71,7 +71,7 @@
           return true;
         }
        
-        public function SetMaxAmpere(int $Ampere) {
+        public function SetMaximumChargingAmperage(int $Ampere) {
             // Check input value
             if ( $Ampere < 6 or $Ampere > 32 ) { return false; }
             
@@ -108,7 +108,7 @@
             if ( $goEChargerStatus->{'ama'} == $Ampere ) { return true; } else { return false; }
         }
         
-        public function SetCurrentAmpere(int $Ampere) {
+        public function SetCurrentChargingAmperage(int $Ampere) {
             // Check input value
             if ( $Ampere < 6 or $Ampere > 32 ) { return false; }
             
