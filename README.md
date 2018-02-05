@@ -46,6 +46,9 @@ Aktualisiert die Messwerte des go-eChargers. Diese Funktion kann auch regelmäss
 Mit dieser Funktion kann der maximal verfügbare Ladestrom des go-eChargers gesetzt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. 
 Diese Funktion hat direkte Auswirkung auf die Einstellungen des go-eChargers. Der maximale Ladestrom sollte an die verfügbare Hausinstallation angepasst sein. Die über IPS maximal einstellbare Ladestrom kann über die Moduleinstellungen beschränkt werden!
 Sollte der maximal verfügbare Ladestrom reduziert werden, so wird ggf. auch der aktuell eingestellte Ladestrom entsprechend verringert, sofern er das neue Maximum überschreiten würde.
+```
+  GOECHARGER_SetMaximumChargingAmperage( 16 ); // Setze den maximal verfügbaren Ladestrom auf 16 Ampere
+```
 ##### 4.1.2.3. SetCurrentChargingAmperage(int $Ampere)
 
 ### 4.2. Load Balancer
