@@ -82,11 +82,11 @@ GOeCharger_SetAutomaticChargeStop( $Instanz, 10.5 ); // aktiviert den automatisc
 
 ##### 4.1.2.6. SetCableUnlockMode(int $unlockMode)
 Mit dieser Funktion kann der Verriegelungsmodus des Kabels am go-eCharger eingestellt werden. Dabei gelten folgende Werte:
-+ 0 = Normaler Modus - Das Kabel bleibt am go-eCharger verriegelt, solange ein Fahrzeug angeschlossen ist
-+ 1 = Automatischer Modus - Das Kabel wird nach dem Ladeende automatisch entriegelt
++ 0 = normaler Modus - Das Kabel bleibt am go-eCharger verriegelt, solange ein Fahrzeug angeschlossen ist
++ 1 = automatischer Modus - Das Kabel wird nach dem Ladeende automatisch entriegelt
 + 2 = verriegelt - Das Kabel kann nur durch Änderung des Verriegelungsmodus entriegelt werden
 ```
-GOeCharger_SetAutomaticChargeStop( $Instanz, 10.5 ); // aktiviert den automatischen Ladestop bei 10,5 kw
+GOeCharger_SetCableUnlockMode( $Instanz, 1 ); // setzt den automatischen Entriegelungsmodus
 ```
 
 ##### 4.1.2.7. SetActivation(bool)
