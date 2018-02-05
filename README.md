@@ -41,7 +41,7 @@ Das Modul "go-eCharger" dient als Schnittstelle zu einem lokal installierten go-
 #### 4.1.2. Funktionen
 
 ##### 4.1.2.1. Update()
-Aktualisiert die Messwerte (IPS Variablen) des go-eChargers. Diese Funktion kann auch regelmässig durch die eingestellten Aktualisierungsfrequenzen in den Moduleinstellungen ausgeführt werden.
+Aktualisiert die Messwerte (IPS Variablen) des go-eChargers. Diese Funktion wird auch in Abhängigkeit der eingestellten Aktualisierungsfrequenzen in den Moduleinstellungender ausgeführt, so dass normalerweise ein manueller Aufruf unnötig sein sollte.
 ```
 GOECHARGER_Update(); // Aktualisiert die Messwerte (IPS Variablen) des go-eChargers
 ```
