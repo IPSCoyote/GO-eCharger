@@ -61,6 +61,7 @@
           SetValue($this->GetIDForIdent("availableAMP"), $goEChargerStatus->{'amp'} ); 
           SetValue($this->GetIDForIdent("maxAvailableAMP"), $goEChargerStatus->{'ama'}); 
           SetValue($this->GetIDForIdent("accessControl"), $goEChargerStatus->{'ast'});
+          SetValue($this->GetIDForIdent("activation"), $goEChargerStatus->{'alw'});  
           SetValue($this->GetIDForIdent("cableUnlockMode"), $goEChargerStatus->{'ust'});
           SetValue($this->GetIDForIdent("automaticStop"), $goEChargerStatus->{'dwo'}/10 );
             
@@ -158,6 +159,14 @@
             // Update all data
             $this->Update();
             if ( $resultStatus->{'ust'} == $unlockMode ) { return true; } else { return false; }
+        }
+        
+        public function SetActivation(bool $active) {
+            if ( $active == true ) { $value = 1; } else { $value = 0; }
+            $resultStatus = $this->setValueToeCharger( 'alw', $value ); 
+            // Update all data
+            $this->Update();
+            if ( $resultStatus->{'alw'} == $value ) { return true; } else { return false; }
         }
         
         //=== Modul Funktionen =========================================================================================
@@ -266,6 +275,13 @@
                 IPS_SetVariableProfileAssociation("GOECHARGER_Error", false, "Fehler", "", 0xFF0000);
             }  
             
+            if ( !IPS_VariableProfileExists('GOECHARGER_Active') ) {
+                $profileID = IPS_CreateVariableProfile('GOECHARGER_Active', 0 );
+                IPS_SetVariableProfileIcon('GOECHARGER_Active', 'Ok' );
+                IPS_SetVariableProfileAssociation("GOECHARGER_Active", true, "aktiviert",     "", 0x00FF00);
+                IPS_SetVariableProfileAssociation("GOECHARGER_Active", false, "deaktiviert", "", 0xFF0000);
+            }  
+            
             if ( !IPS_VariableProfileExists('GOECHARGER_CableUnlockMode') ) {
                 $profileID = IPS_CreateVariableProfile('GOECHARGER_CableUnlockMode', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_CableUnlockMode', 'Plug' );
@@ -315,6 +331,9 @@
             if ( $this->GetIDForIdent("accessControl") == false ) {
               $this->RegisterVariableBoolean("accessControl", "Zugangskontrolle via RFID/App","~Switch",0);
             }   
+            if ( $this->GetIDForIdent("activation") == false ) {
+              $this->RegisterVariableBoolean("activation", "Charger aktiviert","GOECHARGER_Active",0);
+            }              
             if ( $this->GetIDForIdent("cableUnlockMode") == false ) {
               $this->RegisterVariableInteger("cableUnlockMode", "Kabel-Verriegelungsmodus","GOECHARGER_CableUnlockMode",0);
             }               
