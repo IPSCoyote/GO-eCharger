@@ -255,10 +255,6 @@
                 IPS_SetVariableProfileDigits('GOECHARGER_AutomaticStop',1);
                 IPS_SetVariableProfileValues('GOECHARGER_AutomaticStop', 0, 100, 0.1 );
                 IPS_SetVariableProfileText('GOECHARGER_AutomaticStop', "", "kw" );
-                IPS_SetVariableProfileAssociation("GOECHARGER_AutomaticStop", 0, "deaktiviert - max. ", "", 0x00FF00);
-                for($i = 0.1; $i<=100; $i+=0.1 ){
-                  IPS_SetVariableProfileAssociation("GOECHARGER_AutomaticStop", $i, number_format($i,0), "", 0xFF0000);
-                }
             }  
     
         }
@@ -298,7 +294,7 @@
               $this->RegisterVariableInteger("cableUnlockMode", "Kabel-Verriegelungsmodus","GOECHARGER_CableUnlockMode",0);
             }               
             if ( $this->GetIDForIdent("automaticStop") == false ) {
-              $this->RegisterVariableFloat("automaticStop", "automatisches Ladeende bei Akkustand", "GOECHARGER_AutomaticStop", 0 );
+              $this->RegisterVariableFloat("automaticStop", "Ladeende bei Akkustand (0kw = deaktiviert)", "GOECHARGER_AutomaticStop", 0 );
             }
             
         }
