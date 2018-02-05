@@ -75,7 +75,14 @@ GOeCharger_SetAccessControl( $Instanz, true ); // aktiviert die Zugangskontrolle
 ```
 
 ##### 4.1.2.5. SetAutomaticChargeStop(float $kw)
-
+Mit dieser Funktion kann der automatische Ladestop des go-eChargers aktiviert werden. Während der Wert '0' den automatischen Ladestop deaktivert, können höhere Werte bis 100 (Maximum) als Ladegrenze in kw angegeben werden. 
+```
+GOeCharger_SetAutomaticChargeStop( $Instanz, 10.5 ); // aktiviert den automatischen Ladestop bei 10,5 kw
+```
 ##### 4.1.2.6. SetCableUnlockMode(int $unlockMode)
 
 ##### 4.1.2.7. SetActivation(bool)
+Mit dieser Funktion der go-eChargers aktiviert oder deaktiviert werden. Im deaktivierten Zustand ist kein Laden möglich!
+```
+GOeCharger_SetActivation( $Instanz, false ); // deaktiviert den go-eCharger 
+```
