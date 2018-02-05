@@ -254,7 +254,7 @@
                 IPS_SetVariableProfileIcon('GOECHARGER_AutomaticStop', 'Battery' );
                 IPS_SetVariableProfileDigits('GOECHARGER_AutomaticStop',1);
                 IPS_SetVariableProfileValues('GOECHARGER_AutomaticStop', 0, 100, 0.1 );
-                IPS_SetVariableProfileText('GOECHARGER_AutomaticStop', "", "kw" );
+                IPS_SetVariableProfileText('GOECHARGER_AutomaticStop', "", " kw" );
             }  
     
         }
