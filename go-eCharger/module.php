@@ -61,6 +61,7 @@
           SetValue($this->GetIDForIdent("availableAMP"), $goEChargerStatus->{'amp'} ); 
           SetValue($this->GetIDForIdent("maxAvailableAMP"), $goEChargerStatus->{'ama'}); 
           SetValue($this->GetIDForIdent("accessControl"), $goEChargerStatus->{'ast'});
+          SetValue($this->GetIDForIdent("cableUnlockMode"), $goEChargerStatus->{'ust'});
             
           $goEChargerEnergy = $goEChargerStatus->{'nrg'};
           SetValue($this->GetIDForIdent("availableVP1"), $goEChargerEnergy[0]);            
