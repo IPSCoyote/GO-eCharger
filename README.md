@@ -40,6 +40,7 @@ Das Modul "go-eCharger" dient als Schnittstelle zu einem lokal installierten go-
 + **Kabel-Verriegelungsmodus** (0 = Verriegelt, wenn Auto angeschlossen; 1 = Am Ladeende entriegeln; 2 = Immer verriegelt)
 + **Ladeende bei Akkustand** (0.0 kw - 100.0 kw; 0.0 = deaktiviert)
 + **Zugangskontrolle via RFID/APP** (0 = aus; 1 = an)
++ **Charger aktiviert** (0 = deaktiviert; 1 = aktiviert)
 
 #### 4.1.2. Funktionen
 
@@ -67,3 +68,10 @@ GOeCharger_SetCurrentChargingAmperage( 8 ); // Setze den aktuellen Ladestrom auf
 ```
 Die Funktion liefert *true* oder *false* als Rückgabewert und aktualisiert die Messwerte
 
+##### 4.1.2.4. SetAccessControl(bool)
+
+##### 4.1.2.5. SetAutomaticChargeStop(float $kw)
+
+##### 4.1.2.6. SetCableUnlockMode(int $unlockMode)
+
+##### 4.1.2.7. SetActivation(bool)
