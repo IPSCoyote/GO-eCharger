@@ -135,6 +135,30 @@
             if ( $resultStatus->{'amp'} == $Ampere ) { return true; } else { return false; }
         }
         
+        public function SetAccessControll(bool $active) {
+            $resultStatus = $this->setValueToeCharger( 'amp', $active ); 
+            // Update all data
+            $this->Update();
+            if ( $resultStatus->{'ast'} == $Ampere ) { return true; } else { return false; }
+        }
+            
+        public function SetAutomaticChargeStop(int $chargeStopKW) {
+            if ( $chargeStopKW < 0 or $chargeStopKW > 100 ) { return false; }
+            $value = number_value( $chargeStopKW*10, 0 );
+            $resultStatus = $this->setValueToeCharger( 'dwo', $value ); 
+            // Update all data
+            $this->Update();
+            if ( $resultStatus->{'dwo'} == $value ) { return true; } else { return false; }
+        }
+            
+        public function SetCableUnlockMode(int $unlockMode) {
+            if ( $unlockMode < 0 or $unlockMode > 2 ) { return false; }
+            $resultStatus = $this->setValueToeCharger( 'ust', $unlockMode ); 
+            // Update all data
+            $this->Update();
+            if ( $resultStatus->{'ust'} == $Ampere ) { return true; } else { return false; }
+        }
+        
         //=== Modul Funktionen =========================================================================================
         /* Own module functions called via the defined prefix GOeCharger_* 
         *
