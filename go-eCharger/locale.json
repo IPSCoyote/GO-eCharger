@@ -2,6 +2,7 @@
     "translations": {
         "de": { 
             "IP Address": "IP Adresse",
+            "Amp. Home Connection": "Hausanschluss",
             "Update frequencies": "Aktualisierungsfrequenzen (sec.)",
             "Idle": "wartend",
             "Charging": "ladend",
