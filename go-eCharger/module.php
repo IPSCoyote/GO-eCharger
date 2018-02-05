@@ -255,12 +255,9 @@
                 IPS_SetVariableProfileDigits('GOECHARGER_AutomaticStop',1);
                 IPS_SetVariableProfileValues('GOECHARGER_AutomaticStop', 0, 100, 0.1 );
                 IPS_SetVariableProfileText('GOECHARGER_AutomaticStop', "", "kw" );
-                IPS_SetVariableProfileAssociation("GOECHARGER_AutomaticStop", 0, "deaktiviert - max. ", "", 0xFF0000);
-                for($i = 1; $i<=9; $i++ ){
-                  IPS_SetVariableProfileAssociation("GOECHARGER_AutomaticStop", $i, number_format($i,0), "", 0xFFFFFF);
-                }
-                for($i = 10; $i<=100; $i+=5 ){
-                  IPS_SetVariableProfileAssociation("GOECHARGER_AutomaticStop", $i, number_format($i,0), "", 0xFFFFFF);
+                IPS_SetVariableProfileAssociation("GOECHARGER_AutomaticStop", 0, "deaktiviert - max. ", "", 0x00FF00);
+                for($i = 0.1; $i<=100; $i+=0.1 ){
+                  IPS_SetVariableProfileAssociation("GOECHARGER_AutomaticStop", $i, number_format($i,0), "", 0xFF0000);
                 }
             }  
     
