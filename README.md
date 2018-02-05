@@ -40,8 +40,13 @@ Das Modul "go-eCharger" dient als Schnittstelle zu einem lokal installierten go-
 #### 4.1.2. Funktionen
 
 ##### 4.1.2.1. Update()
-##### 4.1.2.2. SetMaxAmpere(int $Ampere)
-##### 4.1.2.3. SetCurrentAmpere(int $Ampere)
+Aktualisiert die Messwerte des go-eChargers. Diese Funktion kann auch regelmässig durch die eingestellten Aktualisierungsfrequenzen in den Moduleinstellungen ausgeführt werden.
+
+##### 4.1.2.2. SetMaximumChargingAmperage(int $Ampere)
+Mit dieser Funktion kann der maximal verfügbare Ladestrom des go-eChargers gesetzt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. 
+Diese Funktion hat direkte Auswirkung auf die Einstellungen des go-eChargers. Der maximale Ladestrom sollte an die verfügbare Hausinstallation angepasst sein. Die über IPS maximal einstellbare Ladestrom kann über die Moduleinstellungen beschränkt werden!
+Sollte der maximal verfügbare Ladestrom reduziert werden, so wird ggf. auch der aktuell eingestellte Ladestrom entsprechend verringert, sofern er das neue Maximum überschreiten würde.
+##### 4.1.2.3. SetCurrentChargingAmperage(int $Ampere)
 
 ### 4.2. Load Balancer
 
