@@ -58,7 +58,7 @@
           // write values into variables
           SetValue($this->GetIDForIdent("status"),                  $goEChargerStatus->{'car'});    
           SetValue($this->GetIDForIdent("availableAMP"),            $goEChargerStatus->{'amp'}); 
-          SetValue($this->GetIDForIdent("error"),                   ( $goEChargerStatus->{'err'} == 0 ) ); 
+          SetValue($this->GetIDForIdent("error"),                   $goEChargerStatus->{'err'}); 
           SetValue($this->GetIDForIdent("accessControl"),           $goEChargerStatus->{'ast'});
           SetValue($this->GetIDForIdent("accessState"),             $goEChargerStatus->{'alw'}); 
           SetValue($this->GetIDForIdent("cableCapability"),         $goEChargerStatus->{'cbl'}); 
