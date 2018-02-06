@@ -1,17 +1,17 @@
 IPS                         go-eCharger                                                         IPS Profile
 
 <nicht verfügbar>           version -  api version, the code below only supports version B      None
-Status                      car  	-  1=ready for charging, 2=charging, 3=waiting for car      GOECharger_Status
-aktuelle Leistung           amp  	-  ampere (current setting)                                 GOECharger_Ampere
-Fehler                      err  	-  error state, 1:RCCB, 3:PHASE, 8:NO_GROUND, 10:INTERNAL   GOECharger_Error
-Zugriffsregelung            ast  	-  access state, 0:OPEN, 1:RFID_REQ                         GOECharger_Access
-Laden erlaubt?              alw  	-  allow charging, 0:false, 1:true                          ~
-Kabel Kapazität             cbl  	-  cable capability in A, 0 for no cable                    GOECharger_Ampere ???
-verfügbare Phasen           pha  	-  number of phases                                         None
-Mainboardtemperatur         tmp  	-  mainboard temperaturec                                   "Celsius" 
+Status                      car  	-  1=ready for charging, 2=charging, 3=waiting for car        GOECharger_Status
+aktuelle Leistung           amp  	-  ampere (current setting)                                   GOECharger_Ampere
+Fehler                      err  	-  error state, 1:RCCB, 3:PHASE, 8:NO_GROUND, 10:INTERNAL     GOECharger_Error
+Zugriffsregelung            ast  	-  access state, 0:OPEN, 1:RFID_REQ                           GOECharger_Access
+Laden erlaubt?              alw  	-  allow charging, 0:false, 1:true                            ~
+Kabel Kapazität             cbl  	-  cable capability in A, 0 for no cable                      GOECharger_Ampere ???
+verfügbare Phasen           pha  	-  number of phases                                           None
+Mainboardtemperatur         tmp  	-  mainboard temperaturec                                     "Celsius" 
                             dws  	-  deka-watt-seconds, 1000 equals, 10.000 Ws charged in this charge proess
-                            dwo  	-  turn off value for dws (for charge XY kWh function), if(dwo!=0 && dws/36000>=dwo)alw=0  
-angeschlossener Adapter     adi  	-  adapter_in, 0:NO_ADAPTER, 1:16A_ADAPTER                  GOECharger_Adapter
+automatischer Ladestop bei  dwo  	-  turn off value for dws (for charge XY kWh function)        GOECharger_
+angeschlossener Adapter     adi  	-  adapter_in, 0:NO_ADAPTER, 1:16A_ADAPTER                    GOECharger_Adapter
 entsperrt durch RFID Nr.    uby  	-  unlocked by RFID card no
                             eto  	-  Energy total .1 kWh (value of 120 means 12 kWh charged)
 <nicht verfügbar>           wst  	-  wifi state, 3:connected, default:unconnected
@@ -46,7 +46,7 @@ Seriennummer                sse  	-  serial number (formatted as %06d string)
 LED Helligkeit              lbr  	-  led brightness, 0-255
                             aho  	-  awattar hours to charge
                             afi  	-  awattar hour:00 to be finished
-maximale Leistung           ama  	-  absolute max ampere                                      GOECharger_Ampere
+maximale Leistung           ama  	-  absolute max ampere                                        GOECharger_Ampere
 <nicht verfügbar>           al1  	-  button ampere level 1
 <nicht verfügbar>           al2  	-  button ampere level 2
 <nicht verfügbar>           al3  	-  button ampere level 3
@@ -59,16 +59,16 @@ Entsperrmodus Kabel         ust  	-  unlock method, 0:standard, 1:auto_unlock, 2
 <nicht verfügbar>           wak  	-  wlan hotspot kennwort/password
 Erdungsprüfung aktiv        nmo  	-  norway mode, 0:false, 1:true                             ~
 
-geladene Energie Karte 1    eca  	-  energy charged with card 1, in .1kWh                     GOECharger_Energy
-geladene Energie Karte 2    ecr  	-  energy charged with card 2, in .1kWh                     GOECharger_Energy
-geladene Energie Karte 3    ecd  	-  energy charged with card 3, in .1kWh                     GOECharger_Energy
-geladene Energie Karte 4    ec4  	-  energy charged with card 4, in .1kWh                     GOECharger_Energy
-geladene Energie Karte 5    ec5  	-  energy charged with card 5, in .1kWh                     GOECharger_Energy
-geladene Energie Karte 6    ec6  	-  energy charged with card 6, in .1kWh                     GOECharger_Energy
-geladene Energie Karte 7    ec7  	-  energy charged with card 7, in .1kWh                     GOECharger_Energy
-geladene Energie Karte 8    ec8  	-  energy charged with card 8, in .1kWh                     GOECharger_Energy
+geladene Energie Karte 1    eca  	-  energy charged with card 1, in .1kWh                       GOECharger_Energy
+geladene Energie Karte 2    ecr  	-  energy charged with card 2, in .1kWh                       GOECharger_Energy
+geladene Energie Karte 3    ecd  	-  energy charged with card 3, in .1kWh                       GOECharger_Energy
+geladene Energie Karte 4    ec4  	-  energy charged with card 4, in .1kWh                       GOECharger_Energy
+geladene Energie Karte 5    ec5  	-  energy charged with card 5, in .1kWh                       GOECharger_Energy
+geladene Energie Karte 6    ec6  	-  energy charged with card 6, in .1kWh                       GOECharger_Energy
+geladene Energie Karte 7    ec7  	-  energy charged with card 7, in .1kWh                       GOECharger_Energy
+geladene Energie Karte 8    ec8  	-  energy charged with card 8, in .1kWh                       GOECharger_Energy
 geladene Energie Karte 9    1ec9  	-  energy charged with card 9, in .1kWh                     GOECharger_Energy
-geladene Energie Karte 10   ec1  	-  energy charged with card 10, in .1kWh                    GOECharger_Energy
+geladene Energie Karte 10   ec1  	-  energy charged with card 10, in .1kWh                      GOECharger_Energy
 
 <nicht verfügbar:>   
 rca  	-  rfid card1 UID (only available for fwv<020)
