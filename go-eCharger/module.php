@@ -263,11 +263,24 @@
                 IPS_SetVariableProfileAssociation("GOECHARGER_Error", 3,  "Fehler an Phase"  , "", 0xFF0000);
                 IPS_SetVariableProfileAssociation("GOECHARGER_Error", 8,  "Keine Erdung"     , "", 0xFF0000);
                 IPS_SetVariableProfileAssociation("GOECHARGER_Error", 10, "Interner Fehler"  , "", 0xFF0000);
+            } 
+            
+            if ( !IPS_VariableProfileExists('GOECHARGER_Access') ) {
+                $profileID = IPS_CreateVariableProfile('GOECHARGER_Access', 1 );
+                IPS_SetVariableProfileAssociation("GOECHARGER_Access", 0, "frei zugänglich"     , "", 0x00FF00);
+                IPS_SetVariableProfileAssociation("GOECHARGER_Access", 1, "RFID Identifizierung", "", 0xFF0000);
             }  
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Ampere') ) {
                 $profileID = IPS_CreateVariableProfile('GOECHARGER_Ampere', 1 );
                 IPS_SetVariableProfileDigits('GOECHARGER_Ampere', 0 );
+                IPS_SetVariableProfileIcon('GOECHARGER_Ampere', 'Electricity' );
+                IPS_SetVariableProfileText('GOECHARGER_Ampere', "", " A" );
+            }
+            
+            if ( !IPS_VariableProfileExists('GOECHARGER_Ampere.1') ) {
+                $profileID = IPS_CreateVariableProfile('GOECHARGER_Ampere', 1 );
+                IPS_SetVariableProfileDigits('GOECHARGER_Ampere', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Ampere', 'Electricity' );
                 IPS_SetVariableProfileText('GOECHARGER_Ampere', "", " A" );
             }
@@ -304,7 +317,7 @@
                 IPS_SetVariableProfileText('GOECHARGER_Voltage', "", " V" );
             }   
             
-            if ( !IPS_VariableProfileExists('GOECHARGER_Power') ) {
+            if ( !IPS_VariableProfileExists('GOECHARGER_Power.1') ) {
                 $profileID = IPS_CreateVariableProfile('GOECHARGER_Energy', 2 );
                 IPS_SetVariableProfileDigits('GOECHARGER_Energy', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Energy', 'Electricity' );
@@ -326,23 +339,57 @@
             if ( $this->GetIDForIdent("status") == false ) {
               $this->RegisterVariableInteger("status", "Status","GOECHARGER_Status",0);
             }
-
+            
             if ( $this->GetIDForIdent("availableAMP") == false ) {
               $this->RegisterVariableInteger("availableAMP", "aktuell verfügbarer Ladestrom","GOECHARGER_Ampere",1);
-            }
+            }  
             
             if ( $this->GetIDForIdent("error") == false ) {
-              $this->RegisterVariableBoolean("error", "Zustand","GOECHARGER_Error",0);
+              $this->RegisterVariableInteger("error", "Fehler","GOECHARGER_Error",0);
             }
+            
+            if ( $this->GetIDForIdent("accessControl") == false ) {
+              $this->RegisterVariableInteger("accessControl", "Zugangskontrolle via RFID/App","GOECHARGER_Access",0);
+            }  
+            
+            if ( $this->GetIDForIdent("accessState") == false ) {
+              $this->RegisterVariableBoolean("activation", "Wallbox aktiv","~Switch",0);
+            }  
+            
+            if ( $this->GetIDForIdent("cableCapability") == false ) {
+              $this->RegisterVariableInteger("cableCapability", "Kabel-Leistungsfähigkeit","GOECharger_AmpereCable",0);
+            }  
+            
+            if ( $this->GetIDForIdent("numberOfPhases") == false ) {
+              $this->RegisterVariableInteger("numberOfPhases", "Anzahl Phasen","",0);
+            }  
+            
+            if ( $this->GetIDForIdent("mainboardTemperature") == false ) {
+              $this->RegisterVariableInteger("mainboardTemperature", "Mainboard Temperatur","~Temperature",0);
+            }  
+            
+            if ( $this->GetIDForIdent("automaticStop") == false ) {
+              $this->RegisterVariableFloat("automaticStop", "Ladeende bei Akkustand (0kw = deaktiviert)", "GOECHARGER_AutomaticStop", 0 );
+            }
+            
+            if ( $this->GetIDForIdent("adapterAttached") == false ) {
+              $this->RegisterVariableInteger("adapterAttached", "angeschlossener Adapter","GOECHARGER_Adapter",0);
+            } 
+            
+            if ( $this->GetIDForIdent("unlockedByRFID") == false ) {
+              $this->RegisterVariableInteger("unlockedByRFID", "entsperrt durch RFID","",0);
+            } 
+            
+            if ( $this->GetIDForIdent("energyTotal") == false ) {
+              $this->RegisterVariableFloat("energyTotal", "bisher geladene Energie","GOECHARGER_Power.1",0);
+            } 
             
             
             
             if ( $this->GetIDForIdent("serialID") == false ) {
               $this->RegisterVariableString("serialID", "Seriennummer","~String",0);
             }
-            if ( $this->GetIDForIdent("error") == false ) {
-              $this->RegisterVariableBoolean("error", "Zustand","GOECHARGER_Error",0);
-            }
+
             
             if ( $this->GetIDForIdent("availableAMP") == false ) {
               $this->RegisterVariableInteger("availableAMP", "derzeit verfügbarer Ladestrom","GOECHARGER_Ampere",1);
@@ -363,18 +410,12 @@
               $this->RegisterVariableFloat("availableKW", "max. verfügbare Ladeleistung","GOECHARGER_Kilowatt",2);
             }    
             
-            if ( $this->GetIDForIdent("accessControl") == false ) {
-              $this->RegisterVariableBoolean("accessControl", "Zugangskontrolle via RFID/App","~Switch",0);
-            }   
-            if ( $this->GetIDForIdent("activation") == false ) {
-              $this->RegisterVariableBoolean("activation", "Charger aktiviert","GOECHARGER_Active",0);
-            }              
+  
+            
             if ( $this->GetIDForIdent("cableUnlockMode") == false ) {
               $this->RegisterVariableInteger("cableUnlockMode", "Kabel-Verriegelungsmodus","GOECHARGER_CableUnlockMode",0);
             }               
-            if ( $this->GetIDForIdent("automaticStop") == false ) {
-              $this->RegisterVariableFloat("automaticStop", "Ladeende bei Akkustand (0kw = deaktiviert)", "GOECHARGER_AutomaticStop", 0 );
-            }
+
             
         }
     }
