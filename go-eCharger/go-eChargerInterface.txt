@@ -5,11 +5,11 @@ Status                      car  	-  1=ready for charging, 2=charging, 3=waiting
 aktuelle Leistung           amp  	-  ampere (current setting)                                   GOECharger_Ampere
 Fehler                      err  	-  error state, 1:RCCB, 3:PHASE, 8:NO_GROUND, 10:INTERNAL     GOECharger_Error
 Zugriffsregelung            ast  	-  access state, 0:OPEN, 1:RFID_REQ                           GOECharger_Access
-Laden erlaubt?              alw  	-  allow charging, 0:false, 1:true                            ~
+Laden möglich?              alw  	-  allow charging, 0:false, 1:true                            ~Switch
 Kabel Kapazität             cbl  	-  cable capability in A, 0 for no cable                      GOECharger_AmpereCable
 verfügbare Phasen           pha  	-  number of phases                                           None
-Mainboardtemperatur         tmp  	-  mainboard temperaturec                                     "Celsius" 
-                            dws  	-  deka-watt-seconds, 1000 equals, 10.000 Ws charged in this charge proess
+Mainboardtemperatur         tmp  	-  mainboard temperaturec                                     ~Temperature
+                            dws  	-  deka-watt-seconds, 1000 equals, 10.000 Ws charged in this charge proess
 automatischer Ladestop bei  dwo  	-  turn off value for dws (for charge XY kWh function) 0-100  GOECharger_AutomaticStop
 angeschlossener Adapter     adi  	-  adapter_in, 0:NO_ADAPTER, 1:16A_ADAPTER                    GOECharger_Adapter
 entsperrt durch RFID Nr.    uby  	-  unlocked by RFID card no
@@ -43,8 +43,8 @@ Seriennummer                sse  	-  serial number (formatted as %06d string)
 
                             tof  	-  time_offset for internal battery powered RTC
                             tds  	-  use daylight saving time for internal RTC
-LED Helligkeit              lbr  	-  led brightness, 0-255
-                            aho  	-  awattar hours to charge
+LED Helligkeit              lbr  	-  led brightness, 0-255                                      ~Intensity.255
+                            aho  	-  awattar hours to charge
                             afi  	-  awattar hour:00 to be finished
 maximale Leistung           ama  	-  absolute max ampere                                        GOECharger_Ampere
 <nicht verfügbar>           al1  	-  button ampere level 1
@@ -57,7 +57,7 @@ maximale Leistung           ama  	-  absolute max ampere                        
 <nicht verfügbar>           cfi  	-  color finished, parseInt(HEX_CODE), 24bit
 Entsperrmodus Kabel         ust  	-  unlock method, 0:standard, 1:auto_unlock, 2:always_locked GOECHARGER_CableUnlockMode
 <nicht verfügbar>           wak  	-  wlan hotspot kennwort/password
-Erdungsprüfung aktiv        nmo  	-  norway mode, 0:false, 1:true                             ~
+Erdungsprüfung              nmo  	-  norway mode, 0:false, 1:true                             ~Switch
 
 geladene Energie Karte 1    eca  	-  energy charged with card 1, in .1kWh                       GOECharger_Energy
 geladene Energie Karte 2    ecr  	-  energy charged with card 2, in .1kWh                       GOECharger_Energy
