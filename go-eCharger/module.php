@@ -378,7 +378,7 @@
               $this->RegisterVariableInteger("leadVP2", "Spannungsversorgung L2","GOECHARGER_Voltage",0);
             }
             
-            if ( $this->GetIDForIdent("leadP3") == false ) {
+            if ( $this->GetIDForIdent("leadVP3") == false ) {
               $this->RegisterVariableInteger("leadVP3", "Spannungsversorgung L3","GOECHARGER_Voltage",0);
             }
             
