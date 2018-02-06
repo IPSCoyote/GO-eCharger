@@ -27,6 +27,10 @@
             
           $this->sendDebug( "go-eCharger", "Apply", 0 );  
 
+          // Generate Profiles & Variables
+          $this->registerProfiles();
+          $this->registerVariables();  
+            
           // Set Data to Variables
           // $this->Update();
         }
