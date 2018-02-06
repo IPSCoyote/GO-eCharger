@@ -269,9 +269,9 @@
                 IPS_CreateVariableProfile('GOECHARGER_AmpereCable', 1 );
                 IPS_SetVariableProfileDigits('GOECHARGER_AmpereCable', 0 );
                 IPS_SetVariableProfileIcon('GOECHARGER_AmpereCable', 'Electricity' );
-                IPS_SetVariableProfileAssociation("GOECHARGER_Error", 0,  "Kein Kabel", "", 0xFF0000);
+                IPS_SetVariableProfileAssociation("GOECHARGER_AmpereCable", 0,  "Kein Kabel", "", 0xFF0000);
                 for($i=1; $i<=32; $i++){
-                    IPS_SetVariableProfileAssociation("GOECHARGER_Error", $i, number_format($i, 0)." A", "", 0xFFFFFF);
+                    IPS_SetVariableProfileAssociation("GOECHARGER_AmpereCable", $i, number_format($i, 0)." A", "", 0xFFFFFF);
                 }
             }
             
