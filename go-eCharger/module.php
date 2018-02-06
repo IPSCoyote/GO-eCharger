@@ -105,10 +105,10 @@
           return true;
         }
        
-        public function getMaximumChargingAmperage() {
-          //$goEChargerStatus = $this->getStatusFromCharger();
-          //if ( $goEChargerStatus == false ) { return false; }
-          //return $goEChargerStatus->{'ama'}; 
+        public function getMaximumChargingAmperage():int {
+          $goEChargerStatus = $this->getStatusFromCharger();
+          if ( $goEChargerStatus == false ) { return false; }
+          return $goEChargerStatus->{'ama'}; 
         }
         
         public function setMaximumChargingAmperage(int $ampere) {
@@ -150,10 +150,10 @@
             if ( $goEChargerStatus->{'ama'} == $ampere ) { return true; } else { return false; }
         }
         
-        public function getCurrentChargingAmperage() {
-          //$goEChargerStatus = $this->getStatusFromCharger();
-          //if ( $goEChargerStatus == false ) { return false; }
-          //return $goEChargerStatus->{'amp'}; 
+        public function getCurrentChargingAmperage():int {
+          $goEChargerStatus = $this->getStatusFromCharger();
+          if ( $goEChargerStatus == false ) { return false; }
+          return $goEChargerStatus->{'amp'}; 
         }
         
         public function setCurrentChargingAmperage(int $ampere) {
@@ -177,10 +177,10 @@
             if ( $resultStatus->{'amp'} == $ampere ) { return true; } else { return false; }
         }
 
-        public function isAccessControlActive() {
-          //$goEChargerStatus = $this->getStatusFromCharger();
-          //if ( $goEChargerStatus == false ) { return false; }
-          //if ( $goEChargerStatus->{'ast'} == '1' ) { return true; } else { return false; } 
+        public function isAccessControlActive():bool {
+          $goEChargerStatus = $this->getStatusFromCharger();
+          if ( $goEChargerStatus == false ) { return false; }
+          if ( $goEChargerStatus->{'ast'} == '1' ) { return true; } else { return false; } 
         }
         
         public function setAccessControlActive(int $active) {
@@ -191,10 +191,10 @@
             if ( $resultStatus->{'ast'} == $$value ) { return true; } else { return false; }
         }
             
-        public function getAutomaticChargeStop() {
-          //$goEChargerStatus = $this->getStatusFromCharger();
-          //if ( $goEChargerStatus == false ) { return false; }
-          //return $goEChargerStatus->{'dwo'}/10; 
+        public function getAutomaticChargeStop():float {
+          $goEChargerStatus = $this->getStatusFromCharger();
+          if ( $goEChargerStatus == false ) { return false; }
+          return $goEChargerStatus->{'dwo'}/10; 
         }
         
         public function setAutomaticChargeStop(float $chargeStopKwh) {
@@ -206,10 +206,10 @@
             if ( $resultStatus->{'dwo'} == $value ) { return true; } else { return false; }
         }
             
-        public function getCableUnlockMode() {
-          //$goEChargerStatus = $this->getStatusFromCharger();
-          //if ( $goEChargerStatus == false ) { return false; }
-          //return $goEChargerStatus->{'ust'}; 
+        public function getCableUnlockMode():int {
+          $goEChargerStatus = $this->getStatusFromCharger();
+          if ( $goEChargerStatus == false ) { return false; }
+          return $goEChargerStatus->{'ust'}; 
         }
         
         public function setCableUnlockMode(int $unlockMode) {
@@ -220,10 +220,10 @@
             if ( $resultStatus->{'ust'} == $unlockMode ) { return true; } else { return false; }
         }
         
-        public function isActive() {
-          //$goEChargerStatus = $this->getStatusFromCharger();
-          //if ( $goEChargerStatus == false ) { return false; }
-          //if ( $goEChargerStatus->{'alw'} == '1' ) { return true; } else { return false; } 
+        public function isActive():bool {
+          $goEChargerStatus = $this->getStatusFromCharger();
+          if ( $goEChargerStatus == false ) { return false; }
+          if ( $goEChargerStatus->{'alw'} == '1' ) { return true; } else { return false; } 
         }
         
         public function setActive(bool $active) {
