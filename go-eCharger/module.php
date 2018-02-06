@@ -105,7 +105,7 @@
           return true;
         }
        
-        public function getMaximumChargingAmperage():int {
+        public function getMaximumChargingAmperage() {
           //$goEChargerStatus = $this->getStatusFromCharger();
           //if ( $goEChargerStatus == false ) { return false; }
           //return $goEChargerStatus->{'ama'}; 
@@ -150,7 +150,7 @@
             if ( $goEChargerStatus->{'ama'} == $ampere ) { return true; } else { return false; }
         }
         
-        public function getCurrentChargingAmperage():int {
+        public function getCurrentChargingAmperage() {
           //$goEChargerStatus = $this->getStatusFromCharger();
           //if ( $goEChargerStatus == false ) { return false; }
           //return $goEChargerStatus->{'amp'}; 
@@ -177,7 +177,7 @@
             if ( $resultStatus->{'amp'} == $ampere ) { return true; } else { return false; }
         }
 
-        public function isAccessControlActive():bool {
+        public function isAccessControlActive()l {
           //$goEChargerStatus = $this->getStatusFromCharger();
           //if ( $goEChargerStatus == false ) { return false; }
           //if ( $goEChargerStatus->{'ast'} == '1' ) { return true; } else { return false; } 
@@ -191,7 +191,7 @@
             if ( $resultStatus->{'ast'} == $$value ) { return true; } else { return false; }
         }
             
-        public function getAutomaticChargeStop():float {
+        public function getAutomaticChargeStop() {
           //$goEChargerStatus = $this->getStatusFromCharger();
           //if ( $goEChargerStatus == false ) { return false; }
           //return $goEChargerStatus->{'dwo'}/10; 
@@ -206,7 +206,7 @@
             if ( $resultStatus->{'dwo'} == $value ) { return true; } else { return false; }
         }
             
-        public function getCableUnlockMode():int {
+        public function getCableUnlockMode() {
           //$goEChargerStatus = $this->getStatusFromCharger();
           //if ( $goEChargerStatus == false ) { return false; }
           //return $goEChargerStatus->{'ust'}; 
@@ -220,7 +220,7 @@
             if ( $resultStatus->{'ust'} == $unlockMode ) { return true; } else { return false; }
         }
         
-        public function isActive():bool {
+        public function isActive() {
           //$goEChargerStatus = $this->getStatusFromCharger();
           //if ( $goEChargerStatus == false ) { return false; }
           //if ( $goEChargerStatus->{'alw'} == '1' ) { return true; } else { return false; } 
