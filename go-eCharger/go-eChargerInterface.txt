@@ -6,7 +6,7 @@ aktuelle Leistung           amp  	-  ampere (current setting)                   
 Fehler                      err  	-  error state, 1:RCCB, 3:PHASE, 8:NO_GROUND, 10:INTERNAL     GOECharger_Error
 Zugriffsregelung            ast  	-  access state, 0:OPEN, 1:RFID_REQ                           GOECharger_Access
 Laden erlaubt?              alw  	-  allow charging, 0:false, 1:true                            ~
-Kabel Kapazität             cbl  	-  cable capability in A, 0 for no cable                      GOECharger_Ampere ???
+Kabel Kapazität             cbl  	-  cable capability in A, 0 for no cable                      GOECharger_AmpereCable
 verfügbare Phasen           pha  	-  number of phases                                           None
 Mainboardtemperatur         tmp  	-  mainboard temperaturec                                     "Celsius" 
                             dws  	-  deka-watt-seconds, 1000 equals, 10.000 Ws charged in this charge proess
