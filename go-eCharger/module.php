@@ -151,9 +151,9 @@
         }
         
         public function getCurrentChargingAmperage():int {
-          $goEChargerStatus = $this->getStatusFromCharger();
-          if ( $goEChargerStatus == false ) { return false; }
-          return $goEChargerStatus->{'amp'}; 
+          //$goEChargerStatus = $this->getStatusFromCharger();
+          //if ( $goEChargerStatus == false ) { return false; }
+          //return $goEChargerStatus->{'amp'}; 
         }
         
         public function setCurrentChargingAmperage(int $ampere) {
@@ -178,9 +178,9 @@
         }
 
         public function isAccessControlActive():bool {
-          $goEChargerStatus = $this->getStatusFromCharger();
-          if ( $goEChargerStatus == false ) { return false; }
-          if ( $goEChargerStatus->{'ast'} == '1' ) { return true; } else { return false; } 
+          //$goEChargerStatus = $this->getStatusFromCharger();
+          //if ( $goEChargerStatus == false ) { return false; }
+          //if ( $goEChargerStatus->{'ast'} == '1' ) { return true; } else { return false; } 
         }
         
         public function setAccessControlActive(int $active) {
@@ -192,9 +192,9 @@
         }
             
         public function getAutomaticChargeStop():float {
-          $goEChargerStatus = $this->getStatusFromCharger();
-          if ( $goEChargerStatus == false ) { return false; }
-          return $goEChargerStatus->{'dwo'}/10; 
+          //$goEChargerStatus = $this->getStatusFromCharger();
+          //if ( $goEChargerStatus == false ) { return false; }
+          //return $goEChargerStatus->{'dwo'}/10; 
         }
         
         public function setAutomaticChargeStop(float $chargeStopKwh) {
@@ -207,9 +207,9 @@
         }
             
         public function getCableUnlockMode():int {
-          $goEChargerStatus = $this->getStatusFromCharger();
-          if ( $goEChargerStatus == false ) { return false; }
-          return $goEChargerStatus->{'ust'}; 
+          //$goEChargerStatus = $this->getStatusFromCharger();
+          //if ( $goEChargerStatus == false ) { return false; }
+          //return $goEChargerStatus->{'ust'}; 
         }
         
         public function setCableUnlockMode(int $unlockMode) {
@@ -221,9 +221,9 @@
         }
         
         public function isActive():bool {
-          $goEChargerStatus = $this->getStatusFromCharger();
-          if ( $goEChargerStatus == false ) { return false; }
-          if ( $goEChargerStatus->{'alw'} == '1' ) { return true; } else { return false; } 
+          //$goEChargerStatus = $this->getStatusFromCharger();
+          //if ( $goEChargerStatus == false ) { return false; }
+          //if ( $goEChargerStatus->{'alw'} == '1' ) { return true; } else { return false; } 
         }
         
         public function setActive(bool $active) {
