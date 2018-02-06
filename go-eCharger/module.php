@@ -65,6 +65,8 @@
           SetValue($this->GetIDForIdent("numberOfPhases"),          $goEChargerStatus->{'pha'}); 
           SetValue($this->GetIDForIdent("mainboardTemperature"),    $goEChargerStatus->{'tmp'});  
           SetValue($this->GetIDForIdent("automaticStop"),           $goEChargerStatus->{'dwo'}/10 );
+          SetValue($this->GetIDForIdent("adapterAttached"),         $goEChargerStatus->{'adi'});
+          SetValue($this->GetIDForIdent("unlockedByRFID"),          $goEChargerStatus->{'uby'});
           SetValue($this->GetIDForIdent("energyTotal"),             $goEChargerStatus->{'eto'});
             
           $goEChargerEnergy = $goEChargerStatus->{'nrg'};
