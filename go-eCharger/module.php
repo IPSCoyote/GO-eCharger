@@ -32,7 +32,7 @@
           $this->registerVariables();  
             
           // Set Data to Variables
-          // $this->Update();
+          $this->Update();
         }
         
     public function Destroy()
