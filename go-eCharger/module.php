@@ -244,6 +244,12 @@
           if ( $goEChargerStatus->{'nmo'} == '1' ) { return true; } else { return false; } 
         }
         
+        public function getError() { 
+          $goEChargerStatus = $this->getStatusFromCharger();
+          if ( $goEChargerStatus == false ) { return false; }
+          return $goEChargerStatus->{'err'}; 
+        }
+        
         //=== Modul Funktionen =========================================================================================
         /* Own module functions called via the defined prefix GOeCharger_* 
         *
