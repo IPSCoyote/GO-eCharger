@@ -29,7 +29,7 @@
 
           // Generate Profiles & Variables
           $this->registerProfiles();
-          $this->registerVariables();  
+          //$this->registerVariables();  
             
           // Set Data to Variables
           // $this->Update();
