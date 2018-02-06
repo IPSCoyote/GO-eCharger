@@ -314,9 +314,9 @@
             if ( !IPS_VariableProfileExists('GOECHARGER_CableUnlockMode') ) {
                 IPS_CreateVariableProfile('GOECHARGER_CableUnlockMode', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_CableUnlockMode', 'Plug' );
-                IPS_SetVariableProfileAssociation("GOECHARGER_CableUnlockMode", 0, "Verriegelt, wenn Auto angeschlossen", "", 0x00FF00);
-                IPS_SetVariableProfileAssociation("GOECHARGER_CableUnlockMode", 1, "Am Ladeende entriegeln", "", 0xFFCC00);
-                IPS_SetVariableProfileAssociation("GOECHARGER_CableUnlockMode", 2, "Immer verriegelt", "", 0xFF0000);
+                IPS_SetVariableProfileAssociation("GOECHARGER_CableUnlockMode", 0, "verriegelt, wenn Auto angeschlossen", "", 0x00FF00);
+                IPS_SetVariableProfileAssociation("GOECHARGER_CableUnlockMode", 1, "am Ladeende entriegeln", "", 0xFFCC00);
+                IPS_SetVariableProfileAssociation("GOECHARGER_CableUnlockMode", 2, "immer verriegelt", "", 0xFF0000);
             }  
         }
         
@@ -343,7 +343,7 @@
             }  
             
             if ( $this->GetIDForIdent("cableCapability") == false ) {
-              $this->RegisterVariableInteger("cableCapability", "Kabel-Leistungsfähigkeit","GOECharger_AmpereCable",0);
+              $this->RegisterVariableInteger("cableCapability", "Kabel-Leistungsfähigkeit","GOECHARGER_AmpereCable",0);
             }  
             
             if ( $this->GetIDForIdent("numberOfPhases") == false ) {
