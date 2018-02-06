@@ -317,11 +317,18 @@
                 IPS_SetVariableProfileText('GOECHARGER_Voltage', "", " V" );
             }   
             
-            if ( !IPS_VariableProfileExists('GOECHARGER_Power.1') ) {
+            if ( !IPS_VariableProfileExists('GOECHARGER_Energy.1') ) {
                 $profileID = IPS_CreateVariableProfile('GOECHARGER_Energy', 2 );
                 IPS_SetVariableProfileDigits('GOECHARGER_Energy', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Energy', 'Electricity' );
-                IPS_SetVariableProfileText('GOECHARGER_Energy', "", " kwh" );
+                IPS_SetVariableProfileText('GOECHARGER_Energy', "", " kw" );
+            }   
+            
+            if ( !IPS_VariableProfileExists('GOECHARGER_Power.1') ) {
+                $profileID = IPS_CreateVariableProfile('GOECHARGER_Power.1', 2 );
+                IPS_SetVariableProfileDigits('GOECHARGER_Power.1', 1 );
+                IPS_SetVariableProfileIcon('GOECHARGER_Power.1', 'Electricity' );
+                IPS_SetVariableProfileText('GOECHARGER_Power.1', "", " kwh" );
             }   
             
             if ( !IPS_VariableProfileExists('GOECHARGER_CableUnlockMode') ) {
@@ -384,38 +391,44 @@
               $this->RegisterVariableFloat("energyTotal", "bisher geladene Energie","GOECHARGER_Power.1",0);
             } 
             
+            if ( $this->GetIDForIdent("leadVP1") == false ) {
+              $this->RegisterVariableInteger("availableVP1", "Spannungsversorgung L1","GOECHARGER_Voltage",3);
+            }
+            if ( $this->GetIDForIdent("leadVP2") == false ) {
+              $this->RegisterVariableInteger("availableVP2", "Spannungsversorgung L2","GOECHARGER_Voltage",3);
+            }
+            if ( $this->GetIDForIdent("leadP3") == false ) {
+              $this->RegisterVariableInteger("availableVP3", "Spannungsversorgung L3","GOECHARGER_Voltage",3);
+            }
+            if ( $this->GetIDForIdent("leadN") == false ) {
+              $this->RegisterVariableInteger("availableVP3", "Spannungsversorgung N","GOECHARGER_Voltage",3);
+            }
             
+            if ( $this->GetIDForIdent("availableLeadEnergy") == false ) {
+              $this->RegisterVariableFloat("availableLeadEnergy", "max. verfügbare Ladeleistung","GOECHARGER_Energy.1",2);
+            }    
             
             if ( $this->GetIDForIdent("serialID") == false ) {
               $this->RegisterVariableString("serialID", "Seriennummer","~String",0);
             }
 
-            
-            if ( $this->GetIDForIdent("availableAMP") == false ) {
-              $this->RegisterVariableInteger("availableAMP", "derzeit verfügbarer Ladestrom","GOECHARGER_Ampere",1);
+            if ( $this->GetIDForIdent("ledBrightness") == false ) {
+              $this->RegisterVariableString("ledBrightness", "LED Helligkeit","~Intensity.255",0);
             }
+            
             if ( $this->GetIDForIdent("maxAvailableAMP") == false ) {
               $this->RegisterVariableInteger("maxAvailableAMP", "maximal verfügbarer Ladestrom","GOECHARGER_Ampere",1);
             }
-            if ( $this->GetIDForIdent("availableVP1") == false ) {
-              $this->RegisterVariableInteger("availableVP1", "verfügbare Spannung Phase 1","GOECHARGER_Voltage",3);
-            }
-            if ( $this->GetIDForIdent("availableVP2") == false ) {
-              $this->RegisterVariableInteger("availableVP2", "verfügbare Spannung Phase 2","GOECHARGER_Voltage",3);
-            }
-            if ( $this->GetIDForIdent("availableVP3") == false ) {
-              $this->RegisterVariableInteger("availableVP3", "verfügbare Spannung Phase 3","GOECHARGER_Voltage",3);
-            }
-            if ( $this->GetIDForIdent("availableKW") == false ) {
-              $this->RegisterVariableFloat("availableKW", "max. verfügbare Ladeleistung","GOECHARGER_Kilowatt",2);
-            }    
-            
-  
-            
+                   
             if ( $this->GetIDForIdent("cableUnlockMode") == false ) {
               $this->RegisterVariableInteger("cableUnlockMode", "Kabel-Verriegelungsmodus","GOECHARGER_CableUnlockMode",0);
             }               
 
+            for(i=1; $i<=10; $i++){
+              if ( $this->GetIDForIdent("energyChargedCard1") == false ) {
+                $this->RegisterVariableFloat("energyChargedCard1", "geladene Energie Karte ".$i,"GOECHARGER_Power.1",0);
+              }    
+            }
             
         }
     }
