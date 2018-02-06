@@ -259,7 +259,7 @@
             }
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Ampere.1') ) {
-                IPS_CreateVariableProfile('GOECHARGER_Ampere.1', 1 );
+                IPS_CreateVariableProfile('GOECHARGER_Ampere.1', 2 );
                 IPS_SetVariableProfileDigits('GOECHARGER_Ampere.1', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Ampere.1', 'Electricity' );
                 IPS_SetVariableProfileText('GOECHARGER_Ampere.1', "", " A" );
