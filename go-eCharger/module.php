@@ -165,12 +165,12 @@
             if ( $resultStatus->{'amp'} == $Ampere ) { return true; } else { return false; }
         }
         
-        public function SetAccessControll(bool $active) {
-            if ( $active == true ) { $value = 1; } else { $value = 0; }
-            $resultStatus = $this->setValueToeCharger( 'amp', $value ); 
+        public function SetAccessControll(int $ControlMode) {
+            if ( $ControlMode < 0 or $ControlMode > 1 ) { return false; }
+            $resultStatus = $this->setValueToeCharger( 'amp', $ControlMode ); 
             // Update all data
             $this->Update();
-            if ( $resultStatus->{'ast'} == $value ) { return true; } else { return false; }
+            if ( $resultStatus->{'ast'} == $ControlMode ) { return true; } else { return false; }
         }
             
         public function SetAutomaticChargeStop(int $chargeStopKW) {
