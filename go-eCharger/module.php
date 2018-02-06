@@ -72,8 +72,8 @@
           SetValue($this->GetIDForIdent("leadVP2"),                 $goEChargerEnergy[1]);            
           SetValue($this->GetIDForIdent("leadVP3"),                 $goEChargerEnergy[2]);  
           SetValue($this->GetIDForIdent("leadN"),                   $goEChargerEnergy[3]);  
-          $availableKW = ( ( ( $goEChargerEnergy[0] + $goEChargerEnergy[1] + $goEChargerEnergy[2] ) / 3 ) * 3 * $goEChargerStatus->{'amp'} ) / 1000;
-          SetValue($this->GetIDForIdent("availableKW"),             $availableKW);  
+          $availableEnergy = ( ( ( $goEChargerEnergy[0] + $goEChargerEnergy[1] + $goEChargerEnergy[2] ) / 3 ) * 3 * $goEChargerStatus->{'amp'} ) / 1000;
+          SetValue($this->GetIDForIdent("availableLeadEnergy"),     $availableEnergy);  
             
           SetValue($this->GetIDForIdent("serialID"),                $goEChargerStatus->{'sse'});  
           SetValue($this->GetIDForIdent("ledBrightness"),           $goEChargerStatus->{'lbr'});  
