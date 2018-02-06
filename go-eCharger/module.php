@@ -321,6 +321,98 @@
         }
         
         protected function registerVariables() {
+            // Generate Variables
+            if ( $this->GetIDForIdent("status") == false ) {
+              $this->RegisterVariableInteger("status", "Status","GOECHARGER_Status",0);
+            }
+            
+            if ( $this->GetIDForIdent("availableAMP") == false ) {
+              $this->RegisterVariableInteger("availableAMP", "aktuell verfügbarer Ladestrom","GOECHARGER_Ampere",1);
+            }  
+            
+            if ( $this->GetIDForIdent("error") == false ) {
+              $this->RegisterVariableInteger("error", "Fehler","GOECHARGER_Error",0);
+            }
+            
+            if ( $this->GetIDForIdent("accessControl") == false ) {
+              $this->RegisterVariableInteger("accessControl", "Zugangskontrolle via RFID/App","GOECHARGER_Access",0);
+            }  
+            
+            if ( $this->GetIDForIdent("accessState") == false ) {
+              $this->RegisterVariableBoolean("activation", "Wallbox aktiv","~Switch",0);
+            }  
+            
+            if ( $this->GetIDForIdent("cableCapability") == false ) {
+              $this->RegisterVariableInteger("cableCapability", "Kabel-Leistungsfähigkeit","GOECharger_AmpereCable",0);
+            }  
+            
+            if ( $this->GetIDForIdent("numberOfPhases") == false ) {
+              $this->RegisterVariableInteger("numberOfPhases", "Anzahl Phasen","",0);
+            }  
+            
+            if ( $this->GetIDForIdent("mainboardTemperature") == false ) {
+              $this->RegisterVariableInteger("mainboardTemperature", "Mainboard Temperatur","~Temperature",0);
+            }  
+            
+            if ( $this->GetIDForIdent("automaticStop") == false ) {
+              $this->RegisterVariableFloat("automaticStop", "Ladeende bei Akkustand (0kw = deaktiviert)", "GOECHARGER_AutomaticStop", 0 );
+            }
+            
+            if ( $this->GetIDForIdent("adapterAttached") == false ) {
+              $this->RegisterVariableInteger("adapterAttached", "angeschlossener Adapter","GOECHARGER_Adapter",0);
+            } 
+            
+            if ( $this->GetIDForIdent("unlockedByRFID") == false ) {
+              $this->RegisterVariableInteger("unlockedByRFID", "entsperrt durch RFID","",0);
+            } 
+            
+            if ( $this->GetIDForIdent("energyTotal") == false ) {
+              $this->RegisterVariableFloat("energyTotal", "bisher geladene Energie","GOECHARGER_Power.1",0);
+            } 
+            
+            if ( $this->GetIDForIdent("leadVP1") == false ) {
+              $this->RegisterVariableInteger("availableVP1", "Spannungsversorgung L1","GOECHARGER_Voltage",3);
+            }
+            if ( $this->GetIDForIdent("leadVP2") == false ) {
+              $this->RegisterVariableInteger("availableVP2", "Spannungsversorgung L2","GOECHARGER_Voltage",3);
+            }
+            if ( $this->GetIDForIdent("leadP3") == false ) {
+              $this->RegisterVariableInteger("availableVP3", "Spannungsversorgung L3","GOECHARGER_Voltage",3);
+            }
+            if ( $this->GetIDForIdent("leadN") == false ) {
+              $this->RegisterVariableInteger("availableVP3", "Spannungsversorgung N","GOECHARGER_Voltage",3);
+            }
+            
+            if ( $this->GetIDForIdent("availableLeadEnergy") == false ) {
+              $this->RegisterVariableFloat("availableLeadEnergy", "max. verfügbare Ladeleistung","GOECHARGER_Energy.1",2);
+            }    
+            
+            if ( $this->GetIDForIdent("serialID") == false ) {
+              $this->RegisterVariableString("serialID", "Seriennummer","~String",0);
+            }
+
+            if ( $this->GetIDForIdent("ledBrightness") == false ) {
+              $this->RegisterVariableString("ledBrightness", "LED Helligkeit","~Intensity.255",0);
+            }
+            
+            if ( $this->GetIDForIdent("maxAvailableAMP") == false ) {
+              $this->RegisterVariableInteger("maxAvailableAMP", "maximal verfügbarer Ladestrom","GOECHARGER_Ampere",1);
+            }
+                   
+            if ( $this->GetIDForIdent("cableUnlockMode") == false ) {
+              $this->RegisterVariableInteger("cableUnlockMode", "Kabel-Verriegelungsmodus","GOECHARGER_CableUnlockMode",0);
+            }    
+            
+            if ( $this->GetIDForIdent("norwayMode") == false ) {
+              $this->RegisterVariableBoolean("norwayMode", "Erdungsprüfung","~Switch",0);
+            }     
+
+            for(i=1; $i<=10; $i++){
+              if ( $this->GetIDForIdent("energyChargedCard".$i) == false ) {
+                $this->RegisterVariableFloat("energyChargedCard".$i, "geladene Energie Karte ".$i,"GOECHARGER_Power.1",0);
+              }    
+            }
+        }
         }
     }
 ?>
