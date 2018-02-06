@@ -177,7 +177,7 @@
             if ( $resultStatus->{'amp'} == $ampere ) { return true; } else { return false; }
         }
 
-        public function isAccessControlActive()l {
+        public function isAccessControlActive() {
           //$goEChargerStatus = $this->getStatusFromCharger();
           //if ( $goEChargerStatus == false ) { return false; }
           //if ( $goEChargerStatus->{'ast'} == '1' ) { return true; } else { return false; } 
