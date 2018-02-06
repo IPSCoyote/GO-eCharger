@@ -10,7 +10,7 @@ Kabel Kapazität             cbl  	-  cable capability in A, 0 for no cable     
 verfügbare Phasen           pha  	-  number of phases                                           None
 Mainboardtemperatur         tmp  	-  mainboard temperaturec                                     "Celsius" 
                             dws  	-  deka-watt-seconds, 1000 equals, 10.000 Ws charged in this charge proess
-automatischer Ladestop bei  dwo  	-  turn off value for dws (for charge XY kWh function)        GOECharger_
+automatischer Ladestop bei  dwo  	-  turn off value for dws (for charge XY kWh function) 0-100  GOECharger_AutomaticStop
 angeschlossener Adapter     adi  	-  adapter_in, 0:NO_ADAPTER, 1:16A_ADAPTER                    GOECharger_Adapter
 entsperrt durch RFID Nr.    uby  	-  unlocked by RFID card no
                             eto  	-  Energy total .1 kWh (value of 120 means 12 kWh charged)
