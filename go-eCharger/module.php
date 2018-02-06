@@ -105,7 +105,7 @@
           return true;
         }
        
-        public function setMaximumChargingAmperage() {
+        public function getMaximumChargingAmperage() {
           //$goEChargerStatus = $this->getStatusFromCharger();
           //if ( $goEChargerStatus == false ) { return false; }
           //return $goEChargerStatus->{'ama'}; 
