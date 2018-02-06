@@ -228,7 +228,7 @@
         protected function registerProfiles() {
             // Generate Variable Profiles
             if ( !IPS_VariableProfileExists('GOECHARGER_Status') ) {
-                $profileID = IPS_CreateVariableProfile('GOECHARGER_Status', 1 );
+                IPS_CreateVariableProfile('GOECHARGER_Status', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Status', 'Ok' );
                 IPS_SetVariableProfileAssociation("GOECHARGER_Status", 1, "bereit zum Laden"    , "", 0xFFFFFF);
                 IPS_SetVariableProfileAssociation("GOECHARGER_Status", 2, "ladend"              , "", 0xFFFFFF);
@@ -236,7 +236,7 @@
             }    
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Error') ) {
-                $profileID = IPS_CreateVariableProfile('GOECHARGER_Error', 1 );
+                IPS_CreateVariableProfile('GOECHARGER_Error', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Error', 'Ok' );
                 IPS_SetVariableProfileAssociation("GOECHARGER_Error", 0,  "Ok"               , "", 0x00FF00);
                 IPS_SetVariableProfileAssociation("GOECHARGER_Error", 1,  "FI Schutzschalter", "", 0xFF0000);
@@ -246,27 +246,27 @@
             } 
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Access') ) {
-                $profileID = IPS_CreateVariableProfile('GOECHARGER_Access', 1 );
+                IPS_CreateVariableProfile('GOECHARGER_Access', 1 );
                 IPS_SetVariableProfileAssociation("GOECHARGER_Access", 0, "frei zugänglich"     , "", 0x00FF00);
                 IPS_SetVariableProfileAssociation("GOECHARGER_Access", 1, "RFID Identifizierung", "", 0xFF0000);
             }  
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Ampere') ) {
-                $profileID = IPS_CreateVariableProfile('GOECHARGER_Ampere', 1 );
+                IPS_CreateVariableProfile('GOECHARGER_Ampere', 1 );
                 IPS_SetVariableProfileDigits('GOECHARGER_Ampere', 0 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Ampere', 'Electricity' );
                 IPS_SetVariableProfileText('GOECHARGER_Ampere', "", " A" );
             }
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Ampere.1') ) {
-                $profileID = IPS_CreateVariableProfile('GOECHARGER_Ampere', 1 );
-                IPS_SetVariableProfileDigits('GOECHARGER_Ampere', 1 );
-                IPS_SetVariableProfileIcon('GOECHARGER_Ampere', 'Electricity' );
-                IPS_SetVariableProfileText('GOECHARGER_Ampere', "", " A" );
+                IPS_CreateVariableProfile('GOECHARGER_Ampere.1', 1 );
+                IPS_SetVariableProfileDigits('GOECHARGER_Ampere.1', 1 );
+                IPS_SetVariableProfileIcon('GOECHARGER_Ampere.1', 'Electricity' );
+                IPS_SetVariableProfileText('GOECHARGER_Ampere.1', "", " A" );
             }
             
             if ( !IPS_VariableProfileExists('GOECHARGER_AmpereCable') ) {
-                $profileID = IPS_CreateVariableProfile('GOECHARGER_AmpereCable', 1 );
+                IPS_CreateVariableProfile('GOECHARGER_AmpereCable', 1 );
                 IPS_SetVariableProfileDigits('GOECHARGER_AmpereCable', 0 );
                 IPS_SetVariableProfileIcon('GOECHARGER_AmpereCable', 'Electricity' );
                 IPS_SetVariableProfileAssociation("GOECHARGER_Error", 0,  "Kein Kabel", "", 0xFF0000);
@@ -276,7 +276,7 @@
             }
             
             if ( !IPS_VariableProfileExists('GOECHARGER_AutomaticStop') ) {
-                $profileID = IPS_CreateVariableProfile('GOECHARGER_AutomaticStop', 2 );
+                IPS_CreateVariableProfile('GOECHARGER_AutomaticStop', 2 );
                 IPS_SetVariableProfileIcon('GOECHARGER_AutomaticStop', 'Battery' );
                 IPS_SetVariableProfileDigits('GOECHARGER_AutomaticStop',1);
                 IPS_SetVariableProfileValues('GOECHARGER_AutomaticStop', 0, 100, 0.1 );
@@ -284,35 +284,35 @@
             }  
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Adapter') ) {
-                $profileID = IPS_CreateVariableProfile('GOECHARGER_Adapter', 1 );
+                IPS_CreateVariableProfile('GOECHARGER_Adapter', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Adapter', 'Ok' );
                 IPS_SetVariableProfileAssociation("GOECHARGER_Adapter", 0, "kein Adapter"    , "", 0xFFFFFF);
                 IPS_SetVariableProfileAssociation("GOECHARGER_Adapter", 1, "16A Adapter"     , "", 0xFFFFFF);
             }    
            
             if ( !IPS_VariableProfileExists('GOECHARGER_Voltage') ) {
-                $profileID = IPS_CreateVariableProfile('GOECHARGER_Voltage', 1 );
+                IPS_CreateVariableProfile('GOECHARGER_Voltage', 1 );
                 IPS_SetVariableProfileDigits('GOECHARGER_Voltage', 0 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Voltage', 'Electricity' );
                 IPS_SetVariableProfileText('GOECHARGER_Voltage', "", " V" );
             }   
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Energy.1') ) {
-                $profileID = IPS_CreateVariableProfile('GOECHARGER_Energy', 2 );
+                IPS_CreateVariableProfile('GOECHARGER_Energy', 2 );
                 IPS_SetVariableProfileDigits('GOECHARGER_Energy', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Energy', 'Electricity' );
                 IPS_SetVariableProfileText('GOECHARGER_Energy', "", " kw" );
             }   
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Power.1') ) {
-                $profileID = IPS_CreateVariableProfile('GOECHARGER_Power.1', 2 );
+                IPS_CreateVariableProfile('GOECHARGER_Power.1', 2 );
                 IPS_SetVariableProfileDigits('GOECHARGER_Power.1', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Power.1', 'Electricity' );
                 IPS_SetVariableProfileText('GOECHARGER_Power.1', "", " kwh" );
             }   
             
             if ( !IPS_VariableProfileExists('GOECHARGER_CableUnlockMode') ) {
-                $profileID = IPS_CreateVariableProfile('GOECHARGER_CableUnlockMode', 1 );
+                IPS_CreateVariableProfile('GOECHARGER_CableUnlockMode', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_CableUnlockMode', 'Plug' );
                 IPS_SetVariableProfileAssociation("GOECHARGER_CableUnlockMode", 0, "Verriegelt, wenn Auto angeschlossen", "", 0x00FF00);
                 IPS_SetVariableProfileAssociation("GOECHARGER_CableUnlockMode", 1, "Am Ladeende entriegeln", "", 0xFFCC00);
