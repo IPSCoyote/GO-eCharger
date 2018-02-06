@@ -422,23 +422,23 @@
             } 
             
             if ( $this->GetIDForIdent("leadVP1") == false ) {
-              $this->RegisterVariableInteger("leadVP1", "Spannungsversorgung L1","GOECHARGER_Voltage",0);
+              $this->RegisterVariableInteger("leadVP1", "Spannungsversorgung L1","GOECHARGER_Voltage",50);
             }
             
             if ( $this->GetIDForIdent("leadVP2") == false ) {
-              $this->RegisterVariableInteger("leadVP2", "Spannungsversorgung L2","GOECHARGER_Voltage",0);
+              $this->RegisterVariableInteger("leadVP2", "Spannungsversorgung L2","GOECHARGER_Voltage",51);
             }
             
             if ( $this->GetIDForIdent("leadVP3") == false ) {
-              $this->RegisterVariableInteger("leadVP3", "Spannungsversorgung L3","GOECHARGER_Voltage",0);
+              $this->RegisterVariableInteger("leadVP3", "Spannungsversorgung L3","GOECHARGER_Voltage",52);
             }
             
             if ( $this->GetIDForIdent("leadN") == false ) {
-              $this->RegisterVariableInteger("leadN", "Spannungsversorgung N","GOECHARGER_Voltage",0);
+              $this->RegisterVariableInteger("leadN", "Spannungsversorgung N","GOECHARGER_Voltage",53);
             }
             
             if ( $this->GetIDForIdent("availableLeadEnergy") == false ) {
-              $this->RegisterVariableFloat("availableLeadEnergy", "max. verfügbare Ladeleistung","GOECHARGER_Energy.1",0);
+              $this->RegisterVariableFloat("availableLeadEnergy", "max. verfügbare Ladeleistung","GOECHARGER_Energy.1",54);
             }    
             
             if ( $this->GetIDForIdent("serialID") == false ) {
