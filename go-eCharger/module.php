@@ -190,6 +190,12 @@
             if ( $resultStatus->{'ust'} == $unlockMode ) { return true; } else { return false; }
         }
         
+        public function isActive() {
+          $goEChargerStatus = $this->getStatusFromCharger();
+          if ( $goEChargerStatus == false ) { return false; }
+          if ( $goEChargerStatus->{'alw'} == '1' ) { return true; } else { return false; } 
+        }
+        
         public function SetActivation(bool $active) {
             if ( $active == true ) { $value = 1; } else { $value = 0; }
             $resultStatus = $this->setValueToeCharger( 'alw', $value ); 
