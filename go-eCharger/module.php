@@ -81,7 +81,7 @@
           SetValue($this->GetIDForIdent("ledBrightness"),           $goEChargerStatus->{'lbr'});  
           SetValue($this->GetIDForIdent("maxAvailableAMP"),         $goEChargerStatus->{'ama'}); 
           SetValue($this->GetIDForIdent("cableUnlockMode"),         $goEChargerStatus->{'ust'});
-          SetValue($this->GetIDForIdent("norwayMode"),              $goEChargerStatus->{'nmo'});
+          SetValue($this->GetIDForIdent("norwayMode"),              !bool($goEChargerStatus->{'nmo'}));
 
           for($i=1; $i<=10; $i++){
             switch ( $i ){
