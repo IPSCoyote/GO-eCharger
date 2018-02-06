@@ -304,7 +304,7 @@
                 IPS_SetVariableProfileText('GOECHARGER_Voltage', "", " V" );
             }   
             
-            if ( !IPS_VariableProfileExists('GOECHARGER_Energy') ) {
+            if ( !IPS_VariableProfileExists('GOECHARGER_Power') ) {
                 $profileID = IPS_CreateVariableProfile('GOECHARGER_Energy', 2 );
                 IPS_SetVariableProfileDigits('GOECHARGER_Energy', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Energy', 'Electricity' );
@@ -323,6 +323,20 @@
         
         protected function registerVariables() {
             // Generate Variables
+            if ( $this->GetIDForIdent("status") == false ) {
+              $this->RegisterVariableInteger("status", "Status","GOECHARGER_Status",0);
+            }
+
+            if ( $this->GetIDForIdent("availableAMP") == false ) {
+              $this->RegisterVariableInteger("availableAMP", "aktuell verfügbarer Ladestrom","GOECHARGER_Ampere",1);
+            }
+            
+            if ( $this->GetIDForIdent("error") == false ) {
+              $this->RegisterVariableBoolean("error", "Zustand","GOECHARGER_Error",0);
+            }
+            
+            
+            
             if ( $this->GetIDForIdent("serialID") == false ) {
               $this->RegisterVariableString("serialID", "Seriennummer","~String",0);
             }
