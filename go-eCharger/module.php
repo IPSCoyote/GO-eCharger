@@ -29,7 +29,7 @@
 
           // Generate Profiles & Variables
           $this->registerProfiles();
-          //$this->registerVariables();  
+          $this->registerVariables();  
             
           // Set Data to Variables
           // $this->Update();
@@ -339,7 +339,7 @@
             }  
             
             if ( $this->GetIDForIdent("accessState") == false ) {
-              $this->RegisterVariableBoolean("activation", "Wallbox aktiv","~Switch",0);
+              $this->RegisterVariableBoolean("accessState", "Wallbox aktiv","~Switch",0);
             }  
             
             if ( $this->GetIDForIdent("cableCapability") == false ) {
@@ -371,15 +371,15 @@
             } 
             
             if ( $this->GetIDForIdent("leadVP1") == false ) {
-              $this->RegisterVariableInteger("availableVP1", "Spannungsversorgung L1","GOECHARGER_Voltage",0);
+              $this->RegisterVariableInteger("leadVP1", "Spannungsversorgung L1","GOECHARGER_Voltage",0);
             }
             
             if ( $this->GetIDForIdent("leadVP2") == false ) {
-              $this->RegisterVariableInteger("availableVP2", "Spannungsversorgung L2","GOECHARGER_Voltage",0);
+              $this->RegisterVariableInteger("leadVP2", "Spannungsversorgung L2","GOECHARGER_Voltage",0);
             }
             
             if ( $this->GetIDForIdent("leadP3") == false ) {
-              $this->RegisterVariableInteger("availableVP3", "Spannungsversorgung L3","GOECHARGER_Voltage",0);
+              $this->RegisterVariableInteger("leadVP3", "Spannungsversorgung L3","GOECHARGER_Voltage",0);
             }
             
             if ( $this->GetIDForIdent("leadN") == false ) {
@@ -412,7 +412,7 @@
             
             for($i=1; $i<=10; $i++){
               if ( $this->GetIDForIdent("energyChargedCard".$i) == false ) {
-                $this->RegisterVariableFloat("energyChargedCard".$i, "geladene Energie Karte ".$i,"GOECHARGER_Power.1",0);
+                $this->RegisterVariableFloat("energyChargedCard".$i, "geladene Energie Karte ".$i,"GOECHARGER_Power.1",99+$i);
               }    
             }
         }
