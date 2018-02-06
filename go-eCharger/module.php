@@ -173,9 +173,9 @@
             if ( $resultStatus->{'ast'} == $ControlMode ) { return true; } else { return false; }
         }
             
-        public function SetAutomaticChargeStop(int $chargeStopKW) {
-            if ( $chargeStopKW < 0 or $chargeStopKW > 100 ) { return false; }
-            $value = number_format( $chargeStopKW*10, 0, '', '' );
+        public function SetAutomaticChargeStop(int $chargeStopKwh) {
+            if ( $chargeStopKwh < 0 or $chargeStopKwh > 100 ) { return false; }
+            $value = number_format( $chargeStopKwh*10, 0, '', '' );
             $resultStatus = $this->setValueToeCharger( 'dwo', $value ); 
             // Update all data
             $this->Update();
