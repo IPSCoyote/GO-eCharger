@@ -16,6 +16,8 @@
           $this->RegisterPropertyInteger("MaxAmperage", 6);
           $this->RegisterPropertyInteger("UpdateIdle", 0);  
           $this->RegisterPropertyInteger("UpdateCharging",0); 
+          
+          $this->registerProfiles();
             
           // Timer
           //$this->RegisterTimer("GOeChargerTimer_UpdateTimer", 0, "GOeCharger_Update($_IPS[\'TARGET\']);");
@@ -28,7 +30,7 @@
           $this->sendDebug( "go-eCharger", "Apply", 0 );  
 
           // Generate Profiles & Variables
-          // $this->registerProfiles();
+
           // $this->registerVariables();
 
           // Set max. Ampere and Update Data to Variables
