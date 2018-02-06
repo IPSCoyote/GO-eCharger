@@ -28,11 +28,11 @@
           $this->sendDebug( "go-eCharger", "Apply", 0 );  
 
           // Generate Profiles & Variables
-          $this->registerProfiles();
-          $this->registerVariables();
+          // $this->registerProfiles();
+          // $this->registerVariables();
 
           // Set max. Ampere and Update Data to Variables
-          $this->Update();
+          // $this->Update();
         }
         
     public function Destroy()
