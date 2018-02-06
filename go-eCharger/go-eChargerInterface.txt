@@ -1,6 +1,6 @@
-IPS                         go-eCharger                                                         IPS Profile
+IPS                         go-eCharger                                                             IPS Profile
 
-<nicht verfügbar>           version -  api version, the code below only supports version B      None
+<nicht verfügbar>           version -  api version, the code below only supports version B          None
 Status                      car  	-  1=ready for charging, 2=charging, 3=waiting for car        GOECharger_Status
 aktuelle Leistung           amp  	-  ampere (current setting)                                   GOECharger_Ampere
 Fehler                      err  	-  error state, 1:RCCB, 3:PHASE, 8:NO_GROUND, 10:INTERNAL     GOECharger_Error
