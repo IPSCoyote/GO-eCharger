@@ -407,11 +407,6 @@
               $this->RegisterVariableBoolean("norwayMode", "Erdungsprüfung","~Switch",0);
             }     
 
-            for(i=1; $i<=10; $i++){
-              if ( $this->GetIDForIdent("energyChargedCard".$i) == false ) {
-                $this->RegisterVariableFloat("energyChargedCard".$i, "geladene Energie Karte ".$i,"GOECHARGER_Power.1",0);
-              }    
-            }
         }
     }
 ?>
