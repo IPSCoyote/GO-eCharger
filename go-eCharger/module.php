@@ -51,58 +51,7 @@
         */
         
         public function Update() {
-          /* Check the connection to the go-eCharger */
-          $goEChargerStatus = $this->getStatusFromCharger();
-          if ( $goEChargerStatus == false ) { return false; }
-       
-          // write values into variables
-          SetValue($this->GetIDForIdent("status"),                  $goEChargerStatus->{'car'});    
-          SetValue($this->GetIDForIdent("availableAMP"),            $goEChargerStatus->{'amp'} ); 
-          SetValue($this->GetIDForIdent("error"),                   ( $goEChargerStatus->{'err'} == 0 ) ); 
-          SetValue($this->GetIDForIdent("accessControl"),           $goEChargerStatus->{'ast'});
-          SetValue($this->GetIDForIdent("accessState"),             $goEChargerStatus->{'alw'}); 
-          SetValue($this->GetIDForIdent("cableCapability"),         $goEChargerStatus->{'cbl'}); 
-          SetValue($this->GetIDForIdent("numberOfPhases"),          $goEChargerStatus->{'pha'}); 
-          SetValue($this->GetIDForIdent("mainboardTemperature"),    $goEChargerStatus->{'tmp'});  
-          SetValue($this->GetIDForIdent("automaticStop"),           $goEChargerStatus->{'dwo'}/10 );
-          SetValue($this->GetIDForIdent("energyTotal"),             $goEChargerStatus->{'eto'});
-            
-          $goEChargerEnergy = $goEChargerStatus->{'nrg'};
-          SetValue($this->GetIDForIdent("leadVP1"),                 $goEChargerEnergy[0]);            
-          SetValue($this->GetIDForIdent("leadVP2"),                 $goEChargerEnergy[1]);            
-          SetValue($this->GetIDForIdent("leadVP3"),                 $goEChargerEnergy[2]);  
-          SetValue($this->GetIDForIdent("leadN"),                   $goEChargerEnergy[3]);  
-          $availableKW = ( ( ( $goEChargerEnergy[0] + $goEChargerEnergy[1] + $goEChargerEnergy[2] ) / 3 ) * 3 * $goEChargerStatus->{'amp'} ) / 1000;
-          SetValue($this->GetIDForIdent("availableKW"),             $availableKW);  
-            
-          SetValue($this->GetIDForIdent("serialID"),                $goEChargerStatus->{'sse'});  
-          SetValue($this->GetIDForIdent("ledBrightness"),           $goEChargerStatus->{'lbr'});  
-          SetValue($this->GetIDForIdent("maxAvailableAMP"),         $goEChargerStatus->{'ama'}); 
-          SetValue($this->GetIDForIdent("cableUnlockMode"),         $goEChargerStatus->{'ust'});
-          SetValue($this->GetIDForIdent("norwayMode"),              $goEChargerStatus->{'nmo'});
-
-          for($i=1; $i<=10; $i++){
-            switch ( $i ){
-                case 1: 
-                    $code = 'eca';
-                    break;
-                case 2:
-                    $code = 'ecr';
-                    break;
-                case 3: 
-                    $code = 'ecd';
-                    break;
-                case 10:
-                    $code = 'ec1';
-                    break;
-                default:
-                    $code = 'ec'.$i;
-                    break;
-            }
-            SetValue($this->GetIDForIdent("energyChargedCard".$i),  $goEChargerStatus->{$code}/10);
-          }
-           
-          return true;
+   
         }
        
         public function SetMaximumChargingAmperage(int $Ampere) {
