@@ -238,6 +238,12 @@
             if ( $resultStatus->{'alw'} == $value ) { return true; } else { return false; }
         }
         
+        public function isElectricallyGroundedCheck() { 
+          $goEChargerStatus = $this->getStatusFromCharger();
+          if ( $goEChargerStatus == false ) { return false; }
+          if ( $goEChargerStatus->{'nmo'} == '1' ) { return true; } else { return false; } 
+        }
+        
         //=== Modul Funktionen =========================================================================================
         /* Own module functions called via the defined prefix GOeCharger_* 
         *
