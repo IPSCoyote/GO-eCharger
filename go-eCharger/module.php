@@ -250,6 +250,12 @@
           return $goEChargerStatus->{'err'}; 
         }
         
+        public function getStatus() { 
+          $goEChargerStatus = $this->getStatusFromCharger();
+          if ( $goEChargerStatus == false ) { return false; }
+          return $goEChargerStatus->{'car'}; 
+        }
+        
         //=== Modul Funktionen =========================================================================================
         /* Own module functions called via the defined prefix GOeCharger_* 
         *
