@@ -187,7 +187,7 @@
           if ( $goEChargerStatus->{'ast'} == '1' ) { return true; } else { return false; } 
         }
         
-        public function setAccessControlActive(int $active) {
+        public function setAccessControlActive(bool $active) {
             if ( $active == true ) { $value = 1; } else { $value = 0; }
             $resultStatus = $this->setValueToeCharger( 'ast', $value ); 
             // Update all data
