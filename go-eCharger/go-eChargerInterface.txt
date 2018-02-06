@@ -1,26 +1,26 @@
-IPS                         go-eCharger                                                         IPS Profile
+IPS                         go-eCharger                                                           IPS Profile
 
-<nicht verfügbar>           version -  api version, the code below only supports version B      None
-Status                      car  	-  1=ready for charging, 2=charging, 3=waiting for car        GOECharger_Status
-aktuelle Leistung           amp  	-  ampere (current setting)                                   GOECharger_Ampere
-Fehler                      err  	-  error state, 1:RCCB, 3:PHASE, 8:NO_GROUND, 10:INTERNAL     GOECharger_Error
-Zugriffsregelung            ast  	-  access state, 0:OPEN, 1:RFID_REQ                           GOECharger_Access
-Laden möglich?              alw  	-  allow charging, 0:false, 1:true                            ~Switch
-Kabel Kapazität             cbl  	-  cable capability in A, 0 for no cable                      GOECharger_AmpereCable
-verfügbare Phasen           pha  	-  number of phases                                           None
-Mainboardtemperatur         tmp  	-  mainboard temperaturec                                     ~Temperature
-                            dws  	-  deka-watt-seconds, 1000 equals, 10.000 Ws charged in this charge proess
-automatischer Ladestop bei  dwo  	-  turn off value for dws (for charge XY kWh function) 0-100  GOECharger_AutomaticStop
-angeschlossener Adapter     adi  	-  adapter_in, 0:NO_ADAPTER, 1:16A_ADAPTER                    GOECharger_Adapter
-entsperrt durch RFID Nr.    uby  	-  unlocked by RFID card no
-                            eto  	-  Energy total .1 kWh (value of 120 means 12 kWh charged)
-<nicht verfügbar>           wst  	-  wifi state, 3:connected, default:unconnected
+<nicht verfügbar>           version -  api version, the code below only supports version B        None
+Status                      car  	  -  1=ready for charging, 2=charging, 3=waiting for car        GOECharger_Status
+aktuelle Leistung           amp  	  -  ampere (current setting)                                   GOECharger_Ampere
+Fehler                      err  	  -  error state, 1:RCCB, 3:PHASE, 8:NO_GROUND, 10:INTERNAL     GOECharger_Error
+Zugriffsregelung            ast  	  -  access state, 0:OPEN, 1:RFID_REQ                           GOECharger_Access
+Laden möglich?              alw  	  -  allow charging, 0:false, 1:true                            ~Switch
+Kabel Kapazität             cbl  	  -  cable capability in A, 0 for no cable                      GOECharger_AmpereCable
+verfügbare Phasen           pha  	  -  number of phases                                           None
+Mainboardtemperatur         tmp  	  -  mainboard temperaturec                                     ~Temperature
+                            dws  	  -  deka-watt-seconds, 1000 equals, 10.000 Ws charged in this charge proess
+automatischer Ladestop bei  dwo  	  -  turn off value for dws (for charge XY kWh function) 0-100  GOECharger_AutomaticStop
+angeschlossener Adapter     adi  	  -  adapter_in, 0:NO_ADAPTER, 1:16A_ADAPTER                    GOECharger_Adapter
+entsperrt durch RFID Nr.    uby  	  -  unlocked by RFID card no
+                            eto  	  -  Energy total .1 kWh (value of 120 means 12 kWh charged)
+<nicht verfügbar>           wst  	  -  wifi state, 3:connected, default:unconnected
 
 Energy
-Spannung Zuleitung L1       nrg[0] 	-  voltage L1 in V                                          GOECharger_Voltage
-Spannung Zuleitung L2       nrg[1] 	-  voltage L2 in V                                          GOECharger_Voltage
-Spannung Zuleitung L3       nrg[2] 	-  voltage L3 in V                                          GOECharger_Voltage
-Spannung Zuleitung N        nrg[3]  -  voltage on N, is !=0 when Schuko is plugged in reversed  GOECharger_Voltage
+Spannung Zuleitung L1       nrg[0] 	-  voltage L1 in V                                            GOECharger_Voltage
+Spannung Zuleitung L2       nrg[1] 	-  voltage L2 in V                                            GOECharger_Voltage
+Spannung Zuleitung L3       nrg[2] 	-  voltage L3 in V                                            GOECharger_Voltage
+Spannung Zuleitung N        nrg[3]  -  voltage on N, is !=0 when Schuko is plugged in reversed    GOECharger_Voltage
                             nrg[4] 	-  current L1 in .1 A
                             nrg[5] 	-  current L2 in .1 A
                             nrg[6] 	-  current L3 in .1 A
@@ -35,40 +35,40 @@ Spannung Zuleitung N        nrg[3]  -  voltage on N, is !=0 when Schuko is plugg
                             nrg[14]	-  powerfactor L1 in %
                             nrg[15]	-  powerfactor N
 
-<nicht verfügbar>           fwv  	-  firmware version (this code only supports below 020) !!!!!!!!!!!!!!!
-Seriennummer                sse  	-  serial number (formatted as %06d string)
-<nicht verfügbar>           wss  	-  wlan extern SSID
-<nicht verfügbar>           wke  	-  wlan extern kennwort/password in cleartext
-<nicht verfügbar>           wen  	-  wlan extern enabled
+<nicht verfügbar>           fwv  	  -  firmware version (this code only supports below 020) !!!!!!!!!!!!!!!
+Seriennummer                sse  	  -  serial number (formatted as %06d string)
+<nicht verfügbar>           wss  	  -  wlan extern SSID
+<nicht verfügbar>           wke  	  -  wlan extern kennwort/password in cleartext
+<nicht verfügbar>           wen  	  -  wlan extern enabled
 
-                            tof  	-  time_offset for internal battery powered RTC
-                            tds  	-  use daylight saving time for internal RTC
-LED Helligkeit              lbr  	-  led brightness, 0-255                                      ~Intensity.255
-                            aho  	-  awattar hours to charge
-                            afi  	-  awattar hour:00 to be finished
-maximale Leistung           ama  	-  absolute max ampere                                        GOECharger_Ampere
-<nicht verfügbar>           al1  	-  button ampere level 1
-<nicht verfügbar>           al2  	-  button ampere level 2
-<nicht verfügbar>           al3  	-  button ampere level 3
-<nicht verfügbar>           al4  	-  button ampere level 4
-<nicht verfügbar>           al5  	-  button ampere level 5
-<nicht verfügbar>           cid  	-  color idle, parseInt(HEX_CODE), 24bit
-<nicht verfügbar>           cch  	-  color charging, parseInt(HEX_CODE), 24bit
-<nicht verfügbar>           cfi  	-  color finished, parseInt(HEX_CODE), 24bit
-Entsperrmodus Kabel         ust  	-  unlock method, 0:standard, 1:auto_unlock, 2:always_locked GOECHARGER_CableUnlockMode
-<nicht verfügbar>           wak  	-  wlan hotspot kennwort/password
-Erdungsprüfung              nmo  	-  norway mode, 0:false, 1:true                             ~Switch
+                            tof  	  -  time_offset for internal battery powered RTC
+                            tds  	  -  use daylight saving time for internal RTC
+LED Helligkeit              lbr  	  -  led brightness, 0-255                                      ~Intensity.255
+                            aho  	  -  awattar hours to charge
+                            afi  	  -  awattar hour:00 to be finished
+maximale Leistung           ama  	  -  absolute max ampere                                        GOECharger_Ampere
+<nicht verfügbar>           al1  	  -  button ampere level 1
+<nicht verfügbar>           al2  	  -  button ampere level 2
+<nicht verfügbar>           al3  	  -  button ampere level 3
+<nicht verfügbar>           al4  	  -  button ampere level 4
+<nicht verfügbar>           al5  	  -  button ampere level 5
+<nicht verfügbar>           cid  	  -  color idle, parseInt(HEX_CODE), 24bit
+<nicht verfügbar>           cch  	  -  color charging, parseInt(HEX_CODE), 24bit
+<nicht verfügbar>           cfi  	  -  color finished, parseInt(HEX_CODE), 24bit
+Entsperrmodus Kabel         ust  	  -  unlock method, 0:standard, 1:auto_unlock, 2:always_locked GOECHARGER_CableUnlockMode
+<nicht verfügbar>           wak  	  -  wlan hotspot kennwort/password
+Erdungsprüfung              nmo  	  -  norway mode, 0:false, 1:true                               ~Switch
 
-geladene Energie Karte 1    eca  	-  energy charged with card 1, in .1kWh                       GOECharger_Energy
-geladene Energie Karte 2    ecr  	-  energy charged with card 2, in .1kWh                       GOECharger_Energy
-geladene Energie Karte 3    ecd  	-  energy charged with card 3, in .1kWh                       GOECharger_Energy
-geladene Energie Karte 4    ec4  	-  energy charged with card 4, in .1kWh                       GOECharger_Energy
-geladene Energie Karte 5    ec5  	-  energy charged with card 5, in .1kWh                       GOECharger_Energy
-geladene Energie Karte 6    ec6  	-  energy charged with card 6, in .1kWh                       GOECharger_Energy
-geladene Energie Karte 7    ec7  	-  energy charged with card 7, in .1kWh                       GOECharger_Energy
-geladene Energie Karte 8    ec8  	-  energy charged with card 8, in .1kWh                       GOECharger_Energy
-geladene Energie Karte 9    1ec9  	-  energy charged with card 9, in .1kWh                     GOECharger_Energy
-geladene Energie Karte 10   ec1  	-  energy charged with card 10, in .1kWh                      GOECharger_Energy
+geladene Energie Karte 1    eca  	  -  energy charged with card 1, in .1kWh                       GOECharger_Energy
+geladene Energie Karte 2    ecr  	  -  energy charged with card 2, in .1kWh                       GOECharger_Energy
+geladene Energie Karte 3    ecd  	  -  energy charged with card 3, in .1kWh                       GOECharger_Energy
+geladene Energie Karte 4    ec4  	  -  energy charged with card 4, in .1kWh                       GOECharger_Energy
+geladene Energie Karte 5    ec5  	  -  energy charged with card 5, in .1kWh                       GOECharger_Energy
+geladene Energie Karte 6    ec6  	  -  energy charged with card 6, in .1kWh                       GOECharger_Energy
+geladene Energie Karte 7    ec7  	  -  energy charged with card 7, in .1kWh                       GOECharger_Energy
+geladene Energie Karte 8    ec8  	  -  energy charged with card 8, in .1kWh                       GOECharger_Energy
+geladene Energie Karte 9    1ec9  	 -  energy charged with card 9, in .1kWh                       GOECharger_Energy
+geladene Energie Karte 10   ec1  	  -  energy charged with card 10, in .1kWh                      GOECharger_Energy
 
 <nicht verfügbar:>   
 rca  	-  rfid card1 UID (only available for fwv<020)
