@@ -105,7 +105,7 @@
           return true;
         }
        
-        public function SetMaximumChargingAmperage(int $Ampere) {
+        public function setMaximumChargingAmperage(int $Ampere) {
             // Check input value
             if ( $Ampere < 6 or $Ampere > 32 ) { return false; }
             if ( $Ampere > $this->ReadPropertyInteger("MaxAmperage") ) { return false; }
@@ -144,7 +144,7 @@
             if ( $goEChargerStatus->{'ama'} == $Ampere ) { return true; } else { return false; }
         }
         
-        public function SetCurrentChargingAmperage(int $Ampere) {
+        public function setCurrentChargingAmperage(int $Ampere) {
             // Check input value
             if ( $Ampere < 6 or $Ampere > 32 ) { return false; }
             if ( $Ampere > $this->ReadPropertyInteger("MaxAmperage") ) { return false; }
@@ -165,7 +165,7 @@
             if ( $resultStatus->{'amp'} == $Ampere ) { return true; } else { return false; }
         }
         
-        public function SetAccessControll(int $ControlMode) {
+        public function setAccessControll(int $ControlMode) {
             if ( $ControlMode < 0 or $ControlMode > 1 ) { return false; }
             $resultStatus = $this->setValueToeCharger( 'amp', $ControlMode ); 
             // Update all data
@@ -173,7 +173,7 @@
             if ( $resultStatus->{'ast'} == $ControlMode ) { return true; } else { return false; }
         }
             
-        public function SetAutomaticChargeStop(int $chargeStopKwh) {
+        public function setAutomaticChargeStop(int $chargeStopKwh) {
             if ( $chargeStopKwh < 0 or $chargeStopKwh > 100 ) { return false; }
             $value = number_format( $chargeStopKwh*10, 0, '', '' );
             $resultStatus = $this->setValueToeCharger( 'dwo', $value ); 
@@ -182,7 +182,7 @@
             if ( $resultStatus->{'dwo'} == $value ) { return true; } else { return false; }
         }
             
-        public function SetCableUnlockMode(int $unlockMode) {
+        public function setCableUnlockMode(int $unlockMode) {
             if ( $unlockMode < 0 or $unlockMode > 2 ) { return false; }
             $resultStatus = $this->setValueToeCharger( 'ust', $unlockMode ); 
             // Update all data
@@ -190,13 +190,13 @@
             if ( $resultStatus->{'ust'} == $unlockMode ) { return true; } else { return false; }
         }
         
-        public function isActive() {
+        public function isActive():bool {
           $goEChargerStatus = $this->getStatusFromCharger();
           if ( $goEChargerStatus == false ) { return false; }
           if ( $goEChargerStatus->{'alw'} == '1' ) { return true; } else { return false; } 
         }
         
-        public function SetActivation(bool $active) {
+        public function setActive(bool $active) {
             if ( $active == true ) { $value = 1; } else { $value = 0; }
             $resultStatus = $this->setValueToeCharger( 'alw', $value ); 
             // Update all data
