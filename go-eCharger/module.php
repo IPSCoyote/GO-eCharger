@@ -327,7 +327,7 @@
             }
             
             if ( $this->GetIDForIdent("availableAMP") == false ) {
-              $this->RegisterVariableInteger("availableAMP", "aktuell verfügbarer Ladestrom","GOECHARGER_Ampere",1);
+              $this->RegisterVariableInteger("availableAMP", "aktuell verfügbarer Ladestrom","GOECHARGER_Ampere",0);
             }  
             
             if ( $this->GetIDForIdent("error") == false ) {
@@ -371,20 +371,23 @@
             } 
             
             if ( $this->GetIDForIdent("leadVP1") == false ) {
-              $this->RegisterVariableInteger("availableVP1", "Spannungsversorgung L1","GOECHARGER_Voltage",3);
+              $this->RegisterVariableInteger("availableVP1", "Spannungsversorgung L1","GOECHARGER_Voltage",0);
             }
+            
             if ( $this->GetIDForIdent("leadVP2") == false ) {
-              $this->RegisterVariableInteger("availableVP2", "Spannungsversorgung L2","GOECHARGER_Voltage",3);
+              $this->RegisterVariableInteger("availableVP2", "Spannungsversorgung L2","GOECHARGER_Voltage",0);
             }
+            
             if ( $this->GetIDForIdent("leadP3") == false ) {
-              $this->RegisterVariableInteger("availableVP3", "Spannungsversorgung L3","GOECHARGER_Voltage",3);
+              $this->RegisterVariableInteger("availableVP3", "Spannungsversorgung L3","GOECHARGER_Voltage",0);
             }
+            
             if ( $this->GetIDForIdent("leadN") == false ) {
-              $this->RegisterVariableInteger("leadN", "Spannungsversorgung N","GOECHARGER_Voltage",3);
+              $this->RegisterVariableInteger("leadN", "Spannungsversorgung N","GOECHARGER_Voltage",0);
             }
             
             if ( $this->GetIDForIdent("availableLeadEnergy") == false ) {
-              $this->RegisterVariableFloat("availableLeadEnergy", "max. verfügbare Ladeleistung","GOECHARGER_Energy.1",2);
+              $this->RegisterVariableFloat("availableLeadEnergy", "max. verfügbare Ladeleistung","GOECHARGER_Energy.1",0);
             }    
             
             if ( $this->GetIDForIdent("serialID") == false ) {
@@ -396,7 +399,7 @@
             }
             
             if ( $this->GetIDForIdent("maxAvailableAMP") == false ) {
-              $this->RegisterVariableInteger("maxAvailableAMP", "maximal verfügbarer Ladestrom","GOECHARGER_Ampere",1);
+              $this->RegisterVariableInteger("maxAvailableAMP", "max. verfügbarer Ladestrom","GOECHARGER_Ampere",0);
             }
                    
             if ( $this->GetIDForIdent("cableUnlockMode") == false ) {
