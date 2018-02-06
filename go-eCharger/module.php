@@ -351,7 +351,7 @@
             }  
             
             if ( $this->GetIDForIdent("mainboardTemperature") == false ) {
-              $this->RegisterVariableInteger("mainboardTemperature", "Mainboard Temperatur","~Temperature",0);
+              $this->RegisterVariableFloat("mainboardTemperature", "Mainboard Temperatur","~Temperature",0);
             }  
             
             if ( $this->GetIDForIdent("automaticStop") == false ) {
@@ -392,7 +392,7 @@
             }
 
             if ( $this->GetIDForIdent("ledBrightness") == false ) {
-              $this->RegisterVariableString("ledBrightness", "LED Helligkeit","~Intensity.255",0);
+              $this->RegisterVariableInteger("ledBrightness", "LED Helligkeit","~Intensity.255",0);
             }
             
             if ( $this->GetIDForIdent("maxAvailableAMP") == false ) {
