@@ -300,10 +300,10 @@
             }   
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Energy.1') ) {
-                IPS_CreateVariableProfile('GOECHARGER_Energy', 2 );
-                IPS_SetVariableProfileDigits('GOECHARGER_Energy', 1 );
-                IPS_SetVariableProfileIcon('GOECHARGER_Energy', 'Electricity' );
-                IPS_SetVariableProfileText('GOECHARGER_Energy', "", " kw" );
+                IPS_CreateVariableProfile('GOECHARGER_Energy.1', 2 );
+                IPS_SetVariableProfileDigits('GOECHARGER_Energy.1', 1 );
+                IPS_SetVariableProfileIcon('GOECHARGER_Energy.1', 'Electricity' );
+                IPS_SetVariableProfileText('GOECHARGER_Energy.1', "", " kw" );
             }   
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Power.1') ) {
