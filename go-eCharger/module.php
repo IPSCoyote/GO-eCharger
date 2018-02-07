@@ -108,6 +108,12 @@
             SetValue($this->GetIDForIdent("energyChargedCard".$i),  $goEChargerStatus->{$code}/10);
           }
            
+          // Set Timer
+          if ( $goEChargerStatus->{'car'} == "2" ) {
+            $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateCharging")*1000);
+          } else
+          { $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateIdle")*1000); }
+            
           return true;
         }
        
