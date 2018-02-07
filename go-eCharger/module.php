@@ -266,7 +266,29 @@
             return $goEChargerStatus->{'car'}; 
         }
         
-
+        public function getCableCapability() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'cbl'}; 
+        }
+        
+        public function getNumberOfPhases() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'pha'}; 
+        }
+        
+        public function getMainboardTemperature() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'tmp'}; 
+        }
+        
+        public function getUnlockRFID() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'uby'}; 
+        }
         
         //=== Modul Funktionen =========================================================================================
         /* Own module functions called via the defined prefix GOeCharger_* 
