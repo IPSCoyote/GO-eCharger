@@ -317,6 +317,34 @@
             $goEChargerEnergy = $goEChargerStatus->{'nrg'};
             return $goEChargerEnergy[3]; 
         }
+
+        public function getSupplyLineEnergy() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
+            $availableEnergy = ( ( ( $goEChargerEnergy[0] + $goEChargerEnergy[1] + $goEChargerEnergy[2] ) / 3 ) * 3 * $goEChargerStatus->{'amp'} ) / 1000;
+            return $availableEnergy; 
+        }
+
+        public function getSerialID() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'sse'}; 
+        }
+        
+        public function getLEDBrightness() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'lbr'}; 
+        }
+        
+        public function setLEDBrightness(int $brightness) {
+            if ( $brightness < 0 or $brightness > 255 ) { return false; }
+            $resultStatus = $this->setValueToeCharger( 'lbr', $brightness ); 
+            // Update all data
+            $this->Update();
+            if ( $resultStatus->{'lbr'} == $brightness ) { return true; } else { return false; }
+        }
         
         //=== Modul Funktionen =========================================================================================
         /* Own module functions called via the defined prefix GOeCharger_* 
