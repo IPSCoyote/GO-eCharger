@@ -18,7 +18,7 @@
           $this->RegisterPropertyInteger("UpdateCharging",0); 
                       
           // Timer
-          //$this->RegisterTimer("GOeChargerTimer_UpdateTimer", 0, 'GOeCharger_Update($_IPS[\'TARGET\']);');
+          $this->RegisterTimer("GOeChargerTimer_UpdateTimer", 0, 'GOeCharger_Update($_IPS[\'TARGET\']);');
         }
  
         public function ApplyChanges() {
