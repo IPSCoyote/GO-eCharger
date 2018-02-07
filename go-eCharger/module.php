@@ -31,16 +31,18 @@
           $this->registerProfiles();
           $this->registerVariables();  
             
+          // Timer erstellen
+          $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateIdle"));
+            
           // Set Data to Variables
           $this->Update();
         }
         
     public function Destroy()
       {
-      $this->UnregisterTimer("GOeChargerTimer_UpdateTimer");
-       
-      //Never delete this line!
-      parent::Destroy();
+        $this->UnregisterTimer("GOeChargerTimer_UpdateTimer");
+        //Never delete this line!
+        parent::Destroy();
       }
         
         //=== Modul Funktionen =========================================================================================
