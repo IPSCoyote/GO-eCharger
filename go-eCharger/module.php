@@ -37,9 +37,9 @@
         
     public function Destroy()
       {
-        $this->UnregisterTimer("GOeChargerTimer_UpdateTimer");
-        //Never delete this line!
-        parent::Destroy();
+            $this->UnregisterTimer("GOeChargerTimer_UpdateTimer");
+            // Never delete this line!
+            parent::Destroy();
       }
         
         //=== Modul Funktionen =========================================================================================
@@ -50,79 +50,79 @@
         */
         
         public function Update() {
-          /* Check the connection to the go-eCharger */
-          $goEChargerStatus = $this->getStatusFromCharger();
-          if ( $goEChargerStatus == false ) { return false; }
+            /* Check the connection to the go-eCharger */
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
        
-          // write values into variables
-          SetValue($this->GetIDForIdent("status"),                  $goEChargerStatus->{'car'});    
-          SetValue($this->GetIDForIdent("availableAMP"),            $goEChargerStatus->{'amp'}); 
-          SetValue($this->GetIDForIdent("error"),                   $goEChargerStatus->{'err'}); 
-          SetValue($this->GetIDForIdent("accessControl"),           $goEChargerStatus->{'ast'});
-          SetValue($this->GetIDForIdent("accessState"),             $goEChargerStatus->{'alw'}); 
-          SetValue($this->GetIDForIdent("cableCapability"),         $goEChargerStatus->{'cbl'}); 
-          SetValue($this->GetIDForIdent("numberOfPhases"),          $goEChargerStatus->{'pha'}); 
-          SetValue($this->GetIDForIdent("mainboardTemperature"),    $goEChargerStatus->{'tmp'});  
-          SetValue($this->GetIDForIdent("automaticStop"),           $goEChargerStatus->{'dwo'}/10 );
-          SetValue($this->GetIDForIdent("adapterAttached"),         $goEChargerStatus->{'adi'});
-          SetValue($this->GetIDForIdent("unlockedByRFID"),          $goEChargerStatus->{'uby'});
-          SetValue($this->GetIDForIdent("energyTotal"),             $goEChargerStatus->{'eto'});
+            // write values into variables
+            SetValue($this->GetIDForIdent("status"),                  $goEChargerStatus->{'car'});    
+            SetValue($this->GetIDForIdent("availableAMP"),            $goEChargerStatus->{'amp'}); 
+            SetValue($this->GetIDForIdent("error"),                   $goEChargerStatus->{'err'}); 
+            SetValue($this->GetIDForIdent("accessControl"),           $goEChargerStatus->{'ast'});
+            SetValue($this->GetIDForIdent("accessState"),             $goEChargerStatus->{'alw'}); 
+            SetValue($this->GetIDForIdent("cableCapability"),         $goEChargerStatus->{'cbl'}); 
+            SetValue($this->GetIDForIdent("numberOfPhases"),          $goEChargerStatus->{'pha'}); 
+            SetValue($this->GetIDForIdent("mainboardTemperature"),    $goEChargerStatus->{'tmp'});  
+            SetValue($this->GetIDForIdent("automaticStop"),           $goEChargerStatus->{'dwo'}/10 );
+            SetValue($this->GetIDForIdent("adapterAttached"),         $goEChargerStatus->{'adi'});
+            SetValue($this->GetIDForIdent("unlockedByRFID"),          $goEChargerStatus->{'uby'});
+            SetValue($this->GetIDForIdent("energyTotal"),             $goEChargerStatus->{'eto'});
             
-          $goEChargerEnergy = $goEChargerStatus->{'nrg'};
-          SetValue($this->GetIDForIdent("leadVP1"),                 $goEChargerEnergy[0]);            
-          SetValue($this->GetIDForIdent("leadVP2"),                 $goEChargerEnergy[1]);            
-          SetValue($this->GetIDForIdent("leadVP3"),                 $goEChargerEnergy[2]);  
-          SetValue($this->GetIDForIdent("leadN"),                   $goEChargerEnergy[3]);  
-          $availableEnergy = ( ( ( $goEChargerEnergy[0] + $goEChargerEnergy[1] + $goEChargerEnergy[2] ) / 3 ) * 3 * $goEChargerStatus->{'amp'} ) / 1000;
-          SetValue($this->GetIDForIdent("availableLeadEnergy"),     $availableEnergy);  
+            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
+            SetValue($this->GetIDForIdent("supplyLineL1"),            $goEChargerEnergy[0]);            
+            SetValue($this->GetIDForIdent("supplyLineL2"),            $goEChargerEnergy[1]);            
+            SetValue($this->GetIDForIdent("supplyLineL3"),            $goEChargerEnergy[2]);  
+            SetValue($this->GetIDForIdent("supplyLineN"),             $goEChargerEnergy[3]);  
+            $availableEnergy = ( ( ( $goEChargerEnergy[0] + $goEChargerEnergy[1] + $goEChargerEnergy[2] ) / 3 ) * 3 * $goEChargerStatus->{'amp'} ) / 1000;
+            SetValue($this->GetIDForIdent("availableSupplyEnergy"),    $availableEnergy);  
             
-          SetValue($this->GetIDForIdent("serialID"),                $goEChargerStatus->{'sse'});  
-          SetValue($this->GetIDForIdent("ledBrightness"),           $goEChargerStatus->{'lbr'});  
-          SetValue($this->GetIDForIdent("maxAvailableAMP"),         $goEChargerStatus->{'ama'}); 
-          SetValue($this->GetIDForIdent("cableUnlockMode"),         $goEChargerStatus->{'ust'});
-          $groundCheck = true;
-          if ( $goEChargerStatus->{'nmo'} == '1' ) { $groundCheck = false; }
-          SetValue($this->GetIDForIdent("norwayMode"),              $groundCheck);
+            SetValue($this->GetIDForIdent("serialID"),                $goEChargerStatus->{'sse'});  
+            SetValue($this->GetIDForIdent("ledBrightness"),           $goEChargerStatus->{'lbr'});  
+            SetValue($this->GetIDForIdent("maxAvailableAMP"),         $goEChargerStatus->{'ama'}); 
+            SetValue($this->GetIDForIdent("cableUnlockMode"),         $goEChargerStatus->{'ust'});
+            $groundCheck = true;
+            if ( $goEChargerStatus->{'nmo'} == '1' ) { $groundCheck = false; }
+            SetValue($this->GetIDForIdent("norwayMode"),              $groundCheck);
 
-          for($i=1; $i<=10; $i++){
-            switch ( $i ){
-                case 1: 
-                    $code = 'eca';
-                    break;
-                case 2:
-                    $code = 'ecr';
-                    break;
-                case 3: 
-                    $code = 'ecd';
-                    break;
-                case 10:
-                    $code = 'ec1';
-                    break;
-                default:
-                    $code = 'ec'.$i;
-                    break;
+            for($i=1; $i<=10; $i++){
+                switch ( $i ){
+                    case 1: 
+                        $code = 'eca';
+                        break;
+                    case 2:
+                        $code = 'ecr';
+                        break;
+                    case 3: 
+                        $code = 'ecd';
+                        break;
+                    case 10:
+                        $code = 'ec1';
+                        break;
+                    default:
+                        $code = 'ec'.$i;
+                        break;
+                }
+                SetValue($this->GetIDForIdent("energyChargedCard".$i),  $goEChargerStatus->{$code}/10);
             }
-            SetValue($this->GetIDForIdent("energyChargedCard".$i),  $goEChargerStatus->{$code}/10);
-          }
            
-          // Set Timer
-          if ( $goEChargerStatus->{'car'} == "2" ) {
-            if ( $this->ReadPropertyInteger("UpdateCharging") >= 0 ) {
-                $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateCharging")*1000);
+            // Set Timer
+            if ( $goEChargerStatus->{'car'} == "2" ) {
+                if ( $this->ReadPropertyInteger("UpdateCharging") >= 0 ) {
+                    $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateCharging")*1000);
+                }
+            } else { 
+                if ( $this->ReadPropertyInteger("UpdateIdle") >= 0 ) {
+                    $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateIdle")*1000);
+                }
             }
-          } else { 
-            if ( $this->ReadPropertyInteger("UpdateIdle") >= 0 ) {
-                $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateIdle")*1000);
-            }
-          }
             
-          return true;
+            return true;
         }
        
         public function getMaximumChargingAmperage() {
-          $goEChargerStatus = $this->getStatusFromCharger();
-          if ( $goEChargerStatus == false ) { return false; }
-          return $goEChargerStatus->{'ama'}; 
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'ama'}; 
         }
         
         public function setMaximumChargingAmperage(int $ampere) {
@@ -165,9 +165,9 @@
         }
         
         public function getCurrentChargingAmperage() {
-          $goEChargerStatus = $this->getStatusFromCharger();
-          if ( $goEChargerStatus == false ) { return false; }
-          return $goEChargerStatus->{'amp'}; 
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'amp'}; 
         }
         
         public function setCurrentChargingAmperage(int $ampere) {
@@ -192,9 +192,9 @@
         }
 
         public function isAccessControlActive() {
-          $goEChargerStatus = $this->getStatusFromCharger();
-          if ( $goEChargerStatus == false ) { return false; }
-          if ( $goEChargerStatus->{'ast'} == '1' ) { return true; } else { return false; } 
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus->{'ast'} == '1' ) { return true; } else { return false; } 
         }
         
         public function setAccessControlActive(bool $active) {
@@ -206,9 +206,9 @@
         }
             
         public function getAutomaticChargeStop() {
-          $goEChargerStatus = $this->getStatusFromCharger();
-          if ( $goEChargerStatus == false ) { return false; }
-          return $goEChargerStatus->{'dwo'}/10; 
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'dwo'}/10; 
         }
         
         public function setAutomaticChargeStop(float $chargeStopKwh) {
@@ -221,9 +221,9 @@
         }
             
         public function getCableUnlockMode() {
-          $goEChargerStatus = $this->getStatusFromCharger();
-          if ( $goEChargerStatus == false ) { return false; }
-          return $goEChargerStatus->{'ust'}; 
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'ust'}; 
         }
         
         public function setCableUnlockMode(int $unlockMode) {
@@ -235,9 +235,9 @@
         }
         
         public function isActive() {
-          $goEChargerStatus = $this->getStatusFromCharger();
-          if ( $goEChargerStatus == false ) { return false; }
-          if ( $goEChargerStatus->{'alw'} == '1' ) { return true; } else { return false; } 
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus->{'alw'} == '1' ) { return true; } else { return false; } 
         }
         
         public function setActive(bool $active) {
@@ -249,21 +249,130 @@
         }
         
         public function isElectricallyGroundedCheck() { 
-          $goEChargerStatus = $this->getStatusFromCharger();
-          if ( $goEChargerStatus == false ) { return false; }
-          if ( $goEChargerStatus->{'nmo'} == '1' ) { return true; } else { return false; } 
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus->{'nmo'} == '1' ) { return true; } else { return false; } 
         }
         
         public function getError() { 
-          $goEChargerStatus = $this->getStatusFromCharger();
-          if ( $goEChargerStatus == false ) { return false; }
-          return $goEChargerStatus->{'err'}; 
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'err'}; 
         }
         
         public function getStatus() { 
-          $goEChargerStatus = $this->getStatusFromCharger();
-          if ( $goEChargerStatus == false ) { return false; }
-          return $goEChargerStatus->{'car'}; 
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'car'}; 
+        }
+        
+        public function getCableCapability() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'cbl'}; 
+        }
+        
+        public function getNumberOfPhases() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'pha'}; 
+        }
+        
+        public function getMainboardTemperature() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'tmp'}; 
+        }
+        
+        public function getUnlockRFID() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'uby'}; 
+        }
+        
+        public function getSupplyLineVoltageL1() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
+            SetValue($this->GetIDForIdent("supplyLineL1"),            $goEChargerEnergy[0]);            
+            SetValue($this->GetIDForIdent("supplyLineL2"),            $goEChargerEnergy[1]);            
+            SetValue($this->GetIDForIdent("supplyLineL3"),            $goEChargerEnergy[2]);  
+            SetValue($this->GetIDForIdent("supplyLineN"),             $goEChargerEnergy[3]);  
+            $availableEnergy = ( ( ( $goEChargerEnergy[0] + $goEChargerEnergy[1] + $goEChargerEnergy[2] ) / 3 ) * 3 * $goEChargerStatus->{'amp'} ) / 1000;
+            return $goEChargerEnergy[0]); 
+        }
+        
+        public function getSupplyLineVoltageL2() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
+            return $goEChargerEnergy[1]); 
+        }
+        
+        public function getSupplyLineVoltageL3() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
+            return $goEChargerEnergy[2]); 
+        }  
+        
+        public function getSupplyLineVoltageN() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
+            return $goEChargerEnergy[3]); 
+        }
+        
+        public function getSupplyLineEnergy() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
+            $availableEnergy = ( ( ( $goEChargerEnergy[0] + $goEChargerEnergy[1] + $goEChargerEnergy[2] ) / 3 ) * 3 * $goEChargerStatus->{'amp'} ) / 1000;
+            return $availableEnergy; 
+        }
+
+        public function getSerialID() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'sse'}; 
+        }
+        
+        public function getLEDBrightness() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'lbr'}; 
+        }
+        
+        public function setLEDBrightness(int $brightness) {
+            if ( $brightness < 0 or $brightness > 255 ) { return false; }
+            $resultStatus = $this->setValueToeCharger( 'lbr', $brightness ); 
+            // Update all data
+            $this->Update();
+            if ( $resultStatus->{'lbr'} == $brightness ) { return true; } else { return false; }
+        }
+        
+        public function getEnergyChargedByCard(int $cardID) {
+            if ( $cardID < 0 or $cardID > 10 ) { return false; }
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            switch ( $cardID ){
+                case 1: 
+                    $code = 'eca';
+                    break;
+                case 2:
+                    $code = 'ecr';
+                    break;
+                case 3: 
+                    $code = 'ecd';
+                    break;
+                case 10:
+                    $code = 'ec1';
+                    break;
+                default:
+                    $code = 'ec'.$i;
+                    break;
+            }
+            return $goEChargerStatus->{$code}/10);
         }
         
         //=== Modul Funktionen =========================================================================================
@@ -274,72 +383,72 @@
         */
         
         protected function getStatusFromCharger() {
-          // get IP of go-eCharger
-          $IPAddress = trim($this->ReadPropertyString("IPAddressCharger"));
+            // get IP of go-eCharger
+            $IPAddress = trim($this->ReadPropertyString("IPAddressCharger"));
             
-          // check if IP is ocnfigured and valid
-          if ( $IPAddress == "0.0.0.0" ) {
-              $this->SetStatus(200); // no configuration done
-              return false;
-          } elseif (filter_var($IPAddress, FILTER_VALIDATE_IP) == false) { 
-              $this->SetStatus(201); // no valid IP configured
-              return false;
-          }
+            // check if IP is ocnfigured and valid
+            if ( $IPAddress == "0.0.0.0" ) {
+                $this->SetStatus(200); // no configuration done
+                return false;
+            } elseif (filter_var($IPAddress, FILTER_VALIDATE_IP) == false) { 
+                $this->SetStatus(201); // no valid IP configured
+                return false;
+            }
             
-          // check if any HHTP device on IP can be reached
-          if ( $this->ping( $IPAddress, 80, 1 ) == false ) {
-              $this->SetStatus(202); // no http response
-              return false;
-          }
+            // check if any HHTP device on IP can be reached
+            if ( $this->ping( $IPAddress, 80, 1 ) == false ) {
+                $this->SetStatus(202); // no http response
+                return false;
+            }
               
-          // get json from go-eCharger
-          try {  
-              $ch = curl_init("http://".$IPAddress."/status"); 
-              curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
-              curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); 
-              curl_setopt($ch, CURLOPT_HEADER, 0); 
-              curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-              $json = curl_exec($ch); 
-              curl_close ($ch);  
-          } catch (Exception $e) { 
-              $this->SetStatus(203); // no http response
-              return false;
-          };
+            // get json from go-eCharger
+            try {  
+                $ch = curl_init("http://".$IPAddress."/status"); 
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); 
+                curl_setopt($ch, CURLOPT_HEADER, 0); 
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+                $json = curl_exec($ch); 
+                curl_close ($ch);  
+            } catch (Exception $e) { 
+                $this->SetStatus(203); // no http response
+                return false;
+            };
             
-          $goEChargerStatus = json_decode($json);
-          if ( $goEChargerStatus === null ) {
-              $this->SetStatus(203); // no http response
-              return false;
-          } elseif ( isset( $goEChargerStatus->{'sse'} ) == false ) {
-              $this->SetStatus(204); // no go-eCharger
-              return false;
-          } 
+            $goEChargerStatus = json_decode($json);
+            if ( $goEChargerStatus === null ) {
+                $this->SetStatus(203); // no http response
+                return false;
+            } elseif ( isset( $goEChargerStatus->{'sse'} ) == false ) {
+                $this->SetStatus(204); // no go-eCharger
+                return false;
+            } 
             
-          $this->SetStatus(102);
-          return $goEChargerStatus;
+            $this->SetStatus(102);
+            return $goEChargerStatus;
         }
         
         protected function setValueToeCharger( $parameter, $value ){
-          try {  
-              $ch = curl_init("http://".trim($this->ReadPropertyString("IPAddressCharger"))."/mqtt?payload=".$parameter."=".$value); 
-              curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
-              curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); 
-              curl_setopt($ch, CURLOPT_HEADER, 0); 
-              curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-              $json = curl_exec($ch); 
-              curl_close ($ch);  
-          } catch (Exception $e) { 
-          };
-          return json_decode($json);
+            try {  
+                $ch = curl_init("http://".trim($this->ReadPropertyString("IPAddressCharger"))."/mqtt?payload=".$parameter."=".$value); 
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); 
+                curl_setopt($ch, CURLOPT_HEADER, 0); 
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+                $json = curl_exec($ch); 
+                curl_close ($ch);  
+              } catch (Exception $e) { 
+            };
+            return json_decode($json);
         }
         
         protected function ping($host, $port, $timeout) 
         { 
-          ob_start();
-          $fP = fSockOpen($host, $port, $errno, $errstr, $timeout); 
-          ob_clean();
-          if (!$fP) { return false; } 
-          return true; 
+            ob_start();
+            $fP = fSockOpen($host, $port, $errno, $errstr, $timeout); 
+            ob_clean();
+            if (!$fP) { return false; } 
+            return true; 
         }
             
         protected function registerProfiles() {
@@ -442,97 +551,97 @@
         protected function registerVariables() {
             // Generate Variables
             if ( $this->GetIDForIdent("status") == false ) {
-              $this->RegisterVariableInteger("status", "Status","GOECHARGER_Status",0);
+                $this->RegisterVariableInteger("status", "Status","GOECHARGER_Status",0);
             }
             
             if ( $this->GetIDForIdent("availableAMP") == false ) {
-              $this->RegisterVariableInteger("availableAMP", "aktuell verfügbarer Ladestrom","GOECHARGER_Ampere",0);
+                $this->RegisterVariableInteger("availableAMP", "aktuell verfügbarer Ladestrom","GOECHARGER_Ampere",0);
             }  
             
             if ( $this->GetIDForIdent("error") == false ) {
-              $this->RegisterVariableInteger("error", "Fehler","GOECHARGER_Error",0);
+                $this->RegisterVariableInteger("error", "Fehler","GOECHARGER_Error",0);
             }
             
             if ( $this->GetIDForIdent("accessControl") == false ) {
-              $this->RegisterVariableInteger("accessControl", "Zugangskontrolle via RFID/App","GOECHARGER_Access",0);
+                $this->RegisterVariableInteger("accessControl", "Zugangskontrolle via RFID/App","GOECHARGER_Access",0);
             }  
             
             if ( $this->GetIDForIdent("accessState") == false ) {
-              $this->RegisterVariableBoolean("accessState", "Wallbox aktiv","~Switch",0);
+                $this->RegisterVariableBoolean("accessState", "Wallbox aktiv","~Switch",0);
             }  
             
             if ( $this->GetIDForIdent("cableCapability") == false ) {
-              $this->RegisterVariableInteger("cableCapability", "Kabel-Leistungsfähigkeit","GOECHARGER_AmpereCable",0);
+                $this->RegisterVariableInteger("cableCapability", "Kabel-Leistungsfähigkeit","GOECHARGER_AmpereCable",0);
             }  
             
             if ( $this->GetIDForIdent("numberOfPhases") == false ) {
-              $this->RegisterVariableInteger("numberOfPhases", "Anzahl Phasen","",0);
+                $this->RegisterVariableInteger("numberOfPhases", "Anzahl Phasen","",0);
             }  
             
             if ( $this->GetIDForIdent("mainboardTemperature") == false ) {
-              $this->RegisterVariableFloat("mainboardTemperature", "Mainboard Temperatur","~Temperature",0);
+                $this->RegisterVariableFloat("mainboardTemperature", "Mainboard Temperatur","~Temperature",0);
             }  
             
             if ( $this->GetIDForIdent("automaticStop") == false ) {
-              $this->RegisterVariableFloat("automaticStop", "Ladeende bei Akkustand (0kw = deaktiviert)", "GOECHARGER_AutomaticStop", 0 );
+                $this->RegisterVariableFloat("automaticStop", "Ladeende bei Akkustand (0kw = deaktiviert)", "GOECHARGER_AutomaticStop", 0 );
             }
             
             if ( $this->GetIDForIdent("adapterAttached") == false ) {
-              $this->RegisterVariableInteger("adapterAttached", "angeschlossener Adapter","GOECHARGER_Adapter",0);
+                $this->RegisterVariableInteger("adapterAttached", "angeschlossener Adapter","GOECHARGER_Adapter",0);
             } 
             
             if ( $this->GetIDForIdent("unlockedByRFID") == false ) {
-              $this->RegisterVariableInteger("unlockedByRFID", "entsperrt durch RFID","",0);
+                $this->RegisterVariableInteger("unlockedByRFID", "entsperrt durch RFID","",0);
             } 
             
             if ( $this->GetIDForIdent("energyTotal") == false ) {
-              $this->RegisterVariableFloat("energyTotal", "bisher geladene Energie","GOECHARGER_Power.1",0);
+                $this->RegisterVariableFloat("energyTotal", "bisher geladene Energie","GOECHARGER_Power.1",0);
             } 
             
-            if ( $this->GetIDForIdent("leadVP1") == false ) {
-              $this->RegisterVariableInteger("leadVP1", "Spannungsversorgung L1","GOECHARGER_Voltage",50);
+            if ( $this->GetIDForIdent("supplyLineL1") == false ) {
+                $this->RegisterVariableInteger("supplyLineL1", "Spannungsversorgung L1","GOECHARGER_Voltage",50);
             }
             
-            if ( $this->GetIDForIdent("leadVP2") == false ) {
-              $this->RegisterVariableInteger("leadVP2", "Spannungsversorgung L2","GOECHARGER_Voltage",51);
+            if ( $this->GetIDForIdent("supplyLineL2") == false ) {
+                $this->RegisterVariableInteger("supplyLineL2", "Spannungsversorgung L2","GOECHARGER_Voltage",51);
             }
             
-            if ( $this->GetIDForIdent("leadVP3") == false ) {
-              $this->RegisterVariableInteger("leadVP3", "Spannungsversorgung L3","GOECHARGER_Voltage",52);
+            if ( $this->GetIDForIdent("supplyLineL3") == false ) {
+                $this->RegisterVariableInteger("supplyLineL3", "Spannungsversorgung L3","GOECHARGER_Voltage",52);
             }
             
-            if ( $this->GetIDForIdent("leadN") == false ) {
-              $this->RegisterVariableInteger("leadN", "Spannungsversorgung N","GOECHARGER_Voltage",53);
+            if ( $this->GetIDForIdent("supplyLineN") == false ) {
+                $this->RegisterVariableInteger("supplyLineN", "Spannungsversorgung N","GOECHARGER_Voltage",53);
             }
             
-            if ( $this->GetIDForIdent("availableLeadEnergy") == false ) {
-              $this->RegisterVariableFloat("availableLeadEnergy", "max. verfügbare Ladeleistung","GOECHARGER_Energy.1",54);
+            if ( $this->GetIDForIdent("availableSupplyEnergy") == false ) {
+                $this->RegisterVariableFloat("availableSupplyEnergy", "max. verfügbare Ladeleistung","GOECHARGER_Energy.1",54);
             }    
             
             if ( $this->GetIDForIdent("serialID") == false ) {
-              $this->RegisterVariableString("serialID", "Seriennummer","~String",0);
+                $this->RegisterVariableString("serialID", "Seriennummer","~String",0);
             }
 
             if ( $this->GetIDForIdent("ledBrightness") == false ) {
-              $this->RegisterVariableInteger("ledBrightness", "LED Helligkeit","~Intensity.255",0);
+                $this->RegisterVariableInteger("ledBrightness", "LED Helligkeit","~Intensity.255",0);
             }
             
             if ( $this->GetIDForIdent("maxAvailableAMP") == false ) {
-              $this->RegisterVariableInteger("maxAvailableAMP", "max. verfügbarer Ladestrom","GOECHARGER_Ampere",0);
+                $this->RegisterVariableInteger("maxAvailableAMP", "max. verfügbarer Ladestrom","GOECHARGER_Ampere",0);
             }
                    
             if ( $this->GetIDForIdent("cableUnlockMode") == false ) {
-              $this->RegisterVariableInteger("cableUnlockMode", "Kabel-Verriegelungsmodus","GOECHARGER_CableUnlockMode",0);
+                $this->RegisterVariableInteger("cableUnlockMode", "Kabel-Verriegelungsmodus","GOECHARGER_CableUnlockMode",0);
             }    
             
             if ( $this->GetIDForIdent("norwayMode") == false ) {
-              $this->RegisterVariableBoolean("norwayMode", "Erdungsprüfung","~Switch",0);
+                $this->RegisterVariableBoolean("norwayMode", "Erdungsprüfung","~Switch",0);
             }  
             
             for($i=1; $i<=10; $i++){
-              if ( $this->GetIDForIdent("energyChargedCard".$i) == false ) {
-                $this->RegisterVariableFloat("energyChargedCard".$i, "geladene Energie Karte ".$i,"GOECHARGER_Power.1",99+$i);
-              }    
+                if ( $this->GetIDForIdent("energyChargedCard".$i) == false ) {
+                    $this->RegisterVariableFloat("energyChargedCard".$i, "geladene Energie Karte ".$i,"GOECHARGER_Power.1",99+$i);
+                }    
             }
         }
     }
