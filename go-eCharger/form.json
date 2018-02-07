@@ -11,8 +11,8 @@
                 { "label": "32A - 22kw", "value": 32 }
         ]},
       { "type": "Label", "label": "Update frequencies" },
-      { "type": "IntervalBox", "name": "UpdateIdle", "caption": "Sekunden (0 = deaktiviert)" },
-      { "type": "IntervalBox", "name": "UpdateCharging", "caption": "Sekunden (0 = deaktiviert)" }
+      { "type": "IntervalBox", "name": "UpdateIdle", "caption": "Sek. (0 = stop)" },
+      { "type": "IntervalBox", "name": "UpdateCharging", "caption": "Sek. (0 = stop)" }
     ],
     "actions":  
     [
