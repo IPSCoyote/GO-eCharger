@@ -31,6 +31,8 @@
           $this->registerProfiles();
           $this->registerVariables();  
             
+          $this->WritePropertyInteger("UpdateCharging", 1);
+            
           // Timer erstellen
           $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateIdle")*1000);
             
