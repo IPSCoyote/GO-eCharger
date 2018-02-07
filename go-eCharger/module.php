@@ -32,7 +32,7 @@
           $this->registerVariables();  
             
           // Timer erstellen
-          $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateIdle"));
+          $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateIdle")*1000);
             
           // Set Data to Variables
           $this->Update();
