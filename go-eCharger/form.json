@@ -10,8 +10,9 @@
                 { "label": "16A - 11kw", "value": 16 },
                 { "label": "32A - 22kw", "value": 32 }
         ]},
-      { "type": "Label", "label": "Update frequencies" },
+      { "type": "Label", "label": "Update Interval while waiting" },
       { "type": "IntervalBox", "name": "UpdateIdle", "caption": "Sek. (0 = stop)" },
+      { "type": "Label", "label": "Update Interval while charging" },
       { "type": "IntervalBox", "name": "UpdateCharging", "caption": "Sek. (0 = stop)" }
     ],
     "actions":  
