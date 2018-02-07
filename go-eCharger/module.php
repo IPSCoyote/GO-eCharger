@@ -294,33 +294,28 @@
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
             $goEChargerEnergy = $goEChargerStatus->{'nrg'};
-            SetValue($this->GetIDForIdent("supplyLineL1"),            $goEChargerEnergy[0]);            
-            SetValue($this->GetIDForIdent("supplyLineL2"),            $goEChargerEnergy[1]);            
-            SetValue($this->GetIDForIdent("supplyLineL3"),            $goEChargerEnergy[2]);  
-            SetValue($this->GetIDForIdent("supplyLineN"),             $goEChargerEnergy[3]);  
-            $availableEnergy = ( ( ( $goEChargerEnergy[0] + $goEChargerEnergy[1] + $goEChargerEnergy[2] ) / 3 ) * 3 * $goEChargerStatus->{'amp'} ) / 1000;
-            return $goEChargerEnergy[0]); 
+            return $goEChargerEnergy[0]; 
         }
         
         public function getSupplyLineVoltageL2() {
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
             $goEChargerEnergy = $goEChargerStatus->{'nrg'};
-            return $goEChargerEnergy[1]); 
+            return $goEChargerEnergy[1]; 
         }
         
         public function getSupplyLineVoltageL3() {
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
             $goEChargerEnergy = $goEChargerStatus->{'nrg'};
-            return $goEChargerEnergy[2]); 
+            return $goEChargerEnergy[2]; 
         }  
         
         public function getSupplyLineVoltageN() {
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
             $goEChargerEnergy = $goEChargerStatus->{'nrg'};
-            return $goEChargerEnergy[3]); 
+            return $goEChargerEnergy[3]; 
         }
         
         public function getSupplyLineEnergy() {
