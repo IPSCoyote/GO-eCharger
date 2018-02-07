@@ -345,6 +345,31 @@
             $this->Update();
             if ( $resultStatus->{'lbr'} == $brightness ) { return true; } else { return false; }
         }
+
+        public function getEnergyChargedByCard(int $cardID) {
+            if ( $cardID < 0 or $cardID > 10 ) { return false; }
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            switch ( $cardID ){
+                case 1: 
+                    $code = 'eca';
+                    break;
+                case 2:
+                    $code = 'ecr';
+                    break;
+                case 3: 
+                    $code = 'ecd';
+                    break;
+                case 10:
+                    $code = 'ec1';
+                    break;
+                default:
+                    $code = 'ec'.$cardID;
+                    break;
+            }
+            return $goEChargerStatus->{$code}/10);
+        }        
+        
         
         //=== Modul Funktionen =========================================================================================
         /* Own module functions called via the defined prefix GOeCharger_* 
