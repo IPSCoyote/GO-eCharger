@@ -290,6 +290,34 @@
             return $goEChargerStatus->{'uby'}; 
         }
         
+        public function getSupplyLineVoltageL1() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
+            return $goEChargerEnergy[0]; 
+        }
+        
+        public function getSupplyLineVoltageL2() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
+            return $goEChargerEnergy[1]; 
+        }
+        
+        public function getSupplyLineVoltageL3() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
+            return $goEChargerEnergy[2]; 
+        }  
+        
+        public function getSupplyLineVoltageN() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
+            return $goEChargerEnergy[3]; 
+        }
+        
         //=== Modul Funktionen =========================================================================================
         /* Own module functions called via the defined prefix GOeCharger_* 
         *
