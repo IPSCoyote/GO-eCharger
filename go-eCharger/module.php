@@ -31,12 +31,7 @@
           $this->registerProfiles();
           $this->registerVariables();  
             
-          $this->WritePropertyInteger("UpdateCharging", 1);
-            
-          // Timer erstellen
-          $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateIdle")*1000);
-            
-          // Set Data to Variables
+          // Set Data to Variables (and update timer)
           $this->Update();
         }
         
@@ -112,9 +107,14 @@
            
           // Set Timer
           if ( $goEChargerStatus->{'car'} == "2" ) {
-            $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateCharging")*1000);
-          } else
-          { $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateIdle")*1000); }
+            if ( $this->ReadPropertyInteger("UpdateCharging") >= 0 ) {
+                $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateCharging")*1000);
+            }
+          } else { 
+            if ( $this->ReadPropertyInteger("UpdateIdle") >= 0 ) {
+                $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateIdle")*1000);
+            }
+          }
             
           return true;
         }
