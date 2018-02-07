@@ -347,7 +347,7 @@
         }
 
         public function getEnergyChargedByCard(int $cardID) {
-            if ( $cardID < 0 or $cardID > 10 ) { return false; }
+            if ( $cardID < 1 or $cardID > 10 ) { return false; }
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
             switch ( $cardID ){
@@ -367,7 +367,7 @@
                     $code = 'ec'.$cardID;
                     break;
             }
-            return $goEChargerStatus->{$code}/10);
+            return $goEChargerStatus->{$code}/10;
         }        
         
         
