@@ -90,13 +90,13 @@ Die Funktion liefert *true* oder *false* als Rückgabewert und aktualisiert die 
 ##### 4.1.2.4 Zugriffskontrolle
 Funktionen bzgl. der Zugriffskontrolle
 
-##### 4.1.2.4.1 IsAccessControlActive(int $Instanz)
+###### 4.1.2.4.1 IsAccessControlActive(int $Instanz)
 Mit dieser Funktion kann der Zustand der Zugangssteuerung (ist eine Nutzung eines RFID notwendig) abgefragt werden.
 ```
 $RFIDneeded = GOeCharger_GetAccessControl( $Instanz ); // Liest die Einstellung der Zugangskontrolle 
 ```
 
-##### 4.1.2.4.2 SetAccessControl(int $Instanz, bool $aktiv)
+###### 4.1.2.4.2 SetAccessControl(int $Instanz, bool $aktiv)
 Mit dieser Funktion kann die Zugangssteuerung via RFID oder App des go-eChargers aktiviert oder deaktiviert werden.
 ```
 GOeCharger_SetAccessControl( $Instanz, true ); // aktiviert die Zugangskontrolle 
@@ -137,12 +137,12 @@ GOeCharger_SetCableUnlockMode( $Instanz, 1 ); // setzt den automatischen Entrieg
 ##### 4.1.2.7 Ladekontrolle
 Mit dieser Funktionen kann das Laden am go-eChargers aktiviert oder deaktiviert werden. Im deaktivierten Zustand ist kein Laden möglich!
 
-##### 4.1.2.7.2 IsActive(int $Instanz)
+###### 4.1.2.7.2 IsActive(int $Instanz)
 ```
 $ChargingActivated = GOeCharger_SetActivation( $Instanz ); // Ermittlung, ob Laden möglich ist
 ```
 
-##### 4.1.2.7.2 SetActive(int $Instanz, bool $aktiv)
+###### 4.1.2.7.2 SetActive(int $Instanz, bool $aktiv)
 ```
 GOeCharger_SetActivation( $Instanz, false ); // deaktiviert den go-eCharger 
 ```
