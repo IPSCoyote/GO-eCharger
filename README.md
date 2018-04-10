@@ -208,7 +208,6 @@ Ermittlung der Spannung der angeschlossenen Phasen.
 $VoltageL1 = GOeCharger_GetSupplyLineVoltageL1( $Instanz ); // Ermittlung der Spannung von Phase 1
 $VoltageL2 = GOeCharger_GetSupplyLineVoltageL2( $Instanz ); // Ermittlung der Spannung von Phase 2
 $VoltageL3 = GOeCharger_GetSupplyLineVoltageL3( $Instanz ); // Ermittlung der Spannung von Phase 3
-$VoltageN  = GOeCharger_GetSupplyLineVoltageN( $Instanz );  // Ermittlung der Spannung von N
 ```
 
 ##### 4.1.2.16 GetSupplyLineEnergy(int $Instanz)
