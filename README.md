@@ -44,12 +44,37 @@ Das Modul "go-eCharger" dient als Schnittstelle zu einem lokal installierten go-
 
 #### 4.1.2. Funktionen
 
-##### 4.1.2.1. Update(int $Instanz)
+##### Allgemeine Funktionen
+
+###### 4.1.2.1.1 Update(int $Instanz)
 Aktualisiert die Messwerte (IPS Variablen) des go-eChargers. Diese Funktion wird auch in Abhängigkeit der eingestellten Aktualisierungsfrequenzen in den Moduleinstellungender ausgeführt, so dass normalerweise ein manueller Aufruf unnötig sein sollte.
 ```
 GOeCharger_Update( $Instanz ); // Aktualisiert die Messwerte (IPS Variablen) des go-eChargers
 ```
 Die Funktion liefert true oder false als Rückgabewert und aktualisiert die Messwerte
+
+###### 4.1.2.1.2 GetError(int $Instanz)
+Ermittlung ob der go-eCharger einen Fehler meldet.
+```
+$Error = GOeCharger_GetError( $Instanz ); // Ermittlung des Fehlerwerts
+```
+
+###### 4.1.2.1.2 GetStatus(int $Instanz)
+Ermittlung ob der go-eCharger einen Fehler meldet.
++ 1: RCCB (Fehlerstromschutzschalter) 
++ 3: PHASE (Phasenstörung)
++ 8: NO_GROUND (Erdungserkennung) 
++ 10, default: INTERNAL (sonstiges)
+```
+$Error = GOeCharger_GetError( $Instanz ); // Ermittlung des Fehlerwerts
+```
+
+###### 4.1.2.1.2 IsElectricallyGroundedCheck(int $Instanz)
+In einigen Ländern wie z.B. in Norwegen kann es sein, das die Erdung nicht vorhanden ist. Die Erdung wird allerdings vom go-eCharger überprüft. Mit dieser Funktionen kann abgefragt werden, ob der "Norwegen Modus" aktiv ist.
+Da dieser Modus von der Elektrischen Installation abhängig ist, bietet dieses Modul keine Möglichkeit an, die Einstellung zu  verändert werden.
+```
+$GroundedCheck = GOeCharger_IsElectricallyGroundedCheck( $Instanz ); // Ermittlung, ob der 'Norwegen Modus' aktiv ist
+```
 
 ##### 4.1.2.2 Maximal verfügbarer Ladestrom
 Mit diesen Funktionen kann der maximal verfügbare Ladestrom kontrolliert werden, den der go-eCharger zur Verfügung stellen kann. Der aktuell eingestellte Ladestrom ("CurrentChargingAmperage") ist kleiner oder gleich.
@@ -146,3 +171,4 @@ $ChargingActivated = GOeCharger_SetActivation( $Instanz ); // Ermittlung, ob Lad
 ```
 GOeCharger_SetActivation( $Instanz, false ); // deaktiviert den go-eCharger 
 ```
+
