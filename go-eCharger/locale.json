@@ -10,8 +10,8 @@
             "Configuration missing": "Konfiguration fehlt",
             "IP invalid": "IP Adresse ungültig",
             "No device found on IP": "Kein Gerät antwortet an der IP Adresse",
-            "No JSON returned from IP": "Kein JSON wird an der IP Adresse geliefert",
-            "No go-eCharger available at IP": "Kein go-eCharger an IP Adresse erreichbar"
+            "No JSON returned from IP": "Kein JSON wird an der IP Adresse geliefert (HTML-API aktiviert?)",
+            "No go-eCharger available at IP": "Kein go-eCharger an IP Adresse erreichbar (HTML-API aktiviert?)"
         }
     }
 }
