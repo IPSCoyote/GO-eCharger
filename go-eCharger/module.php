@@ -66,7 +66,7 @@
             SetValue($this->GetIDForIdent("automaticStop"),           $goEChargerStatus->{'dwo'}/10 );
             SetValue($this->GetIDForIdent("adapterAttached"),         $goEChargerStatus->{'adi'});
             SetValue($this->GetIDForIdent("unlockedByRFID"),          $goEChargerStatus->{'uby'});
-            SetValue($this->GetIDForIdent("energyTotal"),             $goEChargerStatus->{'eto'});
+            SetValue($this->GetIDForIdent("energyTotal"),             $goEChargerStatus->{'eto'}/10);
             
             $goEChargerEnergy = $goEChargerStatus->{'nrg'};
             SetValue($this->GetIDForIdent("supplyLineL1"),            $goEChargerEnergy[0]);            
