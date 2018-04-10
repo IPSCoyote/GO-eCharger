@@ -81,7 +81,8 @@
             SetValue($this->GetIDForIdent("powerToCarLineL1"),        $goEChargerEnergy[7]);            
             SetValue($this->GetIDForIdent("powerToCarLineL2"),        $goEChargerEnergy[8]);            
             SetValue($this->GetIDForIdent("powerToCarLineL3"),        $goEChargerEnergy[9]);  
-            SetValue($this->GetIDForIdent("powerToCarLineN"),         $goEChargerEnergy[10]);              
+            SetValue($this->GetIDForIdent("powerToCarLineN"),         $goEChargerEnergy[10]); 
+            SetValue($this->GetIDForIdent("powerToCarTotal"),         $goEChargerEnergy[11]); 
             
             
             
