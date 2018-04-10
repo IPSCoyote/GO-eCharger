@@ -301,32 +301,25 @@
             return $goEChargerStatus->{'uby'}; 
         }
         
-        public function getSupplyLineVoltageL1() {
+        public function getSupplyLineVoltage(int $line) {
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
             $goEChargerEnergy = $goEChargerStatus->{'nrg'};
-            return $goEChargerEnergy[0]; 
-        }
-        
-        public function getSupplyLineVoltageL2() {
-            $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
-            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
-            return $goEChargerEnergy[1]; 
-        }
-        
-        public function getSupplyLineVoltageL3() {
-            $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
-            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
-            return $goEChargerEnergy[2]; 
-        }  
-        
-        public function getSupplyLineVoltageN() {
-            $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
-            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
-            return $goEChargerEnergy[3]; 
+            switch ( $line ){
+                case 1: 
+                    return $goEChargerEnergy[0]; 
+                    break;
+                case 2:
+                    return $goEChargerEnergy[1]; 
+                    break;
+                case 3: 
+                    return $goEChargerEnergy[2]; 
+                    break;
+                case 4: 
+                    return $goEChargerEnergy[3]; 
+                    break;
+            }
+            return false; 
         }
 
         public function getSupplyLineEnergy() {
@@ -337,6 +330,73 @@
             return $availableEnergy; 
         }
 
+        public function getAmpToCarByLine(int $line) {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
+            switch ( $line ){
+                case 1: 
+                    return $goEChargerEnergy[4]/100; 
+                    break;
+                case 2:
+                    return $goEChargerEnergy[5]/100; 
+                    break;
+                case 3: 
+                    return $goEChargerEnergy[6]/100; 
+                    break;
+            }
+            return false; 
+        }  
+        
+        public function getPowerToCarByLine(int $line) {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
+            switch ( $line ){
+                case 1: 
+                    return $goEChargerEnergy[7]/10; 
+                    break;
+                case 2:
+                    return $goEChargerEnergy[8]/10; 
+                    break;
+                case 3: 
+                    return $goEChargerEnergy[9]/10; 
+                    break;
+                case 4: 
+                    return $goEChargerEnergy[10]/10; 
+                    break;
+            }
+            return false; 
+        }
+        
+        public function getTotalPowerToCar() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
+            return $goEChargerEnergy[11]/100; 
+        }
+        
+        public function getPowerFactorByLine(int $line) {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
+            switch ( $line ){
+                case 1: 
+                    return $goEChargerEnergy[12]; 
+                    break;
+                case 2:
+                    return $goEChargerEnergy[13]; 
+                    break;
+                case 3: 
+                    return $goEChargerEnergy[14]; 
+                    break;
+                case 4: 
+                    return $goEChargerEnergy[15]; 
+                    break;
+            }
+            return false; 
+        }  
+        
         public function getSerialID() {
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
