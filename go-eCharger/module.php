@@ -83,12 +83,10 @@
             SetValue($this->GetIDForIdent("powerToCarLineL3"),        $goEChargerEnergy[9]);  
             SetValue($this->GetIDForIdent("powerToCarLineN"),         $goEChargerEnergy[10]); 
             SetValue($this->GetIDForIdent("powerToCarTotal"),         $goEChargerEnergy[11]); 
-            
-            
-            
-            
-            
-            
+            SetValue($this->GetIDForIdent("powerFactorLineL1"),       $goEChargerEnergy[12]);            
+            SetValue($this->GetIDForIdent("powerFactorLineL2"),       $goEChargerEnergy[13]);            
+            SetValue($this->GetIDForIdent("powerFactorLineL3"),       $goEChargerEnergy[14]);  
+            SetValue($this->GetIDForIdent("powerFactorLineN"),        $goEChargerEnergy[15]);             
             SetValue($this->GetIDForIdent("serialID"),                $goEChargerStatus->{'sse'});  
             SetValue($this->GetIDForIdent("ledBrightness"),           $goEChargerStatus->{'lbr'});  
             SetValue($this->GetIDForIdent("maxAvailableAMP"),         $goEChargerStatus->{'ama'}); 
@@ -659,19 +657,21 @@
                 $this->RegisterVariableFloat("powerToCarTotal", "Gesamtleistung zum Fahrzeug","GOECHARGER_Power.1",62);
             }  
             
+            if ( $this->GetIDForIdent("powerFactorLineL1") == false ) {
+                $this->RegisterVariableFloat("powerFactorLineL1", "Leistungsfaktor L1","~Humidity.F",63);
+            }
             
+            if ( $this->GetIDForIdent("powerFactorLineL2") == false ) {
+                $this->RegisterVariableFloat("powerFactorLineL2", "Leistungsfaktor L2","~Humidity.F",64);
+            }
             
+            if ( $this->GetIDForIdent("powerFactorLineL3") == false ) {
+                $this->RegisterVariableFloat("powerFactorLineL3", "Leistungsfaktor L3","~Humidity.F",65);
+            }
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+            if ( $this->GetIDForIdent("powerFactorLineN") == false ) {
+                $this->RegisterVariableFloat("powerFactorLineN", "Leistungsfaktor N","~Humidity.F",66);
+            }
             
             if ( $this->GetIDForIdent("serialID") == false ) {
                 $this->RegisterVariableString("serialID", "Seriennummer","~String",0);
