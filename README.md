@@ -189,3 +189,56 @@ Liefert die Kabel-Codierung
 ```
 $CableCapability = GOeCharger_GetCableCapability( $Instanz ); // Ermittlung der Kabel-Codierung
 ```
+
+##### 4.1.2.13 GetMainboardTemperature(int $Instanz)
+Mainboard Temperatur in Celsius
+```
+$MainboardTemperature = GOeCharger_GetMainboardTemperature( $Instanz ); // Ermittlung der Mainboard Temperatur
+```
+
+##### 4.1.2.14 GetUnlockRFID(int $Instanz)
+Ermittlung der RFID (integer), die zum entsperren genutzt wurde.
+```
+$MainboardTemperature = GOeCharger_GetMainboardTemperature( $Instanz ); // Ermittlung der Mainboard Temperatur
+```
+
+##### 4.1.2.15 GetSupplyLineVoltageLx(int $Instanz)
+Ermittlung der Spannung der angeschlossenen Phasen.
+```
+$VoltageL1 = GOeCharger_GetSupplyLineVoltageL1( $Instanz ); // Ermittlung der Spannung von Phase 1
+$VoltageL2 = GOeCharger_GetSupplyLineVoltageL2( $Instanz ); // Ermittlung der Spannung von Phase 2
+$VoltageL3 = GOeCharger_GetSupplyLineVoltageL3( $Instanz ); // Ermittlung der Spannung von Phase 3
+$VoltageN  = GOeCharger_GetSupplyLineVoltageN( $Instanz );  // Ermittlung der Spannung von N
+```
+
+##### 4.1.2.16 GetSupplyLineEnergy(int $Instanz)
+Ermittlung der durchschnittlichen Spannung der angeschlossenen Phasen.
+```
+$Engergy = GOeCharger_GetSupplyLineEnergy( $Instanz ); // Ermittlung der Durchschnittsspannung von L1-3
+```
+
+##### 4.1.2.17 GetSerialID(int $Instanz)
+Ermittlung der Seriennummer des go-eChargers.
+```
+$SerialID = GOeCharger_GetSerialID( $Instanz ); // Ermittlung Seriennummer
+```
+
+##### 4.1.2.17 LED Helligkeit
+
+###### 4.1.2.17.1 GetLEDBrightness(int $Instanz)
+Ermittlung der Helligkeit der LEDs
+```
+$LEDBrightness = GOeCharger_GetLEDBrightness( $Instanz ); // Ermittlung Seriennummer
+```
+
+###### 4.1.2.17.2 SetLEDBrightness(int $Instanz, int $Brightness)
+Setzen der Helligkeit der LEDs
+```
+GOeCharger_SetLEDBrightness( $Instanz, 255 ); // Setzen der LED Helligkeit auf Maximum
+```
+
+##### 4.1.2.17 GetEnergyChargedByCard(int $Instanz, int $cardID)
+Liefert die mit einer RFID Karte geladene Energie zurück.
+```
+$EnergyByCard2 = GOeCharger_GetEnergyChargedByCard( $Instanz, 2 ); // Ermittlung der Ladeenergie für Karte 2
+```
