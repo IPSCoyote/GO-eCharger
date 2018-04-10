@@ -697,7 +697,7 @@
                 if ( $this->GetIDForIdent("energyChargedCard".$i) == false ) {
                     $this->RegisterVariableFloat("energyChargedCard".$i, "geladene Energie Karte ".$i,"GOECHARGER_Power.1",99+$i);
                 }    
-            }
+            } 
         }
     }
 ?>
