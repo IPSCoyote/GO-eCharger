@@ -51,7 +51,13 @@ GOeCharger_Update( $Instanz ); // Aktualisiert die Messwerte (IPS Variablen) des
 ```
 Die Funktion liefert true oder false als Rückgabewert und aktualisiert die Messwerte
 
-##### 4.1.2.2. SetMaximumChargingAmperage(int $Instanz, int $Ampere)
+##### 4.1.2.2 Maximum Charging Amperage
+Mit der "Maximum Charging Amperage" ist der maximal verfügbare Ladestrom gemeint, den der go-eCharger zur Verfügung stellen kann. Der aktuell eingestellte Ladestrom ("CurrentChargingAmperage") ist kleiner oder gleich.
+
+###### 4.1.2.2.1 GetMaximumChargingAmperage(int $Instanz )
+Mit dieser Funktion kann der maximal verfügbare Ladestrom des go-eChargers abgefragt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. 
+
+###### 4.1.2.2.2 SetMaximumChargingAmperage(int $Instanz, int $Ampere)
 Mit dieser Funktion kann der maximal verfügbare Ladestrom des go-eChargers gesetzt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. 
 Diese Funktion hat direkte Auswirkung auf die Einstellungen des go-eChargers sowie einen ggf. aktuell stattfindenden Ladevorgang. Der maximale Ladestrom sollte an die verfügbare Hausinstallation angepasst sein. Die über IPS maximal einstellbare Ladestrom kann über die Moduleinstellungen beschränkt werden!
 Sollte der maximal verfügbare Ladestrom reduziert werden, so wird ggf. auch der aktuell eingestellte Ladestrom entsprechend verringert, sofern er das neue Maximum überschreiten würde.
