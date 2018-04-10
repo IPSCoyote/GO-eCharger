@@ -42,18 +42,16 @@ Das Modul "go-eCharger" dient als Schnittstelle zu einem lokal installierten go-
 + **Zugangskontrolle via RFID/APP** (0 = aus; 1 = an)
 + **Charger aktiviert** (0 = deaktiviert; 1 = aktiviert)
 
-#### 4.1.2. Funktionen
+#### 4.1.2. Allgemeine Funktionen
 
-##### Allgemeine Funktionen
-
-###### 4.1.2.1.1 Update(int $Instanz)
+##### 4.1.2.1 Update(int $Instanz)
 Aktualisiert die Messwerte (IPS Variablen) des go-eChargers. Diese Funktion wird auch in Abhängigkeit der eingestellten Aktualisierungsfrequenzen in den Moduleinstellungender ausgeführt, so dass normalerweise ein manueller Aufruf unnötig sein sollte.
 ```
 GOeCharger_Update( $Instanz ); // Aktualisiert die Messwerte (IPS Variablen) des go-eChargers
 ```
 Die Funktion liefert true oder false als Rückgabewert und aktualisiert die Messwerte
 
-###### 4.1.2.1.2 GetError(int $Instanz)
+##### 4.1.2.2 GetError(int $Instanz)
 Ermittlung ob der go-eCharger einen Fehlercode meldet.
 + 1: RCCB (Fehlerstromschutzschalter) 
 + 3: PHASE (Phasenstörung)
@@ -63,7 +61,7 @@ Ermittlung ob der go-eCharger einen Fehlercode meldet.
 $Error = GOeCharger_GetError( $Instanz ); // Ermittlung des Fehlerwerts
 ```
 
-###### 4.1.2.1.2 GetStatus(int $Instanz)
+##### 4.1.2.3 GetStatus(int $Instanz)
 Ermittlung des aktuellen Status des go-eChargers.
 + 1: Ladestation bereit, kein Fahrzeug
 + 2: Fahrzeug lädt
@@ -73,18 +71,18 @@ Ermittlung des aktuellen Status des go-eChargers.
 $Status = GOeCharger_GetStatus( $Instanz ); // Ermittlung des Status
 ```
 
-##### 4.1.2.2 Strom Funktionen
+#### 4.1.3 Funktionen zur Stromkontrolle
 
-###### 4.1.2.2.1 Maximal verfügbarer Ladestrom
+##### 4.1.3.1 Maximal verfügbarer Ladestrom
 Mit diesen Funktionen kann der maximal verfügbare Ladestrom kontrolliert werden, den der go-eCharger zur Verfügung stellen kann. Der aktuell eingestellte Ladestrom ("CurrentChargingAmperage") ist kleiner oder gleich.
 
-####### 4.1.2.2.1.1 GetMaximumChargingAmperage(int $Instanz )
+###### 4.1.3.1.1 GetMaximumChargingAmperage(int $Instanz )
 Mit dieser Funktion kann der maximal verfügbare Ladestrom des go-eChargers abgefragt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. 
 ```
 $MaximumChargingAmperage = GOeCharger_GetMaximumChargingAmperage( $Instanz ); // Liest den maximal verfügbaren Ladestrom
 ```
 
-####### 4.1.2.2.1.2 SetMaximumChargingAmperage(int $Instanz, int $Ampere)
+###### 4.1.3.1.2 SetMaximumChargingAmperage(int $Instanz, int $Ampere)
 Mit dieser Funktion kann der maximal verfügbare Ladestrom des go-eChargers gesetzt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. 
 Diese Funktion hat direkte Auswirkung auf die Einstellungen des go-eChargers sowie einen ggf. aktuell stattfindenden Ladevorgang. Der maximale Ladestrom sollte an die verfügbare Hausinstallation angepasst sein. Die über IPS maximal einstellbare Ladestrom kann über die Moduleinstellungen beschränkt werden!
 Sollte der maximal verfügbare Ladestrom reduziert werden, so wird ggf. auch der aktuell eingestellte Ladestrom entsprechend verringert, sofern er das neue Maximum überschreiten würde.
@@ -93,17 +91,17 @@ GOeCharger_SetMaximumChargingAmperage( $Instanz, 16 ); // Setze den maximal verf
 ```
 Die Funktion liefert *true* oder *false* als Rückgabewert und aktualisiert die Messwerte
 
-##### 4.1.2.3 Aktuell verfügbarer Ladestrom
+##### 4.1.3.2 Aktuell verfügbarer Ladestrom
 Mit diesen Funktionen ist der aktuell verfügbare Ladestrom, den der go-eCharger zur Verfügung stellt, kontrollierbar. Wenn der go-eCharger z.B. maximal 32A zur Verfügung stellen kann (siehe "Maximal verfügbarer Ladestrom"), dann kann ggf. der go-eCharger aktuell auf 10A eingestellt sein. 
 Das angeschlossene Fahrzeug kann maximal diesen Ladestrom abrufen, kann aber auch je nach Fahrzeugkonfiguration oder Einstellung weniger nutzen.
 
-###### 4.1.2.3.2 GetCurrentChargingAmperage(int $Instanz)
+###### 4.1.3.2.1 GetCurrentChargingAmperage(int $Instanz)
 Mit dieser Funktion kann der aktuell verfügbare Ladestrom des go-eChargers abgefragt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. 
 ```
 $CurrentChargingAmperage = GOeCharger_GetCurrentChargingAmperage( $Instanz ); // Liest den aktuellen Ladestrom 
 ```
 
-###### 4.1.2.3.2 SetCurrentChargingAmperage(int $Instanz, int $Ampere)
+###### 4.1.3.2.2 SetCurrentChargingAmperage(int $Instanz, int $Ampere)
 Mit dieser Funktion kann der aktuell verfügbare Ladestrom des go-eChargers gesetzt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. Der Wert darf jedoch den derzeitigen, maximal verfügbaren Ladestrom nicht überschreiten!
 Diese Funktion hat direkte Auswirkung auf die Einstellungen des go-eChargers sowie einen ggf. aktuell stattfindenden Ladevorgang.
 ```
@@ -111,7 +109,24 @@ GOeCharger_SetCurrentChargingAmperage( $Instanz, 8 ); // Setze den aktuellen Lad
 ```
 Die Funktion liefert *true* oder *false* als Rückgabewert und aktualisiert die Messwerte
 
-##### 4.1.2.4 Zugriffskontrolle
+#### 4.1.9 Grundeinstellungen und Anschlusswerte
+Die folgenden Werte sind nur lesbar.
+
+###### 4.1.3.3.1 IsElectricallyGroundedCheck(int $Instanz)
+In einigen Ländern wie z.B. in Norwegen kann es sein, das die Erdung nicht vorhanden ist. Die Erdung wird allerdings vom go-eCharger überprüft. Mit dieser Funktionen kann abgefragt werden, ob der "Norwegen Modus" aktiv ist.
+Da dieser Modus von der Elektrischen Installation abhängig ist, bietet dieses Modul keine Möglichkeit an, die Einstellung zu  verändert werden.
+```
+$GroundedCheck = GOeCharger_IsElectricallyGroundedCheck( $Instanz ); // Ermittlung, ob der 'Norwegen Modus' aktiv ist
+```
+
+
+
+
+
+
+
+
+#### 4.1.3 Zugriffs bzw. Ladekontrollekontrolle
 Funktionen bzgl. der Zugriffskontrolle
 
 ###### 4.1.2.4.1 IsAccessControlActive(int $Instanz)
@@ -171,9 +186,4 @@ $ChargingActivated = GOeCharger_SetActivation( $Instanz ); // Ermittlung, ob Lad
 GOeCharger_SetActivation( $Instanz, false ); // deaktiviert den go-eCharger 
 ```
 
-###### 4.1.2.1.2 IsElectricallyGroundedCheck(int $Instanz)
-In einigen Ländern wie z.B. in Norwegen kann es sein, das die Erdung nicht vorhanden ist. Die Erdung wird allerdings vom go-eCharger überprüft. Mit dieser Funktionen kann abgefragt werden, ob der "Norwegen Modus" aktiv ist.
-Da dieser Modus von der Elektrischen Installation abhängig ist, bietet dieses Modul keine Möglichkeit an, die Einstellung zu  verändert werden.
-```
-$GroundedCheck = GOeCharger_IsElectricallyGroundedCheck( $Instanz ); // Ermittlung, ob der 'Norwegen Modus' aktiv ist
-```
+
