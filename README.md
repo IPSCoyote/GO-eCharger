@@ -174,7 +174,7 @@ $ChargingActivated = GOeCharger_SetActivation( $Instanz ); // Ermittlung, ob Lad
 GOeCharger_SetActivation( $Instanz, false ); // deaktiviert den go-eCharger 
 ```
 
-###### 4.1.2.11 GetCableCapability(int $Instanz)
+##### 4.1.2.11 GetCableCapability(int $Instanz)
 Liefert die Kabel-Codierung
 + 0: kein Kabel
 + 13-32: Ampere Codierung
@@ -182,7 +182,7 @@ Liefert die Kabel-Codierung
 $CableCapability = GOeCharger_GetCableCapability( $Instanz ); // Ermittlung der Kabel-Codierung
 ```
 
-###### 4.1.2.12 GetNumberOfPhases(int $Instanz)
+##### 4.1.2.12 GetNumberOfPhases(int $Instanz)
 Liefert die Kabel-Codierung
 + 0: kein Kabel
 + 13-32: Ampere Codierung
