@@ -614,6 +614,50 @@
                 $this->RegisterVariableFloat("availableSupplyEnergy", "max. verfügbare Ladeleistung","GOECHARGER_Energy.1",54);
             }    
             
+            if ( $this->GetIDForIdent("ampToCarLineL1") == false ) {
+                $this->RegisterVariableInteger("ampToCarLineL1", "Ampere zum Fahrzeug L1","GOECHARGER_Ampere.1",55);
+            }
+            
+            if ( $this->GetIDForIdent("ampToCarLineL2") == false ) {
+                $this->RegisterVariableInteger("ampToCarLineL2", "Ampere zum Fahrzeug L2","GOECHARGER_Ampere.1",56);
+            }
+            
+            if ( $this->GetIDForIdent("ampToCarLineL3") == false ) {
+                $this->RegisterVariableInteger("ampToCarLineL3", "Ampere zum Fahrzeug L3","GOECHARGER_Ampere.1",57);
+            }       
+       
+            if ( $this->GetIDForIdent("powerToCarLineL1") == false ) {
+                $this->RegisterVariableInteger("powerToCarLineL1", "Leistung zum Fahrzeug L1","GOECHARGER_Power",58);
+            }
+            
+            if ( $this->GetIDForIdent("powerToCarLineL2") == false ) {
+                $this->RegisterVariableInteger("powerToCarLineL2", "Leistung zum Fahrzeug L2","GOECHARGER_Power",59);
+            }
+            
+            if ( $this->GetIDForIdent("powerToCarLineL3") == false ) {
+                $this->RegisterVariableInteger("powerToCarLineL3", "Leistung zum Fahrzeug L3","GOECHARGER_Power",60);
+            }
+            
+            if ( $this->GetIDForIdent("powerToCarLineN") == false ) {
+                $this->RegisterVariableInteger("powerToCarLineN", "Leistung zum Fahrzeug N","GOECHARGER_Power",61);
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             if ( $this->GetIDForIdent("serialID") == false ) {
                 $this->RegisterVariableString("serialID", "Seriennummer","~String",0);
             }
