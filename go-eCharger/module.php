@@ -654,7 +654,9 @@
                 $this->RegisterVariableFloat("powerToCarLineN", "Leistung zum Fahrzeug N","GOECHARGER_Power.1",61);
             }
             
-            
+            if ( $this->GetIDForIdent("powerToCarTotal") == false ) {
+                $this->RegisterVariableFloat("powerToCarTotal", "Gesamtleistung zum Fahrzeug","GOECHARGER_Power.1",62);
+            }  
             
             
             
