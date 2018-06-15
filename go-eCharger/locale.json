@@ -3,9 +3,9 @@
         "de": { 
             "IP Address": "IP Adresse",
             "Fuse protection": "El. Absicherung",
-            "Update Intervals": "Update Intervalle",
-            "Update Idle": "wartend auf Ladevorgang",
-            "Update Charging": "während des Ladenvorgangs",
+            "Update Intervals": "Update Intervalle (0 Sek. = deaktiviert)",
+            "Update Idle": "wartend",
+            "Update Charging": "ladend",
             "Check Connection": "Verbindung testen",
             "GO-eCharger identified": "GO-eCharger gefunden",
             "Configuration missing": "Konfiguration fehlt",
