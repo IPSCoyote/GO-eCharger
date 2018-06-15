@@ -4,6 +4,8 @@
             "IP Address": "IP Adresse",
             "Fuse protection": "El. Absicherung",
             "Update Intervals": "Update Intervalle",
+            "UpdateIdle": "wartend auf Ladevorgang",
+            "UpdateCharging": "während des Ladenvorgangs",
             "Check Connection": "Verbindung testen",
             "GO-eCharger identified": "GO-eCharger gefunden",
             "Configuration missing": "Konfiguration fehlt",
