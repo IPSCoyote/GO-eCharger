@@ -3,8 +3,7 @@
         "de": { 
             "IP Address": "IP Adresse",
             "Fuse protection": "El. Absicherung",
-            "Update Interval while waiting": "Update Intervall beim Warten",
-            "Update Interval while charging": "Update Intervall beim Laden eines Fahrzeugs",
+            "Update Intervals": "Update Intervalle",
             "Check Connection": "Verbindung testen",
             "GO-eCharger identified": "GO-eCharger gefunden",
             "Configuration missing": "Konfiguration fehlt",
