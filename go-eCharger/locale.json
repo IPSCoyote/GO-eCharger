@@ -9,7 +9,7 @@
             "Update Charging": "ladend",
             "Functional Data": "Funktionale Einstellungen",
             "Auto Reactivate": "automatische Re-Aktivierung des Chargers bei erneutem Anschluss eines Fahrzeugs",
-            "AverageConsumption": "Durchschnittsverbrauch als Grundlage für den automatischen Ladestopp",
+            "AverageConsumption": "Verbrauch",
             "Check Connection": "Verbindung testen",
             "GO-eCharger identified": "GO-eCharger gefunden",
             "Configuration missing": "Konfiguration fehlt",
