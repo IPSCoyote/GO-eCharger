@@ -8,7 +8,7 @@
             "Update Idle": "wartend",
             "Update Charging": "ladend",
             "Functional Data": "Funktionale Einstellungen",
-            "Auto Reactivate": "automatische Lade-Re-Aktivierung bei erneutem Anschluss eines Fahrzeugs",
+            "Auto Reactivate": "automatische Re-Aktivierung des Chargers bei erneutem Anschluss eines Fahrzeugs",
             "Check Connection": "Verbindung testen",
             "GO-eCharger identified": "GO-eCharger gefunden",
             "Configuration missing": "Konfiguration fehlt",
