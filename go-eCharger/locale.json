@@ -1,8 +1,9 @@
 {
     "translations": {
         "de": { 
+            "Basic Data": "Grunddaten",
             "IP Address": "IP Adresse",
-            "Fuse protection": "El. Absicherung",
+            "Fuse protection": "el. Absicherung",
             "Update Intervals": "Update Intervalle (0 Sek. = deaktiviert)",
             "Update Idle": "wartend",
             "Update Charging": "ladend",
