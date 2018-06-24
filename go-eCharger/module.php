@@ -673,8 +673,8 @@
                 IPS_SetVariableProfileDigits('GOECHARGER_AutomaticStopKM',0);
                 IPS_SetVariableProfileValues('GOECHARGER_AutomaticStopKM', 0, 300, 5 );
                 IPS_SetVariableProfileAssociation("GOECHARGER_AutomaticStopKM", 0, "deaktiviert", "", 0xFFFFFF);
-                for($i=1; $i<=60; $i++){
-                    IPS_SetVariableProfileAssociation("GOECHARGER_AutomaticStopKM", $i, number_format($i*5, 0)." km", "", 0xFFFFFF);
+                for($i=1; $i<=300; $i++){
+                    IPS_SetVariableProfileAssociation("GOECHARGER_AutomaticStopKM", $i, number_format($i, 0)." km", "", 0xFFFFFF);
                 }
                 IPS_SetVariableProfileText('GOECHARGER_AutomaticStopKM', "", "" );
             }
