@@ -130,7 +130,7 @@
             
             // Handle Re-Activation
             if ( $this->ReadPropertyBoolean("AutoReactivate") == true and
-                 GetValueBoolean( $this->GetIDForIdent("accessState") ) == false ) and  // charger deactivated
+                 GetValueBoolean( $this->GetIDForIdent("accessState") ) == false and    // charger deactivated
                  GetValueInteger( $this->GetIDForIdent("status") == 3 )                 // wait for car -> car plugged in
             {
 
