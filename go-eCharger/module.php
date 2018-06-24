@@ -256,13 +256,13 @@
         }
         
         public function getAutomaticChargeStopKm() {
-            if ( $this->ReadPropertyBoolean("AverageConsumption") > 0 )
+            if ( $this->ReadPropertyFloat("AverageConsumption") > 0 )
             {
                 $chargeStopKwh = $this->getAutomaticChargeStop();
                 if ( $chargeStopKwh === false ) { 
                     return false;
                 } else {
-                    return $chargeStopKwh/$this->ReadPropertyBoolean("AverageConsumption")*100;
+                    return $chargeStopKwh/$this->ReadPropertyFloat("AverageConsumption")*100;
                 }
             }
             else
@@ -270,9 +270,9 @@
         }
         
         public function setAutomaticChargeStopKm(float $chargeStopKm) {
-            if ( $this->ReadPropertyBoolean("AverageConsumption") > 0 )
+            if ( $this->ReadPropertyFloat("AverageConsumption") > 0 )
             {
-                $chargeStopKwh = $this->ReadPropertyBoolean("AverageConsumption")/100*$chargeStopKm;
+                $chargeStopKwh = $this->ReadPropertyFloat("AverageConsumption")/100*$chargeStopKm;
                 return $this->setAutomaticChargeStop( $chargeStopKwh );
             }
             else
