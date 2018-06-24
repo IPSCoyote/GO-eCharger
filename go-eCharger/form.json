@@ -15,7 +15,7 @@
       { "type": "NumberSpinner", "name": "UpdateIdle", "caption": "Update Idle", "digits": 0 , "hex": false, "suffix": "seconds"},
       { "type": "NumberSpinner", "name": "UpdateCharging", "caption": "Update Charging", "digits": 0 , "hex": false, "suffix": "seconds"},
       { "type": "Label", "label": "Functional Data" }, 
-      { "type": "CheckBox", "name": "AutoReactivate", "caption": "Auto Reactivate" }
+      { "type": "CheckBox", "name": "AutoReactivate", "caption": "Auto Reactivate" },
       { "type": "NumberSpinner", "name": "AverageConsumption", "caption": "AverageConsumption", "digits": 1, "hex": false, "suffix": "kwh" }
     ],
     "actions":  
