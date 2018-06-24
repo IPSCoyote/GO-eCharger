@@ -17,6 +17,7 @@
       { "type": "Label", "label": "Functional Data" }, 
       { "type": "CheckBox", "name": "AutoReactivate", "caption": "Auto Reactivate" },
       { "type": "CheckBox", "name": "KeepLoadMaxOnReactivate", "caption": "KeepLoadMaxOnReactivate" },
+      { "type": "Label", "label": "Vehicle Data" }, 
       { "type": "NumberSpinner", "name": "AverageConsumption", "caption": "AverageConsumption", "digits": 1, "hex": false, "suffix": "kwh" }
     ],
     "actions":  
