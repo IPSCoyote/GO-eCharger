@@ -32,7 +32,7 @@
           // Generate Profiles & Variables
           $this->registerProfiles();
           $this->registerVariables();  
-           
+           $this->EnableAction("accessState");  
           // Set Data to Variables (and update timer)
           $this->Update();
         }
