@@ -129,9 +129,10 @@
             }
             
             // Handle Re-Activation
-            if ( $this->ReadPropertyBoolean("AutoReactivate") == true )
+            if ( $this->ReadPropertyBoolean("AutoReactivate") == true ) and
+                 IPS_GetValueBoolean( $this->GetIDForIdent("accessState") ) == false )
             {
-            
+              
             }
             
             return true;
