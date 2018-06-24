@@ -63,6 +63,13 @@
             SetValue($this->GetIDForIdent("numberOfPhases"),          $goEChargerStatus->{'pha'}); 
             SetValue($this->GetIDForIdent("mainboardTemperature"),    $goEChargerStatus->{'tmp'});  
             SetValue($this->GetIDForIdent("automaticStop"),           $goEChargerStatus->{'dwo'}/10 );
+            
+            if ( $this->ReadPropertyBoolean("AverageConsumption") > 0 )
+            {
+              SetValue($this->GetIDForIdent("automaticStopKm"), $goEChargerStatus->{'dwo'}/10/$this->ReadPropertyBoolean("AverageConsumption")/100 );                
+            } else 
+              SetValue($this->GetIDForIdent("automaticStopKm"), 0 );
+            
             SetValue($this->GetIDForIdent("adapterAttached"),         $goEChargerStatus->{'adi'});
             SetValue($this->GetIDForIdent("unlockedByRFID"),          $goEChargerStatus->{'uby'});
             SetValue($this->GetIDForIdent("energyTotal"),             $goEChargerStatus->{'eto'}/10);
@@ -247,7 +254,7 @@
             if ( $resultStatus->{'dwo'} == $value ) { return true; } else { return false; }
         }
         
-        public function getAutomaticChargeStopInKM() {
+        public function getAutomaticChargeStopKm() {
             if ( $this->ReadPropertyBoolean("AverageConsumption") > 0 )
             {
                 $chargeStopKwh = $this->getAutomaticChargeStop();
@@ -261,7 +268,7 @@
                 return false;
         }
         
-        public function setAutomaticChargeStopInKM(float $chargeStopKm) {
+        public function setAutomaticChargeStopKm(float $chargeStopKm) {
             if ( $this->ReadPropertyBoolean("AverageConsumption") > 0 )
             {
                 $chargeStopKwh = $this->ReadPropertyBoolean("AverageConsumption")/100*$chargeStopKm;
@@ -501,6 +508,10 @@
                     $this->setAutomaticChargeStop( $Value );
                     break;
                     
+               case "automaticStopKm":
+                    $this->setAutomaticChargeStopKm( $Value );
+                    break;
+                    
                 case "cableUnlockMode":
                     $this->setCableUnlockMode( $Value );
                     break;
@@ -655,6 +666,14 @@
                 IPS_SetVariableProfileText('GOECHARGER_AutomaticStop', "", " kw" );
             }  
             
+            if ( !IPS_VariableProfileExists('GOECHARGER_AutomaticStopKM') ) {
+                IPS_CreateVariableProfile('GOECHARGER_AutomaticStopKM', 2 );
+                IPS_SetVariableProfileIcon('GOECHARGER_AutomaticStopKM', 'Battery' );
+                IPS_SetVariableProfileDigits('GOECHARGER_AutomaticStopKM',0);
+                IPS_SetVariableProfileValues('GOECHARGER_AutomaticStopKM', 0, 300, 5 );
+                IPS_SetVariableProfileText('GOECHARGER_AutomaticStopKM', "", " km" );
+            } 
+            
             if ( !IPS_VariableProfileExists('GOECHARGER_Adapter') ) {
                 IPS_CreateVariableProfile('GOECHARGER_Adapter', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Adapter', 'Ok' );
@@ -730,7 +749,13 @@
             }  
             
             if ( $this->GetIDForIdent("automaticStop") == false ) {
-                $this->RegisterVariableFloat("automaticStop", "Ladeende bei Akkustand (0kw = deaktiviert)", "GOECHARGER_AutomaticStop", 0 );
+                $this->RegisterVariableFloat("automaticStop", "Ladeende nach x kw (0kw = deaktiviert)", "GOECHARGER_AutomaticStop", 0 );
+                $this->EnableAction("automaticStop"); 
+            }
+            
+            if ( $this->GetIDForIdent("automaticStopKm") == false ) {
+                $this->RegisterVariableInteger("automaticStopKm", "Ladeende nach Energie für x km (0km = deaktiviert)", "GOECHARGER_AutomaticStop", 0 );
+                $this->EnableAction("automaticStopKm"); 
             }
             
             if ( $this->GetIDForIdent("adapterAttached") == false ) {
