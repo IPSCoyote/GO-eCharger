@@ -9,6 +9,7 @@
             "Update Charging": "ladend",
             "Functional Data": "Funktionale Einstellungen",
             "Auto Reactivate": "automatische Re-Aktivierung des Chargers bei erneutem Anschluss eines Fahrzeugs",
+            "KeepLoadMaxOnReactivate": "letzten Wert für Ladestopp weiter verwenden (ansonsten ohne Begrenzung)",
             "AverageConsumption": "Verbrauch",
             "Check Connection": "Verbindung testen",
             "GO-eCharger identified": "GO-eCharger gefunden",
