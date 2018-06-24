@@ -669,7 +669,7 @@
             
             if ( !IPS_VariableProfileExists('GOECHARGER_AutomaticStopKM') ) {
                 IPS_CreateVariableProfile('GOECHARGER_AutomaticStopKM', 1 );
-                IPS_SetVariableProfileIcon('GOECHARGER_AutomaticStopKM', 'Battery' );
+                IPS_SetVariableProfileIcon('GOECHARGER_AutomaticStopKM', 'Close' );
                 IPS_SetVariableProfileDigits('GOECHARGER_AutomaticStopKM',0);
                 IPS_SetVariableProfileValues('GOECHARGER_AutomaticStopKM', 0, 300, 5 );
                 IPS_SetVariableProfileAssociation("GOECHARGER_AutomaticStopKM", 0, "deaktiviert", "", 0xFFFFFF);
