@@ -18,6 +18,9 @@
           $this->RegisterPropertyInteger("UpdateCharging",0); 
           $this->RegisterPropertyBoolean("AutoReactivate",false); 
           $this->RegisterPropertyFloat("AverageConsumption",0);
+            
+          // Actions
+          $this->EnableAction($this->GetIDForIdent("accessState"));  // Wallbox active
                       
           // Timer
           $this->RegisterTimer("GOeChargerTimer_UpdateTimer", 0, 'GOeCharger_Update($_IPS[\'TARGET\']);');
@@ -459,6 +462,23 @@
             return $goEChargerStatus->{$code}/10;
         }        
         
+        public function RequestAction($Ident, $Value) {
+            
+            $processed = false;
+            
+            if ( $Ident == $this->GetIDForIdent("accessState") )
+            {
+              // Wallbox active
+              setActive( $Value );  
+              $processed = true;
+            }
+
+            if ( $processed == false )
+            {
+              throw new Exception("Invalid Ident"); 
+            }
+            
+        }
         
         //=== Modul Funktionen =========================================================================================
         /* Own module functions called via the defined prefix GOeCharger_* 
