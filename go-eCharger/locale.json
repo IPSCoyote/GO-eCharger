@@ -7,7 +7,7 @@
             "Update Intervals": "Update Intervalle in Sekunden (0 = deaktiviert)",
             "Update Idle": "wartend",
             "Update Charging": "ladend",
-            "Functional Data": "Funktionale Einstellungen",
+            "Functional Data": "Komfortfunktionen",
             "Auto Reactivate": "automatische Re-Aktivierung des Chargers bei erneutem Anschluss eines Fahrzeugs",
             "KeepLoadMaxOnReactivate": "letzten Wert für Ladestopp weiter verwenden (ansonsten ohne Begrenzung)",
             "Vehicle Data": "Fahrzeugdaten",
