@@ -667,7 +667,7 @@
             }  
             
             if ( !IPS_VariableProfileExists('GOECHARGER_AutomaticStopKM') ) {
-                IPS_CreateVariableProfile('GOECHARGER_AutomaticStopKM', 2 );
+                IPS_CreateVariableProfile('GOECHARGER_AutomaticStopKM', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_AutomaticStopKM', 'Battery' );
                 IPS_SetVariableProfileDigits('GOECHARGER_AutomaticStopKM',0);
                 IPS_SetVariableProfileValues('GOECHARGER_AutomaticStopKM', 0, 300, 5 );
