@@ -133,7 +133,15 @@
                  GetValueBoolean( $this->GetIDForIdent("accessState") ) == false and    // charger deactivated
                  GetValueInteger( $this->GetIDForIdent("status") ) == 3 )               // wait for car -> car plugged in
             {
-
+               // Check, if car was just plugged in (so plugin took place after box was deactivated)
+               $VariableWallboxActive = IPS_GetVariable( $this->GetIDForIdent("accessState") );
+               $VariableConnection    = IPS_GetVariable( $this->GetIDForIdent("status") );
+               if ( $VariableConnection['VariableChanged'] > $VariableWallboxActive['VariableChanged'] )
+               {
+                 // reactivate Wallbox
+                 setActive( true );  
+               }
+                
             }
             
             return true;
