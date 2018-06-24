@@ -18,7 +18,10 @@
           $this->RegisterPropertyInteger("UpdateCharging",0); 
           $this->RegisterPropertyBoolean("AutoReactivate",false); 
           $this->RegisterPropertyFloat("AverageConsumption",0);
-                      
+
+          // Actions
+          $this->EnableAction("accessState");  // Wallbox active
+            
           // Timer
           $this->RegisterTimer("GOeChargerTimer_UpdateTimer", 0, 'GOeCharger_Update($_IPS[\'TARGET\']);');
         }
@@ -32,9 +35,6 @@
           // Generate Profiles & Variables
           $this->registerProfiles();
           $this->registerVariables();  
-            
-           // Actions
-          $this->EnableAction($this->GetIDForIdent("accessState"));  // Wallbox active
             
           // Set Data to Variables (and update timer)
           $this->Update();
