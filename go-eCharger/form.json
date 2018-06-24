@@ -1,6 +1,7 @@
 {
     "elements": 
     [
+      { "type": "Label", "label": "Basic Data" },
       { "type": "ValidationTextBox", "name": "IPAddressCharger", "caption": "IP Address" },
       { "type": "Select", "name": "MaxAmperage", "caption": "Fuse protection",
             "options": [
