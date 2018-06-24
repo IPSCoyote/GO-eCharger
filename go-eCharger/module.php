@@ -16,6 +16,8 @@
           $this->RegisterPropertyInteger("MaxAmperage", 6);
           $this->RegisterPropertyInteger("UpdateIdle", 0);  
           $this->RegisterPropertyInteger("UpdateCharging",0); 
+          $this->RegisterPropertyBoolean("AutoReacivation",false); 
+          $this->RegisterPropertyFloat("AverageConsumption",0);
                       
           // Timer
           $this->RegisterTimer("GOeChargerTimer_UpdateTimer", 0, 'GOeCharger_Update($_IPS[\'TARGET\']);');
