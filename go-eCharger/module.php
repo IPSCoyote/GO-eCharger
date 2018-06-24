@@ -140,6 +140,7 @@
                {
                  // reactivate Wallbox
                  $this->setValueToeCharger( 'alw', true );  
+                 SetValue($this->GetIDForIdent("accessState"), true );
                }
                 
             }
