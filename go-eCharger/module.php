@@ -17,6 +17,7 @@
           $this->RegisterPropertyInteger("UpdateIdle", 0);  
           $this->RegisterPropertyInteger("UpdateCharging",0); 
           $this->RegisterPropertyBoolean("AutoReactivate",false); 
+          $this->RegisterPropertyBoolean("AutoActivateOnStopSet",false);
           $this->RegisterPropertyFloat("AverageConsumption",0);
           $this->RegisterPropertyFloat("MaxLoadKw",0);
             
@@ -250,8 +251,12 @@
             if ( $chargeStopKwh < 0 or $chargeStopKwh > 100 ) { return false; }
             $value = number_format( $chargeStopKwh*10, 0, '', '' );
             $resultStatus = $this->setValueToeCharger( 'dwo', $value ); 
-            // Update all data
-            $this->Update();
+            if ( $this->ReadPropertyBoolean("AutoActivateOnStopSet") == true )
+            {
+              // activate Wallbox
+              $this->setActive( true );
+            } else
+              $this->Update();
             if ( $resultStatus->{'dwo'} == $value ) { return true; } else { return false; }
         }
         
