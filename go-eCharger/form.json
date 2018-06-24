@@ -11,7 +11,7 @@
                 { "label": "32A - 22kw", "value": 32 }
         ]},
       { "type": "Label", "label": "Update Intervals" },
-      { "type": "Numberspinner", "name": "UpdateIdle", "caption": "Update Idle", "digits": 0 , "hex": false, "suffix": "sec."},
+      { "type": "NumberSpinner", "name": "UpdateIdle", "caption": "Update Idle", "digits": 0 , "hex": false, "suffix": "sec."},
       { "type": "Select", "name": "UpdateCharging", "caption": "Update Charging",
             "options": [
                 { "label": "deaktiviert", "value":  0 },
