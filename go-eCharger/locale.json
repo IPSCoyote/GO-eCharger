@@ -7,6 +7,7 @@
             "Update Intervals": "Update Intervalle in Sekunden (0 = deaktiviert)",
             "Update Idle": "wartend",
             "Update Charging": "ladend",
+            "Functional Data": "Funktionale Einstellungen",
             "Check Connection": "Verbindung testen",
             "GO-eCharger identified": "GO-eCharger gefunden",
             "Configuration missing": "Konfiguration fehlt",
