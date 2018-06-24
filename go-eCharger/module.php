@@ -676,7 +676,7 @@
                 for($i=1; $i<=60; $i++){
                     IPS_SetVariableProfileAssociation("GOECHARGER_AutomaticStopKM", $i, number_format($i*5, 0)." km", "", 0xFFFFFF);
                 }
-                IPS_SetVariableProfileText('GOECHARGER_AutomaticStopKM', "", " km" );
+                IPS_SetVariableProfileText('GOECHARGER_AutomaticStopKM', "", "" );
             }
             if ( IPS_VariableProfileExists('GOECHARGER_AutomaticStopKM') ) {
                 if ( $this->ReadPropertyFloat("MaxLoadKw") > 0  and
