@@ -17,7 +17,8 @@
       { "type": "Label", "label": "Functional Data" }, 
       { "type": "CheckBox", "name": "AutoReactivate", "caption": "Auto Reactivate" },
       { "type": "Label", "label": "Vehicle Data" }, 
-      { "type": "NumberSpinner", "name": "AverageConsumption", "caption": "AverageConsumption", "digits": 1, "hex": false, "suffix": "kwh" }
+      { "type": "NumberSpinner", "name": "AverageConsumption", "caption": "AverageConsumption", "digits": 1, "hex": false, "suffix": "kwh" },
+      { "type": "NumberSpinner", "name": "MaxLoadKw", "caption": "MaxLoadKw", "digits": 1, "hex": false, "suffix": "kw" }
     ],
     "actions":  
     [
