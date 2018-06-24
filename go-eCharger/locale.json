@@ -11,6 +11,7 @@
             "Auto Reactivate": "automatische Re-Aktivierung des Chargers bei erneutem Anschluss eines Fahrzeugs",
             "Vehicle Data": "Fahrzeugdaten",
             "AverageConsumption": "Verbrauch",
+            "MaxLoadKw": "Batteriegröße",
             "Check Connection": "Verbindung testen",
             "GO-eCharger identified": "GO-eCharger gefunden",
             "Configuration missing": "Konfiguration fehlt",
