@@ -677,7 +677,8 @@
             if ( IPS_VariableProfileExists('GOECHARGER_AutomaticStopKM') ) {
                 if ( $this->ReadPropertyFloat("MaxLoadKw") > 0  and
                      $this->ReadPropertyFloat("AverageConsumption") > 0 ) {
-                    $maxKm = Round($this->ReadPropertyFloat("MaxLoadKw")/$this->ReadPropertyFloat("AverageConsumption")*100,0);
+                    $Km = Round($this->ReadPropertyFloat("MaxLoadKw")/$this->ReadPropertyFloat("AverageConsumption")*100,0);
+                    $maxKm = round($Km/5,0)*5;
                     IPS_SetVariableProfileValues('GOECHARGER_AutomaticStopKM', 0, $maxKm, 5 );
                 }
             }
