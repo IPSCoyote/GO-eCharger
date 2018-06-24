@@ -25,9 +25,7 @@
  
         public function ApplyChanges() {
           /* Called on 'apply changes' in the configuration UI and after creation of the instance */
-          parent::ApplyChanges();
-            
-          $this->sendDebug( "go-eCharger", "Apply", 0 );  
+          parent::ApplyChanges(); 
 
           // Generate Profiles & Variables
           $this->registerProfiles();
@@ -247,6 +245,30 @@
             // Update all data
             $this->Update();
             if ( $resultStatus->{'dwo'} == $value ) { return true; } else { return false; }
+        }
+        
+        public function getAutomaticChargeStopInKM() {
+            if ( $this->ReadPropertyBoolean("AverageConsumption") > 0 )
+            {
+                $chargeStopKwh = $this->getAutomaticChargeStop();
+                if ( $chargeStopKwh === false ) { 
+                    return false;
+                } else {
+                    return $chargeStopKwh/$this->ReadPropertyBoolean("AverageConsumption")/100;
+                }
+            }
+            else
+                return false;
+        }
+        
+        public function setAutomaticChargeStopInKM(float $chargeStopKm) {
+            if ( $this->ReadPropertyBoolean("AverageConsumption") > 0 )
+            {
+                $chargeStopKwh = $this->ReadPropertyBoolean("AverageConsumption")/100*$chargeStopKm;
+                return $this->setAutomaticChargeStop( $chargeStopKwh );
+            }
+            else
+                return false;            
         }
             
         public function getCableUnlockMode() {
