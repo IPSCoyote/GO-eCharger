@@ -16,7 +16,7 @@
           $this->RegisterPropertyInteger("MaxAmperage", 6);
           $this->RegisterPropertyInteger("UpdateIdle", 0);  
           $this->RegisterPropertyInteger("UpdateCharging",0); 
-          $this->RegisterPropertyBoolean("AutoReacivation",false); 
+          $this->RegisterPropertyBoolean("AutoReactivate",false); 
           $this->RegisterPropertyFloat("AverageConsumption",0);
                       
           // Timer
