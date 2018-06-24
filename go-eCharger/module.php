@@ -463,11 +463,36 @@
         
             switch($Ident) 
             {
-               case "accessState":
-                  $this->setActive( $Value );  
-                  break;
+                case "availableAMP":
+                    $this->setMaximumChargingAmperage( $Value );
+                    break;
+                    
+                case "maxAvailableAMP":
+                    $this->setCurrentChargingAmperage( $Value );
+                    break;
+                    
+                case "accessControl":
+                    $this->setAccessControlActive( $Value );
+                    break; 
+                
+                case "automaticStop":
+                    $this->setAutomaticChargeStop( $Value );
+                    break;
+                    
+                case "cableUnlockMode":
+                    $this->setCableUnlockMode( $Value );
+                    break;
+                    
+                case "accessState":
+                    $this->setActive( $Value );  
+                    break;
+                    
+                case "ledBrightness":
+                    break;
+                    
                 default:
-                  throw new Exception("Invalid Ident"); 
+                    throw new Exception("Invalid Ident"); 
+                    
             }
             
         }
@@ -653,6 +678,7 @@
             
             if ( $this->GetIDForIdent("availableAMP") == false ) {
                 $this->RegisterVariableInteger("availableAMP", "aktuell verfügbarer Ladestrom","GOECHARGER_Ampere",0);
+                $this->EnableAction("availableAMP");
             }  
             
             if ( $this->GetIDForIdent("error") == false ) {
@@ -661,6 +687,7 @@
             
             if ( $this->GetIDForIdent("accessControl") == false ) {
                 $this->RegisterVariableInteger("accessControl", "Zugangskontrolle via RFID/App","GOECHARGER_Access",0);
+                $this->EnableAction("accessControl");
             }  
             
             if ( $this->GetIDForIdent("accessState") == false ) {
@@ -770,14 +797,17 @@
 
             if ( $this->GetIDForIdent("ledBrightness") == false ) {
                 $this->RegisterVariableInteger("ledBrightness", "LED Helligkeit","~Intensity.255",0);
+                $this->EnableAction("ledBrightness");
             }
             
             if ( $this->GetIDForIdent("maxAvailableAMP") == false ) {
                 $this->RegisterVariableInteger("maxAvailableAMP", "max. verfügbarer Ladestrom","GOECHARGER_Ampere",0);
+                $this->EnableAction("maxAvailableAMP");
             }
                    
             if ( $this->GetIDForIdent("cableUnlockMode") == false ) {
                 $this->RegisterVariableInteger("cableUnlockMode", "Kabel-Verriegelungsmodus","GOECHARGER_CableUnlockMode",0);
+                $this->EnableAction("cableUnlockMode");
             }    
             
             if ( $this->GetIDForIdent("norwayMode") == false ) {
