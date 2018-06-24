@@ -18,6 +18,7 @@
           $this->RegisterPropertyInteger("UpdateCharging",0); 
           $this->RegisterPropertyBoolean("AutoReactivate",false); 
           $this->RegisterPropertyFloat("AverageConsumption",0);
+          $this->RegisterPropertyFloat("MaxLoadKw",0);
             
           // Timer
           $this->RegisterTimer("GOeChargerTimer_UpdateTimer", 0, 'GOeCharger_Update($_IPS[\'TARGET\']);');
@@ -66,7 +67,7 @@
             
             if ( $this->ReadPropertyBoolean("AverageConsumption") > 0 )
             {
-              SetValue($this->GetIDForIdent("automaticStopKm"), $goEChargerStatus->{'dwo'}/10/$this->ReadPropertyBoolean("AverageConsumption")/100 );                
+              SetValue($this->GetIDForIdent("automaticStopKm"), $goEChargerStatus->{'dwo'}/10/$this->ReadPropertyBoolean("AverageConsumption")*100 );                
             } else 
               SetValue($this->GetIDForIdent("automaticStopKm"), 0 );
             
@@ -261,7 +262,7 @@
                 if ( $chargeStopKwh === false ) { 
                     return false;
                 } else {
-                    return $chargeStopKwh/$this->ReadPropertyBoolean("AverageConsumption")/100;
+                    return $chargeStopKwh/$this->ReadPropertyBoolean("AverageConsumption")*100;
                 }
             }
             else
@@ -672,7 +673,14 @@
                 IPS_SetVariableProfileDigits('GOECHARGER_AutomaticStopKM',0);
                 IPS_SetVariableProfileValues('GOECHARGER_AutomaticStopKM', 0, 300, 5 );
                 IPS_SetVariableProfileText('GOECHARGER_AutomaticStopKM', "", " km" );
-            } 
+            }
+            if ( IPS_VariableProfileExists('GOECHARGER_AutomaticStopKM') ) {
+                if ( $this->ReadPropertyBoolean("MaxLoadKw") > 0  and
+                     $this->ReadPropertyBoolean("AverageConsumption") > 0 ) {
+                    $maxKm = Round($this->ReadPropertyBoolean("MaxLoadKw")/$this->ReadPropertyBoolean("AverageConsumption")*100,0);
+                    IPS_SetVariableProfileValues('GOECHARGER_AutomaticStopKM', 0, $maxKm, 5 );
+                }
+            }
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Adapter') ) {
                 IPS_CreateVariableProfile('GOECHARGER_Adapter', 1 );
