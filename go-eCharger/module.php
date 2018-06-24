@@ -32,7 +32,7 @@
           // Generate Profiles & Variables
           $this->registerProfiles();
           $this->registerVariables();  
-           $this->EnableAction("accessState");  
+
           // Set Data to Variables (and update timer)
           $this->Update();
         }
@@ -460,19 +460,14 @@
         }        
         
         public function RequestAction($Ident, $Value) {
-            
-            $processed = false;
-            
-            if ( $Ident == $this->GetIDForIdent("accessState") )
+        
+            switch($Ident) 
             {
-              // Wallbox active
-              setActive( $Value );  
-              $processed = true;
-            }
-
-            if ( $processed == false )
-            {
-              throw new Exception("Invalid Ident"); 
+               case "accessState":
+                  setActive( $Value );  
+                  break;
+                default:
+                  throw new Exception("Invalid Ident"); 
             }
             
         }
