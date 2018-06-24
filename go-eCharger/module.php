@@ -37,12 +37,11 @@
           $this->Update();
         }
         
-    public function Destroy()
-      {
+        public function Destroy() {
             $this->UnregisterTimer("GOeChargerTimer_UpdateTimer");
             // Never delete this line!
             parent::Destroy();
-      }
+        }
         
         //=== Modul Funktionen =========================================================================================
         /* Own module functions called via the defined prefix GOeCharger_* 
