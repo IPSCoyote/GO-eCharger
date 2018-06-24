@@ -65,7 +65,7 @@
             SetValue($this->GetIDForIdent("mainboardTemperature"),    $goEChargerStatus->{'tmp'});  
             SetValue($this->GetIDForIdent("automaticStop"),           $goEChargerStatus->{'dwo'}/10 );
             
-            if ( $this->ReadPropertyBoolean("AverageConsumption") > 0 )
+            if ( $this->ReadPropertyFloat("AverageConsumption") > 0 )
             {
               SetValue($this->GetIDForIdent("automaticStopKm"), $goEChargerStatus->{'dwo'}/10/$this->ReadPropertyBoolean("AverageConsumption")*100 );                
             } else 
@@ -675,8 +675,8 @@
                 IPS_SetVariableProfileText('GOECHARGER_AutomaticStopKM', "", " km" );
             }
             if ( IPS_VariableProfileExists('GOECHARGER_AutomaticStopKM') ) {
-                if ( $this->ReadPropertyBoolean("MaxLoadKw") > 0  and
-                     $this->ReadPropertyBoolean("AverageConsumption") > 0 ) {
+                if ( $this->ReadPropertyFloat("MaxLoadKw") > 0  and
+                     $this->ReadPropertyFloat("AverageConsumption") > 0 ) {
                     $maxKm = Round($this->ReadPropertyBoolean("MaxLoadKw")/$this->ReadPropertyBoolean("AverageConsumption")*100,0);
                     IPS_SetVariableProfileValues('GOECHARGER_AutomaticStopKM', 0, $maxKm, 5 );
                 }
