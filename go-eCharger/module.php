@@ -754,7 +754,7 @@
             }
             
             if ( $this->GetIDForIdent("automaticStopKm") == false ) {
-                $this->RegisterVariableInteger("automaticStopKm", "Ladeende nach Energie für x km (0km = deaktiviert)", "GOECHARGER_AutomaticStop", 0 );
+                $this->RegisterVariableInteger("automaticStopKm", "Ladeende nach Energie für x km (0km = deaktiviert)", "GOECHARGER_AutomaticStopKm", 0 );
                 $this->EnableAction("automaticStopKm"); 
             }
             
