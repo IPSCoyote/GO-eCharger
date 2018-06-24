@@ -139,7 +139,7 @@
                if ( $VariableConnection['VariableChanged'] > $VariableWallboxActive['VariableChanged'] )
                {
                  // reactivate Wallbox
-                 setActive( true );  
+                 $this->setValueToeCharger( 'alw', true );  
                }
                 
             }
