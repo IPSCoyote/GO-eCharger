@@ -128,6 +128,12 @@
                 }
             }
             
+            // Handle Re-Activation
+            if ( $this->ReadPropertyBoolean("AutoReactivate") == true )
+            {
+            
+            }
+            
             return true;
         }
        
