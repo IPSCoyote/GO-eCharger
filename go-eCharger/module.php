@@ -464,7 +464,7 @@
             switch($Ident) 
             {
                case "accessState":
-                  setActive( $Value );  
+                  $this->setActive( $Value );  
                   break;
                 default:
                   throw new Exception("Invalid Ident"); 
