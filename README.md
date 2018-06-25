@@ -43,7 +43,7 @@ Name | Type | Optionen | Werte | Funktionen
 `aktuell verfügbarer Ladestrom` | Integer | RW, WF | Der aktuell verfügbare Ladestrom zum laden eines Fahrzeugs<br>*Beispiel: 16 A* | [Get](#41251-getcurrentchargingamperageint-instanz) / [Set](#41252-setcurrentchargingamperageint-instanz-int-ampere)
 `angeschlossener Adapter` | Integer | RO | Adapter, mit dem der go-eCharger angeschlossen ist<br>0: Kein Adapter<br>1: 16A Adapter | Nein
 `Anzahl Phasen` | String | RO | Phasen vor und nach dem Schütz<br>*Beispiel: "Phase 1-3 ist vorhanden"* | Nein
-`bisher geladene Energie` | Float | RO | Bisher insgesamt vom go-eCharger abgegebene Energie in kwh<br>*Beispiel: 379,0 kwh* | Nein
+`bisher abgegebene Energie` | Float | RO | Bisher insgesamt vom go-eCharger abgegebene Energie in kwh<br>*Beispiel: 379,0 kwh* | Nein
 `entsperrt durch RFID` | Integer | RO | Wurde der go-eCharger durch RFID Token X entsperrt | [Get](#41214-getunlockrfidint-instanz)
 `Erdungsprüfung` | Boolean | RO | Ist die Erdungsprüfung (Norwegen Modus) aktiv | [Get](#4126-iselectricallygroundedcheckint-instanz)
 `Fehler` | Integer | RO | Liegt ein Fehler am go-eCharger vor<br>0: kein Fehler<br>1: FI Schutzschalter<br>3: Fehler an Phase<br>8: Keine Erdung<br>10: Interner Fehler | [Get](#4122-geterrorint-instanz)
