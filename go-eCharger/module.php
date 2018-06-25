@@ -65,7 +65,7 @@
             SetValue($this->GetIDForIdent("rebootCounter"),           $goEChargerStatus->{'rbc'});
             
             $rebootTimestamp = time()-$goEChargerStatus->{'rbt'};
-            SetValue($this->GetIDForIdent("rebootTime"),  date(DATE_RFC822),$rebootTimestamp) );
+            SetValue($this->GetIDForIdent("rebootTime"),  date(DATE_RFC822,$rebootTimestamp) );
             
             
             $Phasen = "";
