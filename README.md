@@ -22,11 +22,27 @@ Es soll sowohl Zustandsdaten (Anschluss, Ladevorgang, etc.) als auch Schaltaktio
 
 ## 3. Installation
 
-Vor der Installation des Moduls in IPSymcon muss der go-eCharger vollständig eingerichtet sein. Im lokalen WLAN (nicht dem WLAN des go-eChargers!) sollte dem go-eCharger eine statische IP zugewiesen sein. Zusätzlich muss das HTTP-API des go-eChargers in den erweiterten Einstellungen (nur über das WLAN des go-eChargers erreichbar!) eingerichtet sein.
+### Vorbereitung des go-eChargers
+
+Vor der Installation des Moduls in IPSymcon muss der go-eCharger vollständig eingerichtet sein. Da dieses Modul lokal auf den go-eCharger zugreift, muss im lokalen WLAN (nicht dem WLAN des go-eChargers!) dem go-eCharger eine statische IP zugewiesen sein. Zusätzlich muss das HTTP-API des go-eChargers in den erweiterten Einstellungen (nur über das WLAN des go-eChargers erreichbar!) eingerichtet sein.
 
 <p align="center">
   <img width="447" height="416" src="./Erweiterte%20Einstellungen%20-%20HTTP%20API%20aktivieren.jpg">
 </p>
+
+Die Cloud des go-eChargers wird nicht verwendet. Wer möchte kann diese durch das blockieren aller Ports ausser des HTTP Ports 80 aushebeln. Die wesentlichen Einstellungen stehen auch über dieses Modul zur Verfügung
+
+### Installation des Moduls
+
+Um eine Instanz des go-eCharger Moduls anlegen zu können muss das Modul IPSymcon bekannt gemacht werden. Hierzu wird es unter den Kern-Instanzen bei "Modules" mit dem Pfad 
+```
+git://github.com/IPSCoyote/GO-eCharger
+```
+hinzugefügt. 
+
+Anschließend kann eine Instanz des Moduls angelegt werden.
+
+
 
 ## 4. Module
 Derzeit bietet das GIT nur das Modul "go-eCharger" für die direkte Steuerung eines einzelnen go-eChargers. 
