@@ -176,13 +176,13 @@ Liefert die mit einer RFID Karte geladene Energie zurück.
 $EnergyByCard2 = GOeCharger_GetEnergyChargedByCard( $Instanz, 2 ); // Ermittlung der Ladeenergie für Karte 2
 ```
 
-##### GetMaximumChargingAmperage(int $Instanz )
+#### GetMaximumChargingAmperage(int $Instanz )
 Mit dieser Funktion kann der maximal verfügbare Ladestrom des go-eChargers abgefragt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. 
 ```
 $MaximumChargingAmperage = GOeCharger_GetMaximumChargingAmperage( $Instanz ); // Liest den maximal verfügbaren Ladestrom
 ```
 
-##### SetMaximumChargingAmperage(int $Instanz, int $Ampere)
+#### SetMaximumChargingAmperage(int $Instanz, int $Ampere)
 Mit dieser Funktion kann der maximal verfügbare Ladestrom des go-eChargers gesetzt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. 
 Diese Funktion hat direkte Auswirkung auf die Einstellungen des go-eChargers (Button!) sowie einen ggf. aktuell stattfindenden Ladevorgang. Der maximale Ladestrom sollte an die verfügbare Hausinstallation angepasst sein. Die über IPS maximal einstellbare Ladestrom kann über die Instanzeinstellungen beschränkt werden!
 Sollte der maximal verfügbare Ladestrom reduziert werden, so wird ggf. auch der aktuell eingestellte Ladestrom entsprechend verringert, sofern er das neue Maximum überschreiten würde.
@@ -191,13 +191,13 @@ GOeCharger_SetMaximumChargingAmperage( $Instanz, 16 ); // Setze den maximal verf
 ```
 Die Funktion liefert den eingestellten Wert oder *false* als Rückgabewert zurück und aktualisiert die Messwerte
 
-##### GetCurrentChargingAmperage(int $Instanz)
+#### GetCurrentChargingAmperage(int $Instanz)
 Mit dieser Funktion kann der aktuell verfügbare Ladestrom des go-eChargers abgefragt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. 
 ```
 $CurrentChargingAmperage = GOeCharger_GetCurrentChargingAmperage( $Instanz ); // Liest den aktuellen Ladestrom 
 ```
 
-##### SetCurrentChargingAmperage(int $Instanz, int $Ampere)
+#### SetCurrentChargingAmperage(int $Instanz, int $Ampere)
 Mit dieser Funktion kann der aktuell verfügbare (abgegebene) Ladestrom des go-eChargers gesetzt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. Der Wert darf jedoch den derzeitigen, maximal verfügbaren Ladestrom nicht überschreiten! Sollte dies der Fall sein, so wird der maximal mögliche Wert (aktuelles Maximum) gesetzt.
 Diese Funktion hat direkte Auswirkung auf die Einstellungen des go-eChargers sowie einen ggf. aktuell stattfindenden Ladevorgang.
 ```
@@ -205,7 +205,7 @@ GOeCharger_SetCurrentChargingAmperage( $Instanz, 8 ); // Setze den aktuellen Lad
 ```
 Die Funktion liefert den gesetzten Wert oder *false* als Rückgabewert und aktualisiert die Messwerte
 
-##### GetCableUnlockMode(int $Instanz)
+#### GetCableUnlockMode(int $Instanz)
 Auslesen des aktuellen CableUnlockModes. Dabei gelten folgende Werte:
 + 0 = normaler Modus - Das Kabel bleibt am go-eCharger verriegelt, solange ein Fahrzeug angeschlossen ist
 + 1 = automatischer Modus - Das Kabel wird nach dem Ladeende automatisch entriegelt
@@ -214,7 +214,7 @@ Auslesen des aktuellen CableUnlockModes. Dabei gelten folgende Werte:
 $CableUnlockMode = GOeCharger_SetCableUnlockMode( $Instanz ); // liest den aktuellen Entriegelungsmodus
 ```
 
-##### SetCableUnlockMode(int $Instanz, int $unlockMode)
+#### SetCableUnlockMode(int $Instanz, int $unlockMode)
 Einstellen des CableUnlockModes. Dabei gelten folgende Werte:
 + 0 = normaler Modus - Das Kabel bleibt am go-eCharger verriegelt, solange ein Fahrzeug angeschlossen ist
 + 1 = automatischer Modus - Das Kabel wird nach dem Ladeende automatisch entriegelt
@@ -223,7 +223,7 @@ Einstellen des CableUnlockModes. Dabei gelten folgende Werte:
 GOeCharger_SetCableUnlockMode( $Instanz, 1 ); // setzt den automatischen Entriegelungsmodus
 ```
 
-##### GetAccessControl(int $Instanz)
+#### GetAccessControl(int $Instanz)
 Mit dieser Funktion kann der Zustand der Zugangssteuerung (ist eine Nutzung eines RFID notwendig) abgefragt werden. Mögliche Werte sind
 + 0 = Offen
 + 1 = RFID / App benötigt
@@ -232,7 +232,7 @@ Mit dieser Funktion kann der Zustand der Zugangssteuerung (ist eine Nutzung eine
 $RFIDneeded = GOeCharger_GetAccessControl( $Instanz ); // Liest die Einstellung der Zugangskontrolle 
 ```
 
-##### SetAccessControl(int $Instanz, int $mode)
+#### SetAccessControl(int $Instanz, int $mode)
 Mit dieser Funktion kann die Zugangssteuerung via RFID oder App bzw. die Stromautomatik des go-eChargers aktiviert oder deaktiviert werden. Mögliche Werte sind
 + 0 = Offen
 + 1 = RFID / App benötigt
@@ -241,13 +241,13 @@ Mit dieser Funktion kann die Zugangssteuerung via RFID oder App bzw. die Stromau
 GOeCharger_SetAccessControl( $Instanz, 1 ); // aktiviert die Zugangskontrolle per RFID
 ```
 
-##### GetLEDBrightness(int $Instanz)
+#### GetLEDBrightness(int $Instanz)
 Ermittlung der Helligkeit der LEDs
 ```
 $LEDBrightness = GOeCharger_GetLEDBrightness( $Instanz ); // Ermittlung Seriennummer
 ```
 
-##### SetLEDBrightness(int $Instanz, int $Brightness)
+#### SetLEDBrightness(int $Instanz, int $Brightness)
 Setzen der Helligkeit der LEDs
 ```
 GOeCharger_SetLEDBrightness( $Instanz, 255 ); // Setzen der LED Helligkeit auf Maximum
