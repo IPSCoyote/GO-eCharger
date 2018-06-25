@@ -67,8 +67,7 @@
             $rebootMicrotime = microtime(true)-$goEChargerStatus->{'rbt'};
             $micro = sprintf("%06d",($rebootMicrotime - floor($rebootMicrotime)) * 1000000);
             $date = new DateTime( date('Y-m-d H:i:s.'.$micro, $rebootMicrotime) );
-            $formattedDate = $d->format("Y-m-d H:i:s.u"); // note at point on "u"
-            SetValue($this->GetIDForIdent("rebootTime"),  $formattedDate );
+            SetValue($this->GetIDForIdent("rebootTime"),  $date->format("Y-m-d H:i:s.u") );
             
             $Phasen = "";
             if ( $goEChargerStatus->{'pha'}&(1<<3) ) $Phasen = $Phasen.' 1';
