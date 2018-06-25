@@ -64,7 +64,7 @@ Name | Type | Optionen | Werte | Funktionen
 `Leistung zum Fahrzeug X` | Float | RO | Ladeleistung zum Fahrzeug auf L1-3 und N kwh | Nein
 `Gesamtleistung zum Fahrzeug` | Float | RO | Gesamte Ladeleistung zum Fahrzeug in kwh | Nein
 `Leistungsfaktor X` | Float | RO | Leistungsfaktor auf L1-3 und N in % | Nein
-`geladene Energie Karte X` | Float | RO | Geladene Energiemenge pro Karte in kwh | Nein
+`geladene Energie Karte X` | Float | RO | Geladene Energiemenge pro Karte in kwh | [Get](#41217-getenergychargedbycardint-instanz-int-cardid)
 
 #### 4.1.1. Status
 + **Seriennummer**
