@@ -682,9 +682,7 @@
             $this->RegisterVariableFloat("energyTotal", "bisher abgegebene Energie","GOECHARGER_Power.1",51);
 
             for($i=1; $i<=10; $i++){
-                if ( $this->GetIDForIdent("energyChargedCard".$i) == false ) {
-                    $this->RegisterVariableFloat("energyChargedCard".$i, "geladene Energie Karte ".$i,"GOECHARGER_Power.1",51+$i);
-                }    
+               $this->RegisterVariableFloat("energyChargedCard".$i, "geladene Energie Karte ".$i,"GOECHARGER_Power.1",51+$i);
             } 
             
             //--- Setup -----------------------------------------------------------------------
