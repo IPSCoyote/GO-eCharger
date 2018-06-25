@@ -59,8 +59,8 @@ Name | Type | Optionen | Werte | Funktionen
 
 Name | Type | Optionen | Werte | Funktionen
 :--- | :---: |  :---:  | :---  | :---:
-`bisher abgegebene Energie` | Float | RO | Bisher insgesamt vom go-eCharger abgegebene Energie in kwh<br>*Beispiel: 379,0 kwh* | Nein
-`geladene Energie Karte X` | Float | RO | Geladene Energiemenge pro Karte in kwh | [Get](#41217-getenergychargedbycardint-instanz-int-cardid)
+`bisher abgegebene Energie` | Float | RO | Bisher insgesamt vom go-eCharger abgegebene Energie in kwh<br>*Beispiel: 379,0 kwh* | [Get](#GetEnergyChargedInTotalint-instanz)
+`geladene Energie Karte X` | Float | RO | Geladene Energiemenge pro Karte in kwh | [Get](#getenergychargedbycardint-instanz-int-cardid)
 
 #### Einstellungen
 
@@ -163,6 +163,21 @@ Ermittlung der RFID (integer), die zum entsperren genutzt wurde.
 ```
 $MainboardTemperature = GOeCharger_GetMainboardTemperature( $Instanz ); // Ermittlung der Mainboard Temperatur
 ```
+
+#### GetEnergyChargedInTotal(int $Instanz)
+Liefert die komplette bisher über den go-eCharger geladene Energie in kwh.
+```
+$EnergyInTotal = GOeCharger_GetEnergyChargedInTotal( $Instanz ); // Ermittlung der bisherigen Ladeenergie des go-eChargers
+```
+
+#### GetEnergyChargedByCard(int $Instanz, int $cardID)
+Liefert die mit einer RFID Karte geladene Energie zurück.
+```
+$EnergyByCard2 = GOeCharger_GetEnergyChargedByCard( $Instanz, 2 ); // Ermittlung der Ladeenergie für Karte 2
+```
+
+
+
 
 
 
@@ -332,8 +347,4 @@ Setzen der Helligkeit der LEDs
 GOeCharger_SetLEDBrightness( $Instanz, 255 ); // Setzen der LED Helligkeit auf Maximum
 ```
 
-##### 4.1.2.17 GetEnergyChargedByCard(int $Instanz, int $cardID)
-Liefert die mit einer RFID Karte geladene Energie zurück.
-```
-$EnergyByCard2 = GOeCharger_GetEnergyChargedByCard( $Instanz, 2 ); // Ermittlung der Ladeenergie für Karte 2
-```
+
