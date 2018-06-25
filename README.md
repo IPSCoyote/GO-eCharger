@@ -58,7 +58,7 @@ Name | Type | Optionen | Werte | Funktionen
 `Status` | Integer | RO | Allgemeiner Ladestatus des go-eChargers<br>1: Ladestation bereit, kein Fahrzeug<br>2: Fahrzeug lädt<br>3:Warte auf Fahrzeug<br>4: Ladung beendet, Fahrzeug verbunden | [Get](#4123-getstatusint-instanz)
 `Wallbox aktiv` | Boolean | RW, WF | Kann an der Wallbox geladen werden? | [Get](#412101-isactiveint-instanz) / [Set](#412102-setactiveint-instanz-bool-aktiv)
 `Zugangskontrolle via RFID/APP` | Integer | RW, WF | Zugangskontrolle<br>0: frei zugänglich<br>1: RFID Identifizierung<br>2: Strompreis/automatisch | [Get](#41271-isaccesscontrolactiveint-instanz) / [Set](#41272-setaccesscontrolint-instanz-bool-aktiv)
-`Spannungsversorgung X`
+`Spannungsversorgung X` | Integer | RO | Spannung an L1, L2, L3 und N in Volt | [Get](#41215-getsupplylinevoltagelxint-instanz) 
 `max. verfügbare Ladeleistung`
 `Ampere zum Fahrzeug Lx`
 `Leistung zum Fahrzeug X`
