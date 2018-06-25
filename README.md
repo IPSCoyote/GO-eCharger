@@ -69,7 +69,7 @@ Name | Type | Optionen | Werte | Funktionen
 `max. verfügbarer Ladestrom` | Integer | RW, WF | Maximal verfügbarer Ladestrom des go-eChargers | [Get](#getmaximumchargingamperageint-instanz-) / [Set](#setmaximumchargingamperageint-instanz-int-ampere)
 `aktuell verfügbarer Ladestrom` | Integer | RW, WF | Der aktuell verfügbare Ladestrom zum laden eines Fahrzeugs<br>*Beispiel: 16 A* | [Get](#getcurrentchargingamperageint-instanz) / [Set](#setcurrentchargingamperageint-instanz-int-ampere)
 `Kabel-Verriegelungsmodus` | Integer | RW, WF | Verriegelungsmodus für das Kabel<br>0: Verriegeln, solange Auto angesteckt<br>1: Nach Ladevorgang entriegeln<br>2: Kabel immer verriegelt | [Get](#getcableunlockmodeint-instanz) / [Set](#setcableunlockmodeint-instanz-int-unlockmode)
-`Zugangskontrolle via RFID/APP` | Integer | RW, WF | Zugangskontrolle<br>0: frei zugänglich<br>1: RFID Identifizierung<br>2: Strompreis/automatisch | [Get](#isaccesscontrolactiveint-instanz) / [Set](#setaccesscontrolint-instanz-bool-aktiv)
+`Zugangskontrolle via RFID/APP` | Integer | RW, WF | Zugangskontrolle<br>0: frei zugänglich<br>1: RFID Identifizierung<br>2: Strompreis/automatisch | [Get](#getaccesscontrolint-instanz) / [Set](#setaccesscontrolint-instanz-int-mode)
 `LED Helligkeit` | Integer | RW, WF | Helligkeit der LEDs<br>0: LED aus<br>1 - 255: LED Helligkeit | [Get](#getledbrightnessint-instanz) / [Set](#setledbrightnessint-instanz-int-brightness)
 
 #### Technische Informationen
@@ -223,7 +223,7 @@ Einstellen des CableUnlockModes. Dabei gelten folgende Werte:
 GOeCharger_SetCableUnlockMode( $Instanz, 1 ); // setzt den automatischen Entriegelungsmodus
 ```
 
-##### IsAccessControlActive(int $Instanz)
+##### GetAccessControl(int $Instanz)
 Mit dieser Funktion kann der Zustand der Zugangssteuerung (ist eine Nutzung eines RFID notwendig) abgefragt werden. Mögliche Werte sind
 + 0 = Offen
 + 1 = RFID / App benötigt
@@ -247,6 +247,11 @@ Ermittlung der Helligkeit der LEDs
 $LEDBrightness = GOeCharger_GetLEDBrightness( $Instanz ); // Ermittlung Seriennummer
 ```
 
+##### SetLEDBrightness(int $Instanz, int $Brightness)
+Setzen der Helligkeit der LEDs
+```
+GOeCharger_SetLEDBrightness( $Instanz, 255 ); // Setzen der LED Helligkeit auf Maximum
+```
 
 
 
@@ -358,10 +363,6 @@ $SerialID = GOeCharger_GetSerialID( $Instanz ); // Ermittlung Seriennummer
 
 
 
-###### 4.1.2.17.2 SetLEDBrightness(int $Instanz, int $Brightness)
-Setzen der Helligkeit der LEDs
-```
-GOeCharger_SetLEDBrightness( $Instanz, 255 ); // Setzen der LED Helligkeit auf Maximum
-```
+
 
 
