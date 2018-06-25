@@ -5,7 +5,7 @@
           /* Constructor is called before each function call */
           parent::__construct($InstanceID);
         }
- 
+        
         public function Create() {
           /* Create is called ONCE on Instance creation and start of IP-Symcon.
              Status-Variables und Modul-Properties for permanent usage should be created here  */
