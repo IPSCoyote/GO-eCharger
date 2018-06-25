@@ -51,8 +51,8 @@ Name | Type | Optionen | Werte | Funktionen
 
 Name | Type | Optionen | Werte | Funktionen
 :--- | :---: |  :---:  | :---  | :---:
-`Aktuelle Leistung zum Fahrzeug` | Float | RO | Gesamte Ladeleistung zum Fahrzeug in kwh | Nein
-`abgegebene Energie im Ladezyklus` | Float | RO | abgegebene Energie im aktuellen Ladezyklus in kwh<br>*Beispiel: 5,3 kwh* | Nein
+`Aktuelle Leistung zum Fahrzeug` | Float | RO | Gesamte Ladeleistung zum Fahrzeug in kwh | [Get](#getpowertocarint-instanz)
+`abgegebene Energie im Ladezyklus` | Float | RO | abgegebene Energie im aktuellen Ladezyklus in kwh<br>*Beispiel: 5,3 kwh* | [Get](#getcurrentloadingcycleconsumptionint-instanz)
 `entsperrt durch RFID` | Integer | RO | Wurde der go-eCharger durch RFID Token X entsperrt | [Get](#41214-getunlockrfidint-instanz)
 
 #### Verbrauchsinformationen
