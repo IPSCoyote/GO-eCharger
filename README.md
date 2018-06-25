@@ -39,8 +39,8 @@ WF = **W**eb**f**rond change enabled
 
 Name | Type | Optionen | Werte | Funktionen verfügbar?
 :--- | :---: |  :---:  | :---  | :---
-`Seriennummer` | String | RO | Seriennummer des go-eChargers | Nein
-`Wallbox aktiv` | Integer | RW, WF | Kann an der Wallbox geladen werden?<br>*Beispiel: 000815* | [Get](#412101-isactiveint-instanz) / [Set](#412102-setactiveint-instanz-bool-aktiv)
+`Seriennummer` | String | RO | Seriennummer des go-eChargers<br>*Beispiel: "000815"* | Nein
+`Wallbox aktiv` | Boolean | RW, WF | Kann an der Wallbox geladen werden? | [Get](#412101-isactiveint-instanz) / [Set](#412102-setactiveint-instanz-bool-aktiv)
 
 
 #### 4.1.1. Status
