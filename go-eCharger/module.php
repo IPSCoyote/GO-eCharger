@@ -70,13 +70,13 @@
             if ( $goEChargerStatus->{'pha'}&(1<<3) ) $Phasen = $Phasen.' 1';
             if ( $goEChargerStatus->{'pha'}&(1<<4) ) { 
                 if ( $Phasen <> "" ) {
-                    $Phasen = ",".$Phasen;
+                    $Phasen = $Phasen.",";
                 }
                 $Phasen = $Phasen.' 2';
             }
             if ( $goEChargerStatus->{'pha'}&(1<<5) ) { 
                 if ( $Phasen <> "" ) {
-                    $Phasen = "und".$Phasen;
+                    $Phasen = $Phasen." und";
                 }
                 $Phasen = $Phasen.' 3';
             }
@@ -84,7 +84,7 @@
                 $Phasen = $Phasen." vorhanden";
             } else
                 $Phasen = 'Keine Phasen vorhanden';
-            SetValue($this->GetIDForIdent("availabilityOfPhases"),          $Phasen );
+            SetValue($this->GetIDForIdent("availablePhases"), $Phasen );
             
             
             SetValue($this->GetIDForIdent("mainboardTemperature"),    $goEChargerStatus->{'tmp'});  
@@ -785,8 +785,8 @@
                 $this->RegisterVariableInteger("cableCapability", "Kabel-Leistungsfähigkeit","GOECHARGER_AmpereCable",0);
             }  
             
-            if ( $this->GetIDForIdent("availabilitynumberOfPhases") == false ) {
-                $this->RegisterVariableString("availabilityOfPhases", "Anzahl Phasen","~String",0);
+            if ( $this->GetIDForIdent("availablePhases") == false ) {
+                $this->RegisterVariableString("availablePhases", "verfügbare Phasen","~String",0);
             }  
             
             if ( $this->GetIDForIdent("mainboardTemperature") == false ) {
