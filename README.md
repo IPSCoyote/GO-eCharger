@@ -77,16 +77,16 @@ Name | Type | Optionen | Werte | Funktionen
 Name | Type | Optionen | Werte | Funktionen
 :--- | :---: |  :---:  | :---  | :---:
 `Seriennummer` | String | RO | Seriennummer des go-eChargers<br>*Beispiel: "000815"* | Nein
-`Fehler` | Integer | RO | Liegt ein Fehler am go-eCharger vor<br>0: kein Fehler<br>1: FI Schutzschalter<br>3: Fehler an Phase<br>8: Keine Erdung<br>10: Interner Fehler | [Get](#4122-geterrorint-instanz)
+`Fehler` | Integer | RO | Liegt ein Fehler am go-eCharger vor<br>0: kein Fehler<br>1: FI Schutzschalter<br>3: Fehler an Phase<br>8: Keine Erdung<br>10: Interner Fehler | Nein
 `angeschlossener Adapter` | Integer | RO | verwendeter Adapter für den go-eCharger<br>0: kein Adapter<br>1: 16A Adapter | Nein
-`Kabel-Leistungsfähigkeit` | Integer | RO | Leistungsfähigkeit des angeschlossenen Kabels<br>0: kein Kabel<br>13-32: Ampere | [Get](#41211-getcablecapabilityint-instanz)
-`Erdungsprüfung` | Boolean | RO | Ist die Erdungsprüfung (Norwegen Modus) aktiv | [Get](#4126-iselectricallygroundedcheckint-instanz)
-`Mainboard Temperatur` | Float | RO | Mainboard Temperatur in °C | [Get](#41213-getmainboardtemperatureint-instanz)
+`Kabel-Leistungsfähigkeit` | Integer | RO | Leistungsfähigkeit des angeschlossenen Kabels<br>0: kein Kabel<br>13-32: Ampere | Nein
+`Erdungsprüfung` | Boolean | RO | Ist die Erdungsprüfung (Norwegen Modus) aktiv | Nein
+`Mainboard Temperatur` | Float | RO | Mainboard Temperatur in °C | Nein
 `verfügbare Phasen` | String | RO | verfügbare Phasen<br>*Beispiel: "Phase 1,2 und 3 ist vorhanden"* | Nein
-`Spannungsversorgung X` | Integer | RO | Spannung an L1, L2, L3 und N in Volt | [Get](#41215-getsupplylinevoltagelxint-instanz) 
+`Spannungsversorgung X` | Integer | RO | Spannung an L1, L2, L3 und N in Volt | Nein
 `Leistung zum Fahrzeug X` | Float | RO | Ladeleistung zum Fahrzeug auf L1-3 und N kwh | Nein
 `Ampere zum Fahrzeug Lx` | Float | RO | Ampre zum Fahrzeug auf L1-3 und N in A | Nein
-`max. verfügbare Ladeleistung` | Float | RO | Berechnete max. verfügbare Ladeleistung in kw | [Get](#41216-getsupplylineenergyint-instanz)
+`max. verfügbare Ladeleistung` | Float | RO | Berechnete max. verfügbare Ladeleistung in kw | Nein
 `Leistungsfaktor X` | Float | RO | Leistungsfaktor auf L1-3 und N in % | Nein
 
 #### 4.1.2. Funktionen
@@ -252,117 +252,3 @@ Setzen der Helligkeit der LEDs
 ```
 GOeCharger_SetLEDBrightness( $Instanz, 255 ); // Setzen der LED Helligkeit auf Maximum
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-##### 4.1.2.2 GetError(int $Instanz)
-Ermittlung ob der go-eCharger einen Fehlercode meldet.
-+ 1: RCCB (Fehlerstromschutzschalter) 
-+ 3: PHASE (Phasenstörung)
-+ 8: NO_GROUND (Erdungserkennung) 
-+ 10, default: INTERNAL (sonstiges)
-```
-$Error = GOeCharger_GetError( $Instanz ); // Ermittlung des Fehlerwerts
-```
-
-
-
-
-
-
-
-
-
-##### 4.1.2.6 IsElectricallyGroundedCheck(int $Instanz)
-In einigen Ländern wie z.B. in Norwegen kann es sein, das die Erdung nicht vorhanden ist. Die Erdung wird allerdings vom go-eCharger überprüft. Mit dieser Funktionen kann abgefragt werden, ob der "Norwegen Modus" aktiv ist.
-Da dieser Modus von der Elektrischen Installation abhängig ist, bietet dieses Modul keine Möglichkeit an, die Einstellung zu  verändert werden.
-```
-$GroundedCheck = GOeCharger_IsElectricallyGroundedCheck( $Instanz ); // Ermittlung, ob der 'Norwegen Modus' aktiv ist
-```
-
-##### 4.1.2.7 Zugriffskontrolle
-Funktionen bzgl. der Zugriffskontrolle
-
-###### 4.1.2.7.1 IsAccessControlActive(int $Instanz)
-Mit dieser Funktion kann der Zustand der Zugangssteuerung (ist eine Nutzung eines RFID notwendig) abgefragt werden.
-```
-$RFIDneeded = GOeCharger_GetAccessControl( $Instanz ); // Liest die Einstellung der Zugangskontrolle 
-```
-
-###### 4.1.2.7.2 SetAccessControl(int $Instanz, bool $aktiv)
-Mit dieser Funktion kann die Zugangssteuerung via RFID oder App des go-eChargers aktiviert oder deaktiviert werden.
-```
-GOeCharger_SetAccessControl( $Instanz, true ); // aktiviert die Zugangskontrolle 
-```
-
-
-
-
-##### 4.1.2.10 Ladekontrolle
-Mit dieser Funktionen kann das Laden am go-eChargers aktiviert oder deaktiviert werden. Im deaktivierten Zustand ist kein Laden möglich!
-
-##### 4.1.2.11 GetCableCapability(int $Instanz)
-Liefert die Kabel-Codierung
-+ 0: kein Kabel
-+ 13-32: Ampere Codierung
-```
-$CableCapability = GOeCharger_GetCableCapability( $Instanz ); // Ermittlung der Kabel-Codierung
-```
-
-##### 4.1.2.12 GetAvailablePhases(int $Instanz)
-Liefert die verfügbaren Phasen.
-Phasen vor und nach dem Schütz als binäre Zahl zu interpretieren: 0b00ABCDEF
-A... phase 3, vor dem Schütz
-B... phase 2 vor dem Schütz
-C... phase 1 vor dem Schütz 
-D... phase 3 vor dem Schütz 
-E... phase 2 vor dem Schütz 
-F... phase 1 vor dem Schütz
-pha | 0b00001000: Phase 1 ist vorhanden pha | 0b00111000: Phase1-3 ist vorhanden
-```
-$availablePhases = GOeCharger_GetAvailablePhases( $Instanz ); // Ermittlung der verfügbaren Phasen
-```
-
-##### 4.1.2.13 GetMainboardTemperature(int $Instanz)
-Mainboard Temperatur in Celsius
-```
-$MainboardTemperature = GOeCharger_GetMainboardTemperature( $Instanz ); // Ermittlung der Mainboard Temperatur
-```
-
-
-
-##### 4.1.2.15 GetSupplyLineVoltageLx(int $Instanz)
-Ermittlung der Spannung der angeschlossenen Phasen.
-```
-$VoltageL1 = GOeCharger_GetSupplyLineVoltageL1( $Instanz ); // Ermittlung der Spannung von Phase 1
-$VoltageL2 = GOeCharger_GetSupplyLineVoltageL2( $Instanz ); // Ermittlung der Spannung von Phase 2
-$VoltageL3 = GOeCharger_GetSupplyLineVoltageL3( $Instanz ); // Ermittlung der Spannung von Phase 3
-```
-
-##### 4.1.2.16 GetSupplyLineEnergy(int $Instanz)
-Ermittlung der durchschnittlichen Spannung der angeschlossenen Phasen.
-```
-$Engergy = GOeCharger_GetSupplyLineEnergy( $Instanz ); // Ermittlung der Durchschnittsspannung von L1-3
-```
-
-##### 4.1.2.17 GetSerialID(int $Instanz)
-Ermittlung der Seriennummer des go-eChargers.
-```
-$SerialID = GOeCharger_GetSerialID( $Instanz ); // Ermittlung Seriennummer
-```
-
-
-
-
-
-
