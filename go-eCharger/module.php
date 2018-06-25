@@ -81,7 +81,7 @@
                 $Phasen = $Phasen.' 3';
             }
             if ( $Phasen <> "" ) {
-                $Phasen = $Phasen." vorhanden";
+                $Phasen = "Phasen".$Phasen." vorhanden";
             } else
                 $Phasen = 'Keine Phasen vorhanden';
             SetValue($this->GetIDForIdent("availablePhases"), $Phasen );
