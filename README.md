@@ -40,7 +40,7 @@ WF = **W**eb**f**rond change enabled
 Name |  Type | Optionen | Werte | Zugriffsfunktionen
 -----| ------|----------|-------|-------------------
 Seriennummer | String | RO | Seriennummer des go-eChargers | keine
-Wallbox aktiv | Integer | RW, WF | Kann an der Wallbox geladen werden? | 
+Wallbox aktiv | Integer | RW, WF | Kann an der Wallbox geladen werden? | IsActive / SetActive 
 
 
 
