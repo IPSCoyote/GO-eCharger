@@ -625,7 +625,7 @@
             if ( !IPS_VariableProfileExists('GOECHARGER_Error') ) {
                 IPS_CreateVariableProfile('GOECHARGER_Error', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Error', 'Ok' );
-                IPS_SetVariableProfileAssociation("GOECHARGER_Error", 0,  "Ok"               , "", 0x00FF00);
+                IPS_SetVariableProfileAssociation("GOECHARGER_Error", 0,  "Kein Fehler"      , "", 0x00FF00);
                 IPS_SetVariableProfileAssociation("GOECHARGER_Error", 1,  "FI Schutzschalter", "", 0xFF0000);
                 IPS_SetVariableProfileAssociation("GOECHARGER_Error", 3,  "Fehler an Phase"  , "", 0xFF0000);
                 IPS_SetVariableProfileAssociation("GOECHARGER_Error", 8,  "Keine Erdung"     , "", 0xFF0000);
