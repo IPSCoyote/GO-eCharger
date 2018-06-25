@@ -82,7 +82,7 @@ Name | Type | Optionen | Werte | Funktionen
 `Kabel-Leistungsfähigkeit` | Integer | RO | Leistungsfähigkeit des angeschlossenen Kabels<br>0: kein Kabel<br>13-32: Ampere | [Get](#41211-getcablecapabilityint-instanz)
 `Erdungsprüfung` | Boolean | RO | Ist die Erdungsprüfung (Norwegen Modus) aktiv | [Get](#4126-iselectricallygroundedcheckint-instanz)
 `Mainboard Temperatur` | Float | RO | Mainboard Temperatur in °C | [Get](#41213-getmainboardtemperatureint-instanz)
-`Anzahl Phasen` | String | RO | Phasen vor und nach dem Schütz<br>*Beispiel: "Phase 1-3 ist vorhanden"* | Nein
+`verfügbare Phasen` | String | RO | verfügbare Phasen<br>*Beispiel: "Phase 1,2 und 3 ist vorhanden"* | Nein
 `Spannungsversorgung X` | Integer | RO | Spannung an L1, L2, L3 und N in Volt | [Get](#41215-getsupplylinevoltagelxint-instanz) 
 `Leistung zum Fahrzeug X` | Float | RO | Ladeleistung zum Fahrzeug auf L1-3 und N kwh | Nein
 `Ampere zum Fahrzeug Lx` | Float | RO | Ampre zum Fahrzeug auf L1-3 und N in A | Nein
@@ -229,12 +229,18 @@ Liefert die Kabel-Codierung
 $CableCapability = GOeCharger_GetCableCapability( $Instanz ); // Ermittlung der Kabel-Codierung
 ```
 
-##### 4.1.2.12 GetNumberOfPhases(int $Instanz)
-Liefert die Kabel-Codierung
-+ 0: kein Kabel
-+ 13-32: Ampere Codierung
+##### 4.1.2.12 GetAvailablePhases(int $Instanz)
+Liefert die verfügbaren Phasen.
+Phasen vor und nach dem Schütz als binäre Zahl zu interpretieren: 0b00ABCDEF
+A... phase 3, vor dem Schütz
+B... phase 2 vor dem Schütz
+C... phase 1 vor dem Schütz 
+D... phase 3 vor dem Schütz 
+E... phase 2 vor dem Schütz 
+F... phase 1 vor dem Schütz
+pha | 0b00001000: Phase 1 ist vorhanden pha | 0b00111000: Phase1-3 ist vorhanden
 ```
-$CableCapability = GOeCharger_GetCableCapability( $Instanz ); // Ermittlung der Kabel-Codierung
+$availablePhases = GOeCharger_GetAvailablePhases( $Instanz ); // Ermittlung der verfügbaren Phasen
 ```
 
 ##### 4.1.2.13 GetMainboardTemperature(int $Instanz)
