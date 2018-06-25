@@ -48,7 +48,7 @@ Name | Type | Optionen | Werte | Funktionen
 `Erdungsprüfung` | Boolean | RO | Ist die Erdungsprüfung (Norwegen Modus) aktiv | [Get](#4126-iselectricallygroundedcheckint-instanz)
 `Fehler` | Integer | RO | Liegt ein Fehler am go-eCharger vor<br>0: kein Fehler<br>1: FI Schutzschalter<br>3: Fehler an Phase<br>8: Keine Erdung<br>10: Interner Fehler | [Get](#4122-geterrorint-instanz)
 `Kabel-Leistungsfähigkeit` | Integer | RO | Leistungsfähigkeit des angeschlossenen Kabels<br>0: kein Kabel<br>13-32: Ampere | [Get](#41211-getcablecapabilityint-instanz)
-`Kabel-Verriegelungsmodus`
+`Kabel-Verriegelungsmodus` | Integer | RW | Verriegelungsmodus für das Kabel<br>0: Verriegeln, solange Auto angesteckt<br>1: Nach Ladevorgang entriegeln<br>2: Kabel immer verriegelt | [Get](#41291-getcableunlockmodeint-instanz) / [Set](#41292-setcableunlockmodeint-instanz-int-unlockmode)
 `Ladeende nach x kw (0kw = deaktiviert)`
 `Ladeende nach Energie für x km (0km = deaktiviert)`
 `LED Helligkeit`
