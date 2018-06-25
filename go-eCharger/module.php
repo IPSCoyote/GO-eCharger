@@ -63,7 +63,7 @@
             SetValue($this->GetIDForIdent("accessState"),             $goEChargerStatus->{'alw'}); 
             SetValue($this->GetIDForIdent("cableCapability"),         $goEChargerStatus->{'cbl'});
             SetValue($this->GetIDForIdent("rebootCounter"),           $goEChargerStatus->{'rbc'});
-            SetValue($this->GetIDForIdent("rebootTime"),              $goEChargerStatus->{'rbt'} );
+            SetValue($this->GetIDForIdent("rebootTime"), date( DATE_RFC822, time() - round($goEChargerStatus->{'rbt'}/1000,0); );
             
             $Phasen = "";
             if ( $goEChargerStatus->{'pha'}&(1<<3) ) $Phasen = $Phasen.' 1';
