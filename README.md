@@ -91,12 +91,39 @@ Name | Type | Optionen | Werte | Funktionen
 
 #### 4.1.2. Funktionen
 
-##### 4.1.2.1 Update(int $Instanz)
+#### Grundfunktionen zum Laden
+
+#### Update(int $Instanz)
 Aktualisiert die Messwerte (IPS Variablen) des go-eChargers. Diese Funktion wird auch in Abhängigkeit der eingestellten Aktualisierungsfrequenzen in den Moduleinstellungender ausgeführt, so dass normalerweise ein manueller Aufruf unnötig sein sollte.
 ```
 GOeCharger_Update( $Instanz ); // Aktualisiert die Messwerte (IPS Variablen) des go-eChargers
 ```
 Die Funktion liefert true oder false als Rückgabewert und aktualisiert die Messwerte
+
+##### IsActive(int $Instanz)
+```
+$ChargingActivated = GOeCharger_SetActivation( $Instanz ); // Ermittlung, ob Laden möglich ist
+```
+
+##### SetActive(int $Instanz, bool $aktiv)
+```
+GOeCharger_SetActivation( $Instanz, false ); // deaktiviert den go-eCharger 
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ##### 4.1.2.2 GetError(int $Instanz)
 Ermittlung ob der go-eCharger einen Fehlercode meldet.
@@ -210,16 +237,6 @@ GOeCharger_SetCableUnlockMode( $Instanz, 1 ); // setzt den automatischen Entrieg
 
 ##### 4.1.2.10 Ladekontrolle
 Mit dieser Funktionen kann das Laden am go-eChargers aktiviert oder deaktiviert werden. Im deaktivierten Zustand ist kein Laden möglich!
-
-###### 4.1.2.10.1 IsActive(int $Instanz)
-```
-$ChargingActivated = GOeCharger_SetActivation( $Instanz ); // Ermittlung, ob Laden möglich ist
-```
-
-###### 4.1.2.10.2 SetActive(int $Instanz, bool $aktiv)
-```
-GOeCharger_SetActivation( $Instanz, false ); // deaktiviert den go-eCharger 
-```
 
 ##### 4.1.2.11 GetCableCapability(int $Instanz)
 Liefert die Kabel-Codierung
