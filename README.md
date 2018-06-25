@@ -46,7 +46,7 @@ Name | Type | Optionen | Werte | Funktionen
 `bisher geladene Energie` | Float | RO | Bisher vom go-eCharger abgegebene Energie in kwh<br>*Beispiel: 379,0 kwh* | Nein
 `entsperrt durch RFID` | Integer | RO | Wurde der go-eCharger durch ein RFID Token entsperrt | [Get](#41214-getunlockrfidint-instanz)
 `Erdungsprüfung` | Boolean | RO | Ist die Erdungsprüfung (Norwegen Modus) aktiv | [Get](#4126-iselectricallygroundedcheckint-instanz)
-`Fehler` | Integer | RO | Liegt ein Fehler am go-eCharger vor<br>0: kein Fehler<br>1: Fehlerstromschutzschalter<br>3: Phasenstörung<br>8: Erdungserkennung<br>10: Sonstiges | [Get](#4122-geterrorint-instanz)
+`Fehler` | Integer | RO | Liegt ein Fehler am go-eCharger vor<br>0: kein Fehler<br>1: FI Schutzschalter<br>3: Fehler an Phase<br>8: Keine Erdung<br>10: Interner Fehler | [Get](#4122-geterrorint-instanz)
 `Kabel-Leistungsfähigkeit`
 `Kabel-Verriegelungsmodus`
 `Ladeende nach x kw (0kw = deaktiviert)`
