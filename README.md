@@ -25,7 +25,7 @@ Es soll sowohl Zustandsdaten (Anschluss, Ladevorgang, etc.) als auch Schaltaktio
 Das Modul befindet sich im Entwicklungsstadium und ist derzeit **nicht** für die Nutzung freigegeben.
 
 <p align="center">
-  <img width="460" height="300" src="http://www.fillmurray.com/460/300">
+  <img width="460" height="300" src="./Erweiterte%20Einstellungen%20-%20HTTP%20API%20aktivieren.jpg">
 </p>
 
 ![Einstellungen go-eCharger](/Erweiterte%20Einstellungen%20-%20HTTP%20API%20aktivieren.jpg)
