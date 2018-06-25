@@ -42,9 +42,9 @@ Im folgenden werden die verfügbaren Statusvariablen mit ihren Eigenschaften, We
 
 Name | Type | Optionen | Werte | Funktionen
 :--- | :---: |  :---:  | :---  | :---:
-`Wallbox aktiv` | Boolean | RW, WF | Kann an der Wallbox geladen werden? | [Get](#412101-isactiveint-instanz) / [Set](#412102-setactiveint-instanz-bool-aktiv)
-`Status` | Integer | RO | Allgemeiner Ladestatus des go-eChargers<br>1: Ladestation bereit, kein Fahrzeug<br>2: Fahrzeug lädt<br>3:Warte auf Fahrzeug<br>4: Ladung beendet, Fahrzeug verbunden | [Get](#4123-getstatusint-instanz)
-`Ladeende nach x kwh` | Float | RW, WF | Ladung nach abgabe von X kwh beenden<br>0 = kein automatischer Ladestop<br>0.1-100.0 kwh | [Get](#41281-getautomaticchargestopint-instanz) / [Set](#41282-setautomaticchargestopint-instanz-float-kw)
+`Wallbox aktiv` | Boolean | RW, WF | Kann an der Wallbox geladen werden? | [Get](#isactiveint-instanz) / [Set](#setactiveint-instanz-bool-aktiv)
+`Status` | Integer | RO | Allgemeiner Ladestatus des go-eChargers<br>1: Ladestation bereit, kein Fahrzeug<br>2: Fahrzeug lädt<br>3:Warte auf Fahrzeug<br>4: Ladung beendet, Fahrzeug verbunden | [Get](#getstatusint-instanz)
+`Ladeende nach x kwh` | Float | RW, WF | Ladung nach abgabe von X kwh beenden<br>0 = kein automatischer Ladestop<br>0.1-100.0 kwh | [Get](#getautomaticchargestopint-instanz) / [Set](#setautomaticchargestopint-instanz-float-kw)
 `Ladeende nach Energie für x km` | Integer | RW, WF | Ladung nach Abgabe von Energie für X Kilomenter beenden<br>0 = kein automatischer Ladestop<br>**Parameter funktioniert nur, wenn ein Verbrauch in den Einstellungen gepflegt ist!** | Nein
 
 #### Informationen zum aktuellen Ladevorgang
@@ -120,18 +120,31 @@ Ermittlung des aktuellen Status des go-eChargers. Rückgabewerte sind
 $Status = GOeCharger_GetStatus( $Instanz ); // Ermittlung des Status
 ```
 
-##### GetAutomaticChargeStop(int $Instanz)
+#### GetAutomaticChargeStop(int $Instanz)
 Der Go-eCharger kann die Ladung automatisch nach x kwh beenden. Mit diese Funktion kann der aktuell eingestellte Wert abgefragt werden. Der Wert 0 zeigt an, das kein automatischer Ladestop eingestellt ist.
 ```
 $AutomaticChargeStopAt = GOeCharger_SetAutomaticChargeStop( $Instanz ); // liest den automatischen Ladestop 
 ```
 
-##### SetAutomaticChargeStop(int $Instanz, float $kw)
+#### SetAutomaticChargeStop(int $Instanz, float $kwh)
 Mit dieser Funktion kann der automatische Ladestop des go-eChargers aktiviert werden. Während der Wert '0' den automatischen Ladestop deaktivert, können höhere Werte bis 100 (Maximum) als Ladegrenze in kwh angegeben werden. 
 ```
 GOeCharger_SetAutomaticChargeStop( $Instanz, 10.5 ); // aktiviert den automatischen Ladestop bei 10,5 kwh
 ```
 
+#### GetAutomaticChargeStopKm(int $Instanz)
+Diese Funktion benötigt die Angabe des Durchschnittsverbrauchs in den Instanz-Einstellungen für einen PKW, der typischerweise an diesem Go-eCharger lädt!
+Mit diese Funktion kann analog zur Funktion GetAutomaticChargeStop() der aktuell eingestellte Wert für den Ladestop umgerechnet in Km abgefragt werden. Der Wert 0 zeigt an, das kein automatischer Ladestop eingestellt ist.
+```
+$AutomaticChargeStopAtKm = GOeCharger_SetAutomaticChargeStopKm( $Instanz ); // liest den automatischen Ladestop in Km
+```
+
+#### SetAutomaticChargeStopKm(int $Instanz, float $km)
+Diese Funktion benötigt die Angabe des Durchschnittsverbrauchs in den Instanz-Einstellungen für einen PKW, der typischerweise an diesem Go-eCharger lädt!
+Mit dieser Funktion kann der automatische Ladestop des go-eChargers aktiviert werden. Während der Wert '0' den automatischen Ladestop deaktivert, können höhere Werte als Ladegrenze in km angegeben werden. 
+```
+GOeCharger_SetAutomaticChargeStopKm( $Instanz, 5 ); // aktiviert den automatischen Ladestop nach einer Ladung für 5km Reichweite
+```
 
 
 
