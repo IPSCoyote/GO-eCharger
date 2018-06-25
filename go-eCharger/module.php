@@ -199,8 +199,11 @@
         
         public function setMaximumChargingAmperage(int $ampere) {
             // Check input value
+            $ampereToSet = $ampere;
             if ( $ampere < 6 or $ampere > 32 ) { return false; }
-            if ( $ampere > $this->ReadPropertyInteger("MaxAmperage") ) { return false; }
+            if ( $ampere > $this->ReadPropertyInteger("MaxAmperage") ) { 
+                $ampereToSet = $this->ReadPropertyInteger("MaxAmperage"); 
+            }
             
             // get current settings of goECharger
             $goEChargerStatus = $this->getStatusFromCharger();
@@ -208,11 +211,11 @@
 
             // first calculate the Button values
             $button[0] = 6; // min. Value
-            $gaps = round( ( ( $ampere - 6 ) / 4 ) - 0.5 );
+            $gaps = round( ( ( $ampereToSet - 6 ) / 4 ) - 0.5 );
             $button[1] = $button[0] + $gaps;
             $button[2] = $button[1] + $gaps;
             $button[3] = $button[2] + $gaps;
-            $button[4] = $ampere; // max. Value
+            $button[4] = $ampereToSet; // max. Value
 
             // set values to Charger
             // set button values
@@ -223,7 +226,7 @@
             $this->setValueToeCharger( 'al5', $button[4] );
 
             // set max available Ampere
-            $goEChargerStatus = $this->setValueToeCharger( 'ama', $ampere );
+            $goEChargerStatus = $this->setValueToeCharger( 'ama', $ampereToSet );
 
             // set current available Ampere (if too high)
             if ( $goEChargerStatus->{'amp'} > $goEChargerStatus->{'ama'} ) {
@@ -233,7 +236,7 @@
 
             $this->Update();
             
-            if ( $goEChargerStatus->{'ama'} == $ampere ) { return true; } else { return false; }
+            return $goEChargerStatus->{'ama'};
         }
         
         public function getCurrentChargingAmperage() {
@@ -244,37 +247,42 @@
         
         public function setCurrentChargingAmperage(int $ampere) {
             // Check input value
+            $ampereToSet = $ampere;
             if ( $ampere < 6 or $ampere > 32 ) { return false; }
-            if ( $ampere > $this->ReadPropertyInteger("MaxAmperage") ) { return false; }
+            if ( $ampere > $this->ReadPropertyInteger("MaxAmperage") ) { 
+                $ampereToSet = $this->ReadPropertyInteger("MaxAmperage"); 
+            }
             
             // get current settings of goECharger
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
             
             // Check requested Ampere is <= max Ampere set in Instance
-            if ( $ampere > $goEChargerStatus->{'ama'} ) { return false; }
+            if ( $ampere > $goEChargerStatus->{'ama'} ) { 
+                $ampereToSet = $goEChargerStatus->{'ama'};
+            }
                                  
             // set current available Ampere
-            $resultStatus = $this->setValueToeCharger( 'amp', $ampere ); 
+            $resultStatus = $this->setValueToeCharger( 'amp', $ampereToSet ); 
             
             // Update all data
             $this->Update();
             
-            if ( $resultStatus->{'amp'} == $ampere ) { return true; } else { return false; }
+            return $resultStatus->{'amp'};
         }
 
-        public function isAccessControlActive() {
+        public function getAccessControl() {
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
-            if ( $goEChargerStatus->{'ast'} == '1' ) { return true; } else { return false; } 
+            return $goEChargerStatus->{'ast'};
         }
         
-        public function setAccessControlActive(bool $active) {
-            if ( $active == true ) { $value = 1; } else { $value = 0; }
-            $resultStatus = $this->setValueToeCharger( 'ast', $value ); 
+        public function setAccessControlActive(int $mode) {
+            if ( $mode < 0 or $mode > 2 ) { return false; }
+            $resultStatus = $this->setValueToeCharger( 'ast', $mode ); 
             // Update all data
             $this->Update();
-            if ( $resultStatus->{'ast'} == $$value ) { return true; } else { return false; }
+            if ( $resultStatus->{'ast'} == $mode ) { return true; } else { return false; }
         }
             
         public function getAutomaticChargeStop() {
@@ -348,148 +356,23 @@
             if ( $resultStatus->{'alw'} == $value ) { return true; } else { return false; }
         }
         
-        public function isElectricallyGroundedCheck() { 
-            $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
-            if ( $goEChargerStatus->{'nmo'} == '1' ) { return true; } else { return false; } 
-        }
-        
-        public function getError() { 
-            $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
-            return $goEChargerStatus->{'err'}; 
-        }
-        
         public function getStatus() { 
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
             return $goEChargerStatus->{'car'}; 
         }
-        
-        public function getCableCapability() {
-            $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
-            return $goEChargerStatus->{'cbl'}; 
-        }
-        
-        public function getAvailabilityOfPhases() {
-            $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
-            return $goEChargerStatus->{'pha'}; 
-        }
-        
-        public function getMainboardTemperature() {
-            $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
-            return $goEChargerStatus->{'tmp'}; 
-        }
-        
+
         public function getUnlockRFID() {
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
             return $goEChargerStatus->{'uby'}; 
         }
-        
-        public function getSupplyLineVoltage(int $line) {
-            $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
-            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
-            switch ( $line ){
-                case 1: 
-                    return $goEChargerEnergy[0]; 
-                    break;
-                case 2:
-                    return $goEChargerEnergy[1]; 
-                    break;
-                case 3: 
-                    return $goEChargerEnergy[2]; 
-                    break;
-                case 4: 
-                    return $goEChargerEnergy[3]; 
-                    break;
-            }
-            return false; 
-        }
-
-        public function getSupplyLineEnergy() {
-            $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
-            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
-            $availableEnergy = ( ( ( $goEChargerEnergy[0] + $goEChargerEnergy[1] + $goEChargerEnergy[2] ) / 3 ) * 3 * $goEChargerStatus->{'amp'} ) / 1000;
-            return $availableEnergy; 
-        }
-
-        public function getAmpToCarByLine(int $line) {
-            $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
-            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
-            switch ( $line ){
-                case 1: 
-                    return $goEChargerEnergy[4]/100; 
-                    break;
-                case 2:
-                    return $goEChargerEnergy[5]/100; 
-                    break;
-                case 3: 
-                    return $goEChargerEnergy[6]/100; 
-                    break;
-            }
-            return false; 
-        }  
-        
-        public function getPowerToCarByLine(int $line) {
-            $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
-            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
-            switch ( $line ){
-                case 1: 
-                    return $goEChargerEnergy[7]/10; 
-                    break;
-                case 2:
-                    return $goEChargerEnergy[8]/10; 
-                    break;
-                case 3: 
-                    return $goEChargerEnergy[9]/10; 
-                    break;
-                case 4: 
-                    return $goEChargerEnergy[10]/10; 
-                    break;
-            }
-            return false; 
-        }
-        
+ 
         public function getTotalPowerToCar() {
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
             $goEChargerEnergy = $goEChargerStatus->{'nrg'};
             return $goEChargerEnergy[11]/100; 
-        }
-        
-        public function getPowerFactorByLine(int $line) {
-            $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
-            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
-            switch ( $line ){
-                case 1: 
-                    return $goEChargerEnergy[12]; 
-                    break;
-                case 2:
-                    return $goEChargerEnergy[13]; 
-                    break;
-                case 3: 
-                    return $goEChargerEnergy[14]; 
-                    break;
-                case 4: 
-                    return $goEChargerEnergy[15]; 
-                    break;
-            }
-            return false; 
-        }  
-        
-        public function getSerialID() {
-            $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
-            return $goEChargerStatus->{'sse'}; 
         }
         
         public function getLEDBrightness() {
@@ -505,7 +388,13 @@
             $this->Update();
             if ( $resultStatus->{'lbr'} == $brightness ) { return true; } else { return false; }
         }
-
+        
+        public function getEnergyChargedInTotal() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'eto'}/10);
+        }
+        
         public function getEnergyChargedByCard(int $cardID) {
             if ( $cardID < 1 or $cardID > 10 ) { return false; }
             $goEChargerStatus = $this->getStatusFromCharger();
