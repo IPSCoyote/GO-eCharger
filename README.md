@@ -60,11 +60,11 @@ Name | Type | Optionen | Werte | Funktionen
 `Zugangskontrolle via RFID/APP` | Integer | RW, WF | Zugangskontrolle<br>0: frei zugänglich<br>1: RFID Identifizierung<br>2: Strompreis/automatisch | [Get](#41271-isaccesscontrolactiveint-instanz) / [Set](#41272-setaccesscontrolint-instanz-bool-aktiv)
 `Spannungsversorgung X` | Integer | RO | Spannung an L1, L2, L3 und N in Volt | [Get](#41215-getsupplylinevoltagelxint-instanz) 
 `max. verfügbare Ladeleistung` | Float | RO | Berechnete max. verfügbare Ladeleistung in kw | [Get](#41216-getsupplylineenergyint-instanz)
-`Ampere zum Fahrzeug Lx`
-`Leistung zum Fahrzeug X`
-`Gesamtleistng zum Fahrzeug`
-`Leistungsfaktor X`
-`geladene Energie Karte X`
+`Ampere zum Fahrzeug Lx` | Float | RO | Ampre zum Fahrzeug auf L1-3 und N in A | Nein
+`Leistung zum Fahrzeug X` | Float | RO | Ladeleistung zum Fahrzeug auf L1-3 und N kwh | Nein
+`Gesamtleistung zum Fahrzeug` | Float | RO | Gesamte Ladeleistung zum Fahrzeug in kwh | Nein
+`Leistungsfaktor X` | Float | RO | Leistungsfaktor auf L1-3 und N in % | Nein
+`geladene Energie Karte X` | Float | RO | Geladene Energiemenge pro Karte in kwh | Nein
 
 #### 4.1.1. Status
 + **Seriennummer**
