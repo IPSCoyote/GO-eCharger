@@ -770,12 +770,12 @@
             }  
             
             if ( $this->GetIDForIdent("automaticStop") == false ) {
-                $this->RegisterVariableFloat("automaticStop", "Ladeende nach x kw (0kw = deaktiviert)", "GOECHARGER_AutomaticStop", 0 );
+                $this->RegisterVariableFloat("automaticStop", "Ladeende nach x kwh", "GOECHARGER_AutomaticStop", 0 );
                 $this->EnableAction("automaticStop"); 
             }
             
             if ( $this->GetIDForIdent("automaticStopKm") == false ) {
-                $this->RegisterVariableInteger("automaticStopKm", "Ladeende nach Energie für x km (0km = deaktiviert)", "GOECHARGER_AutomaticStopKM", 0 );
+                $this->RegisterVariableInteger("automaticStopKm", "Ladeende nach Energie für x km", "GOECHARGER_AutomaticStopKM", 0 );
                 $this->EnableAction("automaticStopKm"); 
             }
             
