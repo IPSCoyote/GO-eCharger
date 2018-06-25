@@ -44,7 +44,7 @@ Name | Type | Optionen | Werte | Funktionen verfügbar?
 `angeschlossener Adapter` | Integer | RO | Adapter, mit dem der go-eCharger angeschlossen ist<br>0: Kein Adapter<br>1: 16A Adapter | Nein
 `Anzahl Phasen` | String | RO | Phasen vor und nach dem Schütz<br>*Beispiel: "Phase 1-3 ist vorhanden"* | Nein
 `bisher geladene Energie` | Float | RO | Bisher vom go-eCharger abgegebene Energie in kwh<br>*Beispiel: 379,0 kwh* | Nein
-`entsperrt durch RFID`
+`entsperrt durch RFID` | Integer | RO | Wurde der go-eCharger durch ein RFID Token entsperrt | [Get](#41214-getunlockrfidint-instanz)
 `Erdungsprüfung`
 `Fehler`
 `Kabel-Leistungsfähigkeit`
