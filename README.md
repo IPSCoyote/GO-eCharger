@@ -36,14 +36,14 @@ Im folgenden werden die verfügbaren Statusvariablen mit ihren Eigenschaften, We
 
 RO = **R**ead **O**nly<br>
 RW = **R**ead **W**rite enabled<br>
-WF = **W**eb**f**rond change enabled
+WF = **W**eb**f**rond change enabled (die Variablen können zwecks Anzeige natürlich alle ins WF eingebunden werden)
 
 Name | Type | Optionen | Werte | Funktionen verfügbar?
 :--- | :---: |  :---:  | :---  | :---:
 `aktuell verfügbarer Ladestrom` | Integer | RW, WF | Der aktuell verfügbare Ladestrom zum laden eines Fahrzeugs<br>*Beispiel: 16 A* | [Get](#41251-getcurrentchargingamperageint-instanz) / [Set](#41252-setcurrentchargingamperageint-instanz-int-ampere)
 `angeschlossener Adapter` | Integer | RO | Adapter, mit dem der go-eCharger angeschlossen ist<br>0: Kein Adapter<br>1: 16A Adapter | Nein
-`Anzahl Phasen` 
-`bisher geladene Energie`
+`Anzahl Phasen` | String | RO | Phasen vor und nach dem Schütz<br>*Beispiel: "Phase 1-3 ist vorhanden"* | Nein
+`bisher geladene Energie` | Float | RO | Bisher vom go-eCharger abgegebene Energie in kwh<br>*Beispiel: 379,0 kwh* | Nein
 `entsperrt durch RFID`
 `Erdungsprüfung`
 `Fehler`
