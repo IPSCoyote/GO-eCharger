@@ -392,7 +392,7 @@
         public function getEnergyChargedInTotal() {
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
-            return $goEChargerStatus->{'eto'}/10);
+            return $goEChargerStatus->{'eto'}/10;
         }
         
         public function getEnergyChargedByCard(int $cardID) {
