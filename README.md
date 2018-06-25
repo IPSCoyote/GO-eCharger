@@ -51,7 +51,7 @@ Nachdem eine Instanz des Moduls angelegt wurde, muss diese eingerichtet werden.
   <img width="1009" height="670" src="./images/Modul%20einrichten.jpg">
 </p>
 
-* IP-Adresse
+* IP-Adresse<br>
 Statische IP Adresse unter der der go-eCharger im lokalen WLAN erreichbar ist.
 * el. Absicherung
 Die maximale el. Absicherung, die für den go-eCharger vorhanden ist. Wenn dieser an einer 16A abgesicherten Zuleitung abgesichert ist, wären dies 16A. Andere Werte entsprechend.
