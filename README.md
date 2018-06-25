@@ -43,7 +43,7 @@ hinzugefügt.
 Anschließend kann eine Instanz des Moduls angelegt werden.
 
 <p align="center">
-  <img width="496" height="431" src="./images/Instanz%20anlegen.jpg">
+  <img width="496" height="431" src="./images/Instanz%20Anlegen.jpg">
 </p>
 
 
