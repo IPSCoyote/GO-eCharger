@@ -25,10 +25,8 @@ Es soll sowohl Zustandsdaten (Anschluss, Ladevorgang, etc.) als auch Schaltaktio
 Das Modul befindet sich im Entwicklungsstadium und ist derzeit **nicht** für die Nutzung freigegeben.
 
 <p align="center">
-  <img width="460" height="300" src="./Erweiterte%20Einstellungen%20-%20HTTP%20API%20aktivieren.jpg">
+  <img width="447" height="416" src="./Erweiterte%20Einstellungen%20-%20HTTP%20API%20aktivieren.jpg">
 </p>
-
-![Einstellungen go-eCharger](/Erweiterte%20Einstellungen%20-%20HTTP%20API%20aktivieren.jpg)
 
 ## 4. Module
 Derzeit bietet das GIT nur das Modul "go-eCharger" für die direkte Steuerung eines einzelnen go-eChargers. 
