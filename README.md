@@ -91,27 +91,27 @@ Name | Type | Optionen | Werte | Funktionen
 
 #### 4.1.2. Funktionen
 
-#### Grundfunktionen (zum Laden)
-
-##### Update(int $Instanz)
-Aktualisiert die Messwerte (IPS Variablen) des go-eChargers. Diese Funktion wird auch in Abhängigkeit der eingestellten Aktualisierungsfrequenzen in den Moduleinstellungender ausgeführt, so dass normalerweise ein manueller Aufruf unnötig sein sollte.
+#### Update(int $Instanz)
+Aktualisiert die Messwerte (IPS Variablen) des go-eChargers. Diese Funktion wird auch in Abhängigkeit der eingestellten Aktualisierungsintervall in den Moduleinstellungen ausgeführt, so dass normalerweise ein manueller Aufruf unnötig sein sollte.
 ```
 GOeCharger_Update( $Instanz ); // Aktualisiert die Messwerte (IPS Variablen) des go-eChargers
 ```
 Die Funktion liefert true oder false als Rückgabewert und aktualisiert die Messwerte
 
-##### IsActive(int $Instanz)
+#### IsActive(int $Instanz)
+Prüft, ob die Wallbox aktuell zum laden freigegeben ist. 
 ```
 $ChargingActivated = GOeCharger_SetActivation( $Instanz ); // Ermittlung, ob Laden möglich ist
 ```
 
-##### SetActive(int $Instanz, bool $aktiv)
+#### SetActive(int $Instanz, bool $aktiv)
+Mit dieser Funktion kann das Laden an der Wallbox freigegeben oder abgebrochen werden. 
 ```
 GOeCharger_SetActivation( $Instanz, false ); // deaktiviert den go-eCharger 
 ```
 
-##### GetStatus(int $Instanz)
-Ermittlung des aktuellen Status des go-eChargers.
+#### GetStatus(int $Instanz)
+Ermittlung des aktuellen Status des go-eChargers. Rückgabewerte sind
 + 1: Ladestation bereit, kein Fahrzeug
 + 2: Fahrzeug lädt
 + 3: Warte auf Fahrzeug
@@ -120,19 +120,16 @@ Ermittlung des aktuellen Status des go-eChargers.
 $Status = GOeCharger_GetStatus( $Instanz ); // Ermittlung des Status
 ```
 
-##### Automatische Beendigung des Ladens
-Mit dieser Funktion des go-eChargers kann ein "Ladestopp" gesetzt werden, so dass nur z.B. 5kw geladen werden können (danach wird das Laden beendet). Ein Wert von "0" entspricht der Deaktivierung der Funktion. Zudem entspricht der eingestellte Wert **nicht** dem Ladestand des Fahrzeugs sondern der maximal ladbaren Energie! Wenn das Fahrzeug also mit 20% Akkustand angeschlossen wird, dann können maximal z.B. 5kw geladen werden.
-
-###### GetAutomaticChargeStop(int $Instanz)
-Auslesen des aktuell eingestellten Ladestopp-Werts.
+##### GetAutomaticChargeStop(int $Instanz)
+Der Go-eCharger kann die Ladung automatisch nach x kwh beenden. Mit diese Funktion kann der aktuell eingestellte Wert abgefragt werden. Der Wert 0 zeigt an, das kein automatischer Ladestop eingestellt ist.
 ```
 $AutomaticChargeStopAt = GOeCharger_SetAutomaticChargeStop( $Instanz ); // liest den automatischen Ladestop 
 ```
 
-###### SetAutomaticChargeStop(int $Instanz, float $kw)
-Mit dieser Funktion kann der automatische Ladestop des go-eChargers aktiviert werden. Während der Wert '0' den automatischen Ladestop deaktivert, können höhere Werte bis 100 (Maximum) als Ladegrenze in kw angegeben werden. 
+##### SetAutomaticChargeStop(int $Instanz, float $kw)
+Mit dieser Funktion kann der automatische Ladestop des go-eChargers aktiviert werden. Während der Wert '0' den automatischen Ladestop deaktivert, können höhere Werte bis 100 (Maximum) als Ladegrenze in kwh angegeben werden. 
 ```
-GOeCharger_SetAutomaticChargeStop( $Instanz, 10.5 ); // aktiviert den automatischen Ladestop bei 10,5 kw
+GOeCharger_SetAutomaticChargeStop( $Instanz, 10.5 ); // aktiviert den automatischen Ladestop bei 10,5 kwh
 ```
 
 
