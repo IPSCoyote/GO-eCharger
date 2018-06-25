@@ -62,8 +62,10 @@
             SetValue($this->GetIDForIdent("accessControl"),           $goEChargerStatus->{'ast'});
             SetValue($this->GetIDForIdent("accessState"),             $goEChargerStatus->{'alw'}); 
             SetValue($this->GetIDForIdent("cableCapability"),         $goEChargerStatus->{'cbl'});
+            SetValue($this->GetIDForIdent("rebootCounter"),           $goEChargerStatus->{'rbc'});
             
-            
+            $rebootTimestamp = time()-$goEChargerStatus->{'rbt'};
+            SetValue($this->GetIDForIdent("rebootTime"),  date(DATE_RFC822),$rebootTimestamp) );
             
             
             $Phasen = "";
@@ -757,164 +759,177 @@
         }
         
         protected function registerVariables() {
-            // Generate Variables
-            if ( $this->GetIDForIdent("status") == false ) {
-                $this->RegisterVariableInteger("status", "Status","GOECHARGER_Status",0);
-            }
             
-            if ( $this->GetIDForIdent("availableAMP") == false ) {
-                $this->RegisterVariableInteger("availableAMP", "aktuell verfügbarer Ladestrom","GOECHARGER_Ampere",0);
-                $this->EnableAction("availableAMP");
-            }  
-            
-            if ( $this->GetIDForIdent("error") == false ) {
-                $this->RegisterVariableInteger("error", "Fehler","GOECHARGER_Error",0);
-            }
-            
-            if ( $this->GetIDForIdent("accessControl") == false ) {
-                $this->RegisterVariableInteger("accessControl", "Zugangskontrolle via RFID/App","GOECHARGER_Access",0);
-                $this->EnableAction("accessControl");
-            }  
-            
+            //--- Basic Functions -------------------------------------------------------------
             if ( $this->GetIDForIdent("accessState") == false ) {
-                $this->RegisterVariableBoolean("accessState", "Wallbox aktiv","~Switch",0);
+                $this->RegisterVariableBoolean("accessState", "Wallbox aktiv","~Switch",11);
                 $this->EnableAction("accessState");  
             }  
             
-            if ( $this->GetIDForIdent("cableCapability") == false ) {
-                $this->RegisterVariableInteger("cableCapability", "Kabel-Leistungsfähigkeit","GOECHARGER_AmpereCable",0);
-            }  
-            
-            if ( $this->GetIDForIdent("availablePhases") == false ) {
-                $this->RegisterVariableString("availablePhases", "verfügbare Phasen","~String",0);
-            }  
-            
-            if ( $this->GetIDForIdent("mainboardTemperature") == false ) {
-                $this->RegisterVariableFloat("mainboardTemperature", "Mainboard Temperatur","~Temperature",0);
-            }  
+            if ( $this->GetIDForIdent("status") == false ) {
+                $this->RegisterVariableInteger("status", "Status","GOECHARGER_Status",12);
+            }
             
             if ( $this->GetIDForIdent("automaticStop") == false ) {
-                $this->RegisterVariableFloat("automaticStop", "Ladeende nach x kwh", "GOECHARGER_AutomaticStop", 0 );
+                $this->RegisterVariableFloat("automaticStop", "Ladeende nach x kwh", "GOECHARGER_AutomaticStop", 13 );
                 $this->EnableAction("automaticStop"); 
             }
             
             if ( $this->GetIDForIdent("automaticStopKm") == false ) {
-                $this->RegisterVariableInteger("automaticStopKm", "Ladeende nach Energie für x km", "GOECHARGER_AutomaticStopKM", 0 );
+                $this->RegisterVariableInteger("automaticStopKm", "Ladeende nach Energie für x km", "GOECHARGER_AutomaticStopKM", 14 );
                 $this->EnableAction("automaticStopKm"); 
             }
             
-            if ( $this->GetIDForIdent("adapterAttached") == false ) {
-                $this->RegisterVariableInteger("adapterAttached", "angeschlossener Adapter","GOECHARGER_Adapter",0);
+            //--- Informations to the current loading cycle ------------------------------------
+            if ( $this->GetIDForIdent("powerToCarTotal") == false ) {
+                $this->RegisterVariableFloat("powerToCarTotal", "Aktuelle Leistung zum Fahrzeug","GOECHARGER_Power.1",31);
+            }  
+            
+            if ( $this->GetIDForIdent("energyLoadCycle") == false ) {
+                $this->RegisterVariableFloat("energyLoadCycle", "abgegebene Energie im Ladezyklus","GOECHARGER_Power.1",32);
             } 
             
             if ( $this->GetIDForIdent("unlockedByRFID") == false ) {
-                $this->RegisterVariableInteger("unlockedByRFID", "entsperrt durch RFID","",0);
+                $this->RegisterVariableInteger("unlockedByRFID", "entsperrt durch RFID","",33);
             } 
             
+            //--- Power Consumption information ------------------------------------------------
             if ( $this->GetIDForIdent("energyTotal") == false ) {
-                $this->RegisterVariableFloat("energyTotal", "bisher abgegebene Energie","GOECHARGER_Power.1",0);
-            } 
-            
-            if ( $this->GetIDForIdent("energyLoadCycle") == false ) {
-                $this->RegisterVariableFloat("energyLoadCycle", "abgegebene Energie im Ladezyklus","GOECHARGER_Power.1",0);
-            } 
-            
-            if ( $this->GetIDForIdent("supplyLineL1") == false ) {
-                $this->RegisterVariableInteger("supplyLineL1", "Spannungsversorgung L1","GOECHARGER_Voltage",50);
-            }
-            
-            if ( $this->GetIDForIdent("supplyLineL2") == false ) {
-                $this->RegisterVariableInteger("supplyLineL2", "Spannungsversorgung L2","GOECHARGER_Voltage",51);
-            }
-            
-            if ( $this->GetIDForIdent("supplyLineL3") == false ) {
-                $this->RegisterVariableInteger("supplyLineL3", "Spannungsversorgung L3","GOECHARGER_Voltage",52);
-            }
-            
-            if ( $this->GetIDForIdent("supplyLineN") == false ) {
-                $this->RegisterVariableInteger("supplyLineN", "Spannungsversorgung N","GOECHARGER_Voltage",53);
-            }
-            
-            if ( $this->GetIDForIdent("availableSupplyEnergy") == false ) {
-                $this->RegisterVariableFloat("availableSupplyEnergy", "max. verfügbare Ladeleistung","GOECHARGER_Energy.1",54);
+                $this->RegisterVariableFloat("energyTotal", "bisher abgegebene Energie","GOECHARGER_Power.1",51);
             }    
-            
-            if ( $this->GetIDForIdent("ampToCarLineL1") == false ) {
-                $this->RegisterVariableFloat("ampToCarLineL1", "Ampere zum Fahrzeug L1","GOECHARGER_Ampere.1",55);
-            }
-            
-            if ( $this->GetIDForIdent("ampToCarLineL2") == false ) {
-                $this->RegisterVariableFloat("ampToCarLineL2", "Ampere zum Fahrzeug L2","GOECHARGER_Ampere.1",56);
-            }
-            
-            if ( $this->GetIDForIdent("ampToCarLineL3") == false ) {
-                $this->RegisterVariableFloat("ampToCarLineL3", "Ampere zum Fahrzeug L3","GOECHARGER_Ampere.1",57);
-            }       
-       
-            if ( $this->GetIDForIdent("powerToCarLineL1") == false ) {
-                $this->RegisterVariableFloat("powerToCarLineL1", "Leistung zum Fahrzeug L1","GOECHARGER_Power.1",58);
-            }
-            
-            if ( $this->GetIDForIdent("powerToCarLineL2") == false ) {
-                $this->RegisterVariableFloat("powerToCarLineL2", "Leistung zum Fahrzeug L2","GOECHARGER_Power.1",59);
-            }
-            
-            if ( $this->GetIDForIdent("powerToCarLineL3") == false ) {
-                $this->RegisterVariableFloat("powerToCarLineL3", "Leistung zum Fahrzeug L3","GOECHARGER_Power.1",60);
-            }
-            
-            if ( $this->GetIDForIdent("powerToCarLineN") == false ) {
-                $this->RegisterVariableFloat("powerToCarLineN", "Leistung zum Fahrzeug N","GOECHARGER_Power.1",61);
-            }
-            
-            if ( $this->GetIDForIdent("powerToCarTotal") == false ) {
-                $this->RegisterVariableFloat("powerToCarTotal", "Aktuelle Leistung zum Fahrzeug","GOECHARGER_Power.1",62);
-            }  
-            
-            if ( $this->GetIDForIdent("powerFactorLineL1") == false ) {
-                $this->RegisterVariableFloat("powerFactorLineL1", "Leistungsfaktor L1","~Humidity.F",63);
-            }
-            
-            if ( $this->GetIDForIdent("powerFactorLineL2") == false ) {
-                $this->RegisterVariableFloat("powerFactorLineL2", "Leistungsfaktor L2","~Humidity.F",64);
-            }
-            
-            if ( $this->GetIDForIdent("powerFactorLineL3") == false ) {
-                $this->RegisterVariableFloat("powerFactorLineL3", "Leistungsfaktor L3","~Humidity.F",65);
-            }
-            
-            if ( $this->GetIDForIdent("powerFactorLineN") == false ) {
-                $this->RegisterVariableFloat("powerFactorLineN", "Leistungsfaktor N","~Humidity.F",66);
-            }
-            
-            if ( $this->GetIDForIdent("serialID") == false ) {
-                $this->RegisterVariableString("serialID", "Seriennummer","~String",0);
-            }
-
-            if ( $this->GetIDForIdent("ledBrightness") == false ) {
-                $this->RegisterVariableInteger("ledBrightness", "LED Helligkeit","~Intensity.255",0);
-                $this->EnableAction("ledBrightness");
-            }
-            
-            if ( $this->GetIDForIdent("maxAvailableAMP") == false ) {
-                $this->RegisterVariableInteger("maxAvailableAMP", "max. verfügbarer Ladestrom","GOECHARGER_Ampere",0);
-                $this->EnableAction("maxAvailableAMP");
-            }
-                   
-            if ( $this->GetIDForIdent("cableUnlockMode") == false ) {
-                $this->RegisterVariableInteger("cableUnlockMode", "Kabel-Verriegelungsmodus","GOECHARGER_CableUnlockMode",0);
-                $this->EnableAction("cableUnlockMode");
-            }    
-            
-            if ( $this->GetIDForIdent("norwayMode") == false ) {
-                $this->RegisterVariableBoolean("norwayMode", "Erdungsprüfung","~Switch",0);
-            }  
             
             for($i=1; $i<=10; $i++){
                 if ( $this->GetIDForIdent("energyChargedCard".$i) == false ) {
-                    $this->RegisterVariableFloat("energyChargedCard".$i, "geladene Energie Karte ".$i,"GOECHARGER_Power.1",99+$i);
+                    $this->RegisterVariableFloat("energyChargedCard".$i, "geladene Energie Karte ".$i,"GOECHARGER_Power.1",51+$i);
                 }    
             } 
+            
+            //--- Setup -----------------------------------------------------------------------
+            if ( $this->GetIDForIdent("maxAvailableAMP") == false ) {
+                $this->RegisterVariableInteger("maxAvailableAMP", "max. verfügbarer Ladestrom","GOECHARGER_Ampere",71);
+                $this->EnableAction("maxAvailableAMP");
+            }
+            
+            if ( $this->GetIDForIdent("availableAMP") == false ) {
+                $this->RegisterVariableInteger("availableAMP", "aktuell verfügbarer Ladestrom","GOECHARGER_Ampere",72);
+                $this->EnableAction("availableAMP");
+            }  
+            
+            if ( $this->GetIDForIdent("cableUnlockMode") == false ) {
+                $this->RegisterVariableInteger("cableUnlockMode", "Kabel-Verriegelungsmodus","GOECHARGER_CableUnlockMode",73);
+                $this->EnableAction("cableUnlockMode");
+            } 
+            
+            if ( $this->GetIDForIdent("accessControl") == false ) {
+                $this->RegisterVariableInteger("accessControl", "Zugangskontrolle via RFID/App","GOECHARGER_Access",74);
+                $this->EnableAction("accessControl");
+            }  
+            
+            if ( $this->GetIDForIdent("ledBrightness") == false ) {
+                $this->RegisterVariableInteger("ledBrightness", "LED Helligkeit","~Intensity.255",75);
+                $this->EnableAction("ledBrightness");
+            }
+            
+            //--- Technical Informations ------------------------------------------------------
+            if ( $this->GetIDForIdent("serialID") == false ) {
+                $this->RegisterVariableString("serialID", "Seriennummer","~String",91);
+            }
+            
+            if ( $this->GetIDForIdent("error") == false ) {
+                $this->RegisterVariableInteger("error", "Fehler","GOECHARGER_Error",92);
+            }
+            
+            if ( $this->GetIDForIdent("rebootCounter") == false ) {
+                $this->RegisterVariableInteger("rebootCounter", "Reboot Zähler","",93);
+            }
+
+            if ( $this->GetIDForIdent("rebootTime") == false ) {
+                $this->RegisterVariableString("rebootTime", "Reboot Zeitpunkt","",93);
+            }
+            
+            if ( $this->GetIDForIdent("adapterAttached") == false ) {
+                $this->RegisterVariableInteger("adapterAttached", "angeschlossener Adapter","GOECHARGER_Adapter",95);
+            } 
+            
+            if ( $this->GetIDForIdent("cableCapability") == false ) {
+                $this->RegisterVariableInteger("cableCapability", "Kabel-Leistungsfähigkeit","GOECHARGER_AmpereCable",96);
+            }  
+            
+            if ( $this->GetIDForIdent("norwayMode") == false ) {
+                $this->RegisterVariableBoolean("norwayMode", "Erdungsprüfung","~Switch",97);
+            }  
+            
+            if ( $this->GetIDForIdent("mainboardTemperature") == false ) {
+                $this->RegisterVariableFloat("mainboardTemperature", "Mainboard Temperatur","~Temperature",98);
+            }  
+            
+            if ( $this->GetIDForIdent("availablePhases") == false ) {
+                $this->RegisterVariableString("availablePhases", "verfügbare Phasen","~String",99);
+            }  
+
+            if ( $this->GetIDForIdent("supplyLineL1") == false ) {
+                $this->RegisterVariableInteger("supplyLineL1", "Spannungsversorgung L1","GOECHARGER_Voltage",100);
+            }
+            
+            if ( $this->GetIDForIdent("supplyLineL2") == false ) {
+                $this->RegisterVariableInteger("supplyLineL2", "Spannungsversorgung L2","GOECHARGER_Voltage",101);
+            }
+            
+            if ( $this->GetIDForIdent("supplyLineL3") == false ) {
+                $this->RegisterVariableInteger("supplyLineL3", "Spannungsversorgung L3","GOECHARGER_Voltage",102);
+            }
+            
+            if ( $this->GetIDForIdent("supplyLineN") == false ) {
+                $this->RegisterVariableInteger("supplyLineN", "Spannungsversorgung N","GOECHARGER_Voltage",103);
+            }
+            
+            if ( $this->GetIDForIdent("powerToCarLineL1") == false ) {
+                $this->RegisterVariableFloat("powerToCarLineL1", "Leistung zum Fahrzeug L1","GOECHARGER_Power.1",104);
+            }
+            
+            if ( $this->GetIDForIdent("powerToCarLineL2") == false ) {
+                $this->RegisterVariableFloat("powerToCarLineL2", "Leistung zum Fahrzeug L2","GOECHARGER_Power.1",105);
+            }
+            
+            if ( $this->GetIDForIdent("powerToCarLineL3") == false ) {
+                $this->RegisterVariableFloat("powerToCarLineL3", "Leistung zum Fahrzeug L3","GOECHARGER_Power.1",106);
+            }
+            
+            if ( $this->GetIDForIdent("powerToCarLineN") == false ) {
+                $this->RegisterVariableFloat("powerToCarLineN", "Leistung zum Fahrzeug N","GOECHARGER_Power.1",107);
+            }
+            
+            if ( $this->GetIDForIdent("ampToCarLineL1") == false ) {
+                $this->RegisterVariableFloat("ampToCarLineL1", "Ampere zum Fahrzeug L1","GOECHARGER_Ampere.1",108);
+            }
+            
+            if ( $this->GetIDForIdent("ampToCarLineL2") == false ) {
+                $this->RegisterVariableFloat("ampToCarLineL2", "Ampere zum Fahrzeug L2","GOECHARGER_Ampere.1",109);
+            }
+            
+            if ( $this->GetIDForIdent("ampToCarLineL3") == false ) {
+                $this->RegisterVariableFloat("ampToCarLineL3", "Ampere zum Fahrzeug L3","GOECHARGER_Ampere.1",110);
+            } 
+            
+            if ( $this->GetIDForIdent("powerFactorLineL1") == false ) {
+                $this->RegisterVariableFloat("powerFactorLineL1", "Leistungsfaktor L1","~Humidity.F",111);
+            }
+            
+            if ( $this->GetIDForIdent("powerFactorLineL2") == false ) {
+                $this->RegisterVariableFloat("powerFactorLineL2", "Leistungsfaktor L2","~Humidity.F",112);
+            }
+            
+            if ( $this->GetIDForIdent("powerFactorLineL3") == false ) {
+                $this->RegisterVariableFloat("powerFactorLineL3", "Leistungsfaktor L3","~Humidity.F",113);
+            }
+            
+            if ( $this->GetIDForIdent("powerFactorLineN") == false ) {
+                $this->RegisterVariableFloat("powerFactorLineN", "Leistungsfaktor N","~Humidity.F",114);
+            }
+            
+            if ( $this->GetIDForIdent("availableSupplyEnergy") == false ) {
+                $this->RegisterVariableFloat("availableSupplyEnergy", "max. verfügbare Ladeleistung","GOECHARGER_Energy.1",115);
+            }    
         }
     }
 ?>
