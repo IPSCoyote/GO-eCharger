@@ -75,6 +75,7 @@
             SetValue($this->GetIDForIdent("adapterAttached"),         $goEChargerStatus->{'adi'});
             SetValue($this->GetIDForIdent("unlockedByRFID"),          $goEChargerStatus->{'uby'});
             SetValue($this->GetIDForIdent("energyTotal"),             $goEChargerStatus->{'eto'}/10);
+            SetValue($this->GetIDForIdent("energyLoadCycle"),         $goEChargerStatus->{'dws'}/361010.83);
             
             $goEChargerEnergy = $goEChargerStatus->{'nrg'};
             SetValue($this->GetIDForIdent("supplyLineL1"),            $goEChargerEnergy[0]);            
@@ -787,7 +788,11 @@
             } 
             
             if ( $this->GetIDForIdent("energyTotal") == false ) {
-                $this->RegisterVariableFloat("energyTotal", "bisher geladene Energie","GOECHARGER_Power.1",0);
+                $this->RegisterVariableFloat("energyTotal", "bisher abgegebene Energie","GOECHARGER_Power.1",0);
+            } 
+            
+            if ( $this->GetIDForIdent("energyLoadCycle") == false ) {
+                $this->RegisterVariableFloat("energyLoadCycle", "abgegebene Energie im Ladezyklus","GOECHARGER_Power.1",0);
             } 
             
             if ( $this->GetIDForIdent("supplyLineL1") == false ) {
