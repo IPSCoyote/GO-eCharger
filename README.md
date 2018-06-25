@@ -48,6 +48,7 @@ Name | Type | Optionen | Werte | Funktionen
 `Ladeende nach Energie für x km` | Integer | RW, WF | Ladung nach Abgabe von Energie für X Kilomenter beenden<br>0 = kein automatischer Ladestop<br>**Parameter funktioniert nur, wenn ein Verbrauch in den Einstellungen gepflegt ist!** | Nein
 
 Informationen zum aktuellen Ladevorgang
+
 Name | Type | Optionen | Werte | Funktionen
 :--- | :---: |  :---:  | :---  | :---:
 `Aktuelle Leistung zum Fahrzeug` | Float | RO | Gesamte Ladeleistung zum Fahrzeug in kwh | Nein
@@ -55,12 +56,14 @@ Name | Type | Optionen | Werte | Funktionen
 `entsperrt durch RFID` | Integer | RO | Wurde der go-eCharger durch RFID Token X entsperrt | [Get](#41214-getunlockrfidint-instanz)
 
 Verbrauchsinformationen
+
 Name | Type | Optionen | Werte | Funktionen
 :--- | :---: |  :---:  | :---  | :---:
 `bisher abgegebene Energie` | Float | RO | Bisher insgesamt vom go-eCharger abgegebene Energie in kwh<br>*Beispiel: 379,0 kwh* | Nein
 `geladene Energie Karte X` | Float | RO | Geladene Energiemenge pro Karte in kwh | [Get](#41217-getenergychargedbycardint-instanz-int-cardid)
 
 Einstellungen
+
 Name | Type | Optionen | Werte | Funktionen
 :--- | :---: |  :---:  | :---  | :---:
 `max. verfügbarer Ladestrom` | Integer | RW, WF | Maximal verfügbarer Ladestrom des go-eChargers | [Get](#41241-getmaximumchargingamperageint-instanz-) / [Set](#41242-setmaximumchargingamperageint-instanz-int-ampere)
@@ -70,6 +73,7 @@ Name | Type | Optionen | Werte | Funktionen
 `LED Helligkeit` | Integer | RW, WF | Helligkeit der LEDs<br>0: LED aus<br>1 - 255: LED Helligkeit | [Get](#412171-getledbrightnessint-instanz) / [Set](#412172-setledbrightnessint-instanz-int-brightness)
 
 Technische Informationen
+
 Name | Type | Optionen | Werte | Funktionen
 :--- | :---: |  :---:  | :---  | :---:
 `Seriennummer` | String | RO | Seriennummer des go-eChargers<br>*Beispiel: "000815"* | Nein
