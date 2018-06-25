@@ -61,8 +61,32 @@
             SetValue($this->GetIDForIdent("error"),                   $goEChargerStatus->{'err'}); 
             SetValue($this->GetIDForIdent("accessControl"),           $goEChargerStatus->{'ast'});
             SetValue($this->GetIDForIdent("accessState"),             $goEChargerStatus->{'alw'}); 
-            SetValue($this->GetIDForIdent("cableCapability"),         $goEChargerStatus->{'cbl'}); 
-            SetValue($this->GetIDForIdent("numberOfPhases"),          $goEChargerStatus->{'pha'}); 
+            SetValue($this->GetIDForIdent("cableCapability"),         $goEChargerStatus->{'cbl'});
+            
+            
+            
+            
+            $Phasen = "";
+            if ( $goEChargerStatus->{'pha'}&(1<<3) ) $Phasen = $Phasen.' 1';
+            if ( $goEChargerStatus->{'pha'}&(1<<4) ) { 
+                if ( $Phasen <> "" ) {
+                    $Phasen = ",".$Phasen;
+                }
+                $Phasen = $Phasen.' 2';
+            }
+            if ( $goEChargerStatus->{'pha'}&(1<<5) ) { 
+                if ( $Phasen <> "" ) {
+                    $Phasen = "und".$Phasen;
+                }
+                $Phasen = $Phasen.' 3';
+            }
+            if ( $Phasen <> "" ) {
+                $Phasen = $Phasen." vorhanden";
+            } else
+                $Phasen = 'Keine Phasen vorhanden';
+            SetValue($this->GetIDForIdent("availabilityOfPhases"),          $Phasen );
+            
+            
             SetValue($this->GetIDForIdent("mainboardTemperature"),    $goEChargerStatus->{'tmp'});  
             SetValue($this->GetIDForIdent("automaticStop"),           $goEChargerStatus->{'dwo'}/10 );
             
@@ -337,7 +361,7 @@
             return $goEChargerStatus->{'cbl'}; 
         }
         
-        public function getNumberOfPhases() {
+        public function getAvailabilityOfPhases() {
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
             return $goEChargerStatus->{'pha'}; 
@@ -761,8 +785,8 @@
                 $this->RegisterVariableInteger("cableCapability", "Kabel-Leistungsfähigkeit","GOECHARGER_AmpereCable",0);
             }  
             
-            if ( $this->GetIDForIdent("numberOfPhases") == false ) {
-                $this->RegisterVariableInteger("numberOfPhases", "Anzahl Phasen","",0);
+            if ( $this->GetIDForIdent("availabilitynumberOfPhases") == false ) {
+                $this->RegisterVariableString("availabilityOfPhases", "Anzahl Phasen","~String",0);
             }  
             
             if ( $this->GetIDForIdent("mainboardTemperature") == false ) {
