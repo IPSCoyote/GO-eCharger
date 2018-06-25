@@ -32,8 +32,11 @@ Das Modul "go-eCharger" dient als Schnittstelle zu einem lokal installierten go-
 
 #### 4.1.1 Status Variablen
 
-Name |  Type | Werte | Zugriffsfunktionen
-Seriennummer | String | Seriennummer des go-eChargers | keine
+RO = Read Only
+
+Name |  Type | Optionen | Werte | Zugriffsfunktionen
+-----| ------|----------|-------|-------------------
+Seriennummer | String | RO | Seriennummer des go-eChargers | keine
 
 
 
