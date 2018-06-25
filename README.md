@@ -66,11 +66,11 @@ Name | Type | Optionen | Werte | Funktionen
 
 Name | Type | Optionen | Werte | Funktionen
 :--- | :---: |  :---:  | :---  | :---:
-`max. verfügbarer Ladestrom` | Integer | RW, WF | Maximal verfügbarer Ladestrom des go-eChargers | [Get](#41241-getmaximumchargingamperageint-instanz-) / [Set](#41242-setmaximumchargingamperageint-instanz-int-ampere)
-`aktuell verfügbarer Ladestrom` | Integer | RW, WF | Der aktuell verfügbare Ladestrom zum laden eines Fahrzeugs<br>*Beispiel: 16 A* | [Get](#41251-getcurrentchargingamperageint-instanz) / [Set](#41252-setcurrentchargingamperageint-instanz-int-ampere)
-`Kabel-Verriegelungsmodus` | Integer | RW, WF | Verriegelungsmodus für das Kabel<br>0: Verriegeln, solange Auto angesteckt<br>1: Nach Ladevorgang entriegeln<br>2: Kabel immer verriegelt | [Get](#41291-getcableunlockmodeint-instanz) / [Set](#41292-setcableunlockmodeint-instanz-int-unlockmode)
-`Zugangskontrolle via RFID/APP` | Integer | RW, WF | Zugangskontrolle<br>0: frei zugänglich<br>1: RFID Identifizierung<br>2: Strompreis/automatisch | [Get](#41271-isaccesscontrolactiveint-instanz) / [Set](#41272-setaccesscontrolint-instanz-bool-aktiv)
-`LED Helligkeit` | Integer | RW, WF | Helligkeit der LEDs<br>0: LED aus<br>1 - 255: LED Helligkeit | [Get](#412171-getledbrightnessint-instanz) / [Set](#412172-setledbrightnessint-instanz-int-brightness)
+`max. verfügbarer Ladestrom` | Integer | RW, WF | Maximal verfügbarer Ladestrom des go-eChargers | [Get](#getmaximumchargingamperageint-instanz-) / [Set](#setmaximumchargingamperageint-instanz-int-ampere)
+`aktuell verfügbarer Ladestrom` | Integer | RW, WF | Der aktuell verfügbare Ladestrom zum laden eines Fahrzeugs<br>*Beispiel: 16 A* | [Get](#getcurrentchargingamperageint-instanz) / [Set](#setcurrentchargingamperageint-instanz-int-ampere)
+`Kabel-Verriegelungsmodus` | Integer | RW, WF | Verriegelungsmodus für das Kabel<br>0: Verriegeln, solange Auto angesteckt<br>1: Nach Ladevorgang entriegeln<br>2: Kabel immer verriegelt | [Get](#getcableunlockmodeint-instanz) / [Set](#setcableunlockmodeint-instanz-int-unlockmode)
+`Zugangskontrolle via RFID/APP` | Integer | RW, WF | Zugangskontrolle<br>0: frei zugänglich<br>1: RFID Identifizierung<br>2: Strompreis/automatisch | [Get](#isaccesscontrolactiveint-instanz) / [Set](#setaccesscontrolint-instanz-bool-aktiv)
+`LED Helligkeit` | Integer | RW, WF | Helligkeit der LEDs<br>0: LED aus<br>1 - 255: LED Helligkeit | [Get](#getledbrightnessint-instanz) / [Set](#setledbrightnessint-instanz-int-brightness)
 
 #### Technische Informationen
 
@@ -176,7 +176,76 @@ Liefert die mit einer RFID Karte geladene Energie zurück.
 $EnergyByCard2 = GOeCharger_GetEnergyChargedByCard( $Instanz, 2 ); // Ermittlung der Ladeenergie für Karte 2
 ```
 
+##### GetMaximumChargingAmperage(int $Instanz )
+Mit dieser Funktion kann der maximal verfügbare Ladestrom des go-eChargers abgefragt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. 
+```
+$MaximumChargingAmperage = GOeCharger_GetMaximumChargingAmperage( $Instanz ); // Liest den maximal verfügbaren Ladestrom
+```
 
+##### SetMaximumChargingAmperage(int $Instanz, int $Ampere)
+Mit dieser Funktion kann der maximal verfügbare Ladestrom des go-eChargers gesetzt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. 
+Diese Funktion hat direkte Auswirkung auf die Einstellungen des go-eChargers (Button!) sowie einen ggf. aktuell stattfindenden Ladevorgang. Der maximale Ladestrom sollte an die verfügbare Hausinstallation angepasst sein. Die über IPS maximal einstellbare Ladestrom kann über die Instanzeinstellungen beschränkt werden!
+Sollte der maximal verfügbare Ladestrom reduziert werden, so wird ggf. auch der aktuell eingestellte Ladestrom entsprechend verringert, sofern er das neue Maximum überschreiten würde.
+```
+GOeCharger_SetMaximumChargingAmperage( $Instanz, 16 ); // Setze den maximal verfügbaren Ladestrom auf 16 Ampere
+```
+Die Funktion liefert den eingestellten Wert oder *false* als Rückgabewert zurück und aktualisiert die Messwerte
+
+##### GetCurrentChargingAmperage(int $Instanz)
+Mit dieser Funktion kann der aktuell verfügbare Ladestrom des go-eChargers abgefragt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. 
+```
+$CurrentChargingAmperage = GOeCharger_GetCurrentChargingAmperage( $Instanz ); // Liest den aktuellen Ladestrom 
+```
+
+##### SetCurrentChargingAmperage(int $Instanz, int $Ampere)
+Mit dieser Funktion kann der aktuell verfügbare (abgegebene) Ladestrom des go-eChargers gesetzt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. Der Wert darf jedoch den derzeitigen, maximal verfügbaren Ladestrom nicht überschreiten! Sollte dies der Fall sein, so wird der maximal mögliche Wert (aktuelles Maximum) gesetzt.
+Diese Funktion hat direkte Auswirkung auf die Einstellungen des go-eChargers sowie einen ggf. aktuell stattfindenden Ladevorgang.
+```
+GOeCharger_SetCurrentChargingAmperage( $Instanz, 8 ); // Setze den aktuellen Ladestrom auf 8 Ampere
+```
+Die Funktion liefert den gesetzten Wert oder *false* als Rückgabewert und aktualisiert die Messwerte
+
+##### GetCableUnlockMode(int $Instanz)
+Auslesen des aktuellen CableUnlockModes. Dabei gelten folgende Werte:
++ 0 = normaler Modus - Das Kabel bleibt am go-eCharger verriegelt, solange ein Fahrzeug angeschlossen ist
++ 1 = automatischer Modus - Das Kabel wird nach dem Ladeende automatisch entriegelt
++ 2 = verriegelt - Das Kabel kann nur durch Änderung des Verriegelungsmodus entriegelt werden
+```
+$CableUnlockMode = GOeCharger_SetCableUnlockMode( $Instanz ); // liest den aktuellen Entriegelungsmodus
+```
+
+##### SetCableUnlockMode(int $Instanz, int $unlockMode)
+Einstellen des CableUnlockModes. Dabei gelten folgende Werte:
++ 0 = normaler Modus - Das Kabel bleibt am go-eCharger verriegelt, solange ein Fahrzeug angeschlossen ist
++ 1 = automatischer Modus - Das Kabel wird nach dem Ladeende automatisch entriegelt
++ 2 = verriegelt - Das Kabel kann nur durch Änderung des Verriegelungsmodus entriegelt werden
+```
+GOeCharger_SetCableUnlockMode( $Instanz, 1 ); // setzt den automatischen Entriegelungsmodus
+```
+
+##### IsAccessControlActive(int $Instanz)
+Mit dieser Funktion kann der Zustand der Zugangssteuerung (ist eine Nutzung eines RFID notwendig) abgefragt werden. Mögliche Werte sind
++ 0 = Offen
++ 1 = RFID / App benötigt
++ 2 = Strompreis / automatisch
+```
+$RFIDneeded = GOeCharger_GetAccessControl( $Instanz ); // Liest die Einstellung der Zugangskontrolle 
+```
+
+##### SetAccessControl(int $Instanz, int $mode)
+Mit dieser Funktion kann die Zugangssteuerung via RFID oder App bzw. die Stromautomatik des go-eChargers aktiviert oder deaktiviert werden. Mögliche Werte sind
++ 0 = Offen
++ 1 = RFID / App benötigt
++ 2 = Strompreis / automatisch
+```
+GOeCharger_SetAccessControl( $Instanz, 1 ); // aktiviert die Zugangskontrolle per RFID
+```
+
+##### GetLEDBrightness(int $Instanz)
+Ermittlung der Helligkeit der LEDs
+```
+$LEDBrightness = GOeCharger_GetLEDBrightness( $Instanz ); // Ermittlung Seriennummer
+```
 
 
 
@@ -203,41 +272,11 @@ $Error = GOeCharger_GetError( $Instanz ); // Ermittlung des Fehlerwerts
 
 
 
-##### 4.1.2.4 Maximal verfügbarer Ladestrom
-Mit diesen Funktionen kann der maximal verfügbare Ladestrom kontrolliert werden, den der go-eCharger zur Verfügung stellen kann. Der aktuell eingestellte Ladestrom ("CurrentChargingAmperage") ist kleiner oder gleich.
 
-###### 4.1.2.4.1 GetMaximumChargingAmperage(int $Instanz )
-Mit dieser Funktion kann der maximal verfügbare Ladestrom des go-eChargers abgefragt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. 
-```
-$MaximumChargingAmperage = GOeCharger_GetMaximumChargingAmperage( $Instanz ); // Liest den maximal verfügbaren Ladestrom
-```
 
-###### 4.1.2.4.2 SetMaximumChargingAmperage(int $Instanz, int $Ampere)
-Mit dieser Funktion kann der maximal verfügbare Ladestrom des go-eChargers gesetzt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. 
-Diese Funktion hat direkte Auswirkung auf die Einstellungen des go-eChargers sowie einen ggf. aktuell stattfindenden Ladevorgang. Der maximale Ladestrom sollte an die verfügbare Hausinstallation angepasst sein. Die über IPS maximal einstellbare Ladestrom kann über die Moduleinstellungen beschränkt werden!
-Sollte der maximal verfügbare Ladestrom reduziert werden, so wird ggf. auch der aktuell eingestellte Ladestrom entsprechend verringert, sofern er das neue Maximum überschreiten würde.
-```
-GOeCharger_SetMaximumChargingAmperage( $Instanz, 16 ); // Setze den maximal verfügbaren Ladestrom auf 16 Ampere
-```
-Die Funktion liefert *true* oder *false* als Rückgabewert und aktualisiert die Messwerte
 
-##### 4.1.2.5 Aktuell verfügbarer Ladestrom
-Mit diesen Funktionen ist der aktuell verfügbare Ladestrom, den der go-eCharger zur Verfügung stellt, kontrollierbar. Wenn der go-eCharger z.B. maximal 32A zur Verfügung stellen kann (siehe "Maximal verfügbarer Ladestrom"), dann kann ggf. der go-eCharger aktuell auf 10A eingestellt sein. 
-Das angeschlossene Fahrzeug kann maximal diesen Ladestrom abrufen, kann aber auch je nach Fahrzeugkonfiguration oder Einstellung weniger nutzen.
 
-###### 4.1.2.5.1 GetCurrentChargingAmperage(int $Instanz)
-Mit dieser Funktion kann der aktuell verfügbare Ladestrom des go-eChargers abgefragt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. 
-```
-$CurrentChargingAmperage = GOeCharger_GetCurrentChargingAmperage( $Instanz ); // Liest den aktuellen Ladestrom 
-```
 
-###### 4.1.2.5.2 SetCurrentChargingAmperage(int $Instanz, int $Ampere)
-Mit dieser Funktion kann der aktuell verfügbare Ladestrom des go-eChargers gesetzt werden. Es sind Werte zwischen 6 und 32 Ampere möglich. Der Wert darf jedoch den derzeitigen, maximal verfügbaren Ladestrom nicht überschreiten!
-Diese Funktion hat direkte Auswirkung auf die Einstellungen des go-eChargers sowie einen ggf. aktuell stattfindenden Ladevorgang.
-```
-GOeCharger_SetCurrentChargingAmperage( $Instanz, 8 ); // Setze den aktuellen Ladestrom auf 8 Ampere
-```
-Die Funktion liefert *true* oder *false* als Rückgabewert und aktualisiert die Messwerte
 
 ##### 4.1.2.6 IsElectricallyGroundedCheck(int $Instanz)
 In einigen Ländern wie z.B. in Norwegen kann es sein, das die Erdung nicht vorhanden ist. Die Erdung wird allerdings vom go-eCharger überprüft. Mit dieser Funktionen kann abgefragt werden, ob der "Norwegen Modus" aktiv ist.
@@ -262,23 +301,7 @@ GOeCharger_SetAccessControl( $Instanz, true ); // aktiviert die Zugangskontrolle
 ```
 
 
-##### 4.1.2.9 Verriegelungsmodus des Kabels
-Mit dieser Funktion kann der Verriegelungsmodus des Kabels am go-eCharger kontrolliert werden. Dabei gelten folgende Werte:
-+ 0 = normaler Modus - Das Kabel bleibt am go-eCharger verriegelt, solange ein Fahrzeug angeschlossen ist
-+ 1 = automatischer Modus - Das Kabel wird nach dem Ladeende automatisch entriegelt
-+ 2 = verriegelt - Das Kabel kann nur durch Änderung des Verriegelungsmodus entriegelt werden
 
-###### 4.1.2.9.1 GetCableUnlockMode(int $Instanz)
-Auslesen des aktuellen CableUnlockModes
-```
-$CableUnlockMode = GOeCharger_SetCableUnlockMode( $Instanz ); // liest den aktuellen Entriegelungsmodus
-```
-
-###### 4.1.2.9.2 SetCableUnlockMode(int $Instanz, int $unlockMode)
-Einstellen des CableUnlockModes
-```
-GOeCharger_SetCableUnlockMode( $Instanz, 1 ); // setzt den automatischen Entriegelungsmodus
-```
 
 ##### 4.1.2.10 Ladekontrolle
 Mit dieser Funktionen kann das Laden am go-eChargers aktiviert oder deaktiviert werden. Im deaktivierten Zustand ist kein Laden möglich!
@@ -333,13 +356,7 @@ Ermittlung der Seriennummer des go-eChargers.
 $SerialID = GOeCharger_GetSerialID( $Instanz ); // Ermittlung Seriennummer
 ```
 
-##### 4.1.2.17 LED Helligkeit
 
-###### 4.1.2.17.1 GetLEDBrightness(int $Instanz)
-Ermittlung der Helligkeit der LEDs
-```
-$LEDBrightness = GOeCharger_GetLEDBrightness( $Instanz ); // Ermittlung Seriennummer
-```
 
 ###### 4.1.2.17.2 SetLEDBrightness(int $Instanz, int $Brightness)
 Setzen der Helligkeit der LEDs
