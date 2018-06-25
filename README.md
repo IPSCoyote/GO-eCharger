@@ -42,9 +42,29 @@ Name | Type | Optionen | Werte | Funktionen verfügbar?
 :--- | :---: |  :---:  | :---  | :---:
 `aktuell verfügbarer Ladestrom` | Integer | RW, WF | Der aktuell verfügbare Ladestrom zum laden eines Fahrzeugs<br>*Beispiel: 16 A* | [Get](#41251-getcurrentchargingamperageint-instanz) / [Set](#41252-setcurrentchargingamperageint-instanz-int-ampere)
 `angeschlossener Adapter` | Integer | RO | Adapter, mit dem der go-eCharger angeschlossen ist<br>0: Kein Adapter<br>1: 16A Adapter | Nein
+`Anzahl Phasen` 
+`bisher geladene Energie`
+`entsperrt durch RFID`
+`Erdungsprüfung`
+`Fehler`
+`Kabel-Leistungsfähigkeit`
+`Kabel-Verriegelungsmodus`
+`Ladeende nach x kw (0kw = deaktiviert)`
+`Ladeende nach Energie für x km (0km = deaktiviert)`
+`LED Helligkeit`
+`Mainboard Temperatur`
+`max. verfügbarer Ladestrom`
 `Seriennummer` | String | RO | Seriennummer des go-eChargers<br>*Beispiel: "000815"* | Nein
+`Status`
 `Wallbox aktiv` | Boolean | RW, WF | Kann an der Wallbox geladen werden? | [Get](#412101-isactiveint-instanz) / [Set](#412102-setactiveint-instanz-bool-aktiv)
-
+`Zugangskontrolle via RFID/APP`
+`Spannungsversorgung X`
+`max. verfügbare Ladeleistung`
+`Ampere zum Fahrzeug Lx`
+`Leistung zum Fahrzeug X`
+`Gesamtleistng zum Fahrzeug`
+`Leistungsfaktor X`
+`geladene Energie Karte X
 
 #### 4.1.1. Status
 + **Seriennummer**
