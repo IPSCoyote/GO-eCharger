@@ -25,6 +25,7 @@ Es soll sowohl Zustandsdaten (Anschluss, Ladevorgang, etc.) als auch Schaltaktio
 Das Modul befindet sich im Entwicklungsstadium und ist derzeit **nicht** für die Nutzung freigegeben.
 
 ## 4. Module
+Derzeit bietet das GIT nur das Modul "go-eCharger" für die direkte Steuerung eines einzelnen go-eChargers. 
 
 ### 4.1. go-eCharger
 
