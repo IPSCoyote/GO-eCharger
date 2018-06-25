@@ -41,7 +41,7 @@ Name | Type | Optionen | Werte | Zugriffsfunktionen
 :--- | :---: |  :---:  | :---  | :---
 `Seriennummer` | String | RO | Seriennummer des go-eChargers | keine
 `Wallbox aktiv` | Integer | RW, WF | Kann an der Wallbox geladen werden?
-Beispiel: 000815 | IsActive / SetActive 
+<br>Beispiel: 000815 | IsActive / SetActive 
 
 
 
