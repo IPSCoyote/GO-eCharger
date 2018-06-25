@@ -146,6 +146,24 @@ Mit dieser Funktion kann der automatische Ladestop des go-eChargers aktiviert we
 GOeCharger_SetAutomaticChargeStopKm( $Instanz, 5 ); // aktiviert den automatischen Ladestop nach einer Ladung für 5km Reichweite
 ```
 
+#### GetPowerToCar(int $Instanz)
+Ermittlung der aktuellen Leistung in kw, die zum ladenden Fahrzeug geliefert wird
+```
+GOeCharger_GetPowerToCar( $Instanz ); // Ermittlung der Ladeleistung zum angeschlossenen Fahrzeug
+```
+
+#### GetCurrentLoadingCycleConsumption(int $Instanz)
+Ermittlung der im aktuellen Ladezyklus abgegebenen kwh
+```
+GOeCharger_GetCurrentLoadingCycleConsumption( $Instanz ); // Ermittlung der im Ladezyklus abgegebenen kwh
+```
+
+#### GetUnlockRFID(int $Instanz)
+Ermittlung der RFID (integer), die zum entsperren genutzt wurde.
+```
+$MainboardTemperature = GOeCharger_GetMainboardTemperature( $Instanz ); // Ermittlung der Mainboard Temperatur
+```
+
 
 
 
@@ -278,11 +296,7 @@ Mainboard Temperatur in Celsius
 $MainboardTemperature = GOeCharger_GetMainboardTemperature( $Instanz ); // Ermittlung der Mainboard Temperatur
 ```
 
-##### 4.1.2.14 GetUnlockRFID(int $Instanz)
-Ermittlung der RFID (integer), die zum entsperren genutzt wurde.
-```
-$MainboardTemperature = GOeCharger_GetMainboardTemperature( $Instanz ); // Ermittlung der Mainboard Temperatur
-```
+
 
 ##### 4.1.2.15 GetSupplyLineVoltageLx(int $Instanz)
 Ermittlung der Spannung der angeschlossenen Phasen.
