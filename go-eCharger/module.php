@@ -844,7 +844,7 @@
             }
             
             if ( $this->GetIDForIdent("powerToCarTotal") == false ) {
-                $this->RegisterVariableFloat("powerToCarTotal", "Gesamtleistung zum Fahrzeug","GOECHARGER_Power.1",62);
+                $this->RegisterVariableFloat("powerToCarTotal", "Aktuelle Leistung zum Fahrzeug","GOECHARGER_Power.1",62);
             }  
             
             if ( $this->GetIDForIdent("powerFactorLineL1") == false ) {
