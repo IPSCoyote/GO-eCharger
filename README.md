@@ -47,7 +47,7 @@ Name | Type | Optionen | Werte | Funktionen
 `entsperrt durch RFID` | Integer | RO | Wurde der go-eCharger durch ein RFID Token entsperrt | [Get](#41214-getunlockrfidint-instanz)
 `Erdungsprüfung` | Boolean | RO | Ist die Erdungsprüfung (Norwegen Modus) aktiv | [Get](#4126-iselectricallygroundedcheckint-instanz)
 `Fehler` | Integer | RO | Liegt ein Fehler am go-eCharger vor<br>0: kein Fehler<br>1: FI Schutzschalter<br>3: Fehler an Phase<br>8: Keine Erdung<br>10: Interner Fehler | [Get](#4122-geterrorint-instanz)
-`Kabel-Leistungsfähigkeit`
+`Kabel-Leistungsfähigkeit` | Integer | RO | Leistungsfähigkeit des Kabels<br>0: kein Kabel<br>13-32: Ampere | [Get](#41211-getcablecapabilityint-instanz)
 `Kabel-Verriegelungsmodus`
 `Ladeende nach x kw (0kw = deaktiviert)`
 `Ladeende nach Energie für x km (0km = deaktiviert)`
