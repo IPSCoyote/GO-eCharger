@@ -63,16 +63,16 @@ Die maximale el. Absicherung, die für den go-eCharger vorhanden ist. Wenn diese
 Hier werden die Update-Intervalle für die Instanz in Sekunden hinterlegt. Gute Werte dürften 10/10 Sekunden sein. Werte unter 5 Sekunden können zu Laufzeitproblemen holen, da ggf. das abholen der Werte länger dauern könnte. 
 Ohne Intervalle muss die Update() Funktion für die Instanz manuell aufgerufen werden (siehe unten).
 
-* **Komfortfunktion - automatische Aktivierung bei Anschluss** 
+* **Komfortfunktion - automatische Aktivierung bei Anschluss**<br> 
 Der go-eCharger deaktiviert sich nach einem automatischen Ladeende (siehe unten). Auch kann er manuell deaktiviert worden sein. Mit dieser Option wird das Laden automatsich re-aktiviert, wenn erneut ein Fahrzeug angeschlossen wird.
 
-* **Komfortfunktion - automatische Aktivierung bei setzen Ladeende**
+* **Komfortfunktion - automatische Aktivierung bei setzen Ladeende**<br>
 Wenn der go-eCharger deaktiv ist und man ein Ladeende setzt, muss er anschließend noch aktiviert werden. Mit dieser Option entfällt dies und das Modul übernimmt die Aktivierung des Ladevorgangs, wenn ein automatisches Ladeende gesetzt wird.
 
-* **Fahrzeugdaten - Verbrauch**
+* **Fahrzeugdaten - Verbrauch**<br>
 Um den automatischen Ladestop anhand von Kilomenter-Angaben setzen zu können, muss das Modul den Durchschnittsverbrauch des angeschlossenen Fahrzeugs wissen, um die benötigten kwh berechnen zu können.
 
-* **Fahrzeugdaten - Batteriegröße**
+* **Fahrzeugdaten - Batteriegröße**<br>
 Die Batteriegrösse wird genutzt, um nicht unnötig viele Optionen für die 5km-Schritte der Km-Ladestop-Option anzubieten. 
 
 ## 4. Module
