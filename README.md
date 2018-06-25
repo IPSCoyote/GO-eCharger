@@ -31,12 +31,16 @@ Das Modul befindet sich im Entwicklungsstadium und ist derzeit **nicht** für di
 Das Modul "go-eCharger" dient als Schnittstelle zu einem lokal installierten go-eCharger. Es liefert aktuelle Messwerte als Instanzvariablen und bietet einen Zugriff auf Funktionen des go-eChargers. Der go-eCharger muss dabei lokal über eine IP-Adresse erreichbar sein (siehe Installation).
 
 #### 4.1.1 Status Variablen
+Im folgenden werden die verfügbaren Statusvariablen mit ihren Eigenschaften, Werten und Zugriffsmöglichkeiten aufgelistet.
 
-RO = Read Only
+RO = **R**ead **O**nly
+RW = **R**ead **W**rite enabled
+WF = **W**eb**f**rond change enabled
 
 Name |  Type | Optionen | Werte | Zugriffsfunktionen
 -----| ------|----------|-------|-------------------
 Seriennummer | String | RO | Seriennummer des go-eChargers | keine
+Wallbox aktiv | Integer | RW, WF | Kann an der Wallbox geladen werden? | 
 
 
 
