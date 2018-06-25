@@ -44,7 +44,7 @@ Name | Type | Optionen | Werte | Funktionen
 :--- | :---: |  :---:  | :---  | :---:
 `Wallbox aktiv` | Boolean | RW, WF | Kann an der Wallbox geladen werden? | [Get](#isactiveint-instanz) / [Set](#setactiveint-instanz-bool-aktiv)
 `Status` | Integer | RO | Allgemeiner Ladestatus des go-eChargers<br>1: Ladestation bereit, kein Fahrzeug<br>2: Fahrzeug lädt<br>3:Warte auf Fahrzeug<br>4: Ladung beendet, Fahrzeug verbunden | [Get](#getstatusint-instanz)
-`Ladeende nach x kwh` | Float | RW, WF | Ladung nach abgabe von X kwh beenden<br>0 = kein automatischer Ladestop<br>0.1-100.0 kwh | [Get](#getautomaticchargestopint-instanz) / [Set](#setautomaticchargestopint-instanz-float-kw)
+`Ladeende nach x kwh` | Float | RW, WF | Ladung nach abgabe von X kwh beenden<br>0 = kein automatischer Ladestop<br>0.1-100.0 kwh | [Get](#getautomaticchargestopint-instanz) / [Set](#setautomaticchargestopint-instanz-float-kwh)
 `Ladeende nach Energie für x km` | Integer | RW, WF | Ladung nach Abgabe von Energie für X Kilomenter beenden<br>0 = kein automatischer Ladestop<br>**Parameter funktioniert nur, wenn ein Verbrauch in den Einstellungen gepflegt ist!** | [Get](#getautomaticchargestopkmint-instanz) / [Set](#setautomaticchargestopkmint-instanz-float-km)
 
 #### Informationen zum aktuellen Ladevorgang
