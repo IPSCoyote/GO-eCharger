@@ -34,9 +34,9 @@ Das Modul "go-eCharger" dient als Schnittstelle zu einem lokal installierten go-
 #### 4.1.1 Status Variablen
 Im folgenden werden die verfügbaren Statusvariablen mit ihren Eigenschaften, Werten und Zugriffsmöglichkeiten aufgelistet. Wenn Funktionen verfügbar sind, sind diese im Anschluss aufgelistet. 
 
-RO = **R**ead **O**nly<br>
-RW = **R**ead **W**rite enabled<br>
-WF = **W**eb**f**rond change enabled (die Variablen können zwecks Anzeige natürlich alle ins WF eingebunden werden)
+- RO = **R**ead **O**nly<br>
+- RW = **R**ead **W**rite enabled<br>
+- WF = **W**eb**f**rond change enabled (die Variablen können zwecks Anzeige natürlich alle ins Webfront eingebunden werden)
 
 Name | Type | Optionen | Werte | Funktionen
 :--- | :---: |  :---:  | :---  | :---:
