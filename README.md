@@ -50,7 +50,7 @@ Name | Type | Optionen | Werte | Funktionen
 `Kabel-Leistungsfähigkeit` | Integer | RO | Leistungsfähigkeit des angeschlossenen Kabels<br>0: kein Kabel<br>13-32: Ampere | [Get](#41211-getcablecapabilityint-instanz)
 `Kabel-Verriegelungsmodus` | Integer | RW | Verriegelungsmodus für das Kabel<br>0: Verriegeln, solange Auto angesteckt<br>1: Nach Ladevorgang entriegeln<br>2: Kabel immer verriegelt | [Get](#41291-getcableunlockmodeint-instanz) / [Set](#41292-setcableunlockmodeint-instanz-int-unlockmode)
 `Ladeende nach x kw (0kw = deaktiviert)` | Float | RW, WF | Ladung nach abgabe von X kw beenden<br>0 = kein automatischer Ladestop | [Get](#41281-getautomaticchargestopint-instanz) / [Set](#41282-setautomaticchargestopint-instanz-float-kw)
-`Ladeende nach Energie für x km (0km = deaktiviert)` | Integer | RW, WF | Ladung nach Abgabe von Energie für X Kilomenter beenden<br>0 = kein automatischer Ladestop<br>Parameter funktioniert nur, wenn ein Verbrauch in den Einstellungen gepflegt ist! | Nein
+`Ladeende nach Energie für x km (0km = deaktiviert)` | Integer | RW, WF | Ladung nach Abgabe von Energie für X Kilomenter beenden<br>0 = kein automatischer Ladestop<br>**Parameter funktioniert nur, wenn ein Verbrauch in den Einstellungen gepflegt ist!** | Nein
 `LED Helligkeit`
 `Mainboard Temperatur`
 `max. verfügbarer Ladestrom`
