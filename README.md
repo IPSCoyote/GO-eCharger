@@ -51,7 +51,7 @@ Name | Type | Optionen | Werte | Funktionen
 `Kabel-Verriegelungsmodus` | Integer | RW | Verriegelungsmodus für das Kabel<br>0: Verriegeln, solange Auto angesteckt<br>1: Nach Ladevorgang entriegeln<br>2: Kabel immer verriegelt | [Get](#41291-getcableunlockmodeint-instanz) / [Set](#41292-setcableunlockmodeint-instanz-int-unlockmode)
 `Ladeende nach x kw (0kw = deaktiviert)` | Float | RW, WF | Ladung nach abgabe von X kw beenden<br>0 = kein automatischer Ladestop | [Get](#41281-getautomaticchargestopint-instanz) / [Set](#41282-setautomaticchargestopint-instanz-float-kw)
 `Ladeende nach Energie für x km (0km = deaktiviert)` | Integer | RW, WF | Ladung nach Abgabe von Energie für X Kilomenter beenden<br>0 = kein automatischer Ladestop<br>**Parameter funktioniert nur, wenn ein Verbrauch in den Einstellungen gepflegt ist!** | Nein
-`LED Helligkeit`
+`LED Helligkeit` | Integer | RW | Helligkeit der LEDs<br>0: LED aus<br>1 - 255: LED Helligkeit | [Get](#412171-getledbrightnessint-instanz) / [Set](#412172-setledbrightnessint-instanz-int-brightness)
 `Mainboard Temperatur`
 `max. verfügbarer Ladestrom`
 `Seriennummer` | String | RO | Seriennummer des go-eChargers<br>*Beispiel: "000815"* | Nein
