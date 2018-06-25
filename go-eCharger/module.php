@@ -617,9 +617,10 @@
             if ( !IPS_VariableProfileExists('GOECHARGER_Status') ) {
                 IPS_CreateVariableProfile('GOECHARGER_Status', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Status', 'Ok' );
-                IPS_SetVariableProfileAssociation("GOECHARGER_Status", 1, "bereit zum Laden"    , "", 0xFFFFFF);
-                IPS_SetVariableProfileAssociation("GOECHARGER_Status", 2, "ladend"              , "", 0xFFFFFF);
-                IPS_SetVariableProfileAssociation("GOECHARGER_Status", 3, "warten auf Fahrzeug" , "", 0xFFFFFF);
+                IPS_SetVariableProfileAssociation("GOECHARGER_Status", 1, "Ladestation bereit, kein Fahrzeug"       , "", 0xFFFFFF);
+                IPS_SetVariableProfileAssociation("GOECHARGER_Status", 2, "Fahrzeug lädt"                           , "", 0xFFFFFF);
+                IPS_SetVariableProfileAssociation("GOECHARGER_Status", 3, "Warten auf Fahrzeug"                     , "", 0xFFFFFF);
+                IPS_SetVariableProfileAssociation("GOECHARGER_Status", 4, "Ladung beendet, Fahrzeug noch verbunden" , "", 0xFFFFFF);
             }    
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Error') ) {
