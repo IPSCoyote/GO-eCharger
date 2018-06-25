@@ -91,9 +91,9 @@ Name | Type | Optionen | Werte | Funktionen
 
 #### 4.1.2. Funktionen
 
-#### Grundfunktionen zum Laden
+#### Grundfunktionen (zum Laden)
 
-#### Update(int $Instanz)
+##### Update(int $Instanz)
 Aktualisiert die Messwerte (IPS Variablen) des go-eChargers. Diese Funktion wird auch in Abhängigkeit der eingestellten Aktualisierungsfrequenzen in den Moduleinstellungender ausgeführt, so dass normalerweise ein manueller Aufruf unnötig sein sollte.
 ```
 GOeCharger_Update( $Instanz ); // Aktualisiert die Messwerte (IPS Variablen) des go-eChargers
@@ -110,7 +110,30 @@ $ChargingActivated = GOeCharger_SetActivation( $Instanz ); // Ermittlung, ob Lad
 GOeCharger_SetActivation( $Instanz, false ); // deaktiviert den go-eCharger 
 ```
 
+##### GetStatus(int $Instanz)
+Ermittlung des aktuellen Status des go-eChargers.
++ 1: Ladestation bereit, kein Fahrzeug
++ 2: Fahrzeug lädt
++ 3: Warte auf Fahrzeug
++ 4: Ladung beendet, Fahrzeug noch verbunden
+```
+$Status = GOeCharger_GetStatus( $Instanz ); // Ermittlung des Status
+```
 
+##### Automatische Beendigung des Ladens
+Mit dieser Funktion des go-eChargers kann ein "Ladestopp" gesetzt werden, so dass nur z.B. 5kw geladen werden können (danach wird das Laden beendet). Ein Wert von "0" entspricht der Deaktivierung der Funktion. Zudem entspricht der eingestellte Wert **nicht** dem Ladestand des Fahrzeugs sondern der maximal ladbaren Energie! Wenn das Fahrzeug also mit 20% Akkustand angeschlossen wird, dann können maximal z.B. 5kw geladen werden.
+
+###### GetAutomaticChargeStop(int $Instanz)
+Auslesen des aktuell eingestellten Ladestopp-Werts.
+```
+$AutomaticChargeStopAt = GOeCharger_SetAutomaticChargeStop( $Instanz ); // liest den automatischen Ladestop 
+```
+
+###### SetAutomaticChargeStop(int $Instanz, float $kw)
+Mit dieser Funktion kann der automatische Ladestop des go-eChargers aktiviert werden. Während der Wert '0' den automatischen Ladestop deaktivert, können höhere Werte bis 100 (Maximum) als Ladegrenze in kw angegeben werden. 
+```
+GOeCharger_SetAutomaticChargeStop( $Instanz, 10.5 ); // aktiviert den automatischen Ladestop bei 10,5 kw
+```
 
 
 
@@ -135,15 +158,7 @@ Ermittlung ob der go-eCharger einen Fehlercode meldet.
 $Error = GOeCharger_GetError( $Instanz ); // Ermittlung des Fehlerwerts
 ```
 
-##### 4.1.2.3 GetStatus(int $Instanz)
-Ermittlung des aktuellen Status des go-eChargers.
-+ 1: Ladestation bereit, kein Fahrzeug
-+ 2: Fahrzeug lädt
-+ 3: Warte auf Fahrzeug
-+ 4: Ladung beendet, Fahrzeug noch verbunden
-```
-$Status = GOeCharger_GetStatus( $Instanz ); // Ermittlung des Status
-```
+
 
 ##### 4.1.2.4 Maximal verfügbarer Ladestrom
 Mit diesen Funktionen kann der maximal verfügbare Ladestrom kontrolliert werden, den der go-eCharger zur Verfügung stellen kann. Der aktuell eingestellte Ladestrom ("CurrentChargingAmperage") ist kleiner oder gleich.
@@ -203,20 +218,7 @@ Mit dieser Funktion kann die Zugangssteuerung via RFID oder App des go-eChargers
 GOeCharger_SetAccessControl( $Instanz, true ); // aktiviert die Zugangskontrolle 
 ```
 
-##### 4.1.2.8 Automatische Beendigung des Ladens
-Mit dieser Funktion des go-eChargers kann ein "Ladestopp" gesetzt werden, so dass nur z.B. 5kw geladen werden können (danach wird das Laden beendet). Ein Wert von "0" entspricht der Deaktivierung der Funktion. Zudem entspricht der eingestellte Wert **nicht** dem Ladestand des Fahrzeugs sondern der maximal ladbaren Energie! Wenn das Fahrzeug also mit 20% Akkustand angeschlossen wird, dann können maximal z.B. 5kw geladen werden.
 
-###### 4.1.2.8.1 GetAutomaticChargeStop(int $Instanz)
-Auslesen des aktuell eingestellten Ladestopp-Werts.
-```
-$AutomaticChargeStopAt = GOeCharger_SetAutomaticChargeStop( $Instanz ); // liest den automatischen Ladestop 
-```
-
-###### 4.1.2.8.2 SetAutomaticChargeStop(int $Instanz, float $kw)
-Mit dieser Funktion kann der automatische Ladestop des go-eChargers aktiviert werden. Während der Wert '0' den automatischen Ladestop deaktivert, können höhere Werte bis 100 (Maximum) als Ladegrenze in kw angegeben werden. 
-```
-GOeCharger_SetAutomaticChargeStop( $Instanz, 10.5 ); // aktiviert den automatischen Ladestop bei 10,5 kw
-```
 ##### 4.1.2.9 Verriegelungsmodus des Kabels
 Mit dieser Funktion kann der Verriegelungsmodus des Kabels am go-eCharger kontrolliert werden. Dabei gelten folgende Werte:
 + 0 = normaler Modus - Das Kabel bleibt am go-eCharger verriegelt, solange ein Fahrzeug angeschlossen ist
