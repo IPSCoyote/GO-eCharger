@@ -66,18 +66,6 @@ Name | Type | Optionen | Werte | Funktionen
 `Leistungsfaktor X` | Float | RO | Leistungsfaktor auf L1-3 und N in % | Nein
 `geladene Energie Karte X` | Float | RO | Geladene Energiemenge pro Karte in kwh | [Get](#41217-getenergychargedbycardint-instanz-int-cardid)
 
-#### 4.1.1. Status
-+ **Seriennummer**
-+ **Zustand**
-+ **derzeit verfügbarer Ladestrom** (Strom, den ein eFahrzeug bei Anschluss max. bekommt)
-+ **maximal verfügbarer Ladestrom** (Strom, der an eCharger maximal für das Laden gewählt werden kann)
-+ **verfügbare Spannung an Phase 1 / 2 / 3** (die Spannungsversorgung des go-eChargers je Phase)
-+ **max. verfügbare Ladeleistung** (berechnet aus der aktuellen Spannungsversorgung sowie dem verfügbaren Ladestrom)
-+ **Kabel-Verriegelungsmodus** (0 = Verriegelt, wenn Auto angeschlossen; 1 = Am Ladeende entriegeln; 2 = Immer verriegelt)
-+ **Ladeende bei Akkustand** (0.0 kw - 100.0 kw; 0.0 = deaktiviert)
-+ **Zugangskontrolle via RFID/APP** (0 = aus; 1 = an)
-+ **Charger aktiviert** (0 = deaktiviert; 1 = aktiviert)
-
 #### 4.1.2. Funktionen
 
 ##### 4.1.2.1 Update(int $Instanz)
