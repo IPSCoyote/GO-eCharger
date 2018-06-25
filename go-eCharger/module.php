@@ -179,6 +179,18 @@
             return true;
         }
        
+        public function getPowerToCar() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerEnergy[11]/100; 
+        }
+        
+        public function getCurrentLoadingCycleConsumption() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'dws'}/361010.83; 
+        }
+        
         public function getMaximumChargingAmperage() {
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
