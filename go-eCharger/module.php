@@ -35,7 +35,7 @@
 
           // Set Data to Variables (and update timer)
           $this->Update();
-        }
+        } 
         
         public function Destroy() {
             $this->UnregisterTimer("GOeChargerTimer_UpdateTimer");
