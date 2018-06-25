@@ -59,7 +59,7 @@ Name | Type | Optionen | Werte | Funktionen
 `Wallbox aktiv` | Boolean | RW, WF | Kann an der Wallbox geladen werden? | [Get](#412101-isactiveint-instanz) / [Set](#412102-setactiveint-instanz-bool-aktiv)
 `Zugangskontrolle via RFID/APP` | Integer | RW, WF | Zugangskontrolle<br>0: frei zugänglich<br>1: RFID Identifizierung<br>2: Strompreis/automatisch | [Get](#41271-isaccesscontrolactiveint-instanz) / [Set](#41272-setaccesscontrolint-instanz-bool-aktiv)
 `Spannungsversorgung X` | Integer | RO | Spannung an L1, L2, L3 und N in Volt | [Get](#41215-getsupplylinevoltagelxint-instanz) 
-`max. verfügbare Ladeleistung`
+`max. verfügbare Ladeleistung` | Float | RO | Berechnete max. verfügbare Ladeleistung in kw | [Get](#41216-getsupplylineenergyint-instanz)
 `Ampere zum Fahrzeug Lx`
 `Leistung zum Fahrzeug X`
 `Gesamtleistng zum Fahrzeug`
