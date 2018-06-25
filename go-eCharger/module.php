@@ -637,6 +637,7 @@
                 IPS_CreateVariableProfile('GOECHARGER_Access', 1 );
                 IPS_SetVariableProfileAssociation("GOECHARGER_Access", 0, "frei zugänglich"     , "", 0x00FF00);
                 IPS_SetVariableProfileAssociation("GOECHARGER_Access", 1, "RFID Identifizierung", "", 0xFF0000);
+                IPS_SetVariableProfileAssociation("GOECHARGER_Access", 2, "Strompreis / automatisch", "", 0xFF0000);
             }  
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Ampere') ) {
