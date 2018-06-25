@@ -53,8 +53,19 @@ Nachdem eine Instanz des Moduls angelegt wurde, muss diese eingerichtet werden.
 
 * IP-Adresse<br>
 Statische IP Adresse unter der der go-eCharger im lokalen WLAN erreichbar ist.
-* el. Absicherung
+* el. Absicherung<br>
 Die maximale el. Absicherung, die für den go-eCharger vorhanden ist. Wenn dieser an einer 16A abgesicherten Zuleitung abgesichert ist, wären dies 16A. Andere Werte entsprechend.
+* Update Intervalle<br>
+Hier werden die Update-Intervalle für die Instanz in Sekunden hinterlegt. Gute Werte dürften 10/10 Sekunden sein. Werte unter 5 Sekunden können zu Laufzeitproblemen holen, da ggf. das abholen der Werte länger dauern könnte. 
+Ohne Intervalle muss die Update() Funktion für die Instanz manuell aufgerufen werden (siehe unten).
+* Komfortfunktion - automatische Aktivierung bei Anschluss 
+Der go-eCharger deaktiviert sich nach einem automatischen Ladeende (siehe unten). Auch kann er manuell deaktiviert worden sein. Mit dieser Option wird das Laden automatsich re-aktiviert, wenn erneut ein Fahrzeug angeschlossen wird.
+* Komfortfunktion - automatische Aktivierung bei setzen Ladeende
+Wenn der go-eCharger deaktiv ist und man ein Ladeende setzt, muss er anschließend noch aktiviert werden. Mit dieser Option entfällt dies und das Modul übernimmt die Aktivierung des Ladevorgangs, wenn ein automatisches Ladeende gesetzt wird.
+* Fahrzeugdaten - Verbrauch
+Um den automatischen Ladestop anhand von Kilomenter-Angaben setzen zu können, muss das Modul den Durchschnittsverbrauch des angeschlossenen Fahrzeugs wissen, um die benötigten kwh berechnen zu können.
+* Fahrzeugdaten - Batteriegröße
+Die Batteriegrösse wird genutzt, um nicht unnötig viele Optionen für die 5km-Schritte der Km-Ladestop-Option anzubieten. 
 
 ## 4. Module
 Derzeit bietet das GIT nur das Modul "go-eCharger" für die direkte Steuerung eines einzelnen go-eChargers. 
