@@ -64,7 +64,7 @@ Name | Type | Optionen | Werte | Funktionen verfügbar?
 `Leistung zum Fahrzeug X`
 `Gesamtleistng zum Fahrzeug`
 `Leistungsfaktor X`
-`geladene Energie Karte X
+`geladene Energie Karte X`
 
 #### 4.1.1. Status
 + **Seriennummer**
