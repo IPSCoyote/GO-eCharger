@@ -47,6 +47,9 @@ Anschließend kann eine Instanz des Moduls angelegt werden.
 ### Einrichten der Modul-Instanz
 Nachdem eine Instanz des Moduls angelegt wurde, muss diese eingerichtet werden.
 
+<p align="center">
+  <img width="1009" height="670" src="./images/Modul%20einrichten.jpg">
+</p>
 
 
 ## 4. Module
