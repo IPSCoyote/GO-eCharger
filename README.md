@@ -45,7 +45,7 @@ Name | Type | Optionen | Werte | Funktionen
 `Anzahl Phasen` | String | RO | Phasen vor und nach dem Schütz<br>*Beispiel: "Phase 1-3 ist vorhanden"* | Nein
 `bisher geladene Energie` | Float | RO | Bisher vom go-eCharger abgegebene Energie in kwh<br>*Beispiel: 379,0 kwh* | Nein
 `entsperrt durch RFID` | Integer | RO | Wurde der go-eCharger durch ein RFID Token entsperrt | [Get](#41214-getunlockrfidint-instanz)
-`Erdungsprüfung`
+`Erdungsprüfung` | Boolean | RO | Ist die Erdungsprüfung (Norwegen Modus) aktiv | [Get](#4126-iselectricallygroundedcheckint-instanz)
 `Fehler`
 `Kabel-Leistungsfähigkeit`
 `Kabel-Verriegelungsmodus`
