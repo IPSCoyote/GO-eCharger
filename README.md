@@ -38,7 +38,7 @@ RO = **R**ead **O**nly<br>
 RW = **R**ead **W**rite enabled<br>
 WF = **W**eb**f**rond change enabled (die Variablen können zwecks Anzeige natürlich alle ins WF eingebunden werden)
 
-Name | Type | Optionen | Werte | Funktionen verfügbar?
+Name | Type | Optionen | Werte | Funktionen
 :--- | :---: |  :---:  | :---  | :---:
 `aktuell verfügbarer Ladestrom` | Integer | RW, WF | Der aktuell verfügbare Ladestrom zum laden eines Fahrzeugs<br>*Beispiel: 16 A* | [Get](#41251-getcurrentchargingamperageint-instanz) / [Set](#41252-setcurrentchargingamperageint-instanz-int-ampere)
 `angeschlossener Adapter` | Integer | RO | Adapter, mit dem der go-eCharger angeschlossen ist<br>0: Kein Adapter<br>1: 16A Adapter | Nein
