@@ -659,10 +659,10 @@
         protected function registerVariables() {
             
             //--- Basic Functions -------------------------------------------------------------
-            if ( $this->GetIDForIdent("accessState") == false ) {
+            //if ( $this->GetIDForIdent("accessState") == false ) {
                 $this->RegisterVariableBoolean("accessState", "Wallbox aktiv","~Switch",11);
                 $this->EnableAction("accessState");  
-            }  
+            //}  
             
             if ( $this->GetIDForIdent("status") == false ) {
                 $this->RegisterVariableInteger("status", "Status","GOECHARGER_Status",12);
