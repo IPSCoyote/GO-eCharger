@@ -59,7 +59,7 @@ Name | Type | Optionen | Werte | Funktionen
 
 Name | Type | Optionen | Werte | Funktionen
 :--- | :---: |  :---:  | :---  | :---:
-`bisher abgegebene Energie` | Float | RO | Bisher insgesamt vom go-eCharger abgegebene Energie in kwh<br>*Beispiel: 379,0 kwh* | [Get](#GetEnergyChargedInTotalint-instanz)
+`bisher abgegebene Energie` | Float | RO | Bisher insgesamt vom go-eCharger abgegebene Energie in kwh<br>*Beispiel: 379,0 kwh* | [Get](#getenergychargedintotalint-instanz)
 `geladene Energie Karte X` | Float | RO | Geladene Energiemenge pro Karte in kwh | [Get](#getenergychargedbycardint-instanz-int-cardid)
 
 #### Einstellungen
