@@ -613,14 +613,6 @@
                 IPS_SetVariableProfileAssociation("GOECHARGER_AutomaticStopKM", 100, "100 km", "", 0xFF0000);
                 IPS_SetVariableProfileText('GOECHARGER_AutomaticStopKM', "", "" );
             }
-            if ( IPS_VariableProfileExists('GOECHARGER_AutomaticStopKM') ) {
-                if ( $this->ReadPropertyFloat("MaxLoadKw") > 0  and
-                     $this->ReadPropertyFloat("AverageConsumption") > 0 ) {
-                    $Km = Round($this->ReadPropertyFloat("MaxLoadKw")/$this->ReadPropertyFloat("AverageConsumption")*100,0);
-                    $maxKm = round($Km/5,0)*5;
-                    IPS_SetVariableProfileValues('GOECHARGER_AutomaticStopKM', 0, $maxKm, 5 );
-                }
-            }
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Adapter') ) {
                 IPS_CreateVariableProfile('GOECHARGER_Adapter', 1 );
