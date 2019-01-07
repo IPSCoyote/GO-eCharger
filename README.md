@@ -1,6 +1,6 @@
 ### IP-Symcon Modul für die GO-eCharger Wallbox
 
-PHP-Modul zur Einbindung eines GO-eChargers in IPSymcon. 
+PHP-Modul zur Einbindung einer [GO-eCharger Wallbox](www.go-e.co) in IPSymcon. 
 
 Nutzung auf eigene Gefahr ohne Gewähr. Das Modul kann jederzeit überarbeitet werden, so daß Anpassungen für eine weitere Nutzung notwendig sein können. Bei der Weiterentwicklung wird möglichst auf Kompatibilität geachtet. 
 
