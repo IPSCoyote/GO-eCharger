@@ -1,4 +1,4 @@
-<?
+<?php
     class go_eCharger extends IPSModule {
  
         public function __construct($InstanceID) {
