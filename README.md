@@ -174,7 +174,7 @@ $Status = GOeCharger_GetStatus( $Instanz ); // Ermittlung des Status
 #### GetAutomaticChargeStop(int $Instanz)
 Der Go-eCharger kann die Ladung automatisch nach x kwh beenden. Mit diese Funktion kann der aktuell eingestellte Wert abgefragt werden. Der Wert 0 zeigt an, das kein automatischer Ladestop eingestellt ist.
 ```
-$AutomaticChargeStopAt = GOeCharger_SetAutomaticChargeStop( $Instanz ); // liest den automatischen Ladestop 
+$AutomaticChargeStopAt = GOeCharger_GetAutomaticChargeStop( $Instanz ); // liest den automatischen Ladestop 
 ```
 
 #### SetAutomaticChargeStop(int $Instanz, float $kwh)
@@ -187,7 +187,7 @@ GOeCharger_SetAutomaticChargeStop( $Instanz, 10.5 ); // aktiviert den automatisc
 Diese Funktion benötigt die Angabe des Durchschnittsverbrauchs in den Instanz-Einstellungen für einen PKW, der typischerweise an diesem Go-eCharger lädt!
 Mit diese Funktion kann analog zur Funktion GetAutomaticChargeStop() der aktuell eingestellte Wert für den Ladestop umgerechnet in Km abgefragt werden. Der Wert 0 zeigt an, das kein automatischer Ladestop eingestellt ist.
 ```
-$AutomaticChargeStopAtKm = GOeCharger_SetAutomaticChargeStopKm( $Instanz ); // liest den automatischen Ladestop in Km
+$AutomaticChargeStopAtKm = GOeCharger_GetAutomaticChargeStopKm( $Instanz ); // liest den automatischen Ladestop in Km
 ```
 
 #### SetAutomaticChargeStopKm(int $Instanz, float $km)
@@ -212,7 +212,7 @@ GOeCharger_GetCurrentLoadingCycleConsumption( $Instanz ); // Ermittlung der im L
 #### GetUnlockRFID(int $Instanz)
 Ermittlung der RFID (integer), die zum entsperren genutzt wurde.
 ```
-$MainboardTemperature = GOeCharger_GetMainboardTemperature( $Instanz ); // Ermittlung der Mainboard Temperatur
+$RFID = GOeCharger_GetUnlockRFID( $Instanz ); // Ermittlung der aktuellen RFID, die zum entsperren verwendet wurde
 ```
 
 #### GetEnergyChargedInTotal(int $Instanz)
@@ -262,7 +262,7 @@ Auslesen des aktuellen CableUnlockModes. Dabei gelten folgende Werte:
 + 1 = automatischer Modus - Das Kabel wird nach dem Ladeende automatisch entriegelt
 + 2 = verriegelt - Das Kabel kann nur durch Änderung des Verriegelungsmodus entriegelt werden
 ```
-$CableUnlockMode = GOeCharger_SetCableUnlockMode( $Instanz ); // liest den aktuellen Entriegelungsmodus
+$CableUnlockMode = GOeCharger_GetCableUnlockMode( $Instanz ); // liest den aktuellen Entriegelungsmodus
 ```
 
 #### SetCableUnlockMode(int $Instanz, int $unlockMode)
