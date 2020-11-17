@@ -152,13 +152,13 @@ Die Funktion liefert true oder false als Rückgabewert und aktualisiert die Mess
 #### IsActive(int $Instanz)
 Prüft, ob die Wallbox aktuell zum laden freigegeben ist. 
 ```
-$ChargingActivated = GOeCharger_SetActivation( $Instanz ); // Ermittlung, ob Laden möglich ist
+$ChargingActivated = GOeCharger_IsActive( $Instanz ); // Ermittlung, ob Laden möglich ist
 ```
 
 #### SetActive(int $Instanz, bool $aktiv)
 Mit dieser Funktion kann das Laden an der Wallbox freigegeben oder abgebrochen werden. 
 ```
-GOeCharger_SetActivation( $Instanz, false ); // deaktiviert den go-eCharger 
+GOeCharger_SetActive( $Instanz, false ); // deaktiviert den go-eCharger 
 ```
 
 #### GetStatus(int $Instanz)
