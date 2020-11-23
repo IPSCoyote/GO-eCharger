@@ -452,6 +452,7 @@
                     break;
                     
                 case "ledBrightness":
+                    $this->setLedBrightness( $Value );
                     break;
                     
                 default:
