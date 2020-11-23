@@ -326,4 +326,4 @@ GOeCharger_SetLEDEnergySave( $Instanz, true ); // Aktivierung der Energiesparein
   * Setzen der aktuellen Stromstärke via Webfront funktioniere nicht
 * Funktionserweiterungen
   * LED Energiesparfunktion ( LEDGetEnergySave / LEDSetEnergySave )
-- Funktionserweiterungen
+
