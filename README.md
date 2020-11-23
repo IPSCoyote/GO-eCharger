@@ -122,6 +122,7 @@ Name | Type | Optionen | Werte | Funktionen
 `Kabel-Verriegelungsmodus` | Integer | RW, WF | Verriegelungsmodus für das Kabel<br>0: Verriegeln, solange Auto angesteckt<br>1: Nach Ladevorgang entriegeln<br>2: Kabel immer verriegelt | [Get](#getcableunlockmodeint-instanz) / [Set](#setcableunlockmodeint-instanz-int-unlockmode)
 `Zugangskontrolle via RFID/APP` | Integer | RW, WF | Zugangskontrolle<br>0: frei zugänglich<br>1: RFID Identifizierung<br>2: Strompreis/automatisch | [Get](#getaccesscontrolint-instanz) / [Set](#setaccesscontrolint-instanz-int-mode)
 `LED Helligkeit` | Integer | RW, WF | Helligkeit der LEDs<br>0: LED aus<br>1 - 255: LED Helligkeit | [Get](#getledbrightnessint-instanz) / [Set](#setledbrightnessint-instanz-int-brightness)
+`LED Energiesparfunktion` | Integer | RW, WF | Energiesparfunktion der LEDs<br>0: LED aus<br>1 - 255: LED Helligkeit | [Get](#getledenergysaveint-instanz) / [Set](#setledenergysaveint-instanz-bool-energysaveactive)
 
 #### Technische Informationen
 
@@ -295,11 +296,23 @@ GOeCharger_SetAccessControl( $Instanz, 1 ); // aktiviert die Zugangskontrolle pe
 #### GetLEDBrightness(int $Instanz)
 Ermittlung der Helligkeit der LEDs
 ```
-$LEDBrightness = GOeCharger_GetLEDBrightness( $Instanz ); // Ermittlung Seriennummer
+$LEDBrightness = GOeCharger_GetLEDBrightness( $Instanz ); // Ermittlung der LED Helligkeit
 ```
 
 #### SetLEDBrightness(int $Instanz, int $Brightness)
 Setzen der Helligkeit der LEDs
 ```
 GOeCharger_SetLEDBrightness( $Instanz, 255 ); // Setzen der LED Helligkeit auf Maximum
+```
+
+#### GetLEDEnergySave(int $Instanz)
+Ermittlung der Energiespar-Einstellung für den LED Ring
+```
+$LEDEnergySaveActive = GOeCharger_GetLEDEnergySave( $Instanz ); // Ermittlung des Status der Energiespareinstellung für den LED Ring
+```
+
+#### SetLEDEnergySave(int $Instanz, bool $energySaveActive)
+Aktivieren oder Deaktivieren der Energiespareinstellung für den LED Ring (Auto-Aus nach 10 Sek.)
+```
+GOeCharger_SetLEDEnergySave( $Instanz, true ); // Aktivierung der Energiespareinstellung für den LED Ring
 ```
