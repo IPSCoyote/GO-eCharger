@@ -12,6 +12,7 @@ Nutzung auf eigene Gefahr ohne Gewähr. Das Modul kann jederzeit überarbeitet w
 2. [Systemanforderungen](#2-systemanforderungen)
 3. [Installation](#3-installation)
 4. [Module](#4-module)
+5. [ChangeLog](#5-changelog)
 
 ## 1. Funktionsumfang
 
@@ -316,3 +317,13 @@ Aktivieren oder Deaktivieren der Energiespareinstellung für den LED Ring (Auto-
 ```
 GOeCharger_SetLEDEnergySave( $Instanz, true ); // Aktivierung der Energiespareinstellung für den LED Ring
 ```
+
+## 5. ChangeLog
+Änderungshistorie
+### Version 1.5
+* Fehlerkorrekturen
+  * LED Helligkeit nicht via Webfront änderbar
+  * Setzen der aktuellen Stromstärke via Webfront funktioniere nicht
+* Funktionserweiterungen
+  * LED Energiesparfunktion ( LEDGetEnergySave / LEDSetEnergySave )
+- Funktionserweiterungen
