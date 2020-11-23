@@ -716,7 +716,7 @@
 
             $this->RegisterVariableInteger("ledBrightness", "LED Helligkeit","~Intensity.255",75);
             $this->EnableAction("ledBrightness");
-            $this->RegisterVariableInteger("ledEnergySave", "LED Energiesparfunktion","~Switch",76);
+            $this->RegisterVariableBoolean("ledEnergySave", "LED Energiesparfunktion","~Switch",76);
             $this->EnableAction("ledEnergySave");            
             
             //--- Technical Informations ------------------------------------------------------
