@@ -121,7 +121,6 @@
             SetValue($this->GetIDForIdent("powerFactorLineN"),        $goEChargerEnergy[15]/100);             
             SetValue($this->GetIDForIdent("serialID"),                $goEChargerStatus->{'sse'});  
             SetValue($this->GetIDForIdent("ledBrightness"),           $goEChargerStatus->{'lbr'});  
-            SetValue($this->GetIDForIdent("ledEnergySave"),           $goEChargerStatus->{'lse'});  
             SetValue($this->GetIDForIdent("maxAvailableAMP"),         $goEChargerStatus->{'ama'}); 
             SetValue($this->GetIDForIdent("cableUnlockMode"),         $goEChargerStatus->{'ust'});
             $groundCheck = true;
