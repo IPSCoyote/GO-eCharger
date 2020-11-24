@@ -396,7 +396,7 @@
             return $goEChargerStatus->{'lse'}; 
         }
         
-        public function setLEDEnergySave(boolean $energySaveActive) {
+        public function setLEDEnergySave(bool $energySaveActive) {
             if ( $energySaveActive == true ) { $value = 1; } else { $value = 0; }
             $resultStatus = $this->setValueToeCharger( 'lse', $value ); 
             // Update all data
