@@ -712,21 +712,21 @@
             
             if ( !IPS_VariableProfileExists('GOECHARGER_AwattarPricezone') ) {
                 IPS_CreateVariableProfile('GOECHARGER_AwattarPricezone', 1 );
-                IPS_SetVariableProfileAssociation("GOECHARGER_AwattarPricezone", 0, "Österreich", "", 0xFFFFFF);
-                IPS_SetVariableProfileAssociation("GOECHARGER_AwattarPricezone", 1, "Deutschland", "", 0xFFFFFF);
+                IPS_SetVariableProfileAssociation("GOECHARGER_AwattarPricezone", 0, "Österreich", "", 0x000000);
+                IPS_SetVariableProfileAssociation("GOECHARGER_AwattarPricezone", 1, "Deutschland", "", 0x000000);
             }
             
             if ( !IPS_VariableProfileExists('GOECHARGER_ElectricityPriceChargeTill') ) {
                 IPS_CreateVariableProfile('GOECHARGER_ElectricityPriceChargeTill', 1 );
                 for($i=0; $i<=23; $i++){
-                    IPS_SetVariableProfileAssociation("GOECHARGER_ElectricityPriceChargeTill", $i, str_pad($i,2,"0", STR_PAD_LEFT).":00 Uhr", "", 0xFFFFFF );
+                    IPS_SetVariableProfileAssociation("GOECHARGER_ElectricityPriceChargeTill", $i, str_pad($i,2,"0", STR_PAD_LEFT).":00 Uhr", "", 0x000000 );
                 }
             }
              
             if ( !IPS_VariableProfileExists('GOECHARGER_ElectricityPriceMinChargeHours') ) {
                 IPS_CreateVariableProfile('GOECHARGER_ElectricityPriceMinChargeHours', 1 );
                 for($i=0; $i<=23; $i++){
-                    IPS_SetVariableProfileAssociation("GOECHARGER_ElectricityPriceMinChargeHours", $i, $i." Stunden", "", 0xFFFFFF);
+                    IPS_SetVariableProfileAssociation("GOECHARGER_ElectricityPriceMinChargeHours", $i, $i." Stunden", "", 0x000000);
                 }
             }
         }
@@ -779,9 +779,9 @@
             $this->EnableAction("ledEnergySave");            
             
             //--- Ladung mittels Strompreis automatisch
-            $this->RegisterVariableInteger("electricityPriceMinChargeHours", "Strompreis-basiertes Laden minimale Ladezeit","GOECHARGER_ElectricityPriceMinChargeHours",81);
+            $this->RegisterVariableInteger("electricityPriceMinChargeHours", "minimale Ladezeit bei Strompreis-basiertem Laden","GOECHARGER_ElectricityPriceMinChargeHours",81);
             $this->EnableAction("electricityPriceMinChargeHours");
-            $this->RegisterVariableInteger("electricityPriceChargeTill", "Strompreis-basiertes Laden bis","GOECHARGER_ElectricityPriceChargeTill",82);
+            $this->RegisterVariableInteger("electricityPriceChargeTill", "Laden beendet bis bei Strompreis-basiertem Laden","GOECHARGER_ElectricityPriceChargeTill",82);
             $this->EnableAction("electricityPriceChargeTill");
             
             //--- Technical Informations ------------------------------------------------------
