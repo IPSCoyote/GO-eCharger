@@ -722,7 +722,7 @@
                     IPS_SetVariableProfileAssociation("GOECHARGER_ElectricityPriceChargeTill", $i, str_pad($i,2,"0", STR_PAD_LEFT).":00 Uhr", "", 0xFFFFFF );
                 }
             }
-            
+             
             if ( !IPS_VariableProfileExists('GOECHARGER_ElectricityPriceMinChargeHours') ) {
                 IPS_CreateVariableProfile('GOECHARGER_ElectricityPriceMinChargeHours', 1 );
                 for($i=0; $i<=23; $i++){
