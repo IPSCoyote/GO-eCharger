@@ -1,6 +1,12 @@
 Status bei Firmware 22.1
 {"version":"B","tme":"2411201135","rbc":"27","rbt":"1678385505","car":"2","amp":"10","err":"0","ast":"0","alw":"1","stp":"0","cbl":"32","pha":"63","tmp":"32","dws":"557248","dwo":"51","adi":"0","uby":"0","eto":"30570","wst":"3","nrg":[224,226,222,1,101,1,1,23,0,0,0,232,100,7,1,65],"fwv":"022.1","sse":"<Seriennummer>","wss":"<WLAN-SSID>","wke":"<WLAN-PASSWORD>","wen":"1","tof":"101","tds":"1","lbr":"255","aho":"3","afi":"7","ama":"16","al1":"16","al2":"0","al3":"0","al4":"0","al5":"0","cid":"1","cch":"65535","cfi":"1","lse":"1","ust":"0","wak":"<WLANHOTSPOTPASSWORD>","r1x":"2","dto":"0","nmo":"0","sch":"AAAAAAAAAAAAAAAA","eca":"0","ecr":"0","ecd":"0","ec4":"0","ec5":"0","ec6":"0","ec7":"0","ec8":"0","ec9":"0","ec1":"0","rca":"<RFIDKarte>","rcr":"","rcd":"","rc4":"","rc5":"","rc6":"","rc7":"","rc8":"","rc9":"","rc1":"","rna":"","rnm":"","rne":"","rn4":"","rn5":"","rn6":"","rn7":"","rn8":"","rn9":"","rn1":""}                                                
 
+	Neu Unterstützt mit Modul Version 1.5
+	AHO		uint8_t		Minimale ​Anzahl ​von Stunden in der mit "Strompreis -automatisch" geladen werden muss 
+						Beispiel: 2 ("Auto ist nach 2 Stunden voll genug")		
+	AFI		uint8_t		Stunde (​Uhrzeit​) in der mit "Strompreis - automatisch" die Ladung mindestens ​aho ​Stunden gedauert haben muss.
+						Beispiel: 7 ("Fertig bis 7:00, also davor mindestens 2 Stundengeladen")
+
 
 Status bei Firmware 40.0
 
@@ -41,7 +47,3 @@ Status bei Firmware 40.0
 	CCH:	uint24_t	Color charging:​ Farbwert für Ladevorgang aktiv​, als Zahl			Beispiel: parseInt(​"​#0000FF​"​): 255 (blau, Standard)
 	CFI: 	uint24_t	Color idle: Farbwert für Ladevorgang abgeschlossen als Zahl			Beispiel: parseInt(​"​#00FF00​"​): 65280(grün, Standard)
 	
-	AHO		uint8_t		Minimale ​Anzahl ​von Stunden in der mit "Strompreis -automatisch" geladen werden muss 
-						Beispiel: 2 ("Auto ist nach 2 Stunden voll genug")		
-	AFI		uint8_t		Stunde (​Uhrzeit​) in der mit "Strompreis - automatisch" die Ladung mindestens ​aho ​Stunden gedauert haben muss.
-						Beispiel: 7 ("Fertig bis 7:00, also davor mindestens 2 Stundengeladen")

@@ -719,14 +719,14 @@
             if ( !IPS_VariableProfileExists('GOECHARGER_ElectricityPriceChargeTill') ) {
                 IPS_CreateVariableProfile('GOECHARGER_ElectricityPriceChargeTill', 1 );
                 for($i=0; $i<=23; $i++){
-                    IPS_SetVariableProfileAssociation("GOECHARGER_AwattarPricezone", $i, str_pad($i,2,"0", STR_PAD_LEFT).":00 Uhr", "", 0xFFFFFF );
+                    IPS_SetVariableProfileAssociation("GOECHARGER_ElectricityPriceChargeTill", $i, str_pad($i,2,"0", STR_PAD_LEFT).":00 Uhr", "", 0xFFFFFF );
                 }
             }
             
             if ( !IPS_VariableProfileExists('GOECHARGER_ElectricityPriceMinChargeHours') ) {
                 IPS_CreateVariableProfile('GOECHARGER_ElectricityPriceMinChargeHours', 1 );
                 for($i=0; $i<=23; $i++){
-                    IPS_SetVariableProfileAssociation("GOECHARGER_AwattarPricezone", $i, $i." Stunden", "", 0xFFFFFF);
+                    IPS_SetVariableProfileAssociation("GOECHARGER_ElectricityPriceMinChargeHours", $i, $i." Stunden", "", 0xFFFFFF);
                 }
             }
         }
@@ -785,7 +785,7 @@
             $this->EnableAction("electricityPriceChargeTill");
             
             //--- Technical Informations ------------------------------------------------------
-            $this->RegisterVariableString("serialID", "Seriennummer","~String",91);
+            $this->RegisterVariableString("serialID", "Seriennummer","",91);
 
             $this->RegisterVariableInteger("error", "Fehler","GOECHARGER_Error",92);
 
@@ -801,7 +801,7 @@
 
             $this->RegisterVariableFloat("mainboardTemperature", "Mainboard Temperatur","~Temperature",98);
 
-            $this->RegisterVariableString("availablePhases", "verfügbare Phasen","~String",99);
+            $this->RegisterVariableString("availablePhases", "verfügbare Phasen","",99);
 
             $this->RegisterVariableInteger("supplyLineL1", "Spannungsversorgung L1","GOECHARGER_Voltage",100);
 
