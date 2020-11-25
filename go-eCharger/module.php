@@ -122,7 +122,9 @@
             SetValue($this->GetIDForIdent("serialID"),                $goEChargerStatus->{'sse'});  
             SetValue($this->GetIDForIdent("ledBrightness"),           $goEChargerStatus->{'lbr'});  
             SetValue($this->GetIDForIdent("ledEnergySave"),           $goEChargerStatus->{'lse'});  
-            if ( isset( $goEChargerStatus->{'azo'} ) ) SetValue( $this->GetIDForIdent("awattarPricezone"), $goEChargerStatus->{'azo'} );  // new with Firmware 40.0
+            if ( isset( $goEChargerStatus->{'azo'} ) ) SetValue( $this->GetIDForIdent("awattarPricezone"),               $goEChargerStatus->{'azo'} );  // new with Firmware 40.0
+            if ( isset( $goEChargerStatus->{'aho'} ) ) SetValue( $this->GetIDForIdent("electricityPriceMinChargeHours"), $goEChargerStatus->{'aho'} );  // new with Firmware 40.0
+            if ( isset( $goEChargerStatus->{'afi'} ) ) SetValue( $this->GetIDForIdent("electricityPriceChargeTill"),     $goEChargerStatus->{'afi'} );  // new with Firmware 40.0
             SetValue($this->GetIDForIdent("maxAvailableAMP"),         $goEChargerStatus->{'ama'}); 
             SetValue($this->GetIDForIdent("cableUnlockMode"),         $goEChargerStatus->{'ust'});
             $groundCheck = true;
@@ -435,6 +437,34 @@
             return $goEChargerStatus->{$code}/10;
         }        
         
+        public function getElectricityPriceMinChargeHours() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            if ( isset( $goEChargerStatus->{'aho'} ) ) { return $goEChargerStatus->{'aho'}; } else { return false; }
+        }
+        
+        public function setElectricityPriceMinChargeHours(int $minChargeHours) {
+            if ( $minChargeHours < 0 or $minChargeHours > 23 ) { return false; }
+            $resultStatus = $this->setValueToeCharger( 'aho', $minChargeHours ); 
+            // Update all data
+            $this->Update();
+            if ( isset( $goEChargerStatus->{'aho'} and $resultStatus->{'aho'} == $minChargeHours ) { return true; } else { return false; }
+        }
+        
+        public function getElectricityPriceChargeTill() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            if ( isset( $goEChargerStatus->{'afi'} ) ) { return $goEChargerStatus->{'afi'}; } else { return false; }
+        }
+        
+        public function setElectricityPriceChargeTill(int $chargeTill) {
+            if ( $chargeTill < 0 or $chargeTill > 23 ) { return false; }
+            $resultStatus = $this->setValueToeCharger( 'afi', $chargeTill ); 
+            // Update all data
+            $this->Update();
+            if ( isset( $goEChargerStatus->{'afi'} and $resultStatus->{'afi'} == $chargeTill ) { return true; } else { return false; }
+        }
+        
         public function RequestAction($Ident, $Value) {
         
             switch($Ident) 
@@ -473,6 +503,14 @@
                     
                 case "ledEnergySave":
                     $this->setLEDEnergySave( $Value );
+                    break;
+                    
+                case "electricityPriceMinChargeHours":
+                    $this->setElectricityPriceMinChargeHours( $Value );
+                    break;
+                    
+                case "electricityPriceChargeTill":
+                    $this->setElectricityPriceChargeTill( $Value );
                     break;
                     
                 default:
@@ -678,6 +716,19 @@
                 IPS_SetVariableProfileAssociation("GOECHARGER_AwattarPricezone", 1, "Deutschland", "", 0xFFFFFF);
             }
             
+            if ( !IPS_VariableProfileExists('GOECHARGER_ElectricityPriceChargeTill') ) {
+                IPS_CreateVariableProfile('GOECHARGER_ElectricityPriceChargeTill', 1 );
+                for($i=0; $i<=23; $i++){
+                    IPS_SetVariableProfileAssociation("GOECHARGER_AwattarPricezone", $i, str_pad($i,2,"0", STR_PAD_LEFT);.":00 Uhr", "", 0xFFFFFF);
+                }
+            }
+            
+            if ( !IPS_VariableProfileExists('GOECHARGER_ElectricityPriceMinChargeHours') ) {
+                IPS_CreateVariableProfile('GOECHARGER_ElectricityPriceMinChargeHours', 1 );
+                for($i=0; $i<=23; $i++){
+                    IPS_SetVariableProfileAssociation("GOECHARGER_AwattarPricezone", $i, $i." Stunden", "", 0xFFFFFF);
+                }
+            }
         }
         
         protected function registerVariables() {
@@ -727,7 +778,11 @@
             $this->RegisterVariableBoolean("ledEnergySave", "LED Energiesparfunktion","~Switch",76);
             $this->EnableAction("ledEnergySave");            
             
-            $this->RegisterVariableInteger("awattarPricezone", "Awattar Preiszone","GOECHARGER_AwattarPricezone",80);
+            //--- Ladung mittels Strompreis automatisch
+            $this->RegisterVariableInteger("electricityPriceMinChargeHours", "Strompreis-basiertes Laden minimale Ladezeit","GOECHARGER_ElectricityPriceMinChargeHours",81);
+            $this->EnableAction("electricityPriceMinChargeHours");
+            $this->RegisterVariableInteger("electricityPriceChargeTill", "Strompreis-basiertes Laden bis","GOECHARGER_ElectricityPriceChargeTill",82);
+            $this->EnableAction("electricityPriceChargeTill");
             
             //--- Technical Informations ------------------------------------------------------
             $this->RegisterVariableString("serialID", "Seriennummer","~String",91);
@@ -779,6 +834,8 @@
             $this->RegisterVariableFloat("powerFactorLineN", "Leistungsfaktor N","~Humidity.F",114);
 
             $this->RegisterVariableFloat("availableSupplyEnergy", "max. verfügbare Ladeleistung","GOECHARGER_Energy.1",115); 
+            
+            $this->RegisterVariableInteger("awattarPricezone", "Awattar Preiszone","GOECHARGER_AwattarPricezone",116);
         }
     }
 ?>

@@ -14,6 +14,8 @@ Status bei Firmware 40.0
 		SDP		uint8_t		Scheduler double press: ​Aktiviert Ladung nach doppeltem Drücken des Button, wenn die Ladung gerade durch den
 							Scheduler unterbrochen wurde 0: Funktion deaktiviert	1: Ladung sofort erlauben
 						
+		AZO		uint8_t 	Awattar Preiszone 0: Österreich 1: Deutschland (Integriert in V 1.5)
+
 		Lastmanagement (aktuell Unterstützung nicht geplant)
 						
 		LOE		uint8_t		Lastmanagement enabled	0: Lastmanagement deaktiviert	1: Lastmanagement über Cloud aktiviert
@@ -39,7 +41,6 @@ Status bei Firmware 40.0
 	CCH:	uint24_t	Color charging:​ Farbwert für Ladevorgang aktiv​, als Zahl			Beispiel: parseInt(​"​#0000FF​"​): 255 (blau, Standard)
 	CFI: 	uint24_t	Color idle: Farbwert für Ladevorgang abgeschlossen als Zahl			Beispiel: parseInt(​"​#00FF00​"​): 65280(grün, Standard)
 	
-	AZO		uint8_t 	Awattar Preiszone 0: Österreich 1: Deutschland
 	AHO		uint8_t		Minimale ​Anzahl ​von Stunden in der mit "Strompreis -automatisch" geladen werden muss 
 						Beispiel: 2 ("Auto ist nach 2 Stunden voll genug")		
 	AFI		uint8_t		Stunde (​Uhrzeit​) in der mit "Strompreis - automatisch" die Ladung mindestens ​aho ​Stunden gedauert haben muss.

@@ -141,6 +141,7 @@ Name | Type | Optionen | Werte | Funktionen
 `Ampere zum Fahrzeug Lx` | Float | RO | Ampre zum Fahrzeug auf L1-3 und N in A | Nein
 `max. verfügbare Ladeleistung` | Float | RO | Berechnete max. verfügbare Ladeleistung in kw | Nein
 `Leistungsfaktor X` | Float | RO | Leistungsfaktor auf L1-3 und N in % | Nein
+`Awattar Preiszone` | Integer | RO | Awattar Preiszone | Nein
 
 #### 4.1.2. Funktionen
 
@@ -318,6 +319,8 @@ Aktivieren oder Deaktivieren der Energiespareinstellung für den LED Ring (Auto-
 GOeCharger_SetLEDEnergySave( $Instanz, true ); // Aktivierung der Energiespareinstellung für den LED Ring
 ```
 
+Hinweis: Das Setzen der Energiesparfunktion via API führt der GO-eCharger aktuell nicht aus! Problem ist gemeldet.
+
 ## 5. ChangeLog
 Änderungshistorie
 ### Version 1.5
@@ -326,4 +329,5 @@ GOeCharger_SetLEDEnergySave( $Instanz, true ); // Aktivierung der Energiesparein
   * Setzen der aktuellen Stromstärke via Webfront funktioniere nicht
   
 * Funktionserweiterungen
-  * LED Energiesparfunktion ( LEDGetEnergySave / LEDSetEnergySave )
+  * LED Energiesparfunktion ( RW; LEDGetEnergySave / LEDSetEnergySave )
+  * Awattar Preiszone (RO)
