@@ -727,7 +727,7 @@
             $this->RegisterVariableBoolean("ledEnergySave", "LED Energiesparfunktion","~Switch",76);
             $this->EnableAction("ledEnergySave");            
             
-            $this->RegisterVariableBoolean("awattarPricezone", "Awattar Preiszone","GOECHARGER_AwattarPricezone",80);
+            $this->RegisterVariableInteger("awattarPricezone", "Awattar Preiszone","GOECHARGER_AwattarPricezone",80);
             
             //--- Technical Informations ------------------------------------------------------
             $this->RegisterVariableString("serialID", "Seriennummer","~String",91);
