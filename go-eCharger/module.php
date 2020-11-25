@@ -122,6 +122,7 @@
             SetValue($this->GetIDForIdent("serialID"),                $goEChargerStatus->{'sse'});  
             SetValue($this->GetIDForIdent("ledBrightness"),           $goEChargerStatus->{'lbr'});  
             SetValue($this->GetIDForIdent("ledEnergySave"),           $goEChargerStatus->{'lse'});  
+            if ( isset( $goEChargerStatus->{'azo'} ) SetValue($this->GetIDForIdent("awattarPricezone", $goEChargerStatus->{'azo'}};  // new with Firmware 40.0
             SetValue($this->GetIDForIdent("maxAvailableAMP"),         $goEChargerStatus->{'ama'}); 
             SetValue($this->GetIDForIdent("cableUnlockMode"),         $goEChargerStatus->{'ust'});
             $groundCheck = true;
@@ -670,6 +671,13 @@
                 IPS_SetVariableProfileAssociation("GOECHARGER_CableUnlockMode", 1, "am Ladeende entriegeln", "", 0xFFCC00);
                 IPS_SetVariableProfileAssociation("GOECHARGER_CableUnlockMode", 2, "immer verriegelt", "", 0xFF0000);
             }  
+            
+            if ( !IPS_VariableProfileExists('GOECHARGER_AwattarPricezone') ) {
+                IPS_CreateVariableProfile('GOECHARGER_AwattarPricezone', 1 );
+                IPS_SetVariableProfileAssociation("GOECHARGER_AwattarPricezone", 0, "Österreich", "", 0xFFFFFF);
+                IPS_SetVariableProfileAssociation("GOECHARGER_AwattarPricezone", 1, "Deutschland", "", 0xFFFFFF);
+            }
+            
         }
         
         protected function registerVariables() {
@@ -718,6 +726,8 @@
             $this->EnableAction("ledBrightness");
             $this->RegisterVariableBoolean("ledEnergySave", "LED Energiesparfunktion","~Switch",76);
             $this->EnableAction("ledEnergySave");            
+            
+            $this->RegisterVariableBoolean("awattarPricezone", "Awattar Preiszone","GOECHARGER_AwattarPricezone",80);
             
             //--- Technical Informations ------------------------------------------------------
             $this->RegisterVariableString("serialID", "Seriennummer","~String",91);
