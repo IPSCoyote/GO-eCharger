@@ -122,7 +122,7 @@
             SetValue($this->GetIDForIdent("serialID"),                $goEChargerStatus->{'sse'});  
             SetValue($this->GetIDForIdent("ledBrightness"),           $goEChargerStatus->{'lbr'});  
             SetValue($this->GetIDForIdent("ledEnergySave"),           $goEChargerStatus->{'lse'});  
-            if ( isset( $goEChargerStatus->{'azo'} ) ) SetValue($this->GetIDForIdent("awattarPricezone", $goEChargerStatus->{'azo'}};  // new with Firmware 40.0
+            if ( isset( $goEChargerStatus->{'azo'} ) ) SetValue( $this->GetIDForIdent( "awattarPricezone", $goEChargerStatus->{'azo'} );  // new with Firmware 40.0
             SetValue($this->GetIDForIdent("maxAvailableAMP"),         $goEChargerStatus->{'ama'}); 
             SetValue($this->GetIDForIdent("cableUnlockMode"),         $goEChargerStatus->{'ust'});
             $groundCheck = true;
