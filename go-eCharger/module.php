@@ -719,7 +719,7 @@
             if ( !IPS_VariableProfileExists('GOECHARGER_ElectricityPriceChargeTill') ) {
                 IPS_CreateVariableProfile('GOECHARGER_ElectricityPriceChargeTill', 1 );
                 for($i=0; $i<=23; $i++){
-                    IPS_SetVariableProfileAssociation("GOECHARGER_AwattarPricezone", $i, str_pad($i,2,"0", STR_PAD_LEFT);.":00 Uhr", "", 0xFFFFFF);
+                    IPS_SetVariableProfileAssociation("GOECHARGER_AwattarPricezone", $i, str_pad($i,2,"0", STR_PAD_LEFT).":00 Uhr", "", 0xFFFFFF );
                 }
             }
             
