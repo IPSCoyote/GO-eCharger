@@ -12,7 +12,6 @@ Nutzung auf eigene Gefahr ohne Gewähr. Das Modul kann jederzeit überarbeitet w
 2. [Systemanforderungen](#2-systemanforderungen)
 3. [Installation](#3-installation)
 4. [Module](#4-module)
-5. [ChangeLog](#5-changelog)
 
 ## 1. Funktionsumfang
 
@@ -296,7 +295,7 @@ GOeCharger_SetAccessControl( $Instanz, 1 ); // aktiviert die Zugangskontrolle pe
 #### GetLEDBrightness(int $Instanz)
 Ermittlung der Helligkeit der LEDs
 ```
-$LEDBrightness = GOeCharger_GetLEDBrightness( $Instanz ); // Ermittlung der LED Helligkeit
+$LEDBrightness = GOeCharger_GetLEDBrightness( $Instanz ); // Ermittlung Seriennummer
 ```
 
 #### SetLEDBrightness(int $Instanz, int $Brightness)
@@ -304,14 +303,3 @@ Setzen der Helligkeit der LEDs
 ```
 GOeCharger_SetLEDBrightness( $Instanz, 255 ); // Setzen der LED Helligkeit auf Maximum
 ```
-
-## 5. ChangeLog
-Änderungshistorie
-### Version 1.5
-* Fehlerkorrekturen
-  * LED Helligkeit nicht via Webfront änderbar
-  * Setzen der aktuellen Stromstärke via Webfront funktioniere nicht
-  
-* Funktionserweiterungen
-  * 
-

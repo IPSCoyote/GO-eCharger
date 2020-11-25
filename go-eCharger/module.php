@@ -121,6 +121,7 @@
             SetValue($this->GetIDForIdent("powerFactorLineN"),        $goEChargerEnergy[15]/100);             
             SetValue($this->GetIDForIdent("serialID"),                $goEChargerStatus->{'sse'});  
             SetValue($this->GetIDForIdent("ledBrightness"),           $goEChargerStatus->{'lbr'});  
+            SetValue($this->GetIDForIdent("ledEnergySave"),           $goEChargerStatus->{'lse'});  
             SetValue($this->GetIDForIdent("maxAvailableAMP"),         $goEChargerStatus->{'ama'}); 
             SetValue($this->GetIDForIdent("cableUnlockMode"),         $goEChargerStatus->{'ust'});
             $groundCheck = true;
@@ -389,6 +390,20 @@
             if ( $resultStatus->{'lbr'} == $brightness ) { return true; } else { return false; }
         }
         
+        public function getLEDEngergySave() {
+            $goEChargerStatus = $this->getStatusFromCharger();
+            if ( $goEChargerStatus == false ) { return false; }
+            return $goEChargerStatus->{'lse'}; 
+        }
+        
+        public function setLEDEnergySave(bool $energySaveActive) {
+            if ( $energySaveActive == true ) { $value = 1; } else { $value = 0; }
+            $resultStatus = $this->setValueToeCharger( 'lse', $value ); 
+            // Update all data
+            $this->Update();
+            if ( $resultStatus->{'lse'} == $value ) { return true; } else { return false; }
+        }
+        
         public function getEnergyChargedInTotal() {
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
@@ -453,6 +468,10 @@
                     
                 case "ledBrightness":
                     $this->setLEDBrightness( $Value );
+                    break;
+                    
+                case "ledEnergySave":
+                    $this->setLEDEnergySave( $Value );
                     break;
                     
                 default:
@@ -696,7 +715,9 @@
             $this->EnableAction("accessControl");
 
             $this->RegisterVariableInteger("ledBrightness", "LED Helligkeit","~Intensity.255",75);
-            $this->EnableAction("ledBrightness"); 
+            $this->EnableAction("ledBrightness");
+            $this->RegisterVariableBoolean("ledEnergySave", "LED Energiesparfunktion","~Switch",76);
+            $this->EnableAction("ledEnergySave");            
             
             //--- Technical Informations ------------------------------------------------------
             $this->RegisterVariableString("serialID", "Seriennummer","~String",91);
