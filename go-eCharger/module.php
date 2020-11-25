@@ -448,7 +448,7 @@
             $resultStatus = $this->setValueToeCharger( 'aho', $minChargeHours ); 
             // Update all data
             $this->Update();
-            if ( isset( $goEChargerStatus->{'aho'} and $resultStatus->{'aho'} == $minChargeHours ) { return true; } else { return false; }
+            if ( isset( $goEChargerStatus->{'aho'} ) and $resultStatus->{'aho'} == $minChargeHours ) { return true; } else { return false; }
         }
         
         public function getElectricityPriceChargeTill() {
@@ -462,7 +462,7 @@
             $resultStatus = $this->setValueToeCharger( 'afi', $chargeTill ); 
             // Update all data
             $this->Update();
-            if ( isset( $goEChargerStatus->{'afi'} and $resultStatus->{'afi'} == $chargeTill ) { return true; } else { return false; }
+            if ( isset( $goEChargerStatus->{'afi'} ) and $resultStatus->{'afi'} == $chargeTill ) { return true; } else { return false; }
         }
         
         public function RequestAction($Ident, $Value) {
