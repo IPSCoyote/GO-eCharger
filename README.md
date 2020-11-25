@@ -121,7 +121,9 @@ Name | Type | Optionen | Werte | Funktionen
 `max. verfügbarer Ladestrom` | Integer | RW, WF | Maximal verfügbarer Ladestrom des go-eChargers | [Get](#getmaximumchargingamperageint-instanz-) / [Set](#setmaximumchargingamperageint-instanz-int-ampere)
 `aktuell verfügbarer Ladestrom` | Integer | RW, WF | Der aktuell verfügbare Ladestrom zum laden eines Fahrzeugs<br>*Beispiel: 16 A* | [Get](#getcurrentchargingamperageint-instanz) / [Set](#setcurrentchargingamperageint-instanz-int-ampere)
 `Kabel-Verriegelungsmodus` | Integer | RW, WF | Verriegelungsmodus für das Kabel<br>0: Verriegeln, solange Auto angesteckt<br>1: Nach Ladevorgang entriegeln<br>2: Kabel immer verriegelt | [Get](#getcableunlockmodeint-instanz) / [Set](#setcableunlockmodeint-instanz-int-unlockmode)
-`Zugangskontrolle via RFID/APP` | Integer | RW, WF | Zugangskontrolle<br>0: frei zugänglich<br>1: RFID Identifizierung<br>2: Strompreis/automatisch | [Get](#getaccesscontrolint-instanz) / [Set](#setaccesscontrolint-instanz-int-mode)
+`Zugangskontrolle via RFID/APP/Strompreis` | Integer | RW, WF | Zugangskontrolle<br>0: frei zugänglich<br>1: RFID Identifizierung<br>2: Strompreis/automatisch | [Get](#getaccesscontrolint-instanz) / [Set](#setaccesscontrolint-instanz-int-mode)
+`minimale Ladezeit bei Strompreis-basiertem Laden` | Integer | RW, WF | Minimale ​Anzahl ​von Stunden die bei "Strompreis/automatisch" mindestens vor "Laden beendet bis" geladen werden muss | [Get](#getelectricitypriceminchargehoursint-instanz) / [Set](#setelectricitypriceminchargehoursint-instanz-int-minchargehours)
+`Laden beendet bis bei Strompreis-basiertem Laden` | Integer | RW, WF | Uhrzeit, bis zu der die "minimale Ladezeit" bei "Strompreis/automatisch" geladen sein muss | [Get](#getelectricitypricechargetill-instanz) / [Set](#setelectricitypricechargetillint-instanz-int-chargetill)
 `LED Helligkeit` | Integer | RW, WF | Helligkeit der LEDs<br>0: LED aus<br>1 - 255: LED Helligkeit | [Get](#getledbrightnessint-instanz) / [Set](#setledbrightnessint-instanz-int-brightness)
 `LED Energiesparfunktion` | Integer | RW, WF | Energiesparfunktion der LEDs<br>0: LED aus<br>1 - 255: LED Helligkeit | [Get](#getledenergysaveint-instanz) / [Set](#setledenergysaveint-instanz-bool-energysaveactive)
 
@@ -295,6 +297,32 @@ Mit dieser Funktion kann die Zugangssteuerung via RFID oder App bzw. die Stromau
 GOeCharger_SetAccessControl( $Instanz, 1 ); // aktiviert die Zugangskontrolle per RFID
 ```
 
+#### getElectricityPriceMinChargeHours(int $Instanz)
+Mit dieser Funktion kann die Ladedauer ermittelt werden, die ein Fahrzeug bei automatischer Ladung mittels Strompreis das Fahzeug mindestens geladen worden sein muss.
+```
+$minChargingHours = GOeCharger_getElectricityPriceMinChargeHours( $Instanz ); // Liest die minimalen Ladestunden bei automatischer Ladung durch Strompreis
+```
+
+#### setElectricityPriceMinChargeHours(int $Instanz, int $minChargeHours)
+Mit dieser Funktion kann die Ladedauer gesetzt werden, die ein Fahrzeug bei automatischer Ladung mittels Strompreis das Fahzeug mindestens geladen worden sein muss.
+Der Wert ist als Integer anzugeben. Beispiel: 2 für 2 Stunden.
+```
+GOeCharger_setElectricityPriceMinChargeHours( $Instanz, 2 ); // Das Fahrzeug muss bei automatischer, strompreis basierter Regelung mindestens 2 Stunden laden
+```
+
+#### getElectricityPriceChargeTill(int $Instanz)
+Mit dieser Funktion kann die Uhrzeit ermittelt werden, bis zu welcher das Fahrzeug bei automatischer Ladung mittels Strompreis geladen sein muss.
+```
+$chargeTill = getElectricityPriceChargeTill( $Instanz ); // Liest die Ziel-Uhrzeug bei automatischer Ladung durch Strompreis
+```
+
+#### setElectricityPriceChargeTill(int $Instanz, int $chargeTill)
+Mit dieser Funktion kann die Ziel-Uhrzeit für das automatische, strompreisbasierte Laden gesetzt werden.
+Der Wert ist als Integer anzugeben. Beispiel: 7 = 7:00 Uhr.
+```
+setElectricityPriceChargeTill( $Instanz, 7 ); // Das Fahrzeug soll bis 7:00 geladen sein
+```
+
 #### GetLEDBrightness(int $Instanz)
 Ermittlung der Helligkeit der LEDs
 ```
@@ -331,3 +359,4 @@ Hinweis: Das Setzen der Energiesparfunktion via API führt der GO-eCharger aktue
 * Funktionserweiterungen
   * LED Energiesparfunktion ( RW; LEDGetEnergySave / LEDSetEnergySave )
   * Awattar Preiszone (RO)
+  * Funktionen zum Steuern der Strompreis-basierten Ladung (benötigte Ladezeit / geladen bis)

@@ -770,7 +770,7 @@
             $this->RegisterVariableInteger("cableUnlockMode", "Kabel-Verriegelungsmodus","GOECHARGER_CableUnlockMode",73);
             $this->EnableAction("cableUnlockMode");
 
-            $this->RegisterVariableInteger("accessControl", "Zugangskontrolle via RFID/App","GOECHARGER_Access",74);
+            $this->RegisterVariableInteger("accessControl", "Zugangskontrolle via RFID/App/Strompreis","GOECHARGER_Access",74);
             $this->EnableAction("accessControl");
 
             $this->RegisterVariableInteger("ledBrightness", "LED Helligkeit","~Intensity.255",75);
