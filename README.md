@@ -347,8 +347,6 @@ Aktivieren oder Deaktivieren der Energiespareinstellung für den LED Ring (Auto-
 GOeCharger_SetLEDEnergySave( $Instanz, true ); // Aktivierung der Energiespareinstellung für den LED Ring
 ```
 
-Hinweis: Das Setzen der Energiesparfunktion via API führt der GO-eCharger aktuell nicht aus! Problem ist gemeldet.
-
 ## 5. ChangeLog
 Änderungshistorie
 ### Version 1.5
