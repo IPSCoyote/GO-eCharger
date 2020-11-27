@@ -396,12 +396,12 @@
         public function getLEDEngergySave() {
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
-            return $goEChargerStatus->{'lse'}; 
+            return $goEChargerStatus->{'lse'};  
         }
         
         public function setLEDEnergySave(bool $energySaveActive) {
             if ( $energySaveActive == true ) { $value = 1; } else { $value = 0; }
-            $resultStatus = $this->setValueToeCharger( 'lse', $value ); 
+            $resultStatus = $this->setValueToeCharger( 'r2x', $value ); // based on issue report on GitHub the GO-eCharger needs "r2x" as parameter here!
             // Update all data
             $this->Update();
             if ( $resultStatus->{'lse'} == $value ) { return true; } else { return false; }
