@@ -12,6 +12,7 @@ Nutzung auf eigene Gefahr ohne Gewähr. Das Modul kann jederzeit überarbeitet w
 2. [Systemanforderungen](#2-systemanforderungen)
 3. [Installation](#3-installation)
 4. [Module](#4-module)
+5. [ChangeLog](#5-changelog)
 
 ## 1. Funktionsumfang
 
@@ -120,8 +121,11 @@ Name | Type | Optionen | Werte | Funktionen
 `max. verfügbarer Ladestrom` | Integer | RW, WF | Maximal verfügbarer Ladestrom des go-eChargers | [Get](#getmaximumchargingamperageint-instanz-) / [Set](#setmaximumchargingamperageint-instanz-int-ampere)
 `aktuell verfügbarer Ladestrom` | Integer | RW, WF | Der aktuell verfügbare Ladestrom zum laden eines Fahrzeugs<br>*Beispiel: 16 A* | [Get](#getcurrentchargingamperageint-instanz) / [Set](#setcurrentchargingamperageint-instanz-int-ampere)
 `Kabel-Verriegelungsmodus` | Integer | RW, WF | Verriegelungsmodus für das Kabel<br>0: Verriegeln, solange Auto angesteckt<br>1: Nach Ladevorgang entriegeln<br>2: Kabel immer verriegelt | [Get](#getcableunlockmodeint-instanz) / [Set](#setcableunlockmodeint-instanz-int-unlockmode)
-`Zugangskontrolle via RFID/APP` | Integer | RW, WF | Zugangskontrolle<br>0: frei zugänglich<br>1: RFID Identifizierung<br>2: Strompreis/automatisch | [Get](#getaccesscontrolint-instanz) / [Set](#setaccesscontrolint-instanz-int-mode)
+`Zugangskontrolle via RFID/APP/Strompreis` | Integer | RW, WF | Zugangskontrolle<br>0: frei zugänglich<br>1: RFID Identifizierung<br>2: Strompreis/automatisch | [Get](#getaccesscontrolint-instanz) / [Set](#setaccesscontrolint-instanz-int-mode)
+`minimale Ladezeit bei Strompreis-basiertem Laden` | Integer | RW, WF | Minimale ​Anzahl ​von Stunden die bei "Strompreis/automatisch" mindestens vor "Laden beendet bis" geladen werden muss | [Get](#getelectricitypriceminchargehoursint-instanz) / [Set](#setelectricitypriceminchargehoursint-instanz-int-minchargehours)
+`Laden beendet bis bei Strompreis-basiertem Laden` | Integer | RW, WF | Uhrzeit, bis zu der die "minimale Ladezeit" bei "Strompreis/automatisch" geladen sein muss | [Get](#getelectricitypricechargetill-instanz) / [Set](#setelectricitypricechargetillint-instanz-int-chargetill)
 `LED Helligkeit` | Integer | RW, WF | Helligkeit der LEDs<br>0: LED aus<br>1 - 255: LED Helligkeit | [Get](#getledbrightnessint-instanz) / [Set](#setledbrightnessint-instanz-int-brightness)
+`LED Energiesparfunktion` | Integer | RW, WF | Energiesparfunktion der LEDs<br>0: LED aus<br>1 - 255: LED Helligkeit | [Get](#getledenergysaveint-instanz) / [Set](#setledenergysaveint-instanz-bool-energysaveactive)
 
 #### Technische Informationen
 
@@ -139,6 +143,7 @@ Name | Type | Optionen | Werte | Funktionen
 `Ampere zum Fahrzeug Lx` | Float | RO | Ampre zum Fahrzeug auf L1-3 und N in A | Nein
 `max. verfügbare Ladeleistung` | Float | RO | Berechnete max. verfügbare Ladeleistung in kw | Nein
 `Leistungsfaktor X` | Float | RO | Leistungsfaktor auf L1-3 und N in % | Nein
+`Awattar Preiszone` | Integer | RO | Awattar Preiszone | Nein
 
 #### 4.1.2. Funktionen
 
@@ -292,10 +297,36 @@ Mit dieser Funktion kann die Zugangssteuerung via RFID oder App bzw. die Stromau
 GOeCharger_SetAccessControl( $Instanz, 1 ); // aktiviert die Zugangskontrolle per RFID
 ```
 
+#### getElectricityPriceMinChargeHours(int $Instanz)
+Mit dieser Funktion kann die Ladedauer ermittelt werden, die ein Fahrzeug bei automatischer Ladung mittels Strompreis das Fahzeug mindestens geladen worden sein muss.
+```
+$minChargingHours = GOeCharger_getElectricityPriceMinChargeHours( $Instanz ); // Liest die minimalen Ladestunden bei automatischer Ladung durch Strompreis
+```
+
+#### setElectricityPriceMinChargeHours(int $Instanz, int $minChargeHours)
+Mit dieser Funktion kann die Ladedauer gesetzt werden, die ein Fahrzeug bei automatischer Ladung mittels Strompreis das Fahzeug mindestens geladen worden sein muss.
+Der Wert ist als Integer anzugeben. Beispiel: 2 für 2 Stunden.
+```
+GOeCharger_setElectricityPriceMinChargeHours( $Instanz, 2 ); // Das Fahrzeug muss bei automatischer, strompreis basierter Regelung mindestens 2 Stunden laden
+```
+
+#### getElectricityPriceChargeTill(int $Instanz)
+Mit dieser Funktion kann die Uhrzeit ermittelt werden, bis zu welcher das Fahrzeug bei automatischer Ladung mittels Strompreis geladen sein muss.
+```
+$chargeTill = getElectricityPriceChargeTill( $Instanz ); // Liest die Ziel-Uhrzeug bei automatischer Ladung durch Strompreis
+```
+
+#### setElectricityPriceChargeTill(int $Instanz, int $chargeTill)
+Mit dieser Funktion kann die Ziel-Uhrzeit für das automatische, strompreisbasierte Laden gesetzt werden.
+Der Wert ist als Integer anzugeben. Beispiel: 7 = 7:00 Uhr.
+```
+setElectricityPriceChargeTill( $Instanz, 7 ); // Das Fahrzeug soll bis 7:00 geladen sein
+```
+
 #### GetLEDBrightness(int $Instanz)
 Ermittlung der Helligkeit der LEDs
 ```
-$LEDBrightness = GOeCharger_GetLEDBrightness( $Instanz ); // Ermittlung Seriennummer
+$LEDBrightness = GOeCharger_GetLEDBrightness( $Instanz ); // Ermittlung der LED Helligkeit
 ```
 
 #### SetLEDBrightness(int $Instanz, int $Brightness)
@@ -303,3 +334,27 @@ Setzen der Helligkeit der LEDs
 ```
 GOeCharger_SetLEDBrightness( $Instanz, 255 ); // Setzen der LED Helligkeit auf Maximum
 ```
+
+#### GetLEDEnergySave(int $Instanz)
+Ermittlung der Energiespar-Einstellung für den LED Ring
+```
+$LEDEnergySaveActive = GOeCharger_GetLEDEnergySave( $Instanz ); // Ermittlung des Status der Energiespareinstellung für den LED Ring
+```
+
+#### SetLEDEnergySave(int $Instanz, bool $energySaveActive)
+Aktivieren oder Deaktivieren der Energiespareinstellung für den LED Ring (Auto-Aus nach 10 Sek.)
+```
+GOeCharger_SetLEDEnergySave( $Instanz, true ); // Aktivierung der Energiespareinstellung für den LED Ring
+```
+
+## 5. ChangeLog
+Änderungshistorie
+### Version 1.5
+* Fehlerkorrekturen
+  * LED Helligkeit nicht via Webfront änderbar
+  * Setzen der aktuellen Stromstärke via Webfront funktioniere nicht
+  
+* Funktionserweiterungen
+  * LED Energiesparfunktion ( RW; LEDGetEnergySave / LEDSetEnergySave )
+  * Awattar Preiszone (RO)
+  * Funktionen zum Steuern der Strompreis-basierten Ladung (benötigte Ladezeit / geladen bis)
