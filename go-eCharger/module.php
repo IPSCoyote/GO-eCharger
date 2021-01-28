@@ -692,14 +692,14 @@
                 IPS_CreateVariableProfile('GOECHARGER_Energy.1', 2 );
                 IPS_SetVariableProfileDigits('GOECHARGER_Energy.1', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Energy.1', 'Electricity' );
-                IPS_SetVariableProfileText('GOECHARGER_Energy.1', "", " kw" );
+                IPS_SetVariableProfileText('GOECHARGER_Energy.1', "", " kWh" );
             }   
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Power.1') ) {
                 IPS_CreateVariableProfile('GOECHARGER_Power.1', 2 );
                 IPS_SetVariableProfileDigits('GOECHARGER_Power.1', 1 );
                 IPS_SetVariableProfileIcon('GOECHARGER_Power.1', 'Electricity' );
-                IPS_SetVariableProfileText('GOECHARGER_Power.1', "", " kwh" );
+                IPS_SetVariableProfileText('GOECHARGER_Power.1', "", " kw" );
             }   
             
             if ( !IPS_VariableProfileExists('GOECHARGER_CableUnlockMode') ) {
@@ -748,16 +748,16 @@
             //--- Informations to the current loading cycle ------------------------------------
             $this->RegisterVariableFloat("powerToCarTotal", "Aktuelle Leistung zum Fahrzeug","GOECHARGER_Power.1",31);
 
-            $this->RegisterVariableFloat("energyLoadCycle", "abgegebene Energie im Ladezyklus","GOECHARGER_Power.1",32);
+            $this->RegisterVariableFloat("energyLoadCycle", "abgegebene Energie im Ladezyklus","GOECHARGER_Energy.1",32);
 
             $this->RegisterVariableInteger("unlockedByRFID", "entsperrt durch RFID","",33);
 
             
             //--- Power Consumption information ------------------------------------------------
-            $this->RegisterVariableFloat("energyTotal", "bisher abgegebene Energie","GOECHARGER_Power.1",51);
+            $this->RegisterVariableFloat("energyTotal", "bisher abgegebene Energie","GOECHARGER_Energy.1",51);
 
             for($i=1; $i<=10; $i++){
-               $this->RegisterVariableFloat("energyChargedCard".$i, "geladene Energie Karte ".$i,"GOECHARGER_Power.1",51+$i);
+               $this->RegisterVariableFloat("energyChargedCard".$i, "geladene Energie Karte ".$i,"GOECHARGER_Energy.1",51+$i);
             } 
             
             //--- Setup -----------------------------------------------------------------------
