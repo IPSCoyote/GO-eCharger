@@ -186,7 +186,7 @@
         public function getPowerToCar() {
             $goEChargerStatus = $this->getStatusFromCharger();
             if ( $goEChargerStatus == false ) { return false; }
-            return $goEChargerEnergy[11]/100; 
+            return $goEChargerStatus[11]/100;
         }
         
         public function getCurrentLoadingCycleConsumption() {
@@ -590,6 +590,8 @@
         protected function ping($host, $port, $timeout) 
         { 
             ob_start();
+            $errno = 0;
+            $errstr = "";
             $fP = fSockOpen($host, $port, $errno, $errstr, $timeout); 
             ob_clean();
             if (!$fP) { return false; } 
@@ -689,18 +691,19 @@
             }   
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Energy.1') ) {
-                IPS_CreateVariableProfile('GOECHARGER_Energy.1', 2 );
-                IPS_SetVariableProfileDigits('GOECHARGER_Energy.1', 1 );
-                IPS_SetVariableProfileIcon('GOECHARGER_Energy.1', 'Electricity' );
-                IPS_SetVariableProfileText('GOECHARGER_Energy.1', "", " kWh" );
-            }   
+                IPS_CreateVariableProfile('GOECHARGER_Energy.1', 2);
+                IPS_SetVariableProfileDigits('GOECHARGER_Energy.1', 1);
+                IPS_SetVariableProfileIcon('GOECHARGER_Energy.1', 'Electricity');
+            }
+            IPS_SetVariableProfileText('GOECHARGER_Energy.1', "", " kWh" );
+
             
             if ( !IPS_VariableProfileExists('GOECHARGER_Power.1') ) {
-                IPS_CreateVariableProfile('GOECHARGER_Power.1', 2 );
-                IPS_SetVariableProfileDigits('GOECHARGER_Power.1', 1 );
-                IPS_SetVariableProfileIcon('GOECHARGER_Power.1', 'Electricity' );
-                IPS_SetVariableProfileText('GOECHARGER_Power.1', "", " kw" );
-            }   
+                IPS_CreateVariableProfile('GOECHARGER_Power.1', 2);
+                IPS_SetVariableProfileDigits('GOECHARGER_Power.1', 1);
+                IPS_SetVariableProfileIcon('GOECHARGER_Power.1', 'Electricity');
+            }
+            IPS_SetVariableProfileText('GOECHARGER_Power.1', "", " kw" );
             
             if ( !IPS_VariableProfileExists('GOECHARGER_CableUnlockMode') ) {
                 IPS_CreateVariableProfile('GOECHARGER_CableUnlockMode', 1 );
