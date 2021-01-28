@@ -354,6 +354,9 @@ GOeCharger_SetLEDEnergySave( $Instanz, true ); // Aktivierung der Energiesparein
 ### Version 1.5.1
 * Fehlerkorrekturen
   * Anpassung falscher Profile.
+  * bei bereits installiertem Modul ggf. die Profile 
+    GOECHARGER_POWER.1 (Suffix auf "kW" ändern) sowie 
+    GOECHARGER_Energy.1 (Suffix auf "kWh" ändern) anpassen
   
 ### Version 1.5
 * Fehlerkorrekturen
