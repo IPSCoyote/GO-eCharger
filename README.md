@@ -177,27 +177,27 @@ $Status = GOeCharger_GetStatus( $Instanz ); // Ermittlung des Status
 ```
 
 #### GetAutomaticChargeStop(int $Instanz)
-Der Go-eCharger kann die Ladung automatisch nach x kwh beenden. Mit diese Funktion kann der aktuell eingestellte Wert abgefragt werden. Der Wert 0 zeigt an, das kein automatischer Ladestop eingestellt ist.
+Der Go-eCharger kann die Ladung automatisch nach x kwh beenden. Mit dieser Funktion kann der aktuell eingestellte Wert abgefragt werden. Der Wert 0 zeigt an, das kein automatischer Ladestopp eingestellt ist.
 ```
 $AutomaticChargeStopAt = GOeCharger_GetAutomaticChargeStop( $Instanz ); // liest den automatischen Ladestop 
 ```
 
 #### SetAutomaticChargeStop(int $Instanz, float $kwh)
-Mit dieser Funktion kann der automatische Ladestop des go-eChargers aktiviert werden. Während der Wert '0' den automatischen Ladestop deaktivert, können höhere Werte bis 100 (Maximum) als Ladegrenze in kwh angegeben werden. 
+Mit dieser Funktion kann der automatische Ladestopp des go-eChargers aktiviert werden. Während der Wert '0' den automatischen Ladestopp deaktiviert, können höhere Werte bis 100 (Maximum) als Ladegrenze in kwh angegeben werden. 
 ```
 GOeCharger_SetAutomaticChargeStop( $Instanz, 10.5 ); // aktiviert den automatischen Ladestop bei 10,5 kwh
 ```
 
 #### GetAutomaticChargeStopKm(int $Instanz)
 Diese Funktion benötigt die Angabe des Durchschnittsverbrauchs in den Instanz-Einstellungen für einen PKW, der typischerweise an diesem Go-eCharger lädt!
-Mit diese Funktion kann analog zur Funktion GetAutomaticChargeStop() der aktuell eingestellte Wert für den Ladestop umgerechnet in Km abgefragt werden. Der Wert 0 zeigt an, das kein automatischer Ladestop eingestellt ist.
+Mit dieser Funktion kann analog zur Funktion GetAutomaticChargeStop() der aktuell eingestellte Wert für den Ladestopp umgerechnet in Km abgefragt werden. Der Wert 0 zeigt an, das kein automatischer Ladestop eingestellt ist.
 ```
 $AutomaticChargeStopAtKm = GOeCharger_GetAutomaticChargeStopKm( $Instanz ); // liest den automatischen Ladestop in Km
 ```
 
 #### SetAutomaticChargeStopKm(int $Instanz, float $km)
 Diese Funktion benötigt die Angabe des Durchschnittsverbrauchs in den Instanz-Einstellungen für einen PKW, der typischerweise an diesem Go-eCharger lädt!
-Mit dieser Funktion kann der automatische Ladestop des go-eChargers aktiviert werden. Während der Wert '0' den automatischen Ladestop deaktivert, können höhere Werte als Ladegrenze in km angegeben werden. 
+Mit dieser Funktion kann der automatische Ladestopp des go-eChargers aktiviert werden. Während der Wert '0' den automatischen Ladestopp deaktiviert, können höhere Werte als Ladegrenze in km angegeben werden. 
 ```
 GOeCharger_SetAutomaticChargeStopKm( $Instanz, 5 ); // aktiviert den automatischen Ladestop nach einer Ladung für 5km Reichweite
 ```
@@ -298,13 +298,13 @@ GOeCharger_SetAccessControl( $Instanz, 1 ); // aktiviert die Zugangskontrolle pe
 ```
 
 #### getElectricityPriceMinChargeHours(int $Instanz)
-Mit dieser Funktion kann die Ladedauer ermittelt werden, die ein Fahrzeug bei automatischer Ladung mittels Strompreis das Fahzeug mindestens geladen worden sein muss.
+Mit dieser Funktion kann die Ladedauer ermittelt werden, die ein Fahrzeug bei automatischer Ladung mittels Strompreis das Fahrzeug mindestens geladen worden sein muss.
 ```
 $minChargingHours = GOeCharger_getElectricityPriceMinChargeHours( $Instanz ); // Liest die minimalen Ladestunden bei automatischer Ladung durch Strompreis
 ```
 
 #### setElectricityPriceMinChargeHours(int $Instanz, int $minChargeHours)
-Mit dieser Funktion kann die Ladedauer gesetzt werden, die ein Fahrzeug bei automatischer Ladung mittels Strompreis das Fahzeug mindestens geladen worden sein muss.
+Mit dieser Funktion kann die Ladedauer gesetzt werden, die ein Fahrzeug bei automatischer Ladung mittels Strompreis das Fahrzeug mindestens geladen worden sein muss.
 Der Wert ist als Integer anzugeben. Beispiel: 2 für 2 Stunden.
 ```
 GOeCharger_setElectricityPriceMinChargeHours( $Instanz, 2 ); // Das Fahrzeug muss bei automatischer, strompreis basierter Regelung mindestens 2 Stunden laden
@@ -317,7 +317,7 @@ $chargeTill = getElectricityPriceChargeTill( $Instanz ); // Liest die Ziel-Uhrze
 ```
 
 #### setElectricityPriceChargeTill(int $Instanz, int $chargeTill)
-Mit dieser Funktion kann die Ziel-Uhrzeit für das automatische, strompreisbasierte Laden gesetzt werden.
+Mit dieser Funktion kann die Ziel-Uhrzeit für das automatische, Strompreis basierte Laden gesetzt werden.
 Der Wert ist als Integer anzugeben. Beispiel: 7 = 7:00 Uhr.
 ```
 setElectricityPriceChargeTill( $Instanz, 7 ); // Das Fahrzeug soll bis 7:00 geladen sein
@@ -349,6 +349,12 @@ GOeCharger_SetLEDEnergySave( $Instanz, true ); // Aktivierung der Energiesparein
 
 ## 5. ChangeLog
 Änderungshistorie
+
+
+### Version 1.5.1
+* Fehlerkorrekturen
+  * Anpassung falscher Profile.
+  
 ### Version 1.5
 * Fehlerkorrekturen
   * LED Helligkeit nicht via Webfront änderbar
