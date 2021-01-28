@@ -703,7 +703,7 @@
                 IPS_SetVariableProfileDigits('GOECHARGER_Power.1', 1);
                 IPS_SetVariableProfileIcon('GOECHARGER_Power.1', 'Electricity');
             }
-            IPS_SetVariableProfileText('GOECHARGER_Power.1', "", " kw" );
+            IPS_SetVariableProfileText('GOECHARGER_Power.1', "", " kW" );
             
             if ( !IPS_VariableProfileExists('GOECHARGER_CableUnlockMode') ) {
                 IPS_CreateVariableProfile('GOECHARGER_CableUnlockMode', 1 );
