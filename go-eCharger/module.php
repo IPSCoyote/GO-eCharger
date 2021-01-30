@@ -840,25 +840,25 @@
                 }
                 $DummyInstance =  IPS_GetInstanceIDByName( "korrigierte Werte", $this->InstanceID );
                 if ( $DummyInstance !== false ) {
-                    $this->RegisterVariableFloat("correctedPowerToCarLineL1", "Leistung zum Fahrzeug L1", "GOECHARGER_Power.1", 10);
+                    $this->RegisterVariableFloat("correctedPowerToCarLineL1", "korrigierte Leistung zum Fahrzeug L1", "GOECHARGER_Power.1", 10);
                     $ID = $this->GetIDForIdent( "correctedPowerToCarLineL1" );
                     if ( $ID !== false ) IPS_SetParent( $ID, $DummyInstance );
-                    $this->RegisterVariableFloat("correctedPowerToCarLineL2", "Leistung zum Fahrzeug L2", "GOECHARGER_Power.1", 11);
+                    $this->RegisterVariableFloat("correctedPowerToCarLineL2", "korrigierte Leistung zum Fahrzeug L2", "GOECHARGER_Power.1", 11);
                     $ID = $this->GetIDForIdent( "correctedPowerToCarLineL2" );
                     if ( $ID !== false ) IPS_SetParent( $ID, $DummyInstance );
-                    $this->RegisterVariableFloat("correctedPowerToCarLineL3", "Leistung zum Fahrzeug L3", "GOECHARGER_Power.1", 12);
+                    $this->RegisterVariableFloat("correctedPowerToCarLineL3", "korrigierte Leistung zum Fahrzeug L3", "GOECHARGER_Power.1", 12);
                     $ID = $this->GetIDForIdent( "correctedPowerToCarLineL3" );
                     if ( $ID !== false ) IPS_SetParent( $ID, $DummyInstance );
-                    $this->RegisterVariableFloat("correctedPowerFactorLineL1", "Leistungsfaktor L1", "~Humidity.F", 14);
+                    $this->RegisterVariableFloat("correctedPowerFactorLineL1", "korrigierte Leistungsfaktor L1", "~Humidity.F", 14);
                     $ID = $this->GetIDForIdent( "correctedPowerFactorLineL1" );
                     if ( $ID !== false ) IPS_SetParent( $ID, $DummyInstance );
-                    $this->RegisterVariableFloat("correctedPowerFactorLineL2", "Leistungsfaktor L2", "~Humidity.F", 15);
+                    $this->RegisterVariableFloat("correctedPowerFactorLineL2", "korrigierte Leistungsfaktor L2", "~Humidity.F", 15);
                     $ID = $this->GetIDForIdent( "correctedPowerFactorLineL2" );
                     if ( $ID !== false ) IPS_SetParent( $ID, $DummyInstance );
-                    $this->RegisterVariableFloat("correctedPowerFactorLineL3", "Leistungsfaktor L3", "~Humidity.F", 16);
+                    $this->RegisterVariableFloat("correctedPowerFactorLineL3", "korrigierte Leistungsfaktor L3", "~Humidity.F", 16);
                     $ID = $this->GetIDForIdent( "correctedPowerFactorLineL3" );
                     if ( $ID !== false ) IPS_SetParent( $ID, $DummyInstance );
-                    $this->RegisterVariableFloat("correctedAavailableSupplyEnergy", "max. verfügbare Ladeleistung", "GOECHARGER_Power.1", 18);
+                    $this->RegisterVariableFloat("correctedAavailableSupplyEnergy", "korrigierte max. verfügbare Ladeleistung", "GOECHARGER_Power.1", 18);
                     $ID = $this->GetIDForIdent( "correctedAavailableSupplyEnergy" );
                     if ( $ID !== false ) IPS_SetParent( $ID, $DummyInstance );
                 }
