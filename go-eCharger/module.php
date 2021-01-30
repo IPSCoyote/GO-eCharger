@@ -833,7 +833,7 @@
 
             if ( $this->ReadPropertyBoolean( "calculateCorrectedData" ) ) {
                 //--- Attributes for data correction
-                if ( IPS_GetInstanceByID( "korrigierte Werte", $this->InstanceID ) === false ) {
+                if ( IPS_GetInstanceIDByName( "korrigierte Werte", $this->InstanceID ) === false ) {
                     $DummyInstance =  IPS_CreateInstance( "" ); // Dummy Module
                     IPS_SetName( $DummyInstance, "korrigierte Werte" );
                     IPS_SetParent( $DummyInstance, $this->InstanceID );
