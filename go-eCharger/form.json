@@ -99,13 +99,15 @@
                 "caption": "DataCorrection",
                 "value": false
               },
+              { "type": "Label", "caption": "   " },
               {
                 "type": "NumberSpinner",
                 "name": "verifiedNetPowerL1",
                 "caption": "Measured Power L1",
                 "digits": 0,
                 "suffix": "V",
-                "value": 230
+                "value": 230,
+                "width": "150px"
               },
               { "type": "Label", "caption": "   " },
               {
@@ -114,7 +116,8 @@
                 "caption": "Measured Power L2",
                 "digits": 0,
                 "suffix": "V",
-                "value": 230
+                "value": 230,
+                "width": "150px"
               },
               { "type": "Label", "caption": "   " },
               {
@@ -123,7 +126,8 @@
                 "caption": "Measured Power L3",
                 "digits": 0,
                 "suffix": "V",
-                "value": 230
+                "value": 230,
+                "width": "150px"
               }
             ]
           }
