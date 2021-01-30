@@ -833,12 +833,12 @@
 
             if ( $this->ReadPropertyBoolean( "calculateCorrectedData" ) ) {
                 //--- Attributes for data correction
-                if ( $this->IPS_GetInstanceByID( "korrigierte Werte", $this->InstanceID ) === false ) {
-                    $DummyInstance =  $this->IPS_CreateInstance( "" ); // Dummy Module
-                    $this->IPS_SetName( $DummyInstance, "korrigierte Werte" );
-                    $this->IPS_SetParent( $DummyInstance, $this->InstanceID );
+                if ( IPS_GetInstanceByID( "korrigierte Werte", $this->InstanceID ) === false ) {
+                    $DummyInstance =  IPS_CreateInstance( "" ); // Dummy Module
+                    IPS_SetName( $DummyInstance, "korrigierte Werte" );
+                    IPS_SetParent( $DummyInstance, $this->InstanceID );
                 }
-                $DummyInstance =  $this->IPS_GetInstanceIDByName( "korrigierte Werte", $this->InstanceID );
+                $DummyInstance =  IPS_GetInstanceIDByName( "korrigierte Werte", $this->InstanceID );
                 if ( $DummyInstance !== false ) {
                     $this->RegisterVariableFloat("correctedPowerToCarLineL1", "Leistung zum Fahrzeug L1", "GOECHARGER_Power.1", 10);
                     $ID = $this->GetIDForIdent( "correctedPowerToCarLineL1" );
