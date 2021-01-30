@@ -130,15 +130,15 @@
                 $correctionFactorL3 = 0.0;
                 if ( GetValueInteger( $this->GetIDForIdent("supplyLineL1") ) > 0 ) {
                     $correctionFactorL1 = $this->ReadPropertyInteger("verifiedSupplyPowerL1" ) / $goEChargerEnergy[0];
-                    SetValue($this->GetIDForIdent( "correctionFactorL1" ), $correctionFactorL1 );
+                    SetValue($this->GetIDForIdent( "correctionFactorL1" ), ( $correctionFactorL1 - 1 ) * 100 );
                 }
                 if ( GetValueInteger( $this->GetIDForIdent("supplyLineL2") ) > 0 ) {
                     $correctionFactorL2 = $this->ReadPropertyInteger("verifiedSupplyPowerL2" ) / $goEChargerEnergy[1];
-                    SetValue($this->GetIDForIdent( "correctionFactorL2" ), $correctionFactorL2 );
+                    SetValue($this->GetIDForIdent( "correctionFactorL2" ), ( $correctionFactorL2 - 1 ) * 100 );
                 }
                 if ( GetValueInteger( $this->GetIDForIdent("supplyLineL3") ) > 0 ) {
                     $correctionFactorL3 = $this->ReadPropertyInteger("verifiedSupplyPowerL3" ) / $goEChargerEnergy[2];
-                    SetValue($this->GetIDForIdent( "correctionFactorL3" ), $correctionFactorL3 );
+                    SetValue($this->GetIDForIdent( "correctionFactorL3" ), ( $correctionFactorL3 - 1 ) * 100 );
                 }
                 $correctedAvailableEnergy = ( ( ( ( $goEChargerEnergy[0] * $correctionFactorL1 ) + ( $goEChargerEnergy[1] * $correctionFactorL2 ) + ( $goEChargerEnergy[2] * $correctionFactorL3 ) ) / 3 ) * 3 * $goEChargerStatus->{'amp'} ) / 1000;
                 SetValue($this->GetIDForIdent("correctedAvailableSupplyEnergy" ),  $correctedAvailableEnergy );
