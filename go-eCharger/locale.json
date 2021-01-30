@@ -7,7 +7,7 @@
             "Update Intervals": "Update Intervalle in Sekunden (0 = deaktiviert)",
             "Update Idle": "wartend",
             "Update Charging": "ladend",
-            "Functional Data": "Komfortfunktionen",
+            "Comfort Functions": "Komfortfunktionen",
             "Auto Reactivate": "automatische Aktivierung des Chargers bei erneutem Anschluss eines Fahrzeugs",
             "AutoActivateOnStopSet": "automatische Aktivierung des Chargers beim Setzen eines automatischen Ladeendes",
             "Vehicle Data": "Fahrzeugdaten",

@@ -11,17 +11,29 @@
              Status-Variables und Modul-Properties for permanent usage should be created here  */
           parent::Create(); 
             
-          // Properties Charger
+          //--- Properties
           $this->RegisterPropertyString("IPAddressCharger", "0.0.0.0"); 
           $this->RegisterPropertyInteger("MaxAmperage", 6);
+
+          // Update Intevals
           $this->RegisterPropertyInteger("UpdateIdle", 0);  
-          $this->RegisterPropertyInteger("UpdateCharging",0); 
+          $this->RegisterPropertyInteger("UpdateCharging",0);
+
+          // Comfort Functions
           $this->RegisterPropertyBoolean("AutoReactivate",false); 
           $this->RegisterPropertyBoolean("AutoActivateOnStopSet",false);
+
+          // Vehicle Data
           $this->RegisterPropertyFloat("AverageConsumption",0);
           $this->RegisterPropertyFloat("MaxLoadKw",0);
-            
-          // Timer
+
+          // Special Functions
+          $this->RegisterPropertyBoolean("DataCorrection",false);
+          $this->RegisterPropertyInteger("MeasuredConnectedPowerL1", 230);
+          $this->RegisterPropertyInteger("MeasuredConnectedPowerL2", 230);
+          $this->RegisterPropertyInteger("MeasuredConnectedPowerL3", 230);
+
+          //--- Register Timer
           $this->RegisterTimer("GOeChargerTimer_UpdateTimer", 0, 'GOeCharger_Update($_IPS[\'TARGET\']);');
         }
  
@@ -36,7 +48,14 @@
           // Set Data to Variables (and update timer)
           $this->Update();
         } 
-        
+
+        public function onChangeDataCorrection() {
+            $dataCorrectonStatus = $this->ReadPropertyBoolean("UpdateCharging");
+            $this->UpdateFormField("MeasuredConnectedPowerL1", "visible", $dataCorrectonStatus );
+            $this->UpdateFormField("MeasuredConnectedPowerL2", "visible", $dataCorrectonStatus );
+            $this->UpdateFormField("MeasuredConnectedPowerL3", "visible", $dataCorrectonStatus );
+        }
+
         public function Destroy() {
                   // Never delete this line!
             parent::Destroy();
