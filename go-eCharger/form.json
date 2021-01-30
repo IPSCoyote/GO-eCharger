@@ -82,7 +82,7 @@
         "caption": "Special Functions",
         "items": [
           {
-            "type": "Checkbox",
+            "type": "CheckBox",
             "name": "calculateCorrectedData",
             "caption": "DataCorrection",
             "value": false,
