@@ -122,6 +122,28 @@
             SetValue($this->GetIDForIdent("supplyLineN"),             $goEChargerEnergy[3]);  
             $availableEnergy = ( ( ( $goEChargerEnergy[0] + $goEChargerEnergy[1] + $goEChargerEnergy[2] ) / 3 ) * 3 * $goEChargerStatus->{'amp'} ) / 1000;
             SetValue($this->GetIDForIdent("availableSupplyEnergy"),    $availableEnergy);
+
+            // calculate correction factors
+            if ( $this->ReadPropertyBoolean( "calculateCorrectedData" ) ) {
+                $correctionFactorL1 = 0.0;
+                $correctionFactorL2 = 0.0;
+                $correctionFactorL3 = 0.0;
+                if ( GetValueInteger( $this->GetIDForIdent("supplyLineL1") ) > 0 ) {
+                    $correctionFactorL1 = $this->ReadPropertyFloat("verifiedSupplyPowerL1" ) / $this->$goEChargerEnergy[0];
+                    SetValue($this->GetIDForIdent( "correctionFactorL1", $correctionFactorL1 ) );
+                }
+                if ( GetValueInteger( $this->GetIDForIdent("supplyLineL2") ) > 0 ) {
+                    $correctionFactorL1 = $this->ReadPropertyFloat("verifiedSupplyPowerL2" ) / $this->$goEChargerEnergy[1];
+                    SetValue($this->GetIDForIdent( "correctionFactorL2", $correctionFactorL2 ) );
+                }
+                if ( GetValueInteger( $this->GetIDForIdent("supplyLineL3") ) > 0 ) {
+                    $correctionFactorL1 = $this->ReadPropertyFloat("verifiedSupplyPowerL3" ) / $this->$goEChargerEnergy[2];
+                    SetValue($this->GetIDForIdent( "correctionFactorL3", $correctionFactorL3 ) );
+                }
+                $correctedAvailableEnergy = ( ( ( ( $goEChargerEnergy[0] * $correctionFactorL1 ) + ( $goEChargerEnergy[1] * $correctionFactorL2 ) + ( $goEChargerEnergy[2] * $correctionFactorL3 ) ) / 3 ) * 3 * $goEChargerStatus->{'amp'} ) / 1000;
+                SetValue($this->GetIDForIdent("correctedAvailableSupplyEnergy"),    $availableEnergy);
+            }
+
             SetValue($this->GetIDForIdent("ampToCarLineL1"),          $goEChargerEnergy[4]/10);            
             SetValue($this->GetIDForIdent("ampToCarLineL2"),          $goEChargerEnergy[5]/10);            
             SetValue($this->GetIDForIdent("ampToCarLineL3"),          $goEChargerEnergy[6]/10);  
