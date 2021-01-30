@@ -29,9 +29,9 @@
 
           // Special Functions
           $this->RegisterPropertyBoolean("calculateCorrectedData",false);
-          $this->RegisterPropertyInteger("verifiedNetPowerL1", 230);
-          $this->RegisterPropertyInteger("verifiedNetPowerL2", 230);
-          $this->RegisterPropertyInteger("verifiedNetPowerL3", 230);
+          $this->RegisterPropertyInteger("verifiedSupplyPowerL1", 230);
+          $this->RegisterPropertyInteger("verifiedSupplyPowerL2", 230);
+          $this->RegisterPropertyInteger("verifiedSupplyPowerL3", 230);
 
           //--- Register Timer
           $this->RegisterTimer("GOeChargerTimer_UpdateTimer", 0, 'GOeCharger_Update($_IPS[\'TARGET\']);');
@@ -804,56 +804,67 @@
             
             //--- Technical Informations ------------------------------------------------------
             $this->RegisterVariableString("serialID", "Seriennummer","",91);
-
             $this->RegisterVariableInteger("error", "Fehler","GOECHARGER_Error",92);
-
             $this->RegisterVariableInteger("rebootCounter", "Reboot Zähler","",93);
-
             $this->RegisterVariableString("rebootTime", "Reboot Zeitpunkt","",93);
-            
             $this->RegisterVariableInteger("adapterAttached", "angeschlossener Adapter","GOECHARGER_Adapter",95);
-
             $this->RegisterVariableInteger("cableCapability", "Kabel-Leistungsfähigkeit","GOECHARGER_AmpereCable",96);
-
             $this->RegisterVariableBoolean("norwayMode", "Erdungsprüfung","~Switch",97);
-
             $this->RegisterVariableFloat("mainboardTemperature", "Mainboard Temperatur","~Temperature",98);
-
             $this->RegisterVariableString("availablePhases", "verfügbare Phasen","",99);
-
             $this->RegisterVariableInteger("supplyLineL1", "Spannungsversorgung L1","GOECHARGER_Voltage",100);
-
             $this->RegisterVariableInteger("supplyLineL2", "Spannungsversorgung L2","GOECHARGER_Voltage",101);
-
             $this->RegisterVariableInteger("supplyLineL3", "Spannungsversorgung L3","GOECHARGER_Voltage",102);
-
             $this->RegisterVariableInteger("supplyLineN", "Spannungsversorgung N","GOECHARGER_Voltage",103);
 
+            //--- Power to Car
             $this->RegisterVariableFloat("powerToCarLineL1", "Leistung zum Fahrzeug L1","GOECHARGER_Power.1",104);
-
             $this->RegisterVariableFloat("powerToCarLineL2", "Leistung zum Fahrzeug L2","GOECHARGER_Power.1",105);
-
             $this->RegisterVariableFloat("powerToCarLineL3", "Leistung zum Fahrzeug L3","GOECHARGER_Power.1",106);
-
             $this->RegisterVariableFloat("powerToCarLineN", "Leistung zum Fahrzeug N","GOECHARGER_Power.1",107);
-
             $this->RegisterVariableFloat("ampToCarLineL1", "Ampere zum Fahrzeug L1","GOECHARGER_Ampere.1",108);
-
             $this->RegisterVariableFloat("ampToCarLineL2", "Ampere zum Fahrzeug L2","GOECHARGER_Ampere.1",109);
-
             $this->RegisterVariableFloat("ampToCarLineL3", "Ampere zum Fahrzeug L3","GOECHARGER_Ampere.1",110);
-
             $this->RegisterVariableFloat("powerFactorLineL1", "Leistungsfaktor L1","~Humidity.F",111);
-
             $this->RegisterVariableFloat("powerFactorLineL2", "Leistungsfaktor L2","~Humidity.F",112);
-
             $this->RegisterVariableFloat("powerFactorLineL3", "Leistungsfaktor L3","~Humidity.F",113);
-
             $this->RegisterVariableFloat("powerFactorLineN", "Leistungsfaktor N","~Humidity.F",114);
-
             $this->RegisterVariableFloat("availableSupplyEnergy", "max. verfügbare Ladeleistung","GOECHARGER_Power.1",115);
-            
-            $this->RegisterVariableInteger("awattarPricezone", "Awattar Preiszone","GOECHARGER_AwattarPricezone",116);
+
+            if ( $this->ReadPropertyBoolean( "calculateCorrectedData" ) ) {
+                //--- Attributes for data correction
+                if ( $this->IPS_GetInstanceByID( "korrigierte Werte", $this->InstanceID ) === false ) {
+                    $DummyInstance =  $this->IPS_CreateInstance( "" ); // Dummy Module
+                    $this->IPS_SetName( $DummyInstance, "korrigierte Werte" );
+                    $this->IPS_SetParent( $DummyInstance, $this->InstanceID );
+                }
+                $DummyInstance =  $this->IPS_GetInstanceIDByName( "korrigierte Werte", $this->InstanceID );
+                if ( $DummyInstance !== false ) {
+                    $this->RegisterVariableFloat("correctedPowerToCarLineL1", "Leistung zum Fahrzeug L1", "GOECHARGER_Power.1", 10);
+                    $ID = $this->GetIDForIdent( "correctedPowerToCarLineL1" );
+                    if ( $ID !== false ) IPS_SetParent( $ID, $DummyInstance );
+                    $this->RegisterVariableFloat("correctedPowerToCarLineL2", "Leistung zum Fahrzeug L2", "GOECHARGER_Power.1", 11);
+                    $ID = $this->GetIDForIdent( "correctedPowerToCarLineL2" );
+                    if ( $ID !== false ) IPS_SetParent( $ID, $DummyInstance );
+                    $this->RegisterVariableFloat("correctedPowerToCarLineL3", "Leistung zum Fahrzeug L3", "GOECHARGER_Power.1", 12);
+                    $ID = $this->GetIDForIdent( "correctedPowerToCarLineL3" );
+                    if ( $ID !== false ) IPS_SetParent( $ID, $DummyInstance );
+                    $this->RegisterVariableFloat("correctedPowerFactorLineL1", "Leistungsfaktor L1", "~Humidity.F", 14);
+                    $ID = $this->GetIDForIdent( "correctedPowerFactorLineL1" );
+                    if ( $ID !== false ) IPS_SetParent( $ID, $DummyInstance );
+                    $this->RegisterVariableFloat("correctedPowerFactorLineL2", "Leistungsfaktor L2", "~Humidity.F", 15);
+                    $ID = $this->GetIDForIdent( "correctedPowerFactorLineL2" );
+                    if ( $ID !== false ) IPS_SetParent( $ID, $DummyInstance );
+                    $this->RegisterVariableFloat("correctedPowerFactorLineL3", "Leistungsfaktor L3", "~Humidity.F", 16);
+                    $ID = $this->GetIDForIdent( "correctedPowerFactorLineL3" );
+                    if ( $ID !== false ) IPS_SetParent( $ID, $DummyInstance );
+                    $this->RegisterVariableFloat("correctedAavailableSupplyEnergy", "max. verfügbare Ladeleistung", "GOECHARGER_Power.1", 18);
+                    $ID = $this->GetIDForIdent( "correctedAavailableSupplyEnergy" );
+                    if ( $ID !== false ) IPS_SetParent( $ID, $DummyInstance );
+                }
+            }
+
+            $this->RegisterVariableInteger("awattarPricezone", "Awattar Preiszone","GOECHARGER_AwattarPricezone",120);
         }
     }
 ?>

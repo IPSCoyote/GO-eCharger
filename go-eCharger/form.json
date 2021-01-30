@@ -102,7 +102,7 @@
               { "type": "Label", "caption": "   " },
               {
                 "type": "NumberSpinner",
-                "name": "verifiedNetPowerL1",
+                "name": "verifiedSupplyPowerL1",
                 "caption": "Measured Power L1",
                 "digits": 0,
                 "suffix": "V",
@@ -112,7 +112,7 @@
               { "type": "Label", "caption": "   " },
               {
                 "type": "NumberSpinner",
-                "name": "verifiedNetPowerL2",
+                "name": "verifiedSupplyPowerL2",
                 "caption": "Measured Power L2",
                 "digits": 0,
                 "suffix": "V",
@@ -122,7 +122,7 @@
               { "type": "Label", "caption": "   " },
               {
                 "type": "NumberSpinner",
-                "name": "verifiedNetPowerL3",
+                "name": "verifiedSupplyPowerL3",
                 "caption": "Measured Power L3",
                 "digits": 0,
                 "suffix": "V",
