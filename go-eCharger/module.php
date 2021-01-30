@@ -49,6 +49,14 @@
           $this->Update();
         } 
 
+        public function Destroy() {
+                  // Never delete this line!
+            parent::Destroy();
+        }
+
+        //=== Form Functions =========================================================================================
+        /* onChange Methods called from the Form
+        */
 
         public function onChangeDataCorrection() {
             $dataCorrectonStatus = $this->ReadPropertyBoolean("calculateCorrectedData");
@@ -57,18 +65,13 @@
             $this->UpdateFormField("MeasuredConnectedPowerL3", "visible", $dataCorrectonStatus );
         }
 
-        public function Destroy() {
-                  // Never delete this line!
-            parent::Destroy();
-        }
-        
-        //=== Modul Funktionen =========================================================================================
+        //=== Modul Functions =========================================================================================
         /* Own module functions called via the defined prefix GOeCharger_* 
         *
         * GOeCharger_CheckConnection($id);
         *
         */
-        
+
         public function Update() {
             /* Check the connection to the go-eCharger */
             $goEChargerStatus = $this->getStatusFromCharger();

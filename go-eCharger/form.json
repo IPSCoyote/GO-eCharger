@@ -86,7 +86,7 @@
             "name": "calculateCorrectedData",
             "caption": "DataCorrection",
             "value": false,
-            "onChange": "onChangeDataCorrection($id)"
+            "onChange": "GOeCharger_onChangeDataCorrection($id)"
           },
           {
             "type": "RowLayout",
