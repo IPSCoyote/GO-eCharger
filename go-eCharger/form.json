@@ -91,7 +91,7 @@
         "caption": "Special Functions",
         "items": [
           {
-            "type": "RowLayout"
+            "type": "RowLayout",
             "items": [
               {
                 "type": "CheckBox",
