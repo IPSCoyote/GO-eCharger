@@ -833,13 +833,13 @@
 
             if ( $this->ReadPropertyBoolean( "calculateCorrectedData" ) ) {
                 //--- Attributes for data correction
-                $this->RegisterVariableFloat("correctedPowerToCarLineL1", "korrigierte Leistung zum Fahrzeug L1", "GOECHARGER_Power.1", 105 );
-                $this->RegisterVariableFloat("correctedPowerToCarLineL2", "korrigierte Leistung zum Fahrzeug L2", "GOECHARGER_Power.1", 107 );
-                $this->RegisterVariableFloat("correctedPowerToCarLineL3", "korrigierte Leistung zum Fahrzeug L3", "GOECHARGER_Power.1", 109 );
-                $this->RegisterVariableFloat("correctedPowerFactorLineL1", "korrigierte Leistungsfaktor L1", "~Humidity.F", 116 );
-                $this->RegisterVariableFloat("correctedPowerFactorLineL2", "korrigierte Leistungsfaktor L2", "~Humidity.F", 118 );
-                $this->RegisterVariableFloat("correctedPowerFactorLineL3", "korrigierte Leistungsfaktor L3", "~Humidity.F", 120 );
-                $this->RegisterVariableFloat("correctedAvailableSupplyEnergy", "korrigierte max. verfügbare Ladeleistung", "GOECHARGER_Power.1", 126 );
+                $this->RegisterVariableFloat("correctedPowerToCarLineL1", "Leistung zum Fahrzeug L1 - korrigiert", "GOECHARGER_Power.1", 105 );
+                $this->RegisterVariableFloat("correctedPowerToCarLineL2", "Leistung zum Fahrzeug L2 - korrigiert", "GOECHARGER_Power.1", 107 );
+                $this->RegisterVariableFloat("correctedPowerToCarLineL3", "Leistung zum Fahrzeug L3 - korrigiert", "GOECHARGER_Power.1", 109 );
+                $this->RegisterVariableFloat("correctedPowerFactorLineL1", "Leistungsfaktor L1 - korrigiert", "~Humidity.F", 116 );
+                $this->RegisterVariableFloat("correctedPowerFactorLineL2", "Leistungsfaktor L2 - korrigiert", "~Humidity.F", 118 );
+                $this->RegisterVariableFloat("correctedPowerFactorLineL3", "Leistungsfaktor L3 - korrigiert", "~Humidity.F", 120 );
+                $this->RegisterVariableFloat("correctedAvailableSupplyEnergy", "max. verfügbare Ladeleistung - korrigiert", "GOECHARGER_Power.1", 126 );
                 $this->RegisterVariableFloat( "correctionFactorL1", "Korrekturfaktor L1", "~Humidity.F", 127 );
                 $this->RegisterVariableFloat( "correctionFactorL2", "Korrekturfaktor L2", "~Humidity.F", 128 );
                 $this->RegisterVariableFloat( "correctionFactorL3", "Korrekturfaktor L3", "~Humidity.F", 129 );
