@@ -16,7 +16,9 @@
                 { "label": "12A - 8,2kw", "value": 12 },
                 { "label": "16A - 11kw", "value": 16 },
                 { "label": "32A - 22kw", "value": 32 }
-        ]},
+        ]
+      },
+      { "type": "Label", "caption": "   " },
       { "type": "Label", "label": "Update Intervals" },
       {
         "type": "RowLayout",
@@ -39,6 +41,7 @@
             "suffix": "seconds"}
         ]
       },
+      { "type": "Label", "caption": "   " },
       {
         "type": "ExpansionPanel",
         "caption": "Comfort Functions",
@@ -103,7 +106,6 @@
                 "digits": 0,
                 "suffix": "V",
                 "value": 230,
-                "visible": false
               },
               { "type": "Label", "caption": "   " },
               {
@@ -113,7 +115,6 @@
                 "digits": 0,
                 "suffix": "V",
                 "value": 230,
-                "visible": false
               },
               { "type": "Label", "caption": "   " },
               {
@@ -123,7 +124,6 @@
                 "digits": 0,
                 "suffix": "V",
                 "value": 230,
-                "visible": false
               }
             ]
           }
