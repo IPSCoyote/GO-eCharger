@@ -58,13 +58,6 @@
         /* onChange Methods called from the Form
         */
 
-        public function onChangeDataCorrection() {
-            $dataCorrectonStatus = $this->ReadPropertyBoolean("calculateCorrectedData");
-            $this->UpdateFormField("MeasuredConnectedPowerL1", "visible", $dataCorrectonStatus );
-            $this->UpdateFormField("MeasuredConnectedPowerL2", "visible", $dataCorrectonStatus );
-            $this->UpdateFormField("MeasuredConnectedPowerL3", "visible", $dataCorrectonStatus );
-        }
-
         //=== Modul Functions =========================================================================================
         /* Own module functions called via the defined prefix GOeCharger_* 
         *

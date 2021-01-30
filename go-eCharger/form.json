@@ -85,8 +85,7 @@
             "type": "CheckBox",
             "name": "calculateCorrectedData",
             "caption": "DataCorrection",
-            "value": false,
-            "onChange": "GOeCharger_onChangeDataCorrection($id)"
+            "value": false
           },
           {
             "type": "RowLayout",
