@@ -28,7 +28,7 @@
           $this->RegisterPropertyFloat("MaxLoadKw",0);
 
           // Special Functions
-          $this->RegisterPropertyBoolean("DataCorrection",false);
+          $this->RegisterPropertyBoolean("calculateCorrectedData",false);
           $this->RegisterPropertyInteger("MeasuredConnectedPowerL1", 230);
           $this->RegisterPropertyInteger("MeasuredConnectedPowerL2", 230);
           $this->RegisterPropertyInteger("MeasuredConnectedPowerL3", 230);
@@ -49,8 +49,9 @@
           $this->Update();
         } 
 
+
         public function onChangeDataCorrection() {
-            $dataCorrectonStatus = $this->ReadPropertyBoolean("UpdateCharging");
+            $dataCorrectonStatus = $this->ReadPropertyBoolean("calculateCorrectedData");
             $this->UpdateFormField("MeasuredConnectedPowerL1", "visible", $dataCorrectonStatus );
             $this->UpdateFormField("MeasuredConnectedPowerL2", "visible", $dataCorrectonStatus );
             $this->UpdateFormField("MeasuredConnectedPowerL3", "visible", $dataCorrectonStatus );
