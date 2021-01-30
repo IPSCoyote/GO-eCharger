@@ -29,9 +29,9 @@
 
           // Special Functions
           $this->RegisterPropertyBoolean("calculateCorrectedData",false);
-          $this->RegisterPropertyInteger("MeasuredConnectedPowerL1", 230);
-          $this->RegisterPropertyInteger("MeasuredConnectedPowerL2", 230);
-          $this->RegisterPropertyInteger("MeasuredConnectedPowerL3", 230);
+          $this->RegisterPropertyInteger("verifiedNetPowerL1", 230);
+          $this->RegisterPropertyInteger("verifiedNetPowerL2", 230);
+          $this->RegisterPropertyInteger("verifiedNetPowerL3", 230);
 
           //--- Register Timer
           $this->RegisterTimer("GOeChargerTimer_UpdateTimer", 0, 'GOeCharger_Update($_IPS[\'TARGET\']);');

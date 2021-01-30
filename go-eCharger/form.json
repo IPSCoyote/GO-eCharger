@@ -91,17 +91,17 @@
         "caption": "Special Functions",
         "items": [
           {
-            "type": "CheckBox",
-            "name": "calculateCorrectedData",
-            "caption": "DataCorrection",
-            "value": false
-          },
-          {
-            "type": "RowLayout",
+            "type": "RowLayout"
             "items": [
               {
+                "type": "CheckBox",
+                "name": "calculateCorrectedData",
+                "caption": "DataCorrection",
+                "value": false
+              },
+              {
                 "type": "NumberSpinner",
-                "name": "MeasuredConnectedPowerL1",
+                "name": "verifiedNetPowerL1",
                 "caption": "Measured Power L1",
                 "digits": 0,
                 "suffix": "V",
@@ -110,7 +110,7 @@
               { "type": "Label", "caption": "   " },
               {
                 "type": "NumberSpinner",
-                "name": "MeasuredConnectedPowerL2",
+                "name": "verifiedNetPowerL2",
                 "caption": "Measured Power L2",
                 "digits": 0,
                 "suffix": "V",
@@ -119,7 +119,7 @@
               { "type": "Label", "caption": "   " },
               {
                 "type": "NumberSpinner",
-                "name": "MeasuredConnectedPowerL3",
+                "name": "verifiedNetPowerL3",
                 "caption": "Measured Power L3",
                 "digits": 0,
                 "suffix": "V",

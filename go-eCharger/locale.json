@@ -1,7 +1,7 @@
 {
     "translations": {
         "de": {
-            "Disclaimer": "Dieses Modul wurde unabhängig vom Hersteller GO-eCharger entwickelt. Die Benutzung des Moduls erfolgt auf eigene Gefahr unter Ausschluss jeglicher Gewährleistung für Probleme oder Schäden am GO-eCharger.",
+            "Disclaimer": "Dieses Modul wurde unabhängig vom Hersteller GO-e entwickelt. Die Benutzung des Moduls erfolgt auf eigene Gefahr unter Ausschluss jeglicher Gewährleistung für Probleme oder Schäden am GO-eCharger.",
             "Basic Data": "Grunddaten",
             "IP Address": "IP Adresse",
             "Fuse protection": "el. Absicherung",
@@ -24,9 +24,9 @@
             "seconds": "Sekunden",
             "Special Functions": "Sonderfunktionen",
             "DataCorrection": "Datenkorrektur anwenden",
-            "Measured Power L1":  "gemessene Spannung L1",
-            "Measured Power L2": "gemessene Spannung L2",
-            "Measured Power L3": "gemessene Spannung L3"
+            "Measured Power L1":  "verifizierte Spannung L1",
+            "Measured Power L2": "verifizierte Spannung L2",
+            "Measured Power L3": "verifizierte Spannung L3"
         }
     }
 }
