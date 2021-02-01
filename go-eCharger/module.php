@@ -154,12 +154,12 @@
             }
             SetValue($this->GetIDForIdent("powerToCarLineL2"),        $goEChargerEnergy[8]/10);
             if ( $correctionFactorL2 != 0.0 ) {
-                SetValue($this->GetIDForIdent("correctedPowerToCarLineL2"),$goEChargerEnergy[8]/10) * $correctionFactorL1;
+                SetValue($this->GetIDForIdent("correctedPowerToCarLineL2"),$goEChargerEnergy[8]/10) * $correctionFactor2;
                 SetValue($this->GetIDForIdent("correctedPowerFactorLineL2"),$goEChargerEnergy[13]/100) * $correctionFactorL2;
             }
             SetValue($this->GetIDForIdent("powerToCarLineL3"),        $goEChargerEnergy[9]/10);
             if ( $correctionFactorL3 != 0.0 ) {
-                SetValue($this->GetIDForIdent("correctedPowerToCarLineL3"),$goEChargerEnergy[9]/10) * $correctionFactorL1;
+                SetValue($this->GetIDForIdent("correctedPowerToCarLineL3"),$goEChargerEnergy[9]/10) * $correctionFactorL3;
                 SetValue($this->GetIDForIdent("correctedPowerFactorLineL3"),$goEChargerEnergy[14]/100) * $correctionFactorL3;
             }
             SetValue($this->GetIDForIdent("powerToCarLineN"),         $goEChargerEnergy[10]/10); 
