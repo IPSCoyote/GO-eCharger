@@ -163,7 +163,7 @@
                 SetValue($this->GetIDForIdent("correctedPowerFactorLineL3"),$goEChargerEnergy[14]/100 * $correctionFactorL3 );
             }
             if ( $correctionFactorL1 > 0 ) {
-                SetValue( $this->GetIDForIdent( "correctedPowerToCarTotal"), ( ( $goEChargerEnergy[0] * $goEChargerEnergy[4]/10 ) * $correctionFactorL1 ) + ( ( $goEChargerEnergy[1] * $goEChargerEnergy[5]/10 ) * $correctionFactorL2 ) + ( ( $goEChargerEnergy[2] * $goEChargerEnergy[6]/10 ) * $correctionFactorL3 )
+                SetValue( $this->GetIDForIdent( "correctedPowerToCarTotal"), ( ( $goEChargerEnergy[0] * $goEChargerEnergy[4]/10 ) * $correctionFactorL1 ) + ( ( $goEChargerEnergy[1] * $goEChargerEnergy[5]/10 ) * $correctionFactorL2 ) + ( ( $goEChargerEnergy[2] * $goEChargerEnergy[6]/10 ) * $correctionFactorL3 );
             }
 
             SetValue($this->GetIDForIdent("powerToCarLineN"),         $goEChargerEnergy[10]/10); 
