@@ -162,6 +162,10 @@
                 SetValue($this->GetIDForIdent("correctedPowerToCarLineL3"),$goEChargerEnergy[9]/10 * $correctionFactorL3 );
                 SetValue($this->GetIDForIdent("correctedPowerFactorLineL3"),$goEChargerEnergy[14]/100 * $correctionFactorL3 );
             }
+            if ( $correctionFactorL1 > 0 ) {
+                SetValue( $this->GetIDForIdent( "correctedPowerToCarTotal"), ( ( $goEChargerEnergy[0] * $goEChargerEnergy[4]/10 ) * $correctionFactorL1 ) + ( ( $goEChargerEnergy[1] * $goEChargerEnergy[5]/10 ) * $correctionFactorL2 ) + ( ( $goEChargerEnergy[2] * $goEChargerEnergy[6]/10 ) * $correctionFactorL3 )
+            }
+
             SetValue($this->GetIDForIdent("powerToCarLineN"),         $goEChargerEnergy[10]/10); 
             SetValue($this->GetIDForIdent("powerToCarTotal"),         $goEChargerEnergy[11]/100); 
             SetValue($this->GetIDForIdent("powerFactorLineL1"),       $goEChargerEnergy[12]/100);            
@@ -800,9 +804,9 @@
             //--- Informations to the current loading cycle ------------------------------------
             $this->RegisterVariableFloat("powerToCarTotal", "Aktuelle Leistung zum Fahrzeug","GOECHARGER_Power.1",31);
 
-            $this->RegisterVariableFloat("energyLoadCycle", "abgegebene Energie im Ladezyklus","GOECHARGER_Energy.1",32);
+            $this->RegisterVariableFloat("energyLoadCycle", "abgegebene Energie im Ladezyklus","GOECHARGER_Energy.1",33);
 
-            $this->RegisterVariableInteger("unlockedByRFID", "entsperrt durch RFID","",33);
+            $this->RegisterVariableInteger("unlockedByRFID", "entsperrt durch RFID","",34);
 
             
             //--- Power Consumption information ------------------------------------------------
@@ -867,6 +871,7 @@
 
             if ( $this->ReadPropertyBoolean( "calculateCorrectedData" ) ) {
                 //--- Attributes for data correction
+                $this->RegisterVariableFloat("correctedPowerToCarTotal", "Aktuelle Leistung zum Fahrzeug - korrigiert","GOECHARGER_Power.1",32);
                 $this->RegisterVariableFloat("correctedPowerToCarLineL1", "Leistung zum Fahrzeug L1 - korrigiert", "GOECHARGER_Power.1", 105 );
                 $this->RegisterVariableFloat("correctedPowerToCarLineL2", "Leistung zum Fahrzeug L2 - korrigiert", "GOECHARGER_Power.1", 107 );
                 $this->RegisterVariableFloat("correctedPowerToCarLineL3", "Leistung zum Fahrzeug L3 - korrigiert", "GOECHARGER_Power.1", 109 );
