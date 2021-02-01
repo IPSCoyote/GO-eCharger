@@ -150,7 +150,7 @@
             SetValue($this->GetIDForIdent("powerToCarLineL1"),        $goEChargerEnergy[7]/10);
             if ( $correctionFactorL1 != 0.0 ) {
                 SetValue($this->GetIDForIdent("correctedPowerToCarLineL1"), $goEChargerEnergy[7]/10) * $correctionFactorL1;
-                SetValue($this->GetIDForIdent("correctedPowerFactorLineL1"),$goEChargerEnergy[12]/100) * correctionFactorL1;
+                SetValue($this->GetIDForIdent("correctedPowerFactorLineL1"),$goEChargerEnergy[12]/100) * $correctionFactorL1;
             }
             SetValue($this->GetIDForIdent("powerToCarLineL2"),        $goEChargerEnergy[8]/10);
             if ( $correctionFactorL2 != 0.0 ) {
