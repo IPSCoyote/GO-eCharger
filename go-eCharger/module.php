@@ -235,7 +235,7 @@
             // set current available Ampere (if too high)
             if ( $goEChargerStatus->{'amp'} > $goEChargerStatus->{'ama'} ) {
               // set current available to max. available, as current was higher than new max.
-              $goEChargerStatus = $this->setValueToeCharger( 'amp', $goEChargerStatus->{'ama'} );
+              $goEChargerStatus = $this->setValueToeCharger( 'amx', $goEChargerStatus->{'ama'} );
             }  
 
             $this->Update();
@@ -267,7 +267,7 @@
             }
                                  
             // set current available Ampere
-            $resultStatus = $this->setValueToeCharger( 'amp', $ampereToSet ); 
+            $resultStatus = $this->setValueToeCharger( 'amx', $ampereToSet );
             
             // Update all data
             $this->Update();
