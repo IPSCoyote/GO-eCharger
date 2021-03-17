@@ -81,16 +81,19 @@
             SetValue($this->GetIDForIdent("rebootTime"), date( DATE_RFC822, time()-round($goEChargerStatus->{'rbt'}/1000,0)) );
             
             $Phasen = "";
-            if ( $goEChargerStatus->{'pha'}&(1<<3) ) $Phasen = $Phasen.' 1';
+            $AnzahlPhasen = 0;
+            if ( $goEChargerStatus->{'pha'}&(1<<3) ) { $Phasen = $Phasen.' 1'; $AnzahlPhasen = 1; }
             if ( $goEChargerStatus->{'pha'}&(1<<4) ) { 
                 if ( $Phasen <> "" ) {
                     $Phasen = $Phasen.",";
+                    $AnzahlPhasen += 1;
                 }
                 $Phasen = $Phasen.' 2';
             }
             if ( $goEChargerStatus->{'pha'}&(1<<5) ) { 
                 if ( $Phasen <> "" ) {
                     $Phasen = $Phasen." und";
+                    $AnzahlPhasen += 1;
                 }
                 $Phasen = $Phasen.' 3';
             }
@@ -99,6 +102,7 @@
             } else
                 $Phasen = 'Keine Phasen vorhanden';
             SetValue($this->GetIDForIdent("availablePhases"), $Phasen );
+            SetValue($this->GetIDForIdent( "availablePhasesInRow"), $AnzahlPhasen );
             
             
             SetValue($this->GetIDForIdent("mainboardTemperature"),    $goEChargerStatus->{'tmp'});  
@@ -166,13 +170,19 @@
                 SetValue( $this->GetIDForIdent( "correctedPowerToCarTotal"), ( ( ( $goEChargerEnergy[0] * $goEChargerEnergy[4]/10 ) * $correctionFactorL1 ) + ( ( $goEChargerEnergy[1] * $goEChargerEnergy[5]/10 ) * $correctionFactorL2 ) + ( ( $goEChargerEnergy[2] * $goEChargerEnergy[6]/10 ) * $correctionFactorL3 ) ) / 1000 );
             }
 
+            $usedSupplyLinesByCar = 0;
+            if ( $goEChargerEnergy[7]/10 > 0 ) $usedSupplyLinesByCar += 1;  // Phase 1
+            if ( $goEChargerEnergy[8]/10 > 0 ) $usedSupplyLinesByCar += 1;  // Phase 2
+            if ( $goEChargerEnergy[9]/10 > 0 ) $usedSupplyLinesByCar += 1;  // Phase 3
+            SetValue( $this->GetIDForIdent( "usedSupplyLinesByCar"), $usedSupplyLinesByCar );
+
             SetValue($this->GetIDForIdent("powerToCarLineN"),         $goEChargerEnergy[10]/10); 
             SetValue($this->GetIDForIdent("powerToCarTotal"),         $goEChargerEnergy[11]/100); 
             SetValue($this->GetIDForIdent("powerFactorLineL1"),       $goEChargerEnergy[12]/100);            
             SetValue($this->GetIDForIdent("powerFactorLineL2"),       $goEChargerEnergy[13]/100);            
             SetValue($this->GetIDForIdent("powerFactorLineL3"),       $goEChargerEnergy[14]/100);  
-            SetValue($this->GetIDForIdent("powerFactorLineN"),        $goEChargerEnergy[15]/100);             
-            SetValue($this->GetIDForIdent("serialID"),                $goEChargerStatus->{'sse'});  
+            SetValue($this->GetIDForIdent("powerFactorLineN"),        $goEChargerEnergy[15]/100);
+            SetValue($this->GetIDForIdent("serialID"),                $goEChargerStatus->{'sse'});
             SetValue($this->GetIDForIdent("ledBrightness"),           $goEChargerStatus->{'lbr'});  
             SetValue($this->GetIDForIdent("ledEnergySave"),           $goEChargerStatus->{'lse'});  
             if ( isset( $goEChargerStatus->{'azo'} ) ) SetValue( $this->GetIDForIdent("awattarPricezone"),               $goEChargerStatus->{'azo'} );  // new with Firmware 40.0
@@ -288,7 +298,7 @@
             // set current available Ampere (if too high)
             if ( $goEChargerStatus->{'amp'} > $goEChargerStatus->{'ama'} ) {
               // set current available to max. available, as current was higher than new max.
-              $goEChargerStatus = $this->setValueToeCharger( 'amp', $goEChargerStatus->{'ama'} );
+              $goEChargerStatus = $this->setValueToeCharger( 'amx', $goEChargerStatus->{'ama'} );
             }  
 
             $this->Update();
@@ -320,7 +330,7 @@
             }
                                  
             // set current available Ampere
-            $resultStatus = $this->setValueToeCharger( 'amp', $ampereToSet ); 
+            $resultStatus = $this->setValueToeCharger( 'amx', $ampereToSet );
             
             // Update all data
             $this->Update();
@@ -850,12 +860,14 @@
             $this->RegisterVariableBoolean("norwayMode", "Erdungsprüfung","~Switch",97);
             $this->RegisterVariableFloat("mainboardTemperature", "Mainboard Temperatur","~Temperature",98);
             $this->RegisterVariableString("availablePhases", "verfügbare Phasen","",99);
+            $this->RegisterVariableInteger("availablePhasesInRow","verfügbare Phasen in Reihe","",99);
             $this->RegisterVariableInteger("supplyLineL1", "Spannungsversorgung L1","GOECHARGER_Voltage",100);
             $this->RegisterVariableInteger("supplyLineL2", "Spannungsversorgung L2","GOECHARGER_Voltage",101);
             $this->RegisterVariableInteger("supplyLineL3", "Spannungsversorgung L3","GOECHARGER_Voltage",102);
             $this->RegisterVariableInteger("supplyLineN", "Spannungsversorgung N","GOECHARGER_Voltage",103);
 
             //--- Power to Car
+            $this->RegisterVariableInteger("usedSupplyLinesByCar", "aktuell genutze Phasen beim Laden","",104);
             $this->RegisterVariableFloat("powerToCarLineL1", "Leistung zum Fahrzeug L1","GOECHARGER_Power.1",104);
             $this->RegisterVariableFloat("powerToCarLineL2", "Leistung zum Fahrzeug L2","GOECHARGER_Power.1",106);
             $this->RegisterVariableFloat("powerToCarLineL3", "Leistung zum Fahrzeug L3","GOECHARGER_Power.1",108);
@@ -884,7 +896,7 @@
                 $this->RegisterVariableFloat( "correctionFactorL3", "Korrekturfaktor L3", "~Humidity.F", 129 );
             }
 
-            $this->RegisterVariableInteger("awattarPricezone", "Awattar Preiszone","GOECHARGER_AwattarPricezone",130 );
+            $this->RegisterVariableInteger("awattarPricezone", "Awattar Preiszone","GOECHARGER_AwattarPricezone",150 );
         }
     }
 ?>
