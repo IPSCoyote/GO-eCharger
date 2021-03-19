@@ -315,8 +315,8 @@
         public function setCurrentChargingAmperage(int $ampere) {
             // Check input value
             $ampereToSet = $ampere;
-            if ( $ampere < 6 or $ampere > 32 ) { return false; }
-            if ( $ampere > $this->ReadPropertyInteger("MaxAmperage") ) { 
+            if ( $ampereToSet < 6 or $ampereToSet > 32 ) { return false; }
+            if ( $ampereToSet > $this->ReadPropertyInteger("MaxAmperage") ) {
                 $ampereToSet = $this->ReadPropertyInteger("MaxAmperage"); 
             }
             
@@ -325,7 +325,7 @@
             if ( $goEChargerStatus == false ) { return false; }
             
             // Check requested Ampere is <= max Ampere set in Instance
-            if ( $ampere > $goEChargerStatus->{'ama'} ) { 
+            if ( $ampereToSet > $goEChargerStatus->{'ama'} ) {
                 $ampereToSet = $goEChargerStatus->{'ama'};
             }
                                  
@@ -533,11 +533,11 @@
             switch($Ident) 
             {
                 case "availableAMP":
-                    $this->setMaximumChargingAmperage( $Value );
-                    break;
-                    
-                case "maxAvailableAMP":
                     $this->setCurrentChargingAmperage( $Value );
+                    break;
+
+                case "maxAvailableAMP":
+                    $this->setMaximumChargingAmperage( $Value );
                     break;
                     
                 case "accessControl":
