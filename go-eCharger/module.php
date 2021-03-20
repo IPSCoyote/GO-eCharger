@@ -470,11 +470,11 @@
             switch($Ident) 
             {
                 case "availableAMP":
-                    $this->setMaximumChargingAmperage( $Value );
+                    $this->setCurrentChargingAmperage( $Value );
                     break;
                     
                 case "maxAvailableAMP":
-                    $this->setCurrentChargingAmperage( $Value );
+                    $this->setMaximumChargingAmperage( $Value );
                     break;
                     
                 case "accessControl":
