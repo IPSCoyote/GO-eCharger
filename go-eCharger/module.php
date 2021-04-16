@@ -247,9 +247,7 @@
         }
        
         public function getPowerToCar() {
-            $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
-            return $goEChargerStatus[11]/100;
+            return $this->getTotalPowerToCar();
         }
         
         public function getCurrentLoadingCycleConsumption() {
@@ -603,7 +601,7 @@
                 return false;
             }
             
-            // check if any HHTP device on IP can be reached
+            // check if any HTTP device on IP can be reached
             if ( $this->ping( $IPAddress, 80, 1 ) == false ) {
                 $this->SetStatus(202); // no http response
                 return false;
