@@ -182,11 +182,9 @@
             
             return true;
         }
-       
+
         public function getPowerToCar() {
-            $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
-            return $goEChargerStatus[11]/100;
+            return $this->getTotalPowerToCar();
         }
         
         public function getCurrentLoadingCycleConsumption() {
