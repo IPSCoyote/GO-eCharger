@@ -71,128 +71,153 @@
             if ( $goEChargerStatus == false ) { return false; }
        
             // write values into variables
-            SetValue($this->GetIDForIdent("status"),                  $goEChargerStatus->{'car'});    
-            SetValue($this->GetIDForIdent("availableAMP"),            $goEChargerStatus->{'amp'}); 
-            SetValue($this->GetIDForIdent("error"),                   $goEChargerStatus->{'err'}); 
-            SetValue($this->GetIDForIdent("accessControl"),           $goEChargerStatus->{'ast'});
-            SetValue($this->GetIDForIdent("accessState"),             $goEChargerStatus->{'alw'}); 
-            SetValue($this->GetIDForIdent("cableCapability"),         $goEChargerStatus->{'cbl'});
-            SetValue($this->GetIDForIdent("rebootCounter"),           $goEChargerStatus->{'rbc'});
-            SetValue($this->GetIDForIdent("rebootTime"), date( DATE_RFC822, time()-round($goEChargerStatus->{'rbt'}/1000,0)) );
+            $this->setValueToIdent( $goEChargerStatus, "status", "car" );
+            $this->setValueToIdent( $goEChargerStatus, "availableAMP", "amp" );
+            $this->setValueToIdent( $goEChargerStatus, "error", "err" );
+            $this->setValueToIdent( $goEChargerStatus, "accessControl", "ast" );
+            $this->setValueToIdent( $goEChargerStatus, "accessState", "alw" );
+            $this->setValueToIdent( $goEChargerStatus, "cableCapability", "cbl" );
+            $this->setValueToIdent( $goEChargerStatus, "rebootCounter", "rbc" );
+            if ( isset( $goEChargerStatus->{'rbt'})) {
+                SetValue($this->GetIDForIdent("rebootTime"), date( DATE_RFC822, time()-round($goEChargerStatus->{'rbt'}/1000,0)) );
+            }
+
+            if ( isset( $goEChargerStatus->{'pha'})) {
+                $Phasen = "";
+                $AnzahlPhasen = 0;
+                if ($goEChargerStatus->{'pha'} & (1 << 3)) {
+                    $Phasen = $Phasen . ' 1';
+                    $AnzahlPhasen = 1;
+                }
+                if ($goEChargerStatus->{'pha'} & (1 << 4)) {
+                    if ($Phasen <> "") {
+                        $Phasen = $Phasen . ",";
+                        $AnzahlPhasen += 1;
+                    }
+                    $Phasen = $Phasen . ' 2';
+                }
+                if ($goEChargerStatus->{'pha'} & (1 << 5)) {
+                    if ($Phasen <> "") {
+                        $Phasen = $Phasen . " und";
+                        $AnzahlPhasen += 1;
+                    }
+                    $Phasen = $Phasen . ' 3';
+                }
+                if ($Phasen <> "") {
+                    $Phasen = "Phasen" . $Phasen . " vorhanden";
+                } else
+                    $Phasen = 'Keine Phasen vorhanden';
+                SetValue($this->GetIDForIdent("availablePhases"), $Phasen);
+                SetValue($this->GetIDForIdent("availablePhasesInRow"), $AnzahlPhasen);
+            }
             
-            $Phasen = "";
-            $AnzahlPhasen = 0;
-            if ( $goEChargerStatus->{'pha'}&(1<<3) ) { $Phasen = $Phasen.' 1'; $AnzahlPhasen = 1; }
-            if ( $goEChargerStatus->{'pha'}&(1<<4) ) { 
-                if ( $Phasen <> "" ) {
-                    $Phasen = $Phasen.",";
-                    $AnzahlPhasen += 1;
-                }
-                $Phasen = $Phasen.' 2';
+            $this->setValueToIdent( $goEChargerStatus,"mainboardTemperature", "tmp" );
+            if (isset( $goEChargerStatus->{'dwo'})) {
+                SetValue($this->GetIDForIdent("automaticStop"),           $goEChargerStatus->{'dwo'}/10 );
             }
-            if ( $goEChargerStatus->{'pha'}&(1<<5) ) { 
-                if ( $Phasen <> "" ) {
-                    $Phasen = $Phasen." und";
-                    $AnzahlPhasen += 1;
+
+
+            if ($this->ReadPropertyFloat("AverageConsumption") > 0) {
+                if ( isset( $goEChargerStatus->{'dwo'})) {
+                    SetValue($this->GetIDForIdent("automaticStopKm"), $goEChargerStatus->{'dwo'} / 10 / $this->ReadPropertyFloat("AverageConsumption") * 100);
                 }
-                $Phasen = $Phasen.' 3';
-            }
-            if ( $Phasen <> "" ) {
-                $Phasen = "Phasen".$Phasen." vorhanden";
             } else
-                $Phasen = 'Keine Phasen vorhanden';
-            SetValue($this->GetIDForIdent("availablePhases"), $Phasen );
-            SetValue($this->GetIDForIdent( "availablePhasesInRow"), $AnzahlPhasen );
-            
-            
-            SetValue($this->GetIDForIdent("mainboardTemperature"),    $goEChargerStatus->{'tmp'});  
-            SetValue($this->GetIDForIdent("automaticStop"),           $goEChargerStatus->{'dwo'}/10 );
-            
-            if ( $this->ReadPropertyFloat("AverageConsumption") > 0 )
-            {
-              SetValue($this->GetIDForIdent("automaticStopKm"), $goEChargerStatus->{'dwo'}/10/$this->ReadPropertyFloat("AverageConsumption")*100 );                
-            } else 
-              SetValue($this->GetIDForIdent("automaticStopKm"), 0 );
-            
-            SetValue($this->GetIDForIdent("adapterAttached"),         $goEChargerStatus->{'adi'});
-            SetValue($this->GetIDForIdent("unlockedByRFID"),          $goEChargerStatus->{'uby'});
-            SetValue($this->GetIDForIdent("energyTotal"),             $goEChargerStatus->{'eto'}/10);
-            SetValue($this->GetIDForIdent("energyLoadCycle"),         $goEChargerStatus->{'dws'}/361010.83);
-            
-            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
-            SetValue($this->GetIDForIdent("supplyLineL1"),            $goEChargerEnergy[0]);            
-            SetValue($this->GetIDForIdent("supplyLineL2"),            $goEChargerEnergy[1]);            
-            SetValue($this->GetIDForIdent("supplyLineL3"),            $goEChargerEnergy[2]);  
-            SetValue($this->GetIDForIdent("supplyLineN"),             $goEChargerEnergy[3]);  
-            $availableEnergy = ( ( ( $goEChargerEnergy[0] + $goEChargerEnergy[1] + $goEChargerEnergy[2] ) / 3 ) * 3 * $goEChargerStatus->{'amp'} ) / 1000;
-            SetValue($this->GetIDForIdent("availableSupplyEnergy"),    $availableEnergy);
+                SetValue($this->GetIDForIdent("automaticStopKm"), 0);
 
-            // calculate correction factors
-            $correctionFactorL1 = 0.0;
-            $correctionFactorL2 = 0.0;
-            $correctionFactorL3 = 0.0;
-            if ( $this->ReadPropertyBoolean( "calculateCorrectedData" ) ) {
-                if ( GetValueInteger( $this->GetIDForIdent("supplyLineL1") ) > 0 ) {
-                    $correctionFactorL1 = $this->ReadPropertyInteger("verifiedSupplyPowerL1" ) / $goEChargerEnergy[0];
-                    SetValue($this->GetIDForIdent( "correctionFactorL1" ), ( $correctionFactorL1 - 1 ) * 100 );
+            $this->setValueToIdent( $goEChargerStatus, "adapterAttached", "adi" );
+            $this->setValueToIdent( $goEChargerStatus, "unlockedByRFID", "uby" );
+            if ( isset( $goEChargerStatus->{'eto'} )) {
+                SetValue($this->GetIDForIdent("energyTotal"), $goEChargerStatus->{'eto'} / 10);
+            }
+            if ( isset( $goEChargerStatus->{'dws'} )) {
+                SetValue($this->GetIDForIdent("energyLoadCycle"),         $goEChargerStatus->{'dws'}/361010.83);
+            }
+
+            if ( isset( $goEChargerStatus->{'nrg'} )) {
+                $goEChargerEnergy = $goEChargerStatus->{'nrg'};
+                SetValue($this->GetIDForIdent("supplyLineL1"), $goEChargerEnergy[0]);
+                SetValue($this->GetIDForIdent("supplyLineL2"), $goEChargerEnergy[1]);
+                SetValue($this->GetIDForIdent("supplyLineL3"), $goEChargerEnergy[2]);
+                SetValue($this->GetIDForIdent("supplyLineN"), $goEChargerEnergy[3]);
+                $availableEnergy = ((($goEChargerEnergy[0] + $goEChargerEnergy[1] + $goEChargerEnergy[2]) / 3) * 3 * $goEChargerStatus->{'amp'}) / 1000;
+                SetValue($this->GetIDForIdent("availableSupplyEnergy"), $availableEnergy);
+
+
+                // calculate correction factors
+                $correctionFactorL1 = 0.0;
+                $correctionFactorL2 = 0.0;
+                $correctionFactorL3 = 0.0;
+                if ($this->ReadPropertyBoolean("calculateCorrectedData")) {
+                    if (GetValueInteger($this->GetIDForIdent("supplyLineL1")) > 0) {
+                        $correctionFactorL1 = $this->ReadPropertyInteger("verifiedSupplyPowerL1") / $goEChargerEnergy[0];
+                        SetValue($this->GetIDForIdent("correctionFactorL1"), ($correctionFactorL1 - 1) * 100);
+                    }
+                    if (GetValueInteger($this->GetIDForIdent("supplyLineL2")) > 0) {
+                        $correctionFactorL2 = $this->ReadPropertyInteger("verifiedSupplyPowerL2") / $goEChargerEnergy[1];
+                        SetValue($this->GetIDForIdent("correctionFactorL2"), ($correctionFactorL2 - 1) * 100);
+                    }
+                    if (GetValueInteger($this->GetIDForIdent("supplyLineL3")) > 0) {
+                        $correctionFactorL3 = $this->ReadPropertyInteger("verifiedSupplyPowerL3") / $goEChargerEnergy[2];
+                        SetValue($this->GetIDForIdent("correctionFactorL3"), ($correctionFactorL3 - 1) * 100);
+                    }
+                    $correctedAvailableEnergy = (((($goEChargerEnergy[0] * $correctionFactorL1) + ($goEChargerEnergy[1] * $correctionFactorL2) + ($goEChargerEnergy[2] * $correctionFactorL3)) / 3) * 3 * $goEChargerStatus->{'amp'}) / 1000;
+                    SetValue($this->GetIDForIdent("correctedAvailableSupplyEnergy"), $correctedAvailableEnergy);
                 }
-                if ( GetValueInteger( $this->GetIDForIdent("supplyLineL2") ) > 0 ) {
-                    $correctionFactorL2 = $this->ReadPropertyInteger("verifiedSupplyPowerL2" ) / $goEChargerEnergy[1];
-                    SetValue($this->GetIDForIdent( "correctionFactorL2" ), ( $correctionFactorL2 - 1 ) * 100 );
+
+                SetValue($this->GetIDForIdent("ampToCarLineL1"), $goEChargerEnergy[4] / 10);
+                SetValue($this->GetIDForIdent("ampToCarLineL2"), $goEChargerEnergy[5] / 10);
+                SetValue($this->GetIDForIdent("ampToCarLineL3"), $goEChargerEnergy[6] / 10);
+                SetValue($this->GetIDForIdent("powerToCarLineL1"), $goEChargerEnergy[7] / 10);
+                if ($correctionFactorL1 > 0) {
+                    SetValue($this->GetIDForIdent("correctedPowerToCarLineL1"), $goEChargerEnergy[7] / 10 * $correctionFactorL1);
+                    SetValue($this->GetIDForIdent("correctedPowerFactorLineL1"), $goEChargerEnergy[12] / 100 * $correctionFactorL1);
                 }
-                if ( GetValueInteger( $this->GetIDForIdent("supplyLineL3") ) > 0 ) {
-                    $correctionFactorL3 = $this->ReadPropertyInteger("verifiedSupplyPowerL3" ) / $goEChargerEnergy[2];
-                    SetValue($this->GetIDForIdent( "correctionFactorL3" ), ( $correctionFactorL3 - 1 ) * 100 );
+                SetValue($this->GetIDForIdent("powerToCarLineL2"), $goEChargerEnergy[8] / 10);
+                if ($correctionFactorL2 > 0) {
+                    SetValue($this->GetIDForIdent("correctedPowerToCarLineL2"), $goEChargerEnergy[8] / 10 * $correctionFactorL2);
+                    SetValue($this->GetIDForIdent("correctedPowerFactorLineL2"), $goEChargerEnergy[13] / 100 * $correctionFactorL2);
                 }
-                $correctedAvailableEnergy = ( ( ( ( $goEChargerEnergy[0] * $correctionFactorL1 ) + ( $goEChargerEnergy[1] * $correctionFactorL2 ) + ( $goEChargerEnergy[2] * $correctionFactorL3 ) ) / 3 ) * 3 * $goEChargerStatus->{'amp'} ) / 1000;
-                SetValue($this->GetIDForIdent("correctedAvailableSupplyEnergy" ),  $correctedAvailableEnergy );
+                SetValue($this->GetIDForIdent("powerToCarLineL3"), $goEChargerEnergy[9] / 10);
+                if ($correctionFactorL3 > 0) {
+                    SetValue($this->GetIDForIdent("correctedPowerToCarLineL3"), $goEChargerEnergy[9] / 10 * $correctionFactorL3);
+                    SetValue($this->GetIDForIdent("correctedPowerFactorLineL3"), $goEChargerEnergy[14] / 100 * $correctionFactorL3);
+                }
+                if ($correctionFactorL1 > 0) {
+                    SetValue($this->GetIDForIdent("correctedPowerToCarTotal"), ((($goEChargerEnergy[0] * $goEChargerEnergy[4] / 10) * $correctionFactorL1) + (($goEChargerEnergy[1] * $goEChargerEnergy[5] / 10) * $correctionFactorL2) + (($goEChargerEnergy[2] * $goEChargerEnergy[6] / 10) * $correctionFactorL3)) / 1000);
+                }
+
+                $usedSupplyLinesByCar = 0;
+                if ($goEChargerEnergy[7] / 10 > 0) $usedSupplyLinesByCar += 1;  // Phase 1
+                if ($goEChargerEnergy[8] / 10 > 0) $usedSupplyLinesByCar += 1;  // Phase 2
+                if ($goEChargerEnergy[9] / 10 > 0) $usedSupplyLinesByCar += 1;  // Phase 3
+                SetValue($this->GetIDForIdent("usedSupplyLinesByCar"), $usedSupplyLinesByCar);
+
+
+                SetValue($this->GetIDForIdent("powerToCarLineN"), $goEChargerEnergy[10] / 10);
+                SetValue($this->GetIDForIdent("powerToCarTotal"), $goEChargerEnergy[11] / 100);
+                SetValue($this->GetIDForIdent("powerFactorLineL1"), $goEChargerEnergy[12] / 100);
+                SetValue($this->GetIDForIdent("powerFactorLineL2"), $goEChargerEnergy[13] / 100);
+                SetValue($this->GetIDForIdent("powerFactorLineL3"), $goEChargerEnergy[14] / 100);
+                SetValue($this->GetIDForIdent("powerFactorLineN"), $goEChargerEnergy[15] / 100);
             }
 
-            SetValue($this->GetIDForIdent("ampToCarLineL1"),          $goEChargerEnergy[4]/10);            
-            SetValue($this->GetIDForIdent("ampToCarLineL2"),          $goEChargerEnergy[5]/10);            
-            SetValue($this->GetIDForIdent("ampToCarLineL3"),          $goEChargerEnergy[6]/10);  
-            SetValue($this->GetIDForIdent("powerToCarLineL1"),        $goEChargerEnergy[7]/10);
-            if ( $correctionFactorL1 > 0 ) {
-                SetValue($this->GetIDForIdent("correctedPowerToCarLineL1"), $goEChargerEnergy[7]/10 * $correctionFactorL1 );
-                SetValue($this->GetIDForIdent("correctedPowerFactorLineL1"),$goEChargerEnergy[12]/100 * $correctionFactorL1 );
-            }
-            SetValue($this->GetIDForIdent("powerToCarLineL2"),        $goEChargerEnergy[8]/10);
-            if ( $correctionFactorL2 > 0 ) {
-                SetValue($this->GetIDForIdent("correctedPowerToCarLineL2"),$goEChargerEnergy[8]/10 * $correctionFactorL2 );
-                SetValue($this->GetIDForIdent("correctedPowerFactorLineL2"),$goEChargerEnergy[13]/100 * $correctionFactorL2 );
-            }
-            SetValue($this->GetIDForIdent("powerToCarLineL3"),        $goEChargerEnergy[9]/10);
-            if ( $correctionFactorL3 > 0 ) {
-                SetValue($this->GetIDForIdent("correctedPowerToCarLineL3"),$goEChargerEnergy[9]/10 * $correctionFactorL3 );
-                SetValue($this->GetIDForIdent("correctedPowerFactorLineL3"),$goEChargerEnergy[14]/100 * $correctionFactorL3 );
-            }
-            if ( $correctionFactorL1 > 0 ) {
-                SetValue( $this->GetIDForIdent( "correctedPowerToCarTotal"), ( ( ( $goEChargerEnergy[0] * $goEChargerEnergy[4]/10 ) * $correctionFactorL1 ) + ( ( $goEChargerEnergy[1] * $goEChargerEnergy[5]/10 ) * $correctionFactorL2 ) + ( ( $goEChargerEnergy[2] * $goEChargerEnergy[6]/10 ) * $correctionFactorL3 ) ) / 1000 );
-            }
 
-            $usedSupplyLinesByCar = 0;
-            if ( $goEChargerEnergy[7]/10 > 0 ) $usedSupplyLinesByCar += 1;  // Phase 1
-            if ( $goEChargerEnergy[8]/10 > 0 ) $usedSupplyLinesByCar += 1;  // Phase 2
-            if ( $goEChargerEnergy[9]/10 > 0 ) $usedSupplyLinesByCar += 1;  // Phase 3
-            SetValue( $this->GetIDForIdent( "usedSupplyLinesByCar"), $usedSupplyLinesByCar );
+            $this->setValueToIdent( $goEChargerStatus, "serialID", "sse");
+            $this->setValueToIdent( $goEChargerStatus, "ledBrightness", "lbr");
+            $this->setValueToIdent( $goEChargerStatus, "ledEnergySave", "lse" );
+            $this->setValueToIdent( $goEChargerStatus, "awattarPricezone", "azo" );
+            $this->setValueToIdent( $goEChargerStatus, "electricityPriceMinChargeHours", "aho");
+            $this->setValueToIdent( $goEChargerStatus, "electricityPriceChargeTill", "afi");
+            $this->setValueToIdent( $goEChargerStatus, "maxAvailableAMP", "ama" );
+            $this->setValueToIdent( $goEChargerStatus, "cableUnlockMode", "ust" );
 
-            SetValue($this->GetIDForIdent("powerToCarLineN"),         $goEChargerEnergy[10]/10); 
-            SetValue($this->GetIDForIdent("powerToCarTotal"),         $goEChargerEnergy[11]/100); 
-            SetValue($this->GetIDForIdent("powerFactorLineL1"),       $goEChargerEnergy[12]/100);            
-            SetValue($this->GetIDForIdent("powerFactorLineL2"),       $goEChargerEnergy[13]/100);            
-            SetValue($this->GetIDForIdent("powerFactorLineL3"),       $goEChargerEnergy[14]/100);  
-            SetValue($this->GetIDForIdent("powerFactorLineN"),        $goEChargerEnergy[15]/100);
-            SetValue($this->GetIDForIdent("serialID"),                $goEChargerStatus->{'sse'});
-            SetValue($this->GetIDForIdent("ledBrightness"),           $goEChargerStatus->{'lbr'});  
-            SetValue($this->GetIDForIdent("ledEnergySave"),           $goEChargerStatus->{'lse'});  
-            if ( isset( $goEChargerStatus->{'azo'} ) ) SetValue( $this->GetIDForIdent("awattarPricezone"),               $goEChargerStatus->{'azo'} );  // new with Firmware 40.0
-            if ( isset( $goEChargerStatus->{'aho'} ) ) SetValue( $this->GetIDForIdent("electricityPriceMinChargeHours"), $goEChargerStatus->{'aho'} );  // new with Firmware 40.0
-            if ( isset( $goEChargerStatus->{'afi'} ) ) SetValue( $this->GetIDForIdent("electricityPriceChargeTill"),     $goEChargerStatus->{'afi'} );  // new with Firmware 40.0
-            SetValue($this->GetIDForIdent("maxAvailableAMP"),         $goEChargerStatus->{'ama'}); 
-            SetValue($this->GetIDForIdent("cableUnlockMode"),         $goEChargerStatus->{'ust'});
-            $groundCheck = true;
-            if ( $goEChargerStatus->{'nmo'} == '1' ) { $groundCheck = false; }
-            SetValue($this->GetIDForIdent("norwayMode"),              $groundCheck);
+            if ( isset( $goEChargerStatus->{'nmo'})) {
+                $groundCheck = true;
+                if ($goEChargerStatus->{'nmo'} == '1') {
+                    $groundCheck = false;
+                }
+                SetValue($this->GetIDForIdent("norwayMode"), $groundCheck);
+            }
 
             for($i=1; $i<=10; $i++){
                 switch ( $i ){
@@ -212,17 +237,21 @@
                         $code = 'ec'.$i;
                         break;
                 }
-                SetValue($this->GetIDForIdent("energyChargedCard".$i),  $goEChargerStatus->{$code}/10);
+                if ( isset( $goEChargerStatus->{$code})) {
+                    SetValue($this->GetIDForIdent("energyChargedCard" . $i), $goEChargerStatus->{$code} / 10);
+                }
             }
            
             // Set Timer
-            if ( $goEChargerStatus->{'car'} == "2" ) {
-                if ( $this->ReadPropertyInteger("UpdateCharging") >= 0 ) {
-                    $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateCharging")*1000);
-                }
-            } else { 
-                if ( $this->ReadPropertyInteger("UpdateIdle") >= 0 ) {
-                    $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateIdle")*1000);
+            if ( isset( $goEChargerStatus->{'car'})) {
+                if ($goEChargerStatus->{'car'} == "2") {
+                    if ($this->ReadPropertyInteger("UpdateCharging") >= 0) {
+                        $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateCharging") * 1000);
+                    }
+                } else {
+                    if ($this->ReadPropertyInteger("UpdateIdle") >= 0) {
+                        $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateIdle") * 1000);
+                    }
                 }
             }
             
@@ -252,13 +281,13 @@
         
         public function getCurrentLoadingCycleConsumption() {
             $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus == false or isset( $goEChargerStatus->{'dws'}) == false ) { return false; }
             return $goEChargerStatus->{'dws'}/361010.83; 
         }
         
         public function getMaximumChargingAmperage() {
             $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus == false or isset( $goEChargerStatus->{'ama'}) == false ) { return false; }
             return $goEChargerStatus->{'ama'}; 
         }
         
@@ -294,6 +323,7 @@
             $goEChargerStatus = $this->setValueToeCharger( 'ama', $ampereToSet );
 
             // set current available Ampere (if too high)
+            if ( isset( $goEChargerStatus->{'amp'}) == false or isset($goEChargerStatus->{'ama'}) == false ) return false;
             if ( $goEChargerStatus->{'amp'} > $goEChargerStatus->{'ama'} ) {
               // set current available to max. available, as current was higher than new max.
               $goEChargerStatus = $this->setValueToeCharger( 'amx', $goEChargerStatus->{'ama'} );
@@ -306,7 +336,7 @@
         
         public function getCurrentChargingAmperage() {
             $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus == false or isset( $goEChargerStatus->{'amp'}) == false ) { return false; }
             return $goEChargerStatus->{'amp'}; 
         }
         
@@ -320,7 +350,7 @@
             
             // get current settings of goECharger
             $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus == false or isset( $goEChargerStatus->{'ama'}) == false ) { return false; }
             
             // Check requested Ampere is <= max Ampere set in Instance
             if ( $ampereToSet > $goEChargerStatus->{'ama'} ) {
@@ -332,13 +362,13 @@
             
             // Update all data
             $this->Update();
-            
+            if ( $resultStatus == false or isset( $goEChargerStatus->{'amp'}) == false ) { return false; }
             return $resultStatus->{'amp'};
         }
 
         public function getAccessControl() {
             $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus == false or isset( $goEChargerStatus->{'ast'}) == false ) { return false; }
             return $goEChargerStatus->{'ast'};
         }
         
@@ -347,12 +377,13 @@
             $resultStatus = $this->setValueToeCharger( 'ast', $mode ); 
             // Update all data
             $this->Update();
+            if ( $resultStatus == false or isset( $resultStatus->{'ast'}) == false ) { return false; }
             if ( $resultStatus->{'ast'} == $mode ) { return true; } else { return false; }
         }
             
         public function getAutomaticChargeStop() {
             $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus == false or isset( $goEChargerStatus->{'dwo'}) == false ) { return false; }
             return $goEChargerStatus->{'dwo'}/10; 
         }
         
@@ -366,6 +397,7 @@
               $this->setActive( true );
             } else
               $this->Update();
+            if ( $resultStatus == false or isset( $resultStatus->{'dwo'}) == false ) { return false; }
             if ( $resultStatus->{'dwo'} == $value ) { return true; } else { return false; }
         }
         
@@ -395,7 +427,7 @@
             
         public function getCableUnlockMode() {
             $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus == false or isset( $goEChargerStatus->{'ust'}) == false ) { return false; }
             return $goEChargerStatus->{'ust'}; 
         }
         
@@ -404,12 +436,13 @@
             $resultStatus = $this->setValueToeCharger( 'ust', $unlockMode ); 
             // Update all data
             $this->Update();
+            if ( $resultStatus == false or isset( $resultStatus->{'ust'}) == false ) { return false; }
             if ( $resultStatus->{'ust'} == $unlockMode ) { return true; } else { return false; }
         }
         
         public function isActive() {
             $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus == false or isset( $goEChargerStatus->{'alw'}) == false ) { return false; }
             if ( $goEChargerStatus->{'alw'} == '1' ) { return true; } else { return false; } 
         }
         
@@ -418,31 +451,32 @@
             $resultStatus = $this->setValueToeCharger( 'alw', $value ); 
             // Update all data
             $this->Update();
+            if ( $resultStatus == false or isset( $resultStatus->{'alw'}) == false ) { return false; }
             if ( $resultStatus->{'alw'} == $value ) { return true; } else { return false; }
         }
         
         public function getStatus() { 
             $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus == false or isset( $goEChargerStatus->{'car'}) == false ) { return false; }
             return $goEChargerStatus->{'car'}; 
         }
 
         public function getUnlockRFID() {
             $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus == false or isset( $goEChargerStatus->{'uby'}) == false ) { return false; }
             return $goEChargerStatus->{'uby'}; 
         }
  
         public function getTotalPowerToCar() {
             $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus == false or isset( $goEChargerStatus->{'nrg'}) == false ) { return false; }
             $goEChargerEnergy = $goEChargerStatus->{'nrg'};
             return $goEChargerEnergy[11]/100; 
         }
         
         public function getLEDBrightness() {
             $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus == false or isset( $goEChargerStatus->{'lbr'}) == false ) { return false; }
             return $goEChargerStatus->{'lbr'}; 
         }
         
@@ -451,12 +485,13 @@
             $resultStatus = $this->setValueToeCharger( 'lbr', $brightness ); 
             // Update all data
             $this->Update();
+            if ( $resultStatus == false or isset( $resultStatus->{'dws'}) == false ) { return false; }
             if ( $resultStatus->{'lbr'} == $brightness ) { return true; } else { return false; }
         }
         
         public function getLEDEngergySave() {
             $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus == false or isset( $goEChargerStatus->{'lse'}) == false ) { return false; }
             return $goEChargerStatus->{'lse'};  
         }
         
@@ -465,12 +500,13 @@
             $resultStatus = $this->setValueToeCharger( 'r2x', $value ); // based on issue report on GitHub the GO-eCharger needs "r2x" as parameter here!
             // Update all data
             $this->Update();
+            if ( $resultStatus == false or isset( $resultStatus->{'lse'}) == false ) { return false; }
             if ( $resultStatus->{'lse'} == $value ) { return true; } else { return false; }
         }
         
         public function getEnergyChargedInTotal() {
             $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus == false or isset( $goEChargerStatus->{'eto'}) == false ) { return false; }
             return $goEChargerStatus->{'eto'}/10;
         }
         
@@ -495,12 +531,14 @@
                     $code = 'ec'.$cardID;
                     break;
             }
-            return $goEChargerStatus->{$code}/10;
+            if ( isset( $goEChargerStatus->{$code})) {
+                return $goEChargerStatus->{$code} / 10;
+            }
         }        
         
         public function getElectricityPriceMinChargeHours() {
             $goEChargerStatus = $this->getStatusFromCharger();
-            if ( $goEChargerStatus == false ) { return false; }
+            if ( $goEChargerStatus == false or isset( $goEChargerStatus->{'aho'}) == false ) { return false; }
             if ( isset( $goEChargerStatus->{'aho'} ) ) { return $goEChargerStatus->{'aho'}; } else { return false; }
         }
         
@@ -633,7 +671,14 @@
             $this->SetStatus(102);
             return $goEChargerStatus;
         }
-        
+
+        protected function setValueToIdent( $data, $ident, $apiKey ) {
+            // function to avoid invalid apiKey is accessed
+            if ( isset( $data->{$apiKey} ) ) {
+                SetValue($this->GetIDForIdent($ident), $data->{$apiKey});
+            }
+        }
+
         protected function setValueToeCharger( $parameter, $value ){
             try {  
                 $ch = curl_init("http://".trim($this->ReadPropertyString("IPAddressCharger"))."/mqtt?payload=".$parameter."=".$value); 
