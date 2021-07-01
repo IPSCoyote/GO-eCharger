@@ -350,6 +350,9 @@ GOeCharger_SetLEDEnergySave( $Instanz, true ); // Aktivierung der Energiesparein
 ## 5. ChangeLog
 Änderungshistorie
 
+### Vrsion 1.5.2
+* Fehlerkorrekturen
+  * Stabilisierung gegenüber fehlenden API Parametern in unterschiedlichen API Versionen
 
 ### Version 1.5.1
 * Fehlerkorrekturen
