@@ -500,7 +500,7 @@
             $resultStatus = $this->setValueToeCharger( 'r2x', $value ); // based on issue report on GitHub the GO-eCharger needs "r2x" as parameter here!
             // Update all data
             $this->Update();
-            if ( $resultStatus == false or isset( $resultStatus->{'r2x'}) == false ) { return false; }
+            if ( $resultStatus == false or isset( $resultStatus->{'lse'}) == false ) { return false; }
             if ( $resultStatus->{'lse'} == $value ) { return true; } else { return false; }
         }
         
