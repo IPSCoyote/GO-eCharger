@@ -21,6 +21,7 @@ Nutzung auf eigene Gefahr ohne Gewähr. Das Modul kann jederzeit überarbeitet w
 Das Modul ist dazu gedacht die [GO-eCharger Wallbox](www.go-e.co) zum Laden von Elektrofahrzeugen in [IP-Symcon](www.ip-symcon.de) einzubinden. 
 
 Es soll sowohl Zustandsdaten (Anschluss, Ladevorgang, etc.) als auch Schaltaktionen (Ladevorgang starten/stoppen, Ladeströme setzen) zur Verfügung stellen.
+Über die Zeit hat GO-e unterschiedliche Firmwares geliefert. Nicht jede Funktion bzw. jeder Wert steht in jeder Firmware zur Verfügung. Typischerweise werden z.B. neue Werte hinzugefügt. So kann es vorkommen, das es Attribute gibt, die nie aktualisiert werden. Dies ist kein Fehler.
 
 ## 2. Systemanforderungen
 - IP-Symcon ab Version 4.x
@@ -366,3 +367,8 @@ GOeCharger_SetLEDEnergySave( $Instanz, true ); // Aktivierung der Energiesparein
   * LED Energiesparfunktion ( RW; LEDGetEnergySave / LEDSetEnergySave )
   * Awattar Preiszone (RO)
   * Funktionen zum Steuern der Strompreis-basierten Ladung (benötigte Ladezeit / geladen bis)
+
+### Version 1.6
+* Funktionserweiterungen
+  * Innen-Temperatur wird auch bei multiplen Temperatursensoren aus der Durchschnittstemperatur gebildet (FW 0.51)
+  * Reduzierter Ladestrom aufgrund von Temperatur wird angezeigt (ab FW 0.51)

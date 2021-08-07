@@ -110,8 +110,24 @@
                 SetValue($this->GetIDForIdent("availablePhases"), $Phasen);
                 SetValue($this->GetIDForIdent("availablePhasesInRow"), $AnzahlPhasen);
             }
-            
-            $this->setValueToIdent( $goEChargerStatus,"mainboardTemperature", "tmp" );
+
+            //--- Temperatures
+            if ( isset( $goEChargerStatus->{'tmp'} ) and ( $goEChargerStatus->{'tmp'} > 0 ) ) {
+                // simple temperature value is used
+                SetValue($this->GetIDForIdent("mainboardTemperature"), $goEChargerStatus->{'tmp'} );
+            }
+            elseif ( isset( $goEChargerStatus->{'tma'} ) ) {
+                // array of temperatures is used, so calculate average temperature
+                $goEChargerTemperatures = $goEChargerStatus->{'tma'};
+                $counter = count($goEChargerTemperatures);
+                $temperature = 0;
+                for ( $x = 0; $x < $counter; $x++ ) {
+                    $temperature = $temperature + $goEChargerTemperatures[$x];
+                }
+                $temperature = $temperature / $counter;
+                SetValue($this->GetIDForIdent("mainboardTemperature"), $temperature );
+            }
+
             if (isset( $goEChargerStatus->{'dwo'})) {
                 SetValue($this->GetIDForIdent("automaticStop"),           $goEChargerStatus->{'dwo'}/10 );
             }
@@ -209,6 +225,7 @@
             $this->setValueToIdent( $goEChargerStatus, "electricityPriceMinChargeHours", "aho");
             $this->setValueToIdent( $goEChargerStatus, "electricityPriceChargeTill", "afi");
             $this->setValueToIdent( $goEChargerStatus, "maxAvailableAMP", "ama" );
+            $this->setValueToIdent( $goEChargerStatus, "availableAMPbyTemp", "amt" );
             $this->setValueToIdent( $goEChargerStatus, "cableUnlockMode", "ust" );
 
             if ( isset( $goEChargerStatus->{'nmo'})) {
@@ -876,6 +893,8 @@
             $this->RegisterVariableInteger("availableAMP", "aktuell verfügbarer Ladestrom","GOECHARGER_Ampere",72);
             $this->EnableAction("availableAMP");
 
+            $this->RegisterVariableInteger("availableAMPbyTemp", "aktuell temperaturbezogenes Ladestrom-Limit","GOECHARGER_Ampere",72);
+
             $this->RegisterVariableInteger("cableUnlockMode", "Kabel-Verriegelungsmodus","GOECHARGER_CableUnlockMode",73);
             $this->EnableAction("cableUnlockMode");
 
@@ -901,7 +920,7 @@
             $this->RegisterVariableInteger("adapterAttached", "angeschlossener Adapter","GOECHARGER_Adapter",95);
             $this->RegisterVariableInteger("cableCapability", "Kabel-Leistungsfähigkeit","GOECHARGER_AmpereCable",96);
             $this->RegisterVariableBoolean("norwayMode", "Erdungsprüfung","~Switch",97);
-            $this->RegisterVariableFloat("mainboardTemperature", "Mainboard Temperatur","~Temperature",98);
+            $this->RegisterVariableFloat("mainboardTemperature", "Innentemperatur","~Temperature",98);
             $this->RegisterVariableString("availablePhases", "verfügbare Phasen","",99);
             $this->RegisterVariableInteger("availablePhasesInRow","verfügbare Phasen in Reihe","",99);
             $this->RegisterVariableInteger("supplyLineL1", "Spannungsversorgung L1","GOECHARGER_Voltage",100);
