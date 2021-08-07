@@ -231,7 +231,13 @@
             $this->setValueToIdent( $goEChargerStatus, "electricityPriceMinChargeHours", "aho");
             $this->setValueToIdent( $goEChargerStatus, "electricityPriceChargeTill", "afi");
             $this->setValueToIdent( $goEChargerStatus, "maxAvailableAMP", "ama" );
-            $this->setValueToIdent( $goEChargerStatus, "availableAMPbyTemp", "amt" );
+            if ( isset( $goEChargerStatus->{'amt'} )) {
+                // set temperature based amperage limit
+                $this->setValueToIdent($goEChargerStatus, "availableAMPbyTemp", "amt");
+            } else {
+                // set max Available as default
+                $this->setValueToIdent($goEChargerStatus, "availableAMPbyTemp", "ama");
+            }
             $this->setValueToIdent( $goEChargerStatus, "cableUnlockMode", "ust" );
 
             if ( isset( $goEChargerStatus->{'nmo'})) {
