@@ -146,7 +146,13 @@
                 SetValue($this->GetIDForIdent("energyTotal"), $goEChargerStatus->{'eto'} / 10);
             }
             if ( isset( $goEChargerStatus->{'dws'} )) {
-                SetValue($this->GetIDForIdent("energyLoadCycle"),         $goEChargerStatus->{'dws'}/361010.83);
+                if ( $goEChargerStatus->{'dws'} < 200 ) {
+                    // Firmware Bug in 0.40/0.50 -> dws does not send Deka-Watt-Seconds but more 1/100 kWh
+                    SetValue($this->GetIDForIdent("energyLoadCycle"), $goEChargerStatus->{'dws'} / 100);
+                } else {
+                    // correct value in Deka-Watt-Seconds
+                    SetValue($this->GetIDForIdent("energyLoadCycle"), $goEChargerStatus->{'dws'} / 361010.83);
+                }
             }
 
             if ( isset( $goEChargerStatus->{'nrg'} )) {
