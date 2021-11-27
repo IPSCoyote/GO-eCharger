@@ -353,7 +353,17 @@ GOeCharger_SetLEDEnergySave( $Instanz, true ); // Aktivierung der Energiesparein
 ## 5. ChangeLog
 Änderungshistorie
 
+### Version 2.0 (in Entwicklung)
+* Funktionserweiterungen
+  * Phasenumschaltung zwischen 1phasigem und 3phasigem Laden (nur für GO-eCharger ab Hardware V3)
+  * Neuer Befehl zum einfachen Umsetzen von PV Überschussladen inkl. optionaler aktiver Phasenumschaltung (bei GO-eChargern ab Hardware V3)
+  * Optionale Verwendung von MQTT anstatt regelmäßigem Pollens des Status
 
+### Version 1.6 (aktuelle Beta)
+* Funktionserweiterungen
+  * Innen-Temperatur wird auch bei multiplen Temperatursensoren aus der Durchschnittstemperatur gebildet (FW 0.51)
+  * Reduzierter Ladestrom aufgrund von Temperatur wird angezeigt (ab FW 0.51)
+  * 
 ### Version 1.5.1
 * Fehlerkorrekturen
   * Anpassung falscher Profile.
@@ -368,7 +378,3 @@ GOeCharger_SetLEDEnergySave( $Instanz, true ); // Aktivierung der Energiesparein
   * Awattar Preiszone (RO)
   * Funktionen zum Steuern der Strompreis-basierten Ladung (benötigte Ladezeit / geladen bis)
 
-### Version 1.6
-* Funktionserweiterungen
-  * Innen-Temperatur wird auch bei multiplen Temperatursensoren aus der Durchschnittstemperatur gebildet (FW 0.51)
-  * Reduzierter Ladestrom aufgrund von Temperatur wird angezeigt (ab FW 0.51)
