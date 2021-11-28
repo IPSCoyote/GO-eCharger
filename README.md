@@ -32,7 +32,7 @@ Es soll sowohl Zustandsdaten (Anschluss, Ladevorgang, etc.) als auch Schaltaktio
 Vor der Installation des Moduls in IPSymcon muss der go-eCharger vollständig eingerichtet sein. Da dieses Modul lokal auf den go-eCharger zugreift, muss im lokalen WLAN (nicht dem WLAN des go-eChargers!) dem go-eCharger eine statische IP zugewiesen sein. Zusätzlich muss das HTTP-API des go-eChargers in den erweiterten Einstellungen (nur über das WLAN des go-eChargers erreichbar!) eingerichtet sein.
 
 <p align="center">
-  <img width="447" height="416" src="./imgs/Erweiterte%20Einstellungen%20-%20HTTP%20API%20aktivieren.jpg">
+  <img width="447" height="965,33" src="./imgs/Erweiterte%20Einstellungen%20-%20HTTP%20API%20aktivieren.jpg">
 </p>
 
 Die Cloud des go-eChargers wird nicht verwendet. Wer möchte kann diese durch das blockieren aller Ports ausser des HTTP Ports 80 aushebeln. Die wesentlichen Einstellungen stehen auch über dieses Modul zur Verfügung
