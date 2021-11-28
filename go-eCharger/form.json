@@ -291,7 +291,7 @@
               "caption": "AverageConsumption",
               "digits": 1,
               "hex": false,
-              "suffix": "kwh"
+              "suffix": "kWh"
             },
             {
               "type": "Label",
@@ -303,7 +303,7 @@
               "caption": "MaxLoadKw",
               "digits": 1,
               "hex": false,
-              "suffix": "kw"
+              "suffix": "kWh"
             },
             {
               "type": "Label",
