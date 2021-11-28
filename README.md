@@ -60,12 +60,15 @@ Nachdem eine Instanz des Moduls angelegt wurde, muss diese eingerichtet werden.
 * **IP-Adresse**<br>
 Statische IP Adresse unter der der go-eCharger im lokalen WLAN erreichbar ist.
 
-* **el. Absicherung**<br>
+* **el. Absicherung und max. 1-phasige Schieflast**<br>
 Die maximale el. Absicherung, die für den go-eCharger vorhanden ist. Wenn dieser an einer 16A abgesicherten Zuleitung abgesichert ist, wären dies 16A. Andere Werte entsprechend.
+Die maximale 1-phasige Schieflast wird für die Berechnung sowie das automatische Umschalten zwischen 1- und 3-phasigem Laden benötigt (Befehl SetCurrentChargingWatt)
 
-* **Update Intervalle**<br>
-Hier werden die Update-Intervalle für die Instanz in Sekunden hinterlegt. Gute Werte dürften 10/10 Sekunden sein. Werte unter 5 Sekunden können zu Laufzeitproblemen holen, da ggf. das abholen der Werte länger dauern könnte. 
+* **Update Verhalten**<br>
+Hier werden die Update-Intervalle für die Instanz in Sekunden hinterlegt. Gute Werte dürften 10/10 Sekunden sein. Werte unter 5 Sekunden können zu Laufzeitproblemen holen, da ggf. das abholen der Werte länger dauern könnte. Beim Pollen ist kein übergeordnetes Gateway (MQTT Server) notwendig.
 Ohne Intervalle muss die Update() Funktion für die Instanz manuell aufgerufen werden (siehe unten).
+
+Alternativ kann man auch den Datenempfang via MQTT aktivieren. In diesem Fall muss dem GO-eCharger ein entsprechendes Gateway (MQTT Server) als übergeordnete Instanz zugewiesen werden.
 
 * **Komfortfunktion - automatische Aktivierung bei Anschluss**<br> 
 Der go-eCharger deaktiviert sich nach einem automatischen Ladeende (siehe unten). Auch kann er manuell deaktiviert worden sein. Mit dieser Option wird das Laden automatsich re-aktiviert, wenn erneut ein Fahrzeug angeschlossen wird.
@@ -73,14 +76,25 @@ Der go-eCharger deaktiviert sich nach einem automatischen Ladeende (siehe unten)
 * **Komfortfunktion - automatische Aktivierung bei setzen Ladeende**<br>
 Wenn der go-eCharger deaktiv ist und man ein Ladeende setzt, muss er anschließend noch aktiviert werden. Mit dieser Option entfällt dies und das Modul übernimmt die Aktivierung des Ladevorgangs, wenn ein automatisches Ladeende gesetzt wird.
 
+* **Komfortfunktion - automatischer Wechsel zwischen 1- und 3-phasigem Laden**<br>
+Ab Hardware V3 kann der go-eCharger während des Ladens zwischen 1- und 3-phasigem Laden wechseln. Mit dieser Option kann man es dem Modul erlauben, dies zu tun. Die Option wirkt sich nur auf den Befehl GO-eCharger_SetCurrentChargingWatt aus!
+Die Wartezeiten (zwischen Ladestart/Ende sowie dem Phasen-Wechsel) dient zum Schutz von Fahrzeug und eCharger, um ein zu häufiges Starten/Beenden des Ladevorgangs sowie des Phasenwechsels zu vermeiden. 
+**Die Option sollte bei Hardware V1 und V2 deaktiviert bleiben**, da die Funktion ansonsten von falschen Voraussetzungen ausgeht. 
+
 * **Fahrzeugdaten - Verbrauch**<br>
 Um den automatischen Ladestop anhand von Kilomenter-Angaben setzen zu können, muss das Modul den Durchschnittsverbrauch des angeschlossenen Fahrzeugs wissen, um die benötigten kwh berechnen zu können.
 
 * **Fahrzeugdaten - Batteriegröße**<br>
 Die Batteriegrösse wird genutzt, um nicht unnötig viele Optionen für die 5km-Schritte der Km-Ladestop-Option anzubieten. 
 
+* **Fahrzeugdaten - Anzahl der AC Ladephasen**<br>
+Die Anzahl der Ladephasen dient als Vorgabewert für den Befehl GO-eCharger_SetCurrentChargingWatt, da erst nach dem Start der Ladung vom GO-eCharger festgestellt werden kann, mit wieviel Phasen das angeschlossene Fahrzeug konkret lädt.
+
+* **Sonderfunktionen - Datenkorrektur anwenden**<br>
+Falls man den vom GO-eCharger ermittelten Spannungen auf L1, L2 und L3 nicht traut, kann man durch diese Option weitere Variablen mit "korrigierten" Werten anlegen lassen. Für die Korrektur muss die "echte" Spannung auf L1, L2 und L3 angegeben werden.
+
 ## 4. Module
-Derzeit bietet das GIT nur das Modul "go-eCharger" für die direkte Steuerung eines einzelnen go-eChargers. 
+Derzeit bietet das GIT nur das Modul "go-eCharger" für die direkte Steuerung eines einzelnen go-eChargers via API V1 bzw. den Datenempfang via MQTT. 
 
 ### 4.1. go-eCharger
 
