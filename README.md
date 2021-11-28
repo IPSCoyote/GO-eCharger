@@ -397,7 +397,7 @@ Es wird die eingestellte Schieflast-Schutzschwelle für den Wechsel zwischen 1- 
 ### Version 2.0 (Beta in Entwicklung)
 * Funktionserweiterungen
   * Phasenumschaltung zwischen 1phasigem und 3phasigem Laden (nur für GO-eCharger ab Hardware V3) ([Get](#getsinglephasechargingint-instanzbool-singlephasecharging) / [Set](#setsinglephasechargingint-instanz-bool-singlephasecharging))
-  * Neuer Befehl ([GOeCharger_SetCurrentChargingWatt](#setcurrentchargingwattint-watthours-int-minimumampere)) zum einfachen Umsetzen von PV Überschussladen inkl. optionaler aktiver Phasenumschaltung (bei GO-eChargern ab Hardware V3)
+  * Neuer Befehl ([GOeCharger_SetCurrentChargingWatt](#setcurrentchargingwattint-watthours--int-minimumampere-)) zum einfachen Umsetzen von PV Überschussladen inkl. optionaler aktiver Phasenumschaltung (bei GO-eChargern ab Hardware V3)
   * Optionale Verwendung von MQTT anstatt regelmäßigem Pollens des Status
 
 ### Version 1.6 (aktuelle Beta im Store)
