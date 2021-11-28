@@ -383,11 +383,11 @@ GOeCharger_SetSinglePhaseCharging( $Instanz, true ); // Aktiviert das 1-phasige 
 ```
 
 
-#### SetCurrentChargingWatt(int $WattHours)
+#### SetCurrentChargingWatt(int $WattHours [, int $MinimumAmpere ])
 Setzt die aktuelle Ladeleistung (Ampere) und ggf. auch die zu verwendenden Phasen (1phasig/3phasig; ab Hardware V3) 
 ```
 GOeCharger_SetCurrentChargingWatt( $Instanz, 3000 ); // Setzt die Ladeleistung auf 2.990W (=13A 1phasig)
-GOeCharger_SetCurrentChargingWatt( $Instanz, 6000 ); // Setzt die Ladeleistung auf 5.520W (=8A 3phasig)
+GOeCharger_SetCurrentChargingWatt( $Instanz, 6000, 6 ); // Setzt die Ladeleistung auf 5.520W (=8A 3phasig), aber mindestens auf 6A
 ```
 Es wird die eingestellte Schieflast-Schutzschwelle für den Wechsel zwischen 1- und 3phasigem Laden berücksichtigt.
 
@@ -396,8 +396,8 @@ Es wird die eingestellte Schieflast-Schutzschwelle für den Wechsel zwischen 1- 
 
 ### Version 2.0 (Beta in Entwicklung)
 * Funktionserweiterungen
-  * Phasenumschaltung zwischen 1phasigem und 3phasigem Laden (nur für GO-eCharger ab Hardware V3)
-  * Neuer Befehl (GOeCharger_SetCurrentChargingWatt) zum einfachen Umsetzen von PV Überschussladen inkl. optionaler aktiver Phasenumschaltung (bei GO-eChargern ab Hardware V3)
+  * Phasenumschaltung zwischen 1phasigem und 3phasigem Laden (nur für GO-eCharger ab Hardware V3) ([Get](#getsinglephasechargingint-instanzbool-singlephasecharging) / [Set](#setsinglephasechargingint-instanz-bool-singlephasecharging))
+  * Neuer Befehl ([GOeCharger_SetCurrentChargingWatt](#setcurrentchargingwattint-watthours-int-minimumampere)) zum einfachen Umsetzen von PV Überschussladen inkl. optionaler aktiver Phasenumschaltung (bei GO-eChargern ab Hardware V3)
   * Optionale Verwendung von MQTT anstatt regelmäßigem Pollens des Status
 
 ### Version 1.6 (aktuelle Beta im Store)
