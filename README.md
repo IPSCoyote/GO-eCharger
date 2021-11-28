@@ -29,13 +29,13 @@ Es soll sowohl Zustandsdaten (Anschluss, Ladevorgang, etc.) als auch Schaltaktio
 ## 3. Installation
 
 ### Vorbereitung des go-eChargers
-Vor der Installation des Moduls in IPSymcon muss der go-eCharger vollständig eingerichtet sein. Da dieses Modul lokal auf den go-eCharger zugreift, muss im lokalen WLAN (nicht dem WLAN des go-eChargers!) dem go-eCharger eine statische IP zugewiesen sein. Zusätzlich muss das HTTP-API des go-eChargers in den erweiterten Einstellungen (nur über das WLAN des go-eChargers erreichbar!) eingerichtet sein.
+Vor der Installation des Moduls in IPSymcon muss der go-eCharger vollständig eingerichtet sein. Da dieses Modul lokal auf den go-eCharger zugreift, muss im lokalen WLAN (nicht dem WLAN des go-eChargers!) dem go-eCharger eine statische IP zugewiesen sein. Zusätzlich muss das HTTP-API V1 des go-eChargers in den erweiterten Einstellungen eingerichtet sein. Bei Wunsch können die Daten des go-eChargers auch via MQTT empfangen werden. Entsprechend ist auch diese Option bei Bedarf zu aktivieren.
 
 <p align="center">
-  <img width="447" height="965,33" src="./imgs/Erweiterte%20Einstellungen%20-%20HTTP%20API%20aktivieren.jpg">
+  <img width="447" height="965" src="./imgs/Erweiterte%20Einstellungen%20-%20HTTP%20API%20aktivieren.jpg">
 </p>
 
-Die Cloud des go-eChargers wird nicht verwendet. Wer möchte kann diese durch das blockieren aller Ports ausser des HTTP Ports 80 aushebeln. Die wesentlichen Einstellungen stehen auch über dieses Modul zur Verfügung
+Weder die Cloud des go-eChargers, noch die API V2 als auch das Schreiben auf MQTT wird verwendet. Wer möchte kann diese durch das blockieren aller Ports ausser des HTTP Ports 80 aushebeln. Die wesentlichen Einstellungen stehen auch über dieses Modul zur Verfügung
 
 ### Installation des Moduls
 Um eine Instanz des go-eCharger Moduls anlegen zu können muss das Modul IPSymcon bekannt gemacht werden. Hierzu wird es unter den Kern-Instanzen bei "Modules" mit dem Pfad 
@@ -54,7 +54,7 @@ Anschließend kann eine Instanz des Moduls angelegt werden.
 Nachdem eine Instanz des Moduls angelegt wurde, muss diese eingerichtet werden.
 
 <p align="center">
-  <img width="1009" height="670" src="./imgs/Configuration.png">
+  <img width="1009" height="1273" src="./imgs/Configuration.png">
 </p>
 
 * **IP-Adresse**<br>
