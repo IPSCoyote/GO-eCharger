@@ -139,14 +139,20 @@ Name | Type | Optionen | Werte | Funktionen
 `angeschlossener Adapter` | Integer | RO | verwendeter Adapter für den go-eCharger<br>0: kein Adapter<br>1: 16A Adapter | Nein
 `Kabel-Leistungsfähigkeit` | Integer | RO | Leistungsfähigkeit des angeschlossenen Kabels<br>0: kein Kabel<br>13-32: Ampere | Nein
 `Erdungsprüfung` | Boolean | RO | Ist die Erdungsprüfung (Norwegen Modus) aktiv | Nein
-`Mainboard Temperatur` | Float | RO | Mainboard Temperatur in °C | Nein
+`Temperatur` | Float | RO | Mainboard Temperatur in °C | Nein
+`Mit wieviel Phasen laden?` | Boolean | RW | Auswahl zwischen 1-phasigem und 3-phasigem Laden (ab HW V3!) | | [Get](#setsinglephasecharging-instanz) / [Set](#setsinglephasecharging-instanz-int-bool-single)
 `verfügbare Phasen` | String | RO | verfügbare Phasen<br>*Beispiel: "Phase 1,2 und 3 ist vorhanden"* | Nein
+`verfügbare Phasen in Reihe` | Integer | RO | Anzahl der angeschlossenen Phasen | Nein
 `Spannungsversorgung X` | Integer | RO | Spannung an L1, L2, L3 und N in Volt | Nein
+`aktuell genutze Phasen beim Laden` | Integer | RO | Bei einem aktiven Ladevorgang wird hier die Anzahl der genutzen Phasen angegeben | Nein
 `Leistung zum Fahrzeug X` | Float | RO | Ladeleistung zum Fahrzeug auf L1-3 und N kwh | Nein
 `Ampere zum Fahrzeug Lx` | Float | RO | Ampre zum Fahrzeug auf L1-3 und N in A | Nein
 `max. verfügbare Ladeleistung` | Float | RO | Berechnete max. verfügbare Ladeleistung in kw | Nein
 `Leistungsfaktor X` | Float | RO | Leistungsfaktor auf L1-3 und N in % | Nein
 `Awattar Preiszone` | Integer | RO | Awattar Preiszone | Nein
+`letzter Wechsel zwischen aktiv und inaktiv` | Integer | RO | Zeitstempel der letzten Statusänderung zwischen laden und nicht laden | Nein
+`letzter Wechsel zwischen 1- und 3-phasigem Laden` | Integer | RO | Zeitstempel der Änderung zwischen 1- und 3-phasigem Laden | Nein
+
 
 #### 4.1.2. Funktionen
 
@@ -350,16 +356,37 @@ Aktivieren oder Deaktivieren der Energiespareinstellung für den LED Ring (Auto-
 GOeCharger_SetLEDEnergySave( $Instanz, true ); // Aktivierung der Energiespareinstellung für den LED Ring
 ```
 
+#### GetSinglePhaseCharging(int $Instanz,bool $SinglePhaseCharging)
+Ermittlung, ob da 1-phasige Laden aktiv ist. Die Funktion steht erst ab Hardware Version 3 zur Verfügung!
+```
+GOeCharger_GetSinglePhaseCharging( $Instanz ); // Ermittlung, ob das 1-phasige Laden aktiv ist
+```
+
+#### SetSinglePhaseCharging(int $Instanz, bool $SinglePhaseCharging)
+Aktiviert (oder deaktiviert) das 1-phasige Laden (deaktiv = laden mit 3 verfügbaren Phasen). Die Funktion steht erst ab Hardware Version 3 zur Verfügung!
+```
+GOeCharger_SetSinglePhaseCharging( $Instanz, true ); // Aktiviert das 1-phasige laden
+```
+
+
+#### SetCurrentChargingWatt(int $WattHours)
+Setzt die aktuelle Ladeleistung (Ampere) und ggf. auch die zu verwendenden Phasen (1phasig/3phasig; ab Hardware V3) 
+```
+GOeCharger_SetCurrentChargingWatt( $Instanz, 3000 ); // Setzt die Ladeleistung auf 2.990W (=13A 1phasig)
+GOeCharger_SetCurrentChargingWatt( $Instanz, 6000 ); // Setzt die Ladeleistung auf 5.520W (=8A 3phasig)
+```
+Es wird die eingestellte Schieflast-Schutzschwelle für den Wechsel zwischen 1- und 3phasigem Laden berücksichtigt.
+
 ## 5. ChangeLog
 Änderungshistorie
 
-### Version 2.0 (in Entwicklung)
+### Version 2.0 (Beta in Entwicklung)
 * Funktionserweiterungen
   * Phasenumschaltung zwischen 1phasigem und 3phasigem Laden (nur für GO-eCharger ab Hardware V3)
-  * Neuer Befehl zum einfachen Umsetzen von PV Überschussladen inkl. optionaler aktiver Phasenumschaltung (bei GO-eChargern ab Hardware V3)
+  * Neuer Befehl (GOeCharger_SetCurrentChargingWatt) zum einfachen Umsetzen von PV Überschussladen inkl. optionaler aktiver Phasenumschaltung (bei GO-eChargern ab Hardware V3)
   * Optionale Verwendung von MQTT anstatt regelmäßigem Pollens des Status
 
-### Version 1.6 (aktuelle Beta)
+### Version 1.6 (aktuelle Beta im Store)
 * Funktionserweiterungen
   * Innen-Temperatur wird auch bei multiplen Temperatursensoren aus der Durchschnittstemperatur gebildet (FW 0.51)
   * Reduzierter Ladestrom aufgrund von Temperatur wird angezeigt (ab FW 0.51)
