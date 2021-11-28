@@ -154,7 +154,7 @@ Name | Type | Optionen | Werte | Funktionen
 `Kabel-Leistungsfähigkeit` | Integer | RO | Leistungsfähigkeit des angeschlossenen Kabels<br>0: kein Kabel<br>13-32: Ampere | Nein
 `Erdungsprüfung` | Boolean | RO | Ist die Erdungsprüfung (Norwegen Modus) aktiv | Nein
 `Temperatur` | Float | RO | Mainboard Temperatur in °C | Nein
-`Mit wieviel Phasen laden?` | Boolean | RW | Auswahl zwischen 1-phasigem und 3-phasigem Laden (ab HW V3!) | | [Get](getsinglephasechargingint-instanzbool-singlephasecharging) / [Set](#setsinglephasecharging-instanz-int-bool-single)
+`Mit wieviel Phasen laden?` | Boolean | RW | Auswahl zwischen 1-phasigem und 3-phasigem Laden (ab HW V3!) | [Get](#getsinglephasechargingint-instanzbool-singlephasecharging) / [Set](#setsinglephasechargingint-instanz-bool-singlephasecharging)
 `verfügbare Phasen` | String | RO | verfügbare Phasen<br>*Beispiel: "Phase 1,2 und 3 ist vorhanden"* | Nein
 `verfügbare Phasen in Reihe` | Integer | RO | Anzahl der angeschlossenen Phasen | Nein
 `Spannungsversorgung X` | Integer | RO | Spannung an L1, L2, L3 und N in Volt | Nein
