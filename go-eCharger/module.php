@@ -1143,7 +1143,7 @@ class go_eCharger extends IPSModule
         //--- RBT (Reboot Timer) --------------------------------------------------------------
         if (isset($goEChargerStatus->{'rbt'})) {
             $rebootTime = date(DATE_RFC822, time() - round($goEChargerStatus->{'rbt'} / 1000, 0));
-            if (substr($rebootTime, 0, 21) <> substr(GetValue($this->GetIDForIdent("rebootTime")), 0, 21)) {
+            if (substr($rebootTime, 0, 20) <> substr(GetValue($this->GetIDForIdent("rebootTime")), 0, 20)) {
                 SetValue($this->GetIDForIdent("rebootTime"), $rebootTime);
             }
         }
