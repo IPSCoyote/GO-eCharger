@@ -15,7 +15,7 @@
             "AutoActivateOnStopSet": "automatische Aktivierung des Chargers beim Setzen eines automatischen Ladeendes",
             "AutomaticPhaseSwitch": "automatischer Wechsel zwischen 1- und 3-phasigem Laden (bei Benutzung des Befehls GO-eCharger_SetCurrentChargingWatt)",
             "Active Switch Waiting Time": "Wartezeit zwischen Ladestart/Ende",
-            "Phases Switch Waiting Time": "Wartezeit zwischen Wechsel 1-/3-phasig",
+            "Phases Switch Waiting Time": "Wartezeit zwischen Wechsel 1-/3-phasig ",
             "Vehicle Data": "Fahrzeugdaten",
             "Vehicle Data Header": "Die hier angegebenen Fahrzeugwerte werden verwendet, um die benötigten kWh für eine bestimmte Kilometerstrecke (automatischer Ladestop) oder die minimale Einschaltleistung zu berechnen.",
             "AverageConsumption": "Verbrauch kWh/100km",
