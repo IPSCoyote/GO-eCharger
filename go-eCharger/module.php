@@ -42,6 +42,7 @@ class go_eCharger extends IPSModule
         $this->RegisterPropertyInteger("verifiedSupplyPowerL1", 230);
         $this->RegisterPropertyInteger("verifiedSupplyPowerL2", 230);
         $this->RegisterPropertyInteger("verifiedSupplyPowerL3", 230);
+        $this->RegisterPropertyBoolean("debugLog", false);
 
         //--- Register Timer
         $this->RegisterTimer("GOeChargerTimer_UpdateTimer", 0, 'GOeCharger_Update($_IPS[\'TARGET\']);');
@@ -272,6 +273,14 @@ class go_eCharger extends IPSModule
 
     public function setCurrentChargingWattWithMinimumAmperage(int $wattToSet, int $minimumChargingAmperage)
     {
+        $this->debugLog("setCurrentChargingWattWithMinimumAmperage with ".$wattToSet."Wh and ".$minimumChargingAmperage."A minimum");
+        $Semaphore = "GO-eCharger-" . GetValueString($this->GetIDForIdent("serialID"))."-SetWatt";
+        if (IPS_SemaphoreEnter($Semaphore, 2000) == false) {
+            // wait 2 seconds (for short processing time
+            $this->debugLog("setCurrentChargingWattWithMinimumAmperage: Semaphore blocked processing");
+            return false;
+        }
+
         $availableInstalledPhases = GetValueInteger($this->GetIDForIdent("availablePhasesInRow"));  // Installed Phases
 
         $switchUsedPhasesAllowed = $this->ReadPropertyBoolean("switchUsedPhasesAllowed"); // is switching between 1- and 3-phases allowed
@@ -357,11 +366,13 @@ class go_eCharger extends IPSModule
         $chargerActive = ($amperageToSet >= 6); // no charging, if Amperage is not 6A minimum
 
         //--- Execute changes
+        $this->debugLog("setCurrentChargingWattWithMinimumAmperage: Target is ".$phasesToSet."phase(s) with ".$amperageToSet."A");
         // set phases with (switch limit)
         if (GetValueBoolean($this->GetIDForIdent("singlePhaseCharging")) and $phasesToSet == 3) {
             // set to 3 phases
             // save last status update time as changing the phases will stop/start charging, which should not
             // count
+            $this->debugLog("setCurrentChargingWattWithMinimumAmperage: Switch of phases needed");
             $lastUpdateTime = GetValueInteger($this->GetIDForIdent("lastUpdateChargerStatus"));
             $this->setSinglePhaseCharging(false);
             sleep(25); // wait 25 seconds as phase shifting takes time...
@@ -370,6 +381,7 @@ class go_eCharger extends IPSModule
             // set to 1 phase
             // save last status update time as changing the phases will stop/start charging, which should not
             // count
+            $this->debugLog("setCurrentChargingWattWithMinimumAmperage: Switch of phases needed");
             $lastUpdateTime = GetValueInteger($this->GetIDForIdent("lastUpdateChargerStatus"));
             $this->setSinglePhaseCharging(true);
             sleep(25); // wait 25 seconds as phase shifting takes time...
@@ -378,6 +390,7 @@ class go_eCharger extends IPSModule
 
         // set amperage
         if ($amperageToSet >= 6 and $amperageToSet <> GetValueInteger($this->GetIDForIdent("availableAMP"))) {
+            $this->debugLog("setCurrentChargingWattWithMinimumAmperage: Switch of amperes needed");
             $this->setCurrentChargingAmperage($amperageToSet);
             sleep(2);
         }
@@ -386,9 +399,16 @@ class go_eCharger extends IPSModule
         if (GetValueBoolean($this->GetIDForIdent("accessState")) <> $chargerActive) {
             // check waiting time
             if (time() >= GetValueInteger($this->GetIDForIdent("lastUpdateChargerStatus")) + $this->ReadPropertyInteger("ActiveSwitchWaitingTime") * 60) {
+                $this->debugLog("setCurrentChargingWattWithMinimumAmperage: Charger Active toggle");
                 $this->setActive($chargerActive);
+            } else {
+                $this->debugLog("setCurrentChargingWattWithMinimumAmperage: Charger Active Toggle not possible due to minimum waiting time");
             }
         }
+
+        // Leave Semaphore
+        IPS_SemaphoreLeave( $Semaphore );
+        return true;
 
     }
 
@@ -804,6 +824,12 @@ class go_eCharger extends IPSModule
 
 
     //=== PRIVATE/PRODUCTED FUNCTIONS ==============================================================================
+    protected function debugLog( String $message ) {
+        if ( $this->ReadPropertyBoolean("debugLog") == true ) {
+            $this->SendDebug( "GO-eCharger", $message, 0 );
+        };
+    }
+
     protected function getStatusFromCharger()
     {
         // get IP of go-eCharger

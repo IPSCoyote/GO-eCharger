@@ -385,6 +385,12 @@
               "width": "150px"
             }
           ]
+        },
+        {
+          "type": "CheckBox",
+          "name": "debugLog",
+          "caption": "DebugLog",
+          "value": false
         }
       ]
     }
