@@ -57,6 +57,11 @@ class go_eCharger extends IPSModule
         $this->registerProfiles();
         $this->registerVariables();
 
+        // Set Timer
+        if ($this->ReadPropertyInteger("UpdateCharging") >= 0) {
+            $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateCharging") * 1000);
+        }
+
         // Set Data to Variables (and update timer)
         $this->Update();
     }
