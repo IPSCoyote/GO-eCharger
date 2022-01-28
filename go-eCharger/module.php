@@ -891,7 +891,8 @@ class go_eCharger extends IPSModule
     {
         // function to avoid invalid apiKey is accessed
         if (isset($data->{$apiKey})) {
-            SetValue($this->GetIDForIdent($ident), $data->{$apiKey});
+            $this->debugLog("setValueToIdent on ".$apiKey );
+            if ( SetValue($this->GetIDForIdent($ident), $data->{$apiKey}) == false ) $this->debugLog("FAILED on ".$apiKey ); ;
         }
     }
 
@@ -979,11 +980,11 @@ class go_eCharger extends IPSModule
         $this->setValueToIdent($goEChargerStatus, "cableCapability", "cbl");
 
         //--- DWO (Abschaltwert in 0.1kWh if stp==2, for DWS parameter) ---------------------------
-        if (isset($goEChargerStatus->{'dwo'}) AND ($goEChargerStatus->{'dwo'} != "null")) {
+        if (isset($goEChargerStatus->{'dwo'})) {
            SetValue($this->GetIDForIdent("automaticStop"), $goEChargerStatus->{'dwo'} / 10);
         }
         if ($this->ReadPropertyFloat("AverageConsumption") > 0) {
-            if (isset($goEChargerStatus->{'dwo'}) AND ($goEChargerStatus->{'dwo'} != "null")) {
+            if (isset($goEChargerStatus->{'dwo'})) {
                 SetValue($this->GetIDForIdent("automaticStopKm"), $goEChargerStatus->{'dwo'} / 10 / $this->ReadPropertyFloat("AverageConsumption") * 100);
             }
         } else
