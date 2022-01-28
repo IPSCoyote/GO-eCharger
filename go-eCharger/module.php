@@ -891,8 +891,7 @@ class go_eCharger extends IPSModule
     {
         // function to avoid invalid apiKey is accessed
         if (isset($data->{$apiKey})) {
-            $this->debugLog("setValueToIdent on ".$apiKey );
-            if ( SetValue($this->GetIDForIdent($ident), $data->{$apiKey}) == false ) $this->debugLog("FAILED on ".$apiKey ); ;
+            if ( SetValue($this->GetIDForIdent($ident), $data->{$apiKey}) == false ) $this->debugLog("setValueToIdent FAILED on ".$apiKey ); ;
         }
     }
 
@@ -1506,7 +1505,6 @@ class go_eCharger extends IPSModule
             $goEChargerStatus->{'nrg'} = $goEChargerEnergy;
         }
     }
-
 
 }
 
