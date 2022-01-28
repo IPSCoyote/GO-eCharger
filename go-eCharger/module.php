@@ -974,11 +974,11 @@ class go_eCharger extends IPSModule
         $this->setValueToIdent($goEChargerStatus, "cableCapability", "cbl");
 
         //--- DWO (Abschaltwert in 0.1kWh if stp==2, for DWS parameter) ---------------------------
-        if (isset($goEChargerStatus->{'dwo'})) {
-            SetValue($this->GetIDForIdent("automaticStop"), $goEChargerStatus->{'dwo'} / 10);
+        if (isset($goEChargerStatus->{'dwo'}) AND ($goEChargerStatus->{'dwo'} != "null")) {
+           SetValue($this->GetIDForIdent("automaticStop"), $goEChargerStatus->{'dwo'} / 10);
         }
         if ($this->ReadPropertyFloat("AverageConsumption") > 0) {
-            if (isset($goEChargerStatus->{'dwo'})) {
+            if (isset($goEChargerStatus->{'dwo'}) AND ($goEChargerStatus->{'dwo'} != "null")) {
                 SetValue($this->GetIDForIdent("automaticStopKm"), $goEChargerStatus->{'dwo'} / 10 / $this->ReadPropertyFloat("AverageConsumption") * 100);
             }
         } else
