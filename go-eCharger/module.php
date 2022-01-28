@@ -150,6 +150,7 @@ class go_eCharger extends IPSModule
                 }
                 $data = json_decode($json);
 
+                $this->dataCorrection($data);
                 $this->UpdateWithData($data);
             }
 
@@ -879,6 +880,10 @@ class go_eCharger extends IPSModule
         }
 
         $this->SetStatus(102);
+
+
+        $this->dataCorrection($goEChargerStatus);
+
         return $goEChargerStatus;
     }
 
@@ -1482,6 +1487,26 @@ class go_eCharger extends IPSModule
         $this->RegisterVariableInteger("lastUpdateChargerStatus", "letzter Wechsel zwischen aktiv und inaktiv", "~UnixTimestamp", 999);
         $this->RegisterVariableInteger("lastUpdateSinglePhase", "letzter Wechsel zwischen 1- und 3-phasigem Laden", "~UnixTimestamp", 999);
     }
+
+    protected function dataCorrection(&$goEChargerStatus) {
+        /* This method maybe used to correct data returned from the Status API
+           Usually these corrections should be only temporary needed */
+
+        // issue on "nrg" with to high power factor!! (in FW 52.2)
+        if (isset($goEChargerStatus->{'nrg'})) {
+            $goEChargerEnergy = $goEChargerStatus->{'nrg'};
+
+            if ($goEChargerEnergy[7] > 77 ) $goEChargerEnergy[11] = $goEChargerEnergy[11]/10;
+
+            if ($goEChargerEnergy[7] > 77 ) $goEChargerEnergy[7] = $goEChargerEnergy[7]/100;
+            if ($goEChargerEnergy[8] > 77 ) $goEChargerEnergy[8] = $goEChargerEnergy[8]/100;
+            if ($goEChargerEnergy[9] > 77 ) $goEChargerEnergy[9] = $goEChargerEnergy[9]/100;
+
+            $goEChargerStatus->{'nrg'} = $goEChargerEnergy;
+        }
+    }
+
+
 }
 
 ?>
