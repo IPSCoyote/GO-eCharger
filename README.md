@@ -109,64 +109,63 @@ Im folgenden werden die verfügbaren Statusvariablen mit ihren Eigenschaften, We
 
 #### Grundfunktionen zum Laden
 
-Name | Type | Optionen | Werte | Funktionen
-:--- | :---: |  :---:  | :---  | :---:
-`Wallbox aktiv` | Boolean | RW, WF | Kann an der Wallbox geladen werden? | [Get](#isactiveint-instanz) / [Set](#setactiveint-instanz-bool-aktiv)
-`Status` | Integer | RO | Allgemeiner Ladestatus des go-eChargers<br>1: Ladestation bereit, kein Fahrzeug<br>2: Fahrzeug lädt<br>3:Warte auf Fahrzeug<br>4: Ladung beendet, Fahrzeug verbunden | [Get](#getstatusint-instanz)
-`Ladeende nach x kwh` | Float | RW, WF | Ladung nach abgabe von X kwh beenden<br>0 = kein automatischer Ladestop<br>0.1-100.0 kwh | [Get](#getautomaticchargestopint-instanz) / [Set](#setautomaticchargestopint-instanz-float-kwh)
-`Ladeende nach Energie für x km` | Integer | RW, WF | Ladung nach Abgabe von Energie für X Kilomenter beenden<br>0 = kein automatischer Ladestop<br>**Parameter funktioniert nur, wenn ein Verbrauch in den Einstellungen gepflegt ist!** | [Get](#getautomaticchargestopkmint-instanz) / [Set](#setautomaticchargestopkmint-instanz-float-km)
+| Name                             |  Type   | Optionen | Werte                                                                                                                                                                               |                                             Funktionen                                             |
+|:---------------------------------|:-------:|:--------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------:|
+| `Wallbox aktiv`                  | Boolean |  RW, WF  | Kann an der Wallbox geladen werden?                                                                                                                                                 |               [Get](#isactiveint-instanz) / [Set](#setactiveint-instanz-bool-aktiv)                |
+| `Status`                         | Integer |    RO    | Allgemeiner Ladestatus des go-eChargers<br>1: Ladestation bereit, kein Fahrzeug<br>2: Fahrzeug lädt<br>3:Warte auf Fahrzeug<br>4: Ladung beendet, Fahrzeug verbunden                |                                    [Get](#getstatusint-instanz)                                    |
+| `Ladeende nach x kwh`            |  Float  |  RW, WF  | Ladung nach abgabe von X kwh beenden<br>0 = kein automatischer Ladestop<br>0.1-100.0 kwh                                                                                            |  [Get](#getautomaticchargestopint-instanz) / [Set](#setautomaticchargestopint-instanz-float-kwh)   |
+| `Ladeende nach Energie für x km` | Integer |  RW, WF  | Ladung nach Abgabe von Energie für X Kilomenter beenden<br>0 = kein automatischer Ladestop<br>**Parameter funktioniert nur, wenn ein Verbrauch in den Einstellungen gepflegt ist!** | [Get](#getautomaticchargestopkmint-instanz) / [Set](#setautomaticchargestopkmint-instanz-float-km) |
 
 #### Informationen zum aktuellen Ladevorgang
 
-Name | Type | Optionen | Werte | Funktionen
-:--- | :---: |  :---:  | :---  | :---:
-`Aktuelle Leistung zum Fahrzeug` | Float | RO | Gesamte Ladeleistung zum Fahrzeug in kwh | [Get](#getpowertocarint-instanz)
-`abgegebene Energie im Ladezyklus` | Float | RO | abgegebene Energie im aktuellen Ladezyklus in kwh<br>*Beispiel: 5,3 kwh* | [Get](#getcurrentloadingcycleconsumptionint-instanz)
-`entsperrt durch RFID` | Integer | RO | Wurde der go-eCharger durch RFID Token X entsperrt | [Get](#getunlockrfidint-instanz)
+| Name                               |  Type   | Optionen | Werte                                                                    |                      Funktionen                      |
+|:-----------------------------------|:-------:|:--------:|:-------------------------------------------------------------------------|:----------------------------------------------------:|
+| `Aktuelle Leistung zum Fahrzeug`   |  Float  |    RO    | Gesamte Ladeleistung zum Fahrzeug in kwh                                 |           [Get](#getpowertocarint-instanz)           |
+| `abgegebene Energie im Ladezyklus` |  Float  |    RO    | abgegebene Energie im aktuellen Ladezyklus in kwh<br>*Beispiel: 5,3 kwh* | [Get](#getcurrentloadingcycleconsumptionint-instanz) |
+| `entsperrt durch RFID`             | Integer |    RO    | Wurde der go-eCharger durch RFID Token X entsperrt                       |           [Get](#getunlockrfidint-instanz)           |
 
 #### Verbrauchsinformationen
 
-Name | Type | Optionen | Werte | Funktionen
-:--- | :---: |  :---:  | :---  | :---:
-`bisher abgegebene Energie` | Float | RO | Bisher insgesamt vom go-eCharger abgegebene Energie in kwh<br>*Beispiel: 379,0 kwh* | [Get](#getenergychargedintotalint-instanz)
-`geladene Energie Karte X` | Float | RO | Geladene Energiemenge pro Karte in kwh | [Get](#getenergychargedbycardint-instanz-int-cardid)
+| Name                        | Type  | Optionen | Werte                                                                               |                      Funktionen                      |
+|:----------------------------|:-----:|:--------:|:------------------------------------------------------------------------------------|:----------------------------------------------------:|
+| `bisher abgegebene Energie` | Float |    RO    | Bisher insgesamt vom go-eCharger abgegebene Energie in kwh<br>*Beispiel: 379,0 kwh* |      [Get](#getenergychargedintotalint-instanz)      |
+| `geladene Energie Karte X`  | Float |    RO    | Geladene Energiemenge pro Karte in kwh                                              | [Get](#getenergychargedbycardint-instanz-int-cardid) |
 
 #### Einstellungen
 
-Name | Type | Optionen | Werte | Funktionen
-:--- | :---: |  :---:  | :---  | :---:
-`max. verfügbarer Ladestrom` | Integer | RW, WF | Maximal verfügbarer Ladestrom des go-eChargers | [Get](#getmaximumchargingamperageint-instanz-) / [Set](#setmaximumchargingamperageint-instanz-int-ampere)
-`aktuell verfügbarer Ladestrom` | Integer | RW, WF | Der aktuell verfügbare Ladestrom zum laden eines Fahrzeugs<br>*Beispiel: 16 A* | [Get](#getcurrentchargingamperageint-instanz) / [Set](#setcurrentchargingamperageint-instanz-int-ampere)
-`Kabel-Verriegelungsmodus` | Integer | RW, WF | Verriegelungsmodus für das Kabel<br>0: Verriegeln, solange Auto angesteckt<br>1: Nach Ladevorgang entriegeln<br>2: Kabel immer verriegelt | [Get](#getcableunlockmodeint-instanz) / [Set](#setcableunlockmodeint-instanz-int-unlockmode)
-`Zugangskontrolle via RFID/APP/Strompreis` | Integer | RW, WF | Zugangskontrolle<br>0: frei zugänglich<br>1: RFID Identifizierung<br>2: Strompreis/automatisch | [Get](#getaccesscontrolint-instanz) / [Set](#setaccesscontrolint-instanz-int-mode)
-`minimale Ladezeit bei Strompreis-basiertem Laden` | Integer | RW, WF | Minimale ​Anzahl ​von Stunden die bei "Strompreis/automatisch" mindestens vor "Laden beendet bis" geladen werden muss | [Get](#getelectricitypriceminchargehoursint-instanz) / [Set](#setelectricitypriceminchargehoursint-instanz-int-minchargehours)
-`Laden beendet bis bei Strompreis-basiertem Laden` | Integer | RW, WF | Uhrzeit, bis zu der die "minimale Ladezeit" bei "Strompreis/automatisch" geladen sein muss | [Get](#getelectricitypricechargetill-instanz) / [Set](#setelectricitypricechargetillint-instanz-int-chargetill)
-`LED Helligkeit` | Integer | RW, WF | Helligkeit der LEDs<br>0: LED aus<br>1 - 255: LED Helligkeit | [Get](#getledbrightnessint-instanz) / [Set](#setledbrightnessint-instanz-int-brightness)
-`LED Energiesparfunktion` | Integer | RW, WF | Energiesparfunktion der LEDs<br>0: LED aus<br>1 - 255: LED Helligkeit | [Get](#getledenergysaveint-instanz) / [Set](#setledenergysaveint-instanz-bool-energysaveactive)
+| Name                                               |  Type   | Optionen | Werte                                                                                                                                     |                                                           Funktionen                                                           |
+|:---------------------------------------------------|:-------:|:--------:|:------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------:|
+| `max. verfügbarer Ladestrom`                       | Integer |  RW, WF  | Maximal verfügbarer Ladestrom des go-eChargers                                                                                            |           [Get](#getmaximumchargingamperageint-instanz-) / [Set](#setmaximumchargingamperageint-instanz-int-ampere)            |
+| `aktuell verfügbarer Ladestrom`                    | Integer |  RW, WF  | Der aktuell verfügbare Ladestrom zum laden eines Fahrzeugs<br>*Beispiel: 16 A*                                                            |            [Get](#getcurrentchargingamperageint-instanz) / [Set](#setcurrentchargingamperageint-instanz-int-ampere)            |
+| `Kabel-Verriegelungsmodus`                         | Integer |  RW, WF  | Verriegelungsmodus für das Kabel<br>0: Verriegeln, solange Auto angesteckt<br>1: Nach Ladevorgang entriegeln<br>2: Kabel immer verriegelt |                  [Get](#getcableunlockmodeint-instanz) / [Set](#setcableunlockmodeint-instanz-int-unlockmode)                  |
+| `Zugangskontrolle via RFID/APP/Strompreis`         | Integer |  RW, WF  | Zugangskontrolle<br>0: frei zugänglich<br>1: RFID Identifizierung<br>2: Strompreis/automatisch                                            |                       [Get](#getaccesscontrolint-instanz) / [Set](#setaccesscontrolint-instanz-int-mode)                       |
+| `minimale Ladezeit bei Strompreis-basiertem Laden` | Integer |  RW, WF  | Minimale ​Anzahl ​von Stunden die bei "Strompreis/automatisch" mindestens vor "Laden beendet bis" geladen werden muss                     | [Get](#getelectricitypriceminchargehoursint-instanz) / [Set](#setelectricitypriceminchargehoursint-instanz-int-minchargehours) |
+| `Laden beendet bis bei Strompreis-basiertem Laden` | Integer |  RW, WF  | Uhrzeit, bis zu der die "minimale Ladezeit" bei "Strompreis/automatisch" geladen sein muss                                                |        [Get](#getelectricitypricechargetill-instanz) / [Set](#setelectricitypricechargetillint-instanz-int-chargetill)         |
+| `LED Helligkeit`                                   | Integer |  RW, WF  | Helligkeit der LEDs<br>0: LED aus<br>1 - 255: LED Helligkeit                                                                              |                    [Get](#getledbrightnessint-instanz) / [Set](#setledbrightnessint-instanz-int-brightness)                    |
+| `LED Energiesparfunktion`                          | Integer |  RW, WF  | Energiesparfunktion der LEDs<br>0: LED aus<br>1 - 255: LED Helligkeit                                                                     |                [Get](#getledenergysaveint-instanz) / [Set](#setledenergysaveint-instanz-bool-energysaveactive)                 |
 
 #### Technische Informationen
 
-Name | Type | Optionen | Werte | Funktionen
-:--- | :---: |  :---:  | :---  | :---:
-`Seriennummer` | String | RO | Seriennummer des go-eChargers<br>*Beispiel: "000815"* | Nein
-`Fehler` | Integer | RO | Liegt ein Fehler am go-eCharger vor<br>0: kein Fehler<br>1: FI Schutzschalter<br>3: Fehler an Phase<br>8: Keine Erdung<br>10: Interner Fehler | Nein
-`angeschlossener Adapter` | Integer | RO | verwendeter Adapter für den go-eCharger<br>0: kein Adapter<br>1: 16A Adapter | Nein
-`Kabel-Leistungsfähigkeit` | Integer | RO | Leistungsfähigkeit des angeschlossenen Kabels<br>0: kein Kabel<br>13-32: Ampere | Nein
-`Erdungsprüfung` | Boolean | RO | Ist die Erdungsprüfung (Norwegen Modus) aktiv | Nein
-`Temperatur` | Float | RO | Mainboard Temperatur in °C | Nein
-`Mit wieviel Phasen laden?` | Boolean | RW | Auswahl zwischen 1-phasigem und 3-phasigem Laden (ab HW V3!) | [Get](#getsinglephasechargingint-instanzbool-singlephasecharging) / [Set](#setsinglephasechargingint-instanz-bool-singlephasecharging)
-`verfügbare Phasen` | String | RO | verfügbare Phasen<br>*Beispiel: "Phase 1,2 und 3 ist vorhanden"* | Nein
-`verfügbare Phasen in Reihe` | Integer | RO | Anzahl der angeschlossenen Phasen | Nein
-`Spannungsversorgung X` | Integer | RO | Spannung an L1, L2, L3 und N in Volt | Nein
-`aktuell genutze Phasen beim Laden` | Integer | RO | Bei einem aktiven Ladevorgang wird hier die Anzahl der genutzen Phasen angegeben | Nein
-`Leistung zum Fahrzeug X` | Float | RO | Ladeleistung zum Fahrzeug auf L1-3 und N kwh | Nein
-`Ampere zum Fahrzeug Lx` | Float | RO | Ampre zum Fahrzeug auf L1-3 und N in A | Nein
-`max. verfügbare Ladeleistung` | Float | RO | Berechnete max. verfügbare Ladeleistung in kw | Nein
-`Leistungsfaktor X` | Float | RO | Leistungsfaktor auf L1-3 und N in % | Nein
-`Awattar Preiszone` | Integer | RO | Awattar Preiszone | Nein
-`letzter Wechsel zwischen aktiv und inaktiv` | Integer | RO | Zeitstempel der letzten Statusänderung zwischen laden und nicht laden | Nein
-`letzter Wechsel zwischen 1- und 3-phasigem Laden` | Integer | RO | Zeitstempel der Änderung zwischen 1- und 3-phasigem Laden | Nein
-
+| Name                                               |  Type   | Optionen | Werte                                                                                                                                         |                                                               Funktionen                                                               |
+|:---------------------------------------------------|:-------:|:--------:|:----------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------:|
+| `Seriennummer`                                     | String  |    RO    | Seriennummer des go-eChargers<br>*Beispiel: "000815"*                                                                                         |                                                                  Nein                                                                  |
+| `Fehler`                                           | Integer |    RO    | Liegt ein Fehler am go-eCharger vor<br>0: kein Fehler<br>1: FI Schutzschalter<br>3: Fehler an Phase<br>8: Keine Erdung<br>10: Interner Fehler |                                                                  Nein                                                                  |
+| `angeschlossener Adapter`                          | Integer |    RO    | verwendeter Adapter für den go-eCharger<br>0: kein Adapter<br>1: 16A Adapter                                                                  |                                                                  Nein                                                                  |
+| `Kabel-Leistungsfähigkeit`                         | Integer |    RO    | Leistungsfähigkeit des angeschlossenen Kabels<br>0: kein Kabel<br>13-32: Ampere                                                               |                                                                  Nein                                                                  |
+| `Erdungsprüfung`                                   | Boolean |    RO    | Ist die Erdungsprüfung (Norwegen Modus) aktiv                                                                                                 |                                                                  Nein                                                                  |
+| `Temperatur`                                       |  Float  |    RO    | Mainboard Temperatur in °C                                                                                                                    |                                                                  Nein                                                                  |
+| `Mit wieviel Phasen laden?`                        | Boolean |    RW    | Auswahl zwischen 1-phasigem und 3-phasigem Laden (ab HW V3!)                                                                                  | [Get](#getsinglephasechargingint-instanzbool-singlephasecharging) / [Set](#setsinglephasechargingint-instanz-bool-singlephasecharging) |
+| `verfügbare Phasen`                                | String  |    RO    | verfügbare Phasen<br>*Beispiel: "Phase 1,2 und 3 ist vorhanden"*                                                                              |                                                                  Nein                                                                  |
+| `verfügbare Phasen in Reihe`                       | Integer |    RO    | Anzahl der angeschlossenen Phasen                                                                                                             |                                                                  Nein                                                                  |
+| `Spannungsversorgung X`                            | Integer |    RO    | Spannung an L1, L2, L3 und N in Volt                                                                                                          |                                                                  Nein                                                                  |
+| `aktuell genutze Phasen beim Laden`                | Integer |    RO    | Bei einem aktiven Ladevorgang wird hier die Anzahl der genutzen Phasen angegeben                                                              |                                                                  Nein                                                                  |
+| `Leistung zum Fahrzeug X`                          |  Float  |    RO    | Ladeleistung zum Fahrzeug auf L1-3 und N kwh                                                                                                  |                                                                  Nein                                                                  |
+| `Ampere zum Fahrzeug Lx`                           |  Float  |    RO    | Ampre zum Fahrzeug auf L1-3 und N in A                                                                                                        |                                                                  Nein                                                                  |
+| `max. verfügbare Ladeleistung`                     |  Float  |    RO    | Berechnete max. verfügbare Ladeleistung in kw                                                                                                 |                                                                  Nein                                                                  |
+| `Leistungsfaktor X`                                |  Float  |    RO    | Leistungsfaktor auf L1-3 und N in %                                                                                                           |                                                                  Nein                                                                  |
+| `Awattar Preiszone`                                | Integer |    RO    | Awattar Preiszone                                                                                                                             |                                                                  Nein                                                                  |
+| `letzter Wechsel zwischen aktiv und inaktiv`       | Integer |    RO    | Zeitstempel der letzten Statusänderung zwischen laden und nicht laden                                                                         |                                                                  Nein                                                                  |
+| `letzter Wechsel zwischen 1- und 3-phasigem Laden` | Integer |    RO    | Zeitstempel der Änderung zwischen 1- und 3-phasigem Laden                                                                                     |                                                                  Nein                                                                  |
 
 #### 4.1.2. Funktionen
 
@@ -394,7 +393,7 @@ Es wird die eingestellte Schieflast-Schutzschwelle für den Wechsel zwischen 1- 
 ## 5. ChangeLog
 Änderungshistorie
 
-### Version 2.0 (Beta in Entwicklung)
+### Version 2.0
 * Funktionserweiterungen
   * Phasenumschaltung zwischen 1phasigem und 3phasigem Laden (nur für GO-eCharger ab Hardware V3) ([Get](#getsinglephasechargingint-instanzbool-singlephasecharging) / [Set](#setsinglephasechargingint-instanz-bool-singlephasecharging))
   * Neuer Befehl ([GOeCharger_SetCurrentChargingWatt](#setcurrentchargingwattint-watthours--int-minimumampere-)) zum einfachen Umsetzen von PV Überschussladen inkl. optionaler aktiver Phasenumschaltung (bei GO-eChargern ab Hardware V3)
