@@ -38,17 +38,7 @@ Vor der Installation des Moduls in IPSymcon muss der go-eCharger vollständig ei
 Weder die Cloud des go-eChargers, noch die API V2 als auch das Schreiben auf MQTT wird verwendet. Wer möchte kann diese durch das blockieren aller Ports ausser des HTTP Ports 80 aushebeln. Die wesentlichen Einstellungen stehen auch über dieses Modul zur Verfügung
 
 ### Installation des Moduls
-Um eine Instanz des go-eCharger Moduls anlegen zu können muss das Modul IPSymcon bekannt gemacht werden. Hierzu wird es unter den Kern-Instanzen bei "Modules" mit dem Pfad 
-```
-git://github.com/IPSCoyote/GO-eCharger
-```
-hinzugefügt. 
-
-Anschließend kann eine Instanz des Moduls angelegt werden.
-
-<p align="center">
-  <img width="496" height="431" src="./imgs/Instanz%20Anlegen.jpg">
-</p>
+Die Installation des Moduls erfolgt über den IPS Modulstore. Einfach nach "GO-echarger" suchen.
 
 ### Einrichten der Modul-Instanz
 Nachdem eine Instanz des Moduls angelegt wurde, muss diese eingerichtet werden.
