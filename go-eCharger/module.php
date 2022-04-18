@@ -150,7 +150,13 @@ class go_eCharger extends IPSModule
                 }
                 $data = json_decode($json);
 
+                // data correction from MQTT API V2 to API V1 (which the module logic uses)
+                $this->mqttDataCorrectionApiV2toApiV1($data);
+
+                // data correction on incompatible changed data
                 $this->dataCorrection($data);
+
+                // update data
                 $this->UpdateWithData($data);
             }
 
@@ -1511,6 +1517,15 @@ class go_eCharger extends IPSModule
         }
     }
 
+    protected function mqttDataCorrectionApiV2toApiV1(&$goEChargerStatus) {
+        /* This method is used to correct  MQTT Data which is sent in API V2 format to API V1 on which the
+           normal logic is based (HTTP-API-V1) */
+
+        if (isset($goEChargerStatus->{'eto'})) {
+            // total energy is sent in API V2 in Wh, in API V1 it's .1 kWh, so we've to defice by 10
+            $goEChargerStatus->{'eto'} = $goEChargerStatus->{'eto'} / 10;
+        }
+    }
 }
 
 ?>
