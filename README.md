@@ -14,7 +14,8 @@ Nutzung auf eigene Gefahr ohne Gewähr. Das Modul kann jederzeit überarbeitet w
 2. [Systemanforderungen](#2-systemanforderungen)
 3. [Installation](#3-installation)
 4. [Module](#4-module)
-5. [ChangeLog](#5-changelog)
+5. [Tips&Tricks](#5-tips--tricks)
+6. [ChangeLog](#6-changelog)
 
 ## 1. Funktionsumfang
 
