@@ -380,7 +380,38 @@ GOeCharger_SetCurrentChargingWatt( $Instanz, 6000, 6 ); // Setzt die Ladeleistun
 ```
 Es wird die eingestellte Schieflast-Schutzschwelle für den Wechsel zwischen 1- und 3phasigem Laden berücksichtigt.
 
-## 5. ChangeLog
+## 5. Tips & Tricks
+
+### 5.1 Überschussladen via PV
+Um das Modul für das Überschuss-Laden einer PV Anlage zu nutzen benötigt man nur ein IPS Attribut, welches den aktuell verfügbaren Überschuss der PV Anlage bereit stellt. Alternativ kann man natürlich auch den Überschuss aus anderen Attributen der PV Anlage in einem Skript berechnen und verwenden. Anschließend muss man den Verfügbaren Überschuss nur noch dem GO-eCharger Modul mittels des Befehls [GOeCharger_SetCurrentChargingWatt](#setcurrentchargingwattint-watthours--int-minimumampere-) zur Verfügung stellen.
+
+Hier eine grobe Vorlage für ein solches Skript:
+```
+<?php
+  //--- Beispielskript für das PV-Überschussladen ---
+  
+  // Ermittlung des verfügbaren PV Überschuss und Verbrauchsdaten
+  $aktuellePVLeistung         = GetValue( $AttributIDMitDerAktuellenPVLeistung );
+  $aktuellerHausverbrauch     = GetValue( $AttributIDMitDemAktuellenHausverbrauch );
+  $aktuelleLeistungGOeCharger = GetValue( $AttributID des GOeCharger Attributs 'Aktuelle Leistung zum Fahrzeug' );
+  
+  // nun den aktuellen Hausverbrauch (wenn verfügbar) vom PV Ertrag abziehen sowie einen ggf. laufenden Ladevorgang
+  // mit dem GOeCharger berücksichtigen (=egalisieren), um den konkreten verfügbaren Überschuss zu erhalten
+  // (da kann man natürlich noch viel mehr einfließen lassen)
+  $aktuellerUeberschuss = $aktuellePVLeistung - $aktuellerHausverbrauch + $aktuelleLeistungGOeCharger;
+  
+  // Wallbox schalten ((de)aktiviert die Wallbox, setzt die Ampere und schaltet ggf. auch die Anzahl der Phasen)
+  GOeCharger_SetCurrentChargingWatt( $GOeChargerInstanz, $aktuellerUeberschuss)
+?>
+```
+Das Skript sollte z.B. minütlich über ein zyklisches Event laufen. Fertig ;)
+
+
+
+
+
+
+## 6. ChangeLog
 Änderungshistorie
 
 ### Version 2.0
