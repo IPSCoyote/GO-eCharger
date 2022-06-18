@@ -129,7 +129,7 @@ Im folgenden werden die verfügbaren Statusvariablen mit ihren Eigenschaften, We
 | `max. verfügbarer Ladestrom`                       | Integer |  RW, WF  | Maximal verfügbarer Ladestrom des go-eChargers                                                                                            |           [Get](#getmaximumchargingamperageint-instanz-) / [Set](#setmaximumchargingamperageint-instanz-int-ampere)            |
 | `aktuell verfügbarer Ladestrom`                    | Integer |  RW, WF  | Der aktuell verfügbare Ladestrom zum laden eines Fahrzeugs<br>*Beispiel: 16 A*                                                            |            [Get](#getcurrentchargingamperageint-instanz) / [Set](#setcurrentchargingamperageint-instanz-int-ampere)            |
 | `Kabel-Verriegelungsmodus`                         | Integer |  RW, WF  | Verriegelungsmodus für das Kabel<br>0: Verriegeln, solange Auto angesteckt<br>1: Nach Ladevorgang entriegeln<br>2: Kabel immer verriegelt |                  [Get](#getcableunlockmodeint-instanz) / [Set](#setcableunlockmodeint-instanz-int-unlockmode)                  |
-| `Zugangskontrolle via RFID/APP/Strompreis`         | Integer |  RW, WF  | Zugangskontrolle<br>0: frei zugänglich<br>1: RFID Identifizierung<br>2: Strompreis/automatisch                                            |                       [Get](#getaccesscontrolint-instanz) / [Set](#setaccesscontrolint-instanz-int-mode)                       |
+| `Zugangskontrolle via RFID/APP/Strompreis`         | Integer |  RW, WF  | Zugangskontrolle<br>0: frei zugänglich<br>1: RFID Identifizierung<br>2: Strompreis/automatisch                                            |                    [Get](#getaccesscontrolint-instanz) / [Set](#setaccesscontrolactiveint-instanz-int-mode)                    |
 | `minimale Ladezeit bei Strompreis-basiertem Laden` | Integer |  RW, WF  | Minimale ​Anzahl ​von Stunden die bei "Strompreis/automatisch" mindestens vor "Laden beendet bis" geladen werden muss                     | [Get](#getelectricitypriceminchargehoursint-instanz) / [Set](#setelectricitypriceminchargehoursint-instanz-int-minchargehours) |
 | `Laden beendet bis bei Strompreis-basiertem Laden` | Integer |  RW, WF  | Uhrzeit, bis zu der die "minimale Ladezeit" bei "Strompreis/automatisch" geladen sein muss                                                |        [Get](#getelectricitypricechargetill-instanz) / [Set](#setelectricitypricechargetillint-instanz-int-chargetill)         |
 | `LED Helligkeit`                                   | Integer |  RW, WF  | Helligkeit der LEDs<br>0: LED aus<br>1 - 255: LED Helligkeit                                                                              |                    [Get](#getledbrightnessint-instanz) / [Set](#setledbrightnessint-instanz-int-brightness)                    |
@@ -301,13 +301,13 @@ Mit dieser Funktion kann der Zustand der Zugangssteuerung (ist eine Nutzung eine
 $RFIDneeded = GOeCharger_GetAccessControl( $Instanz ); // Liest die Einstellung der Zugangskontrolle 
 ```
 
-#### SetAccessControl(int $Instanz, int $mode)
+#### SetAccessControlActive(int $Instanz, int $mode)
 Mit dieser Funktion kann die Zugangssteuerung via RFID oder App bzw. die Stromautomatik des go-eChargers aktiviert oder deaktiviert werden. Mögliche Werte sind
 + 0 = Offen
 + 1 = RFID / App benötigt
 + 2 = Strompreis / automatisch
 ```
-GOeCharger_SetAccessControl( $Instanz, 1 ); // aktiviert die Zugangskontrolle per RFID
+GOeCharger_SetAccessControlActive( $Instanz, 1 ); // aktiviert die Zugangskontrolle per RFID
 ```
 
 #### getElectricityPriceMinChargeHours(int $Instanz)
