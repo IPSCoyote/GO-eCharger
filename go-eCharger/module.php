@@ -1510,11 +1510,6 @@ class go_eCharger extends IPSModule
 
             $goEChargerStatus->{'nrg'} = $goEChargerEnergy;
         }
-
-        if (isset($goEChargerStatus->{'dwo'}) AND $goEChargerStatus->{'dwo'} <> "0" AND $goEChargerStatus->{'dwo'} <> "1") {
-            // API 52.2 returns null for 'dwo' instead of "1" or "0" (even so it's defined in the API as uint_8)
-            $goEChargerStatus->{'dwo'} = "0";
-        }
     }
 
     protected function mqttDataCorrectionApiV2toApiV1(&$goEChargerStatus) {
