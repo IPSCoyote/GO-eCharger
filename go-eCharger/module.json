@@ -1,11 +1,11 @@
 {
     "id": "{B4624A42-F80A-4975-B692-7FB4D06CC805}",
-    "name": "go_eCharger",
+    "name": "go_eCharger bis HW Rev. 2",
     "type": 3,
     "vendor": "go-e GmbH",
     "aliases":
     [
-        "go-eCharger"
+        "go-eCharger bis HW Rev. 2"
     ],
     "parentRequirements": ["{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}"],
     "childRequirements": [],

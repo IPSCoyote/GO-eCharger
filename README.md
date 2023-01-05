@@ -207,6 +207,7 @@ Mit dieser Funktion kann analog zur Funktion GetAutomaticChargeStop() der aktuel
 ```
 $AutomaticChargeStopAtKm = GOeCharger_GetAutomaticChargeStopKm( $Instanz ); // liest den automatischen Ladestop in Km
 ```
+<b>Achtung!</b>  Bei einem go-eCharger ab Hardware Rev. v3 muss die API v2 in den Einstellungen des go-eChargers aktiviert werden!
 
 #### SetAutomaticChargeStopKm(int $Instanz, float $km)
 Diese Funktion benötigt die Angabe des Durchschnittsverbrauchs in den Instanz-Einstellungen für einen PKW, der typischerweise an diesem Go-eCharger lädt!
@@ -214,6 +215,7 @@ Mit dieser Funktion kann der automatische Ladestopp des go-eChargers aktiviert w
 ```
 GOeCharger_SetAutomaticChargeStopKm( $Instanz, 5 ); // aktiviert den automatischen Ladestop nach einer Ladung für 5km Reichweite
 ```
+<b>Achtung!</b> Bei einem go-eCharger ab Hardware Rev. v3 muss die API v2 in den Einstellungen des go-eChargers aktiviert werden!
 
 #### GetPowerToCar(int $Instanz)
 Ermittlung der aktuellen Leistung in kw, die zum ladenden Fahrzeug geliefert wird
@@ -414,6 +416,10 @@ Das Skript sollte z.B. minütlich über ein zyklisches Event laufen. Fertig ;)
 
 ## 6. ChangeLog
 Änderungshistorie
+
+### Version 2.1
+* Fehlerbehebungen
+  * Lade-Limit wurde nicht mehr korrekt vom GO-eCharger gelesen (für Hardware ab Rev. v3) muss die API v2 in den Einstellungen des go-eChargers aktiviert werden!)
 
 ### Version 2.0
 * Funktionserweiterungen
