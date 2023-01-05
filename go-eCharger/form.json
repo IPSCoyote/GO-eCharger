@@ -17,9 +17,38 @@
       "label": "Basic Data"
     },
     {
-      "type": "ValidationTextBox",
-      "name": "IPAddressCharger",
-      "caption": "IP Address"
+      "type": "RowLayout",
+      "items": [
+        {
+          "type": "ValidationTextBox",
+          "name": "IPAddressCharger",
+          "caption": "IP Address"
+        },
+        {
+          "type": "Label",
+          "caption": "   "
+        },
+        {
+          "type": "Select",
+          "name": "HardwareRevision",
+          "caption": "Hardware Revision",
+          "value": 2,
+          "options": [
+            {
+              "caption": "HardwareRev1",
+              "value": 1
+            },
+            {
+              "caption": "HardwareRev2",
+              "value": 2
+            },
+            {
+              "caption": "HardwareRev3",
+              "value": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "type": "RowLayout",

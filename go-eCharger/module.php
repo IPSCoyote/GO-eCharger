@@ -1,6 +1,6 @@
 <?php
 
-class go_eCharger extends IPSModule
+class goEChargerHWRevv2 extends IPSModule
 {
 
     public function __construct($InstanceID)
@@ -17,6 +17,7 @@ class go_eCharger extends IPSModule
 
         //--- Properties
         $this->RegisterPropertyString("IPAddressCharger", "0.0.0.0");
+        $this->RegisterPropertyInteger( "HardwareRevision", 2);
         $this->RegisterPropertyInteger("MaxAmperage", 6);
         $this->RegisterPropertyInteger("OutOfBoundAmperage", 17);
 
@@ -154,7 +155,7 @@ class go_eCharger extends IPSModule
                 $this->mqttDataCorrectionApiV2toApiV1($data);
 
                 // data correction on incompatible changed data
-                $this->dataCorrection($data);
+                $this->dataCorrection($data, null);
 
                 // update data
                 $this->UpdateWithData($data);
@@ -876,21 +877,45 @@ class go_eCharger extends IPSModule
             return false;
         };
 
-        $goEChargerStatus = json_decode($json);
-        if ($goEChargerStatus === null) {
+        $goEChargerStatusAPIv1 = json_decode($json);
+        if ($goEChargerStatusAPIv1 === null) {
             $this->SetStatus(203); // no http response
             return false;
-        } elseif (isset($goEChargerStatus->{'sse'}) == false) {
+        } elseif (isset($goEChargerStatusAPIv1->{'sse'}) == false) {
             $this->SetStatus(204); // no go-eCharger
             return false;
         }
 
         $this->SetStatus(102);
 
+        $goEChargerStatusAPIv2 = null; // default with null as API call might not happen
 
-        $this->dataCorrection($goEChargerStatus);
+        if ( ( $this->ReadPropertyInteger("HardwareRevision") == 3 ) &&
+             ( isset($goEChargerStatusAPIv1->{'fwv'}) == true ) &&
+             ( floatval(preg_replace("/[^0-9.]/", "", $goEChargerStatusAPIv1->{'fwv'} ) ) >= 50 ) ) {
+            // on Hardware Revision 3 and a Firmware >= 50 try to use the API v2 to support incompatible API V1 issues
+            // examples: "dwo"
+            try {
+                $ch = curl_init("http://" . $IPAddress . "/api/status");
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                $json = curl_exec($ch);
+                curl_close($ch);
+            } catch (Exception $e) {
+                $this->SetStatus(203); // no http response
+                return false;
+            };
 
-        return $goEChargerStatus;
+            $goEChargerStatusAPIv2 = json_decode($json);
+        }
+
+
+
+        $this->dataCorrection($goEChargerStatusAPIv1, $goEChargerStatusAPIv2);
+
+        return $goEChargerStatusAPIv1;
     }
 
     protected function setValueToIdent($data, $ident, $apiKey)
@@ -903,6 +928,31 @@ class go_eCharger extends IPSModule
 
     protected function setValueToeCharger($parameter, $value)
     {
+        if ( $this->ReadPropertyInteger("HardwareRevision") == 3 )  {
+            // if Hardware is Rev. 3 check, if a special handling is needed when setting a parameter
+            if ( $parameter == "dwo" ) {
+                // adopt data if needed
+                switch ($parameter) {
+                    case "dwo":
+                        $value = $value * 100; // Conversion 0.1 kWh -> Wh
+                        break;
+                }
+                try {
+                    $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?" . $parameter . "=" . $value);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                    curl_setopt($ch, CURLOPT_HEADER, 0);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    $json = curl_exec($ch);
+                    curl_close($ch);
+                } catch (Exception $e) {
+                };
+                // get complete status from eCharger as conversion etc. is needed
+                return $this->getStatusFromCharger();
+            }
+        }
+
+
         try {
             $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/mqtt?payload=" . $parameter . "=" . $value);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
@@ -1494,7 +1544,7 @@ class go_eCharger extends IPSModule
         $this->RegisterVariableInteger("lastUpdateSinglePhase", "letzter Wechsel zwischen 1- und 3-phasigem Laden", "~UnixTimestamp", 999);
     }
 
-    protected function dataCorrection(&$goEChargerStatus) {
+    protected function dataCorrection(&$goEChargerStatus, $goEChargerStatusV2) {
         /* This method maybe used to correct data returned from the Status API
            Usually these corrections should be only temporary needed */
 
@@ -1510,6 +1560,14 @@ class go_eCharger extends IPSModule
 
             $goEChargerStatus->{'nrg'} = $goEChargerEnergy;
         }
+
+        // transfer data from API v2 into API v1 structure
+        if ( $goEChargerStatusV2 != null ) {
+            if ((isset($goEChargerStatus->{'dwo'})) && (isset($goEChargerStatusV2->{'dwo'}))) {
+                $value = intval($goEChargerStatusV2->{'dwo'})/100; // conversion Wh -> 0.1 kWh needed
+                $goEChargerStatus->{'dwo'} = strval($value);
+            }
+        }
     }
 
     protected function mqttDataCorrectionApiV2toApiV1(&$goEChargerStatus) {
@@ -1519,6 +1577,11 @@ class go_eCharger extends IPSModule
         if (isset($goEChargerStatus->{'eto'})) {
             // total energy is sent in API V2 in Wh, in API V1 it's .1 kWh, so we've to defice by 10
             $goEChargerStatus->{'eto'} = $goEChargerStatus->{'eto'} / 10;
+        }
+
+        if (isset($goEChargerStatus->{'dwo'})) {
+            // total energy is sent in API V2 in Wh, in API V1 it's .1 kWh, so we've to defice by 10
+            $goEChargerStatus->{'dwo'} = $goEChargerStatus->{'dwo'} / 100;
         }
     }
 }

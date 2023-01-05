@@ -417,7 +417,7 @@ Das Skript sollte z.B. minütlich über ein zyklisches Event laufen. Fertig ;)
 ## 6. ChangeLog
 Änderungshistorie
 
-### Version 2.1
+### Version 2.0.1
 * Fehlerbehebungen
   * Lade-Limit wurde nicht mehr korrekt vom GO-eCharger gelesen (für Hardware ab Rev. v3) muss die API v2 in den Einstellungen des go-eChargers aktiviert werden!)
 
