@@ -197,11 +197,15 @@ Der Go-eCharger kann die Ladung automatisch nach x kwh beenden. Mit dieser Funkt
 $AutomaticChargeStopAt = GOeCharger_GetAutomaticChargeStop( $Instanz ); // liest den automatischen Ladestop 
 ```
 
+<b>Achtung!</b>  Bei einem go-eCharger ab Hardware Rev. v3 muss die API v2 in den Einstellungen des go-eChargers aktiviert werden und im Modul die korrekte Hardware Rev. gewählt sein!
+
 #### SetAutomaticChargeStop(int $Instanz, float $kwh)
 Mit dieser Funktion kann der automatische Ladestopp des go-eChargers aktiviert werden. Während der Wert '0' den automatischen Ladestopp deaktiviert, können höhere Werte bis 100 (Maximum) als Ladegrenze in kwh angegeben werden. 
 ```
 GOeCharger_SetAutomaticChargeStop( $Instanz, 10.5 ); // aktiviert den automatischen Ladestop bei 10,5 kwh
 ```
+
+<b>Achtung!</b>  Bei einem go-eCharger ab Hardware Rev. v3 muss die API v2 in den Einstellungen des go-eChargers aktiviert werden und im Modul die korrekte Hardware Rev. gewählt sein!
 
 #### GetAutomaticChargeStopKm(int $Instanz)
 Diese Funktion benötigt die Angabe des Durchschnittsverbrauchs in den Instanz-Einstellungen für einen PKW, der typischerweise an diesem Go-eCharger lädt!
@@ -209,7 +213,7 @@ Mit dieser Funktion kann analog zur Funktion GetAutomaticChargeStop() der aktuel
 ```
 $AutomaticChargeStopAtKm = GOeCharger_GetAutomaticChargeStopKm( $Instanz ); // liest den automatischen Ladestop in Km
 ```
-<b>Achtung!</b>  Bei einem go-eCharger ab Hardware Rev. v3 muss die API v2 in den Einstellungen des go-eChargers aktiviert werden!
+<b>Achtung!</b>  Bei einem go-eCharger ab Hardware Rev. v3 muss die API v2 in den Einstellungen des go-eChargers aktiviert werden und im Modul die korrekte Hardware Rev. gewählt sein!
 
 #### SetAutomaticChargeStopKm(int $Instanz, float $km)
 Diese Funktion benötigt die Angabe des Durchschnittsverbrauchs in den Instanz-Einstellungen für einen PKW, der typischerweise an diesem Go-eCharger lädt!
@@ -419,9 +423,10 @@ Das Skript sollte z.B. minütlich über ein zyklisches Event laufen. Fertig ;)
 ## 6. ChangeLog
 Änderungshistorie
 
-### Version 2.0.1
+### Version 2.1
 * Fehlerbehebungen
   * Lade-Limit wurde nicht mehr korrekt vom GO-eCharger gelesen (für Hardware ab Rev. v3) muss die API v2 in den Einstellungen des go-eChargers aktiviert werden!)
+* Version 2.1 ist als "Abschlußversion" für die GO-eCharger Hardware Rev. v1 und v2 angedacht. Dem Modulentwickler steht keine entsprechende Hardware mehr zu Verfügung. Zudem basiert das Modul bis hier auf der API v1. Für den GO-eCharger ab Hardware Rev. v3 wird allerdings die (auch funktionell) deutlich umfangreichere APi v2 empfohlen. Da darüber hinaus auch die interne Logik des GO-eChargers als auch seiner App sich teilweise von der des Modul entfernen macht ein "Cut" Sinn. Es wird vermutlich eine Version 3.0 des Moduls geben, welches ein Modul für die Hardware v1/2 als ein weiteres Modul für die Hardware v3 enthält....
 
 ### Version 2.0
 * Funktionserweiterungen
