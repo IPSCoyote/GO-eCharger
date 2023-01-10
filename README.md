@@ -47,7 +47,7 @@ Die Installation des Moduls erfolgt über den IPS Modulstore. Einfach nach "GO-e
 Nachdem eine Instanz des Moduls angelegt wurde, muss diese eingerichtet werden.
 
 <p align="center">
-  <img width="1007" height="790" src="./imgs/Configuration.png">
+  <img width="856" height="671" src="./imgs/Configuration.png">
 </p>
 
 * **IP-Adresse**<br>
