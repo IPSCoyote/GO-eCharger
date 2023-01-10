@@ -33,7 +33,7 @@ Es soll sowohl Zustandsdaten (Anschluss, Ladevorgang, etc.) als auch Schaltaktio
 Vor der Installation des Moduls in IPSymcon muss der go-eCharger vollständig eingerichtet sein. Da dieses Modul lokal auf den go-eCharger zugreift, muss im lokalen WLAN (nicht dem WLAN des go-eChargers!) dem go-eCharger eine statische IP zugewiesen sein. Zusätzlich muss das HTTP-API V1 des go-eChargers in den erweiterten Einstellungen eingerichtet sein. Bei Wunsch können die Daten des go-eChargers auch via MQTT empfangen werden. Entsprechend ist auch diese Option bei Bedarf zu aktivieren.
 
 <p align="center">
-  <img width="447" height="965" src="./imgs/Erweiterte%20Einstellungen%20-%20HTTP%20API%20aktivieren.jpg">
+  <img width="388" height="1381" src="./imgs/Erweiterte%20Einstellungen%20-%20HTTP%20API%20aktivieren.jpg">
 </p>
 
 Sollte ein GO-eCharger Hardware Rev. v3 verwendet werden, sollte auch die API v2 aktiviert werden (ist für das Verwenden des Lade-Limits notwendig)!
@@ -47,11 +47,14 @@ Die Installation des Moduls erfolgt über den IPS Modulstore. Einfach nach "GO-e
 Nachdem eine Instanz des Moduls angelegt wurde, muss diese eingerichtet werden.
 
 <p align="center">
-  <img width="1009" height="1273" src="./imgs/Configuration.png">
+  <img width="1007" height="790" src="./imgs/Configuration.png">
 </p>
 
 * **IP-Adresse**<br>
 Statische IP Adresse unter der der go-eCharger im lokalen WLAN erreichbar ist.
+
+* **Hardware Revision**<br>
+  Es wird die Hardware Rev. v2 als Default Wert verwendet. Sollte man eine Hardware Rev. v3 anbinden, sollte unbedingt die richtige Hardware Rev. eingestellt werden!
 
 * **el. Absicherung und max. 1-phasige Schieflast**<br>
 Die maximale el. Absicherung, die für den go-eCharger vorhanden ist. Wenn dieser an einer 16A abgesicherten Zuleitung abgesichert ist, wären dies 16A. Andere Werte entsprechend.
