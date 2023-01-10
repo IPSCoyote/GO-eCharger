@@ -38,7 +38,7 @@ Vor der Installation des Moduls in IPSymcon muss der go-eCharger vollständig ei
 
 Sollte ein GO-eCharger Hardware Rev. v3 verwendet werden, sollte auch die API v2 aktiviert werden (ist für das Verwenden des Lade-Limits notwendig)!
 
-Ansonsten wird weder die Cloud des go-eChargers, noch die API V2 als auch das Schreiben auf MQTT wird verwendet. Wer möchte, kann diese durch das Blockieren aller Ports ausser des HTTP Ports 80 aushebeln. Die wesentlichen Einstellungen stehen auch über dieses Modul zur Verfügung
+Drüber hinaus wird weder die Cloud des go-eChargers, noch die API V2 (im vollen Umfang) als auch das Schreiben auf MQTT wird verwendet. Wer möchte, kann diese durch das Blockieren aller Ports ausser des HTTP Ports 80 aushebeln. Die wesentlichen Einstellungen stehen auch über dieses Modul zur Verfügung
 
 ### Installation des Moduls
 Die Installation des Moduls erfolgt über den IPS Modulstore. Einfach nach "GO-echarger" suchen.
