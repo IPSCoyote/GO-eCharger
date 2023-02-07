@@ -468,7 +468,8 @@ class goEChargerHWRevv2 extends IPSModule
         }
         $value = number_format($chargeStopKwh * 10, 0, '', '');
         $resultStatus = $this->setValueToeCharger('dwo', $value);
-        if ($this->ReadPropertyBoolean("AutoActivateOnStopSet") == true) {
+        if ( ( $this->ReadPropertyInteger("HardwareRevision") != 3 ) and
+             ($this->ReadPropertyBoolean("AutoActivateOnStopSet") == true) ) {
             // activate Wallbox
             $this->setActive(true);
         } else
