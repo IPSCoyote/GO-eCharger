@@ -953,9 +953,10 @@ class goEChargerHWRevv2 extends IPSModule
                     return $this->getStatusFromCharger();
 
                 case "alw":
+                    // set DWO to 0 via API V2 (this is as DWO and the "force charging" somehow are irritating otherwise (charging, even so DWO already reached)
                     try {
-                        $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/dwo=0&alw=" . $value);
-                        $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?dwo=0&alw=" . $value);
+                        $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/dwo=0");
+                        $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?dwo=0");
                         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
                         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
                         curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -966,8 +967,8 @@ class goEChargerHWRevv2 extends IPSModule
                         $this->debugLog("exception on Trigger");
                     };
 
-                    // get complete status from eCharger as conversion etc. is needed
-                    return $this->getStatusFromCharger();
+                    // and now activate/deactivate via API V1
+                    break;
             }
         }
 
