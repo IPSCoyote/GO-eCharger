@@ -936,6 +936,7 @@ class goEChargerHWRevv2 extends IPSModule
                 $value = $value * 100;
                 // set dwo to charger
                 try {
+                    $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?frc=0&lmo=3&dwo=" . $value);
                     $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?frc=0&lmo=3&dwo=" . $value);
                     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
                     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
@@ -943,6 +944,7 @@ class goEChargerHWRevv2 extends IPSModule
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                     curl_close($ch);
                 } catch (Exception $e) {
+                    $this->debugLog("exception on Trigger");
                 };
 
                 // get complete status from eCharger as conversion etc. is needed
@@ -952,6 +954,7 @@ class goEChargerHWRevv2 extends IPSModule
 
 
         try {
+            $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/mqtt?payload=" . $parameter . "=" . $value);
             $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/mqtt?payload=" . $parameter . "=" . $value);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
@@ -960,6 +963,7 @@ class goEChargerHWRevv2 extends IPSModule
             $json = curl_exec($ch);
             curl_close($ch);
         } catch (Exception $e) {
+            $this->debugLog("exception on Trigger");
         };
         return json_decode($json);
     }
