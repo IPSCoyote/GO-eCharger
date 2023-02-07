@@ -931,7 +931,19 @@ class goEChargerHWRevv2 extends IPSModule
         if ( $this->ReadPropertyInteger("HardwareRevision") == 3 )  {
             // if Hardware is Rev. 3 check, if a special handling is needed when setting a parameter
             if ( $parameter == "dwo" ) {
-                // adopt data if needed
+                // set dwo to charger
+                try {
+                    $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?" . $parameter . "=" . $value);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                    curl_setopt($ch, CURLOPT_HEADER, 0);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    $json = curl_exec($ch);
+                    curl_close($ch);
+                } catch (Exception $e) {
+                };
+
+                // adopt modes if needed
                 switch ($parameter) {
                     case "dwo":
                         // for "dwo" (automatic charging stop) the v3 Chargers have to be setup into "automatic" mode (=neutral & default)
@@ -949,16 +961,7 @@ class goEChargerHWRevv2 extends IPSModule
                         $value = $value * 100; // Conversion 0.1 kWh -> Wh
                         break;
                 }
-                try {
-                    $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?" . $parameter . "=" . $value);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-                    curl_setopt($ch, CURLOPT_HEADER, 0);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                    $json = curl_exec($ch);
-                    curl_close($ch);
-                } catch (Exception $e) {
-                };
+
                 // get complete status from eCharger as conversion etc. is needed
                 return $this->getStatusFromCharger();
             }
