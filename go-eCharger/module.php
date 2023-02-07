@@ -942,6 +942,7 @@ class goEChargerHWRevv2 extends IPSModule
                     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
                     curl_setopt($ch, CURLOPT_HEADER, 0);
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    $json = curl_exec($ch);
                     curl_close($ch);
                 } catch (Exception $e) {
                     $this->debugLog("exception on Trigger");
