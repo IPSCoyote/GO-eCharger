@@ -17,7 +17,7 @@ class goEChargerHWRevv2 extends IPSModule
 
         //--- Properties
         $this->RegisterPropertyString("IPAddressCharger", "0.0.0.0");
-        $this->RegisterPropertyInteger( "HardwareRevision", 2);
+        $this->RegisterPropertyInteger("HardwareRevision", 2);
         $this->RegisterPropertyInteger("MaxAmperage", 6);
         $this->RegisterPropertyInteger("OutOfBoundAmperage", 17);
 
@@ -286,8 +286,8 @@ class goEChargerHWRevv2 extends IPSModule
 
     public function setCurrentChargingWattWithMinimumAmperage(int $wattToSet, int $minimumChargingAmperage)
     {
-        $this->debugLog("setCurrentChargingWattWithMinimumAmperage with ".$wattToSet."Wh and ".$minimumChargingAmperage."A minimum");
-        $Semaphore = "GO-eCharger-" . GetValueString($this->GetIDForIdent("serialID"))."-SetWatt";
+        $this->debugLog("setCurrentChargingWattWithMinimumAmperage with " . $wattToSet . "Wh and " . $minimumChargingAmperage . "A minimum");
+        $Semaphore = "GO-eCharger-" . GetValueString($this->GetIDForIdent("serialID")) . "-SetWatt";
         if (IPS_SemaphoreEnter($Semaphore, 2000) == false) {
             // wait 2 seconds (for short processing time
             $this->debugLog("setCurrentChargingWattWithMinimumAmperage: Semaphore blocked processing");
@@ -379,7 +379,7 @@ class goEChargerHWRevv2 extends IPSModule
         $chargerActive = ($amperageToSet >= 6); // no charging, if Amperage is not 6A minimum
 
         //--- Execute changes
-        $this->debugLog("setCurrentChargingWattWithMinimumAmperage: Target is ".$phasesToSet."phase(s) with ".$amperageToSet."A");
+        $this->debugLog("setCurrentChargingWattWithMinimumAmperage: Target is " . $phasesToSet . "phase(s) with " . $amperageToSet . "A");
         // set phases with (switch limit)
         if (GetValueBoolean($this->GetIDForIdent("singlePhaseCharging")) and $phasesToSet == 3) {
             // set to 3 phases
@@ -420,7 +420,7 @@ class goEChargerHWRevv2 extends IPSModule
         }
 
         // Leave Semaphore
-        IPS_SemaphoreLeave( $Semaphore );
+        IPS_SemaphoreLeave($Semaphore);
         return true;
 
     }
@@ -468,8 +468,8 @@ class goEChargerHWRevv2 extends IPSModule
         }
         $value = number_format($chargeStopKwh * 10, 0, '', '');
         $resultStatus = $this->setValueToeCharger('dwo', $value);
-        if ( ( $this->ReadPropertyInteger("HardwareRevision") != 3 ) and
-             ($this->ReadPropertyBoolean("AutoActivateOnStopSet") == true) ) {
+        if (($this->ReadPropertyInteger("HardwareRevision") != 3) and
+            ($this->ReadPropertyBoolean("AutoActivateOnStopSet") == true)) {
             // activate Wallbox
             $this->setActive(true);
         } else
@@ -838,9 +838,10 @@ class goEChargerHWRevv2 extends IPSModule
 
 
     //=== PRIVATE/PRODUCTED FUNCTIONS ==============================================================================
-    protected function debugLog( String $message ) {
-        if ( $this->ReadPropertyBoolean("debugLog") == true ) {
-            $this->SendDebug( "GO-eCharger", $message, 0 );
+    protected function debugLog(string $message)
+    {
+        if ($this->ReadPropertyBoolean("debugLog") == true) {
+            $this->SendDebug("GO-eCharger", $message, 0);
         };
     }
 
@@ -891,9 +892,9 @@ class goEChargerHWRevv2 extends IPSModule
 
         $goEChargerStatusAPIv2 = null; // default with null as API call might not happen
 
-        if ( ( $this->ReadPropertyInteger("HardwareRevision") == 3 ) &&
-             ( isset($goEChargerStatusAPIv1->{'fwv'}) == true ) &&
-             ( floatval(preg_replace("/[^0-9.]/", "", $goEChargerStatusAPIv1->{'fwv'} ) ) >= 50 ) ) {
+        if (($this->ReadPropertyInteger("HardwareRevision") == 3) &&
+            (isset($goEChargerStatusAPIv1->{'fwv'}) == true) &&
+            (floatval(preg_replace("/[^0-9.]/", "", $goEChargerStatusAPIv1->{'fwv'})) >= 50)) {
             // on Hardware Revision 3 and a Firmware >= 50 try to use the API v2 to support incompatible API V1 issues
             // examples: "dwo"
             try {
@@ -913,7 +914,6 @@ class goEChargerHWRevv2 extends IPSModule
         }
 
 
-
         $this->dataCorrection($goEChargerStatusAPIv1, $goEChargerStatusAPIv2);
 
         return $goEChargerStatusAPIv1;
@@ -923,33 +923,51 @@ class goEChargerHWRevv2 extends IPSModule
     {
         // function to avoid invalid apiKey is accessed
         if (isset($data->{$apiKey})) {
-            if ( $this->SetValue($ident, $data->{$apiKey}) == false ) $this->debugLog("setValueToIdent FAILED on ".$apiKey ); ;
+            if ($this->SetValue($ident, $data->{$apiKey}) == false) $this->debugLog("setValueToIdent FAILED on " . $apiKey);;
         }
     }
 
     protected function setValueToeCharger($parameter, $value)
     {
-        if ( $this->ReadPropertyInteger("HardwareRevision") == 3 )  {
+        if ($this->ReadPropertyInteger("HardwareRevision") == 3) {
             // if Hardware is Rev. 3 check, if a special handling is needed when setting a parameter
-            if ( $parameter == "dwo" ) {
-                // adopt value
-                $value = $value * 100;
-                // set dwo to charger
-                try {
-                    $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?frc=0&lmo=3&dwo=" . $value);
-                    $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?frc=0&lmo=3&dwo=" . $value);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-                    curl_setopt($ch, CURLOPT_HEADER, 0);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                    $json = curl_exec($ch);
-                    curl_close($ch);
-                } catch (Exception $e) {
-                    $this->debugLog("exception on Trigger");
-                };
+            switch ($parameter) {
+                case "dwo":
+                    // adopt value
+                    $value = $value * 100;
+                    // set dwo to charger
+                    try {
+                        $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?frc=0&lmo=3&dwo=" . $value);
+                        $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?frc=0&lmo=3&dwo=" . $value);
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                        curl_setopt($ch, CURLOPT_HEADER, 0);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                        $json = curl_exec($ch);
+                        curl_close($ch);
+                    } catch (Exception $e) {
+                        $this->debugLog("exception on Trigger");
+                    };
 
-                // get complete status from eCharger as conversion etc. is needed
-                return $this->getStatusFromCharger();
+                    // get complete status from eCharger as conversion etc. is needed
+                    return $this->getStatusFromCharger();
+
+                case "alw":
+                    try {
+                        $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/dwo=0&alw=" . $value);
+                        $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?dwo=0&alw=" . $value);
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                        curl_setopt($ch, CURLOPT_HEADER, 0);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                        $json = curl_exec($ch);
+                        curl_close($ch);
+                    } catch (Exception $e) {
+                        $this->debugLog("exception on Trigger");
+                    };
+
+                    // get complete status from eCharger as conversion etc. is needed
+                    return $this->getStatusFromCharger();
             }
         }
 
@@ -1039,7 +1057,7 @@ class goEChargerHWRevv2 extends IPSModule
 
         //--- DWO (Abschaltwert in 0.1kWh if stp==2, for DWS parameter) ---------------------------
         if (isset($goEChargerStatus->{'dwo'})) {
-           $this->SetValue("automaticStop", $goEChargerStatus->{'dwo'} / 10);
+            $this->SetValue("automaticStop", $goEChargerStatus->{'dwo'} / 10);
         } else {
             $this->SetValue("automaticStop", 0);
         }
@@ -1047,7 +1065,7 @@ class goEChargerHWRevv2 extends IPSModule
             if (isset($goEChargerStatus->{'dwo'})) {
                 $this->SetValue("automaticStopKm", $goEChargerStatus->{'dwo'} / 10 / $this->ReadPropertyFloat("AverageConsumption") * 100);
             } else {
-                $this->SetValue("automaticStopKm", 0 );
+                $this->SetValue("automaticStopKm", 0);
             }
         } else
             $this->SetValue("automaticStopKm", 0);
@@ -1551,7 +1569,8 @@ class goEChargerHWRevv2 extends IPSModule
         $this->RegisterVariableInteger("lastUpdateSinglePhase", "letzter Wechsel zwischen 1- und 3-phasigem Laden", "~UnixTimestamp", 999);
     }
 
-    protected function dataCorrection(&$goEChargerStatus, $goEChargerStatusV2) {
+    protected function dataCorrection(&$goEChargerStatus, $goEChargerStatusV2)
+    {
         /* This method maybe used to correct data returned from the Status API
            Usually these corrections should be only temporary needed */
 
@@ -1559,19 +1578,19 @@ class goEChargerHWRevv2 extends IPSModule
         if (isset($goEChargerStatus->{'nrg'})) {
             $goEChargerEnergy = $goEChargerStatus->{'nrg'};
 
-            if ($goEChargerEnergy[7] > 77 ) $goEChargerEnergy[11] = $goEChargerEnergy[11]/10;
+            if ($goEChargerEnergy[7] > 77) $goEChargerEnergy[11] = $goEChargerEnergy[11] / 10;
 
-            if ($goEChargerEnergy[7] > 77 ) $goEChargerEnergy[7] = $goEChargerEnergy[7]/100;
-            if ($goEChargerEnergy[8] > 77 ) $goEChargerEnergy[8] = $goEChargerEnergy[8]/100;
-            if ($goEChargerEnergy[9] > 77 ) $goEChargerEnergy[9] = $goEChargerEnergy[9]/100;
+            if ($goEChargerEnergy[7] > 77) $goEChargerEnergy[7] = $goEChargerEnergy[7] / 100;
+            if ($goEChargerEnergy[8] > 77) $goEChargerEnergy[8] = $goEChargerEnergy[8] / 100;
+            if ($goEChargerEnergy[9] > 77) $goEChargerEnergy[9] = $goEChargerEnergy[9] / 100;
 
             $goEChargerStatus->{'nrg'} = $goEChargerEnergy;
         }
 
         // transfer data from API v2 into API v1 structure
-        if ( $goEChargerStatusV2 != null ) {
+        if ($goEChargerStatusV2 != null) {
             if ((isset($goEChargerStatus->{'dwo'})) && (isset($goEChargerStatusV2->{'dwo'}))) {
-                $value = intval($goEChargerStatusV2->{'dwo'})/100; // conversion Wh -> 0.1 kWh needed
+                $value = intval($goEChargerStatusV2->{'dwo'}) / 100; // conversion Wh -> 0.1 kWh needed
                 $goEChargerStatus->{'dwo'} = strval($value);
             } else {
                 $goEChargerStatus->{'dwo'} = "0";
@@ -1579,7 +1598,8 @@ class goEChargerHWRevv2 extends IPSModule
         }
     }
 
-    protected function mqttDataCorrectionApiV2toApiV1(&$goEChargerStatus) {
+    protected function mqttDataCorrectionApiV2toApiV1(&$goEChargerStatus)
+    {
         /* This method is used to correct  MQTT Data which is sent in API V2 format to API V1 on which the
            normal logic is based (HTTP-API-V1) */
 
