@@ -1589,6 +1589,8 @@ class goEChargerHWRevv2 extends IPSModule
             if ((isset($goEChargerStatus->{'dwo'})) && (isset($goEChargerStatusV2->{'dwo'}))) {
                 $value = intval($goEChargerStatusV2->{'dwo'})/100; // conversion Wh -> 0.1 kWh needed
                 $goEChargerStatus->{'dwo'} = strval($value);
+            } else {
+                $goEChargerStatus->{'dwo'} = "0";
             }
         }
     }
