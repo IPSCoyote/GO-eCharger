@@ -935,25 +935,11 @@ class goEChargerHWRevv2 extends IPSModule
                 $value = $value * 100;
                 // set dwo to charger
                 try {
-                    $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?" . $parameter . "=" . $value);
+                    $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?set?frc=0&lmo=3&dwo=" . $value);
                     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
                     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
                     curl_setopt($ch, CURLOPT_HEADER, 0);
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                    $json = curl_exec($ch);
-                    curl_close($ch);
-                } catch (Exception $e) {
-                };
-
-                // for "dwo" (automatic charging stop) the v3 Chargers have to be setup into "automatic" mode (=neutral & default)
-                sleep(2);
-                try {
-                    $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?frc=0&lmo=3");
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-                    curl_setopt($ch, CURLOPT_HEADER, 0);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                    $json = curl_exec($ch);
                     curl_close($ch);
                 } catch (Exception $e) {
                 };
