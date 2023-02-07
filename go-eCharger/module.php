@@ -943,6 +943,13 @@ class goEChargerHWRevv2 extends IPSModule
                             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                             $json = curl_exec($ch);
                             curl_close($ch);
+                            $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?lmo=3");
+                            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                            curl_setopt($ch, CURLOPT_HEADER, 0);
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                            $json = curl_exec($ch);
+                            curl_close($ch);
                         } catch (Exception $e) {
                         };
                         // and with default node
@@ -1049,10 +1056,14 @@ class goEChargerHWRevv2 extends IPSModule
         //--- DWO (Abschaltwert in 0.1kWh if stp==2, for DWS parameter) ---------------------------
         if (isset($goEChargerStatus->{'dwo'})) {
            $this->SetValue("automaticStop", $goEChargerStatus->{'dwo'} / 10);
+        } else {
+            $this->SetValue("automaticStop", 0);
         }
         if ($this->ReadPropertyFloat("AverageConsumption") > 0) {
             if (isset($goEChargerStatus->{'dwo'})) {
                 $this->SetValue("automaticStopKm", $goEChargerStatus->{'dwo'} / 10 / $this->ReadPropertyFloat("AverageConsumption") * 100);
+            } else {
+                $this->SetValue("automaticStopKm", 0 );
             }
         } else
             $this->SetValue("automaticStopKm", 0);
