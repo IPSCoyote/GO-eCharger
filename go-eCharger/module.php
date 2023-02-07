@@ -935,7 +935,7 @@ class goEChargerHWRevv2 extends IPSModule
                 $value = $value * 100;
                 // set dwo to charger
                 try {
-                    $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?set?frc=0&lmo=3&dwo=" . $value);
+                    $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?frc=0&lmo=3&dwo=" . $value);
                     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
                     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
                     curl_setopt($ch, CURLOPT_HEADER, 0);
