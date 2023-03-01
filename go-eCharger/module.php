@@ -1596,6 +1596,14 @@ class goEChargerHWRevv2 extends IPSModule
             } else {
                 $goEChargerStatus->{'dwo'} = "0";
             }
+
+            if (!isset($goEChargerStatus->{'tmp'}) && !isset($goEChargerStatus->{'tma'})) {
+                // no temperature data on API V1 data! So use, if available, temperature data from API V2
+                // this seems to be the case on HW V4
+                if (isset($goEChargerStatusV2->{'tma'})) {
+                    $goEChargerStatus->{'tma'} = $goEChargerStatusV2->{'tma'};
+                }
+            }
         }
     }
 
