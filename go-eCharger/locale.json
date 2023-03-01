@@ -2,6 +2,7 @@
     "translations": {
         "de": {
             "Disclaimer": "Dieses Modul wurde unabhängig vom Hersteller GO-e für den Go-eCharger Hardware Rev. 2 entwickelt. Die Benutzung des Moduls erfolgt auf eigene Gefahr unter Ausschluss jeglicher Gewährleistung für Probleme oder Schäden am GO-eCharger.",
+            "Donation": "Das Modul ist ein Hobby. Wer sich mit einer kleinen Spende für dessen Entwicklung (ohne Recht auf irgendwelche Ansprüche) bedanken möchte, kann dies gerne via Paypal-Spende machen:",
             "Basic Data": "Grunddaten",
             "IP Address": "IP Adresse",
             "Fuse protection": "el. Absicherung",
