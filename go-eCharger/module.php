@@ -1604,6 +1604,11 @@ class goEChargerHWRevv2 extends IPSModule
                     $goEChargerStatus->{'tma'} = $goEChargerStatusV2->{'tma'};
                 }
             }
+
+            // transfer mainboard temperatur limit from API V2 to API V1
+            if (isset($goEChargerStatusV2->{'amt'})) {
+                $goEChargerStatus->{'amt'} = $goEChargerStatusV2->{'amt'};
+            }
         }
     }
 
