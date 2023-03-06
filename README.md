@@ -189,7 +189,8 @@ GOeCharger_SetActive( $Instanz, false ); // deaktiviert den go-eCharger
 ```
 
 #### GetMode(int $Instanz)
-Liefert den aktuelles Modus der Wallbox
+NUR FÜR HARDWARE > Rev. 3 !
+Liefert den aktuellen Modus der Wallbox
 ```
 $mode = GOeCharger_GetMode( $Instanz ); // Ermittlung des Modus
 ```
@@ -200,6 +201,7 @@ Rückgabewerte sind
 + 2: Laden = Es wird geladen (egal, was sonstige Einstellungen sagen)
 
 #### SetMode(int $Instanz, int $mode)
+NUR FÜR HARDWARE > Rev. 3 !
 Mit dieser Funktion kann man den Modus des GO-eChargers setzen
 ```
 GOeCharger_SetMode( $Instanz, $mode ); // setzen des Modus für den GO-eCharger
