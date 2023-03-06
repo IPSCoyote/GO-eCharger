@@ -829,6 +829,7 @@ class goEChargerHWRevv2 extends IPSModule
                 break;
 
             case "accessStateV2":
+                $this->setMode($Value);
                 break;
 
             case "ledBrightness":
@@ -1365,11 +1366,13 @@ class goEChargerHWRevv2 extends IPSModule
     {
         // Generate Variable Profiles
         if ($this->ReadPropertyInteger("HardwareRevision") >= 3) {
-            IPS_CreateVariableProfile('GOECHARGER_WallboxMode', 1);
-            IPS_SetVariableProfileIcon('GOECHARGER_WallboxMode', 'Mobile');
-            IPS_SetVariableProfileAssociation("GOECHARGER_WallboxMode", 0, "Wallbox regelt selbst", "Mobile", 0xFFFFFF);
-            IPS_SetVariableProfileAssociation("GOECHARGER_WallboxMode", 1, "Nicht Laden", "Sleep", 0xFF0000);
-            IPS_SetVariableProfileAssociation("GOECHARGER_WallboxMode", 2, "Laden", "Climate", 0x00FF00);
+            if (!IPS_VariableProfileExists('GOECHARGER_WallboxMode')) {
+                IPS_CreateVariableProfile('GOECHARGER_WallboxMode', 1);
+                IPS_SetVariableProfileIcon('GOECHARGER_WallboxMode', 'Mobile');
+                IPS_SetVariableProfileAssociation("GOECHARGER_WallboxMode", 0, "Wallbox regelt selbst", "Mobile", 0xFFFFFF);
+                IPS_SetVariableProfileAssociation("GOECHARGER_WallboxMode", 1, "Nicht Laden", "Sleep", 0xFF0000);
+                IPS_SetVariableProfileAssociation("GOECHARGER_WallboxMode", 2, "Laden", "Climate", 0x00FF00);
+            }
         }
 
 
