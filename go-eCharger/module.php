@@ -572,6 +572,7 @@ class goEChargerHWRevv2 extends IPSModule
             return false;
         }
         $resultStatus = $this->setValueToeCharger('frc', $mode);
+        $this->SetValue( "accessStateV2", $mode);
         // Update all data
         return $this->getMode();
     }
@@ -582,6 +583,7 @@ class goEChargerHWRevv2 extends IPSModule
         if ($goEChargerStatus == false or isset($goEChargerStatus->{'frc'}) == false) {
             return false;
         }
+        $this->SetValue( "accessStateV2", $goEChargerStatus->{'frc'});
         return $goEChargerStatus->{'frc'};
     }
 
