@@ -188,6 +188,27 @@ Mit dieser Funktion kann das Laden an der Wallbox freigegeben oder abgebrochen w
 GOeCharger_SetActive( $Instanz, false ); // deaktiviert den go-eCharger 
 ```
 
+#### GetMode(int $Instanz)
+Liefert den aktuelles Modus der Wallbox
+```
+$mode = GOeCharger_GetMode( $Instanz ); // Ermittlung des Modus
+```
+
+Rückgabewerte sind
++ 0: Neutral = Wallbox regelt selbst (in diesem Modus entscheidet der GO-eCharger und seine Einstellungen, ob geladen wird (z.B. für Tibber))
++ 1: Nicht Laden = Es wird nicht geladen (egal, was sonstige Einstellungen sagen)
++ 2: Laden = Es wird geladen (egal, was sonstige Einstellungen sagen)
+
+#### SetMode(int $Instanz, int $mode)
+Mit dieser Funktion kann man den Modus des GO-eChargers setzen
+```
+GOeCharger_SetMode( $Instanz, $mode ); // setzen des Modus für den GO-eCharger
+```
+Erlaubte Werte sind
++ 0: Neutral = Wallbox regelt selbst (in diesem Modus entscheidet der GO-eCharger und seine Einstellungen, ob geladen wird (z.B. für Tibber))
++ 1: Nicht Laden = Es wird nicht geladen (egal, was sonstige Einstellungen sagen)
++ 2: Laden = Es wird geladen (egal, was sonstige Einstellungen sagen)
+
 #### GetStatus(int $Instanz)
 Ermittlung des aktuellen Status des go-eChargers. Rückgabewerte sind
 + 1: Ladestation bereit, kein Fahrzeug
@@ -429,6 +450,13 @@ Das Skript sollte z.B. minütlich über ein zyklisches Event laufen. Fertig ;)
 
 ## 6. ChangeLog
 Änderungshistorie
+
+### Version 2.2
+* Sag niemals nie.... Funktionserweiterungen
+  * Hardware-Rev. 3 und 4 nun in den Einstellungen auswählbar
+  * Für GO-eCharger mit Hw V3/4: Es wird teilweise versucht, mittels der API V2 ein paar Workarounds zu realisieren
+  * Für GO-eCharger mit Hw V3/4: Neues Attribut "Wallbox Modus", welcher die 3 Zustände "Wallbox regelt selbst", "Nicht Laden" und "Laden" kennt. Dieses sollte ggf. alternativ zum bisherigen Attribut "Wallbox aktiv" verwendet werden!
+  * Für GO-eCharger mit Hw V3/4: Neue Befehle ([Get](#getsinglephasechargingint-instanzbool-singlephasecharging) / [Set](#setsinglephasechargingint-instanz-bool-singlephasecharging))
 
 ### Version 2.1
 * Fehlerbehebungen
