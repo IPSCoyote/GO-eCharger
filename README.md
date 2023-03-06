@@ -458,7 +458,7 @@ Das Skript sollte z.B. minütlich über ein zyklisches Event laufen. Fertig ;)
   * Hardware-Rev. 3 und 4 nun in den Einstellungen auswählbar
   * Für GO-eCharger mit Hw V3/4: Es wird teilweise versucht, mittels der API V2 ein paar Workarounds zu realisieren
   * Für GO-eCharger mit Hw V3/4: Neues Attribut "Wallbox Modus", welcher die 3 Zustände "Wallbox regelt selbst", "Nicht Laden" und "Laden" kennt. Dieses sollte ggf. alternativ zum bisherigen Attribut "Wallbox aktiv" verwendet werden!
-  * Für GO-eCharger mit Hw V3/4: Neue Befehle ([Get](#getsinglephasechargingint-instanzbool-singlephasecharging) / [Set](#setsinglephasechargingint-instanz-bool-singlephasecharging))
+  * Für GO-eCharger mit Hw V3/4: Neue Befehle zum Lesen und Setzen des Modus des GO-eChargers ([Get](#getmodeint-instanz) / [Set](#setmodeint-instanz-int-mode))
 
 ### Version 2.1
 * Fehlerbehebungen
