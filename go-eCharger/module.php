@@ -1352,8 +1352,8 @@ class goEChargerHWRevv2 extends IPSModule
             IPS_CreateVariableProfile('GOECHARGER_WallboxMode', 1);
             IPS_SetVariableProfileIcon('GOECHARGER_WallboxMode', 'Mobile');
             IPS_SetVariableProfileAssociation("GOECHARGER_WallboxMode", 0, "Wallbox regelt selbst", "Mobile", 0xFFFFFF);
-            IPS_SetVariableProfileAssociation("GOECHARGER_WallboxMode", 1, "Laden", "Climate", 0x00FF00);
-            IPS_SetVariableProfileAssociation("GOECHARGER_WallboxMode", 2, "Nicht Laden", "Sleep", 0xFF0000);
+            IPS_SetVariableProfileAssociation("GOECHARGER_WallboxMode", 1, "Nicht Laden", "Sleep", 0xFF0000);
+            IPS_SetVariableProfileAssociation("GOECHARGER_WallboxMode", 2, "Laden", "Climate", 0x00FF00);
         }
 
 
