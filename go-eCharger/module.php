@@ -991,6 +991,22 @@ class goEChargerHWRevv2 extends IPSModule
 
                     // and now activate/deactivate via API V1
                     break;
+
+                case "frc":
+                    // set force mode to charger
+                    try {
+                        $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/frc=".$value);
+                        $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?frc=".$value);
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                        curl_setopt($ch, CURLOPT_HEADER, 0);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                        $json = curl_exec($ch);
+                        curl_close($ch);
+                    } catch (Exception $e) {
+                        $this->debugLog("exception on Trigger");
+                    };
+                    return $this->getStatusFromCharger();
             }
         }
 
