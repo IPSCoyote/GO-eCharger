@@ -54,6 +54,10 @@
             {
               "caption": "HardwareRev3",
               "value": 3
+            },
+            {
+              "caption": "HardwareRev4",
+              "value": 3
             }
           ]
         }

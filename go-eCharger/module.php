@@ -468,7 +468,7 @@ class goEChargerHWRevv2 extends IPSModule
         }
         $value = number_format($chargeStopKwh * 10, 0, '', '');
         $resultStatus = $this->setValueToeCharger('dwo', $value);
-        if (($this->ReadPropertyInteger("HardwareRevision") != 3) and
+        if (($this->ReadPropertyInteger("HardwareRevision") < 3) and
             ($this->ReadPropertyBoolean("AutoActivateOnStopSet") == true)) {
             // activate Wallbox
             $this->setActive(true);
@@ -564,6 +564,25 @@ class goEChargerHWRevv2 extends IPSModule
         } else {
             return false;
         }
+    }
+
+    public function setMode(int $mode)
+    {
+        if ( $mode <0 or $mode >2 ) {
+            return false;
+        }
+        $resultStatus = $this->setValueToeCharger('frc', $mode);
+        // Update all data
+        return $this->getMode();
+    }
+
+    public function getMode()
+    {
+        $goEChargerStatus = $this->getStatusFromCharger();
+        if ($goEChargerStatus == false or isset($goEChargerStatus->{'frc'}) == false) {
+            return false;
+        }
+        return $goEChargerStatus->{'frc'};
     }
 
     public function getStatus()
@@ -809,6 +828,9 @@ class goEChargerHWRevv2 extends IPSModule
                 $this->setActive($Value);
                 break;
 
+            case "accessStateV2":
+                break;
+
             case "ledBrightness":
                 $this->setLEDBrightness($Value);
                 break;
@@ -892,7 +914,7 @@ class goEChargerHWRevv2 extends IPSModule
 
         $goEChargerStatusAPIv2 = null; // default with null as API call might not happen
 
-        if (($this->ReadPropertyInteger("HardwareRevision") == 3) &&
+        if (($this->ReadPropertyInteger("HardwareRevision") >= 3) &&
             (isset($goEChargerStatusAPIv1->{'fwv'}) == true) &&
             (floatval(preg_replace("/[^0-9.]/", "", $goEChargerStatusAPIv1->{'fwv'})) >= 50)) {
             // on Hardware Revision 3 and a Firmware >= 50 try to use the API v2 to support incompatible API V1 issues
@@ -929,7 +951,7 @@ class goEChargerHWRevv2 extends IPSModule
 
     protected function setValueToeCharger($parameter, $value)
     {
-        if ($this->ReadPropertyInteger("HardwareRevision") == 3) {
+        if ($this->ReadPropertyInteger("HardwareRevision") >= 3) {
             // if Hardware is Rev. 3 check, if a special handling is needed when setting a parameter
             switch ($parameter) {
                 case "dwo":
@@ -953,7 +975,7 @@ class goEChargerHWRevv2 extends IPSModule
                     return $this->getStatusFromCharger();
 
                 case "alw":
-                    // set DWO to 0 via API V2 (this is as DWO and the "force charging" somehow are irritating otherwise (charging, even so DWO already reached)
+                    // set DWO to 0 and start/stop Charger via API V2
                     try {
                         $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/dwo=0");
                         $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?dwo=0");
@@ -1141,6 +1163,12 @@ class goEChargerHWRevv2 extends IPSModule
             $this->SetValue("singlePhaseCharging", $goEChargerStatus->{'fsp'});
         }
 
+
+        //--- FRC (Mode / Force, API V2!) -----------------------------------------------------
+        if (isset($goEChargerStatus->{'frc'})) {
+            $this->SetValue( "accessStateV2", $goEChargerStatus->{'frc'});
+        }
+
         //--- LBR (LED brightness from 0-255 ) ------------------------------------------------
         $this->setValueToIdent($goEChargerStatus, "ledBrightness", "lbr");
 
@@ -1320,6 +1348,15 @@ class goEChargerHWRevv2 extends IPSModule
     protected function registerProfiles()
     {
         // Generate Variable Profiles
+        if ($this->ReadPropertyInteger("HardwareRevision") >= 3) {
+            IPS_CreateVariableProfile('GOECHARGER_WallboxMode', 1);
+            IPS_SetVariableProfileIcon('GOECHARGER_WallboxMode', 'Mobile');
+            IPS_SetVariableProfileAssociation("GOECHARGER_WallboxMode", 0, "Wallbox regelt selbst", "Mobile", 0xFFFFFF);
+            IPS_SetVariableProfileAssociation("GOECHARGER_WallboxMode", 1, "Laden", "Climate", 0x00FF00);
+            IPS_SetVariableProfileAssociation("GOECHARGER_WallboxMode", 2, "Nicht Laden", "Sleep", 0xFF0000);
+        }
+
+
         if (!IPS_VariableProfileExists('GOECHARGER_Status')) {
             IPS_CreateVariableProfile('GOECHARGER_Status', 1);
             IPS_SetVariableProfileIcon('GOECHARGER_Status', 'Ok');
@@ -1467,6 +1504,11 @@ class goEChargerHWRevv2 extends IPSModule
         $this->RegisterVariableBoolean("accessState", "Wallbox aktiv", "~Switch", 11);
         $this->EnableAction("accessState");
 
+        if ($this->ReadPropertyInteger("HardwareRevision") >= 3) {
+            $this->RegisterVariableInteger("accessStateV2", "Wallbox Modus", "GOECHARGER_WallboxMode", 11);
+            $this->EnableAction("accessStateV2");
+        }
+
         $this->RegisterVariableInteger("status", "Status", "GOECHARGER_Status", 12);
 
         $this->RegisterVariableFloat("automaticStop", "Ladeende nach x kwh", "GOECHARGER_AutomaticStop", 13);
@@ -1608,6 +1650,11 @@ class goEChargerHWRevv2 extends IPSModule
             // transfer mainboard temperatur limit from API V2 to API V1
             if (isset($goEChargerStatusV2->{'amt'})) {
                 $goEChargerStatus->{'amt'} = $goEChargerStatusV2->{'amt'};
+            }
+
+            // transfer frc (mode) from API V2 to API V1
+            if (isset($goEChargerStatusV2->{'frc'})) {
+                $goEChargerStatus->{'frc'} = $goEChargerStatusV2->{'frc'};
             }
         }
     }
