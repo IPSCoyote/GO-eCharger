@@ -453,6 +453,10 @@ Das Skript sollte z.B. minütlich über ein zyklisches Event laufen. Fertig ;)
 ## 6. ChangeLog
 Änderungshistorie
 
+### Version 2.2.1
+* Fehlerbehebungen
+  * Timeout für Curl gesetzt
+
 ### Version 2.2
 * Sag niemals nie.... Funktionserweiterungen
   * Hardware-Rev. 3 und 4 nun in den Einstellungen auswählbar

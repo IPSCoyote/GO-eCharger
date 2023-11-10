@@ -897,6 +897,8 @@ class goEChargerHWRevv2 extends IPSModule
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
             curl_setopt($ch, CURLOPT_HEADER, 0);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
             $json = curl_exec($ch);
             curl_close($ch);
         } catch (Exception $e) {
@@ -928,6 +930,8 @@ class goEChargerHWRevv2 extends IPSModule
                 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
                 curl_setopt($ch, CURLOPT_HEADER, 0);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
                 $json = curl_exec($ch);
                 curl_close($ch);
             } catch (Exception $e) {
@@ -968,6 +972,8 @@ class goEChargerHWRevv2 extends IPSModule
                         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
                         curl_setopt($ch, CURLOPT_HEADER, 0);
                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+                        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
                         $json = curl_exec($ch);
                         curl_close($ch);
                     } catch (Exception $e) {
@@ -986,6 +992,8 @@ class goEChargerHWRevv2 extends IPSModule
                         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
                         curl_setopt($ch, CURLOPT_HEADER, 0);
                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+                        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
                         $json = curl_exec($ch);
                         curl_close($ch);
                     } catch (Exception $e) {
@@ -1004,6 +1012,8 @@ class goEChargerHWRevv2 extends IPSModule
                         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
                         curl_setopt($ch, CURLOPT_HEADER, 0);
                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+                        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
                         $json = curl_exec($ch);
                         curl_close($ch);
                     } catch (Exception $e) {
@@ -1021,6 +1031,8 @@ class goEChargerHWRevv2 extends IPSModule
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
             curl_setopt($ch, CURLOPT_HEADER, 0);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
             $json = curl_exec($ch);
             curl_close($ch);
         } catch (Exception $e) {
