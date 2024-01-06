@@ -453,6 +453,10 @@ Das Skript sollte z.B. minütlich über ein zyklisches Event laufen. Fertig ;)
 ## 6. ChangeLog
 Änderungshistorie
 
+### Version 2.2.2
+* Fehlerbebehungen
+  * Beim Beenden der Ladung mittels setCurrentChargingAmperage(withMinimumAmperage) wurde, sofern erlaubt, bei 3phasigem Laden zunächst auf 1phasiges Laden gewechselt, anstatt das Laden sofort zu beenden.
+
 ### Version 2.2.1
 * Fehlerbehebungen
   * Timeout für Curl gesetzt

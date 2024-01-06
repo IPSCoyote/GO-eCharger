@@ -318,6 +318,11 @@ class goEChargerHWRevv2 extends IPSModule
             $switchUsedPhasesAllowed = false;
         }
 
+        // no switch of phases, if target is below absolut minimum charge (5A 1phase), as this means anyhow "Switch of charging"
+        if (($wattToSet < 1100) && ($minimumChargingAmperage <= 0 )) {
+            $switchUsedPhasesAllowed = false;
+        }
+
         if ($switchUsedPhasesAllowed) {
             //--- number of phases can be adopted ------------------------------------------------------------------
             // calculate amperage on one phase
