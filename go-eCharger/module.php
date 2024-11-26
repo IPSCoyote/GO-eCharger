@@ -1014,6 +1014,26 @@ class goEChargerHWRevv2 extends IPSModule
                     // get complete status from eCharger as conversion etc. is needed
                     return $this->getStatusFromCharger();
 
+                case "lmo":
+                    // set lmo to charger
+                    try {
+                        $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?lmo=" . $value);
+                        $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?lmo=" . $value);
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                        curl_setopt($ch, CURLOPT_HEADER, 0);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+                        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+                        $json = curl_exec($ch);
+                        curl_close($ch);
+                    } catch (Exception $e) {
+                        $this->debugLog("exception on Trigger");
+                    };
+
+                    // get complete status from eCharger as conversion etc. is needed
+                    return $this->getStatusFromCharger();
+
                 case "alw":
                     // set DWO to 0 and start/stop Charger via API V2
                     try {
@@ -1718,6 +1738,11 @@ class goEChargerHWRevv2 extends IPSModule
                 $goEChargerStatus->{'dwo'} = strval($value);
             } else {
                 $goEChargerStatus->{'dwo'} = "0";
+            }
+
+            // transfer mainboard temperatur limit from API V2 to API V1
+            if (isset($goEChargerStatusV2->{'lmo'})) {
+                $goEChargerStatus->{'lmo'} = $goEChargerStatusV2->{'lmo'};
             }
 
             if (!isset($goEChargerStatus->{'tmp'}) && !isset($goEChargerStatus->{'tma'})) {
