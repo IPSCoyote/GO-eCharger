@@ -34,15 +34,22 @@ Es soll sowohl Zustandsdaten (Anschluss, Ladevorgang, etc.) als auch Schaltaktio
 ## 3. Installation
 
 ### Vorbereitung des go-eChargers
-Vor der Installation des Moduls in IPSymcon muss der go-eCharger vollständig eingerichtet sein. Da dieses Modul lokal auf den go-eCharger zugreift, muss im lokalen WLAN (nicht dem WLAN des go-eChargers!) dem go-eCharger eine statische IP zugewiesen sein. Zusätzlich muss das HTTP-API V1 des go-eChargers in den erweiterten Einstellungen eingerichtet sein. Bei Wunsch können die Daten des go-eChargers auch via MQTT empfangen werden. Entsprechend ist auch diese Option bei Bedarf zu aktivieren.
+Vor der Installation des Moduls in IPSymcon muss der go-eCharger vollständig eingerichtet sein. Da dieses Modul lokal auf den go-eCharger zugreift, muss im lokalen WLAN (nicht dem WLAN des go-eChargers!) dem go-eCharger eine statische IP zugewiesen sein. 
 
-<p align="center">
-  <img width="388" height="1381" src="./imgs/Erweiterte%20Einstellungen%20-%20HTTP%20API%20aktivieren.jpg">
-</p>
+Zusätzlich muss das HTTP-API V1 des go-eChargers in den erweiterten Einstellungen eingerichtet sein. Bei Wunsch können die Daten des go-eChargers auch via MQTT empfangen werden. Entsprechend ist auch diese Option bei Bedarf zu aktivieren.
 
 Sollte ein GO-eCharger Hardware Rev. v3 verwendet werden, sollte auch die API v2 aktiviert werden (ist für das Verwenden des Lade-Limits notwendig)!
 
 Drüber hinaus wird weder die Cloud des go-eChargers, noch die API V2 (im vollen Umfang) als auch das Schreiben auf MQTT wird verwendet. Wer möchte, kann diese durch das Blockieren aller Ports ausser des HTTP Ports 80 aushebeln. Die wesentlichen Einstellungen stehen auch über dieses Modul zur Verfügung
+
+<details>
+<summary>Einstellungen in der App</summary>
+<p align="center">
+  <img width="416" height="800" src="./imgs/Erweiterte%20Einstellungen%20-%20HTTP%20API%20aktivieren%201-3.png">
+  <img width="416" height="807" src="./imgs/Erweiterte%20Einstellungen%20-%20HTTP%20API%20aktivieren%202-3.png">
+  <img width="416" height="1590" src="./imgs/Erweiterte%20Einstellungen%20-%20HTTP%20API%20aktivieren%203-3.png">
+</p>
+</details>
 
 ### Installation des Moduls
 Die Installation des Moduls erfolgt über den IPS Modulstore. Einfach nach "GO-echarger" suchen.
