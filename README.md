@@ -109,12 +109,13 @@ Im folgenden werden die verfügbaren Statusvariablen mit ihren Eigenschaften, We
 
 #### Grundfunktionen zum Laden
 
-| Name                             |  Type   | Optionen | Werte                                                                                                                                                                               |                                             Funktionen                                             |
-|:---------------------------------|:-------:|:--------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------:|
-| `Wallbox aktiv`                  | Boolean |  RW, WF  | Kann an der Wallbox geladen werden?                                                                                                                                                 |               [Get](#isactiveint-instanz) / [Set](#setactiveint-instanz-bool-aktiv)                |
-| `Status`                         | Integer |    RO    | Allgemeiner Ladestatus des go-eChargers<br>1: Ladestation bereit, kein Fahrzeug<br>2: Fahrzeug lädt<br>3:Warte auf Fahrzeug<br>4: Ladung beendet, Fahrzeug verbunden                |                                    [Get](#getstatusint-instanz)                                    |
-| `Ladeende nach x kwh`            |  Float  |  RW, WF  | Ladung nach abgabe von X kwh beenden<br>0 = kein automatischer Ladestop<br>0.1-100.0 kwh                                                                                            |  [Get](#getautomaticchargestopint-instanz) / [Set](#setautomaticchargestopint-instanz-float-kwh)   |
-| `Ladeende nach Energie für x km` | Integer |  RW, WF  | Ladung nach Abgabe von Energie für X Kilomenter beenden<br>0 = kein automatischer Ladestop<br>**Parameter funktioniert nur, wenn ein Verbrauch in den Einstellungen gepflegt ist!** | [Get](#getautomaticchargestopkmint-instanz) / [Set](#setautomaticchargestopkmint-instanz-float-km) |
+| Name                                          |  Type   | Optionen | Werte                                                                                                                                                                                                                               |                                             Funktionen                                             |
+|:----------------------------------------------|:-------:|:--------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------:|
+| `Wallbox aktiv`                               | Boolean |  RW, WF  | Kann an der Wallbox geladen werden?                                                                                                                                                                                                 |               [Get](#isactiveint-instanz) / [Set](#setactiveint-instanz-bool-aktiv)                |
+| `Status`                                      | Integer |    RO    | Allgemeiner Ladestatus des go-eChargers<br>1: Ladestation bereit, kein Fahrzeug<br>2: Fahrzeug lädt<br>3:Warte auf Fahrzeug<br>4: Ladung beendet, Fahrzeug verbunden                                                                |                                    [Get](#getstatusint-instanz)                                    |
+| `Ladeende nach x kwh`                         |  Float  |  RW, WF  | Ladung nach abgabe von X kwh beenden<br>0 = kein automatischer Ladestop<br>0.1-100.0 kwh                                                                                                                                            |  [Get](#getautomaticchargestopint-instanz) / [Set](#setautomaticchargestopint-instanz-float-kwh)   |
+| `Ladeende nach Energie für x km`              | Integer |  RW, WF  | Ladung nach Abgabe von Energie für X Kilomenter beenden<br>0 = kein automatischer Ladestop<br>**Parameter funktioniert nur, wenn ein Verbrauch in den Einstellungen gepflegt ist!**                                                 | [Get](#getautomaticchargestopkmint-instanz) / [Set](#setautomaticchargestopkmint-instanz-float-km) |
+| `Betriebsmodus` | Integer |  RW, WF  | Betriebsmodus des go-eChargers<br>3: Basic<br>4: Eco<br>5: Daily Trip<br>**Funktioniert nur via API V2! Eingestellte Hardware-Revision beachten!** |      [Get](#getlogicmodeint-instanz) / [Set](#setlogicmodeint-instanz-int-logicmode)       |
 
 #### Informationen zum aktuellen Ladevorgang
 
@@ -252,6 +253,15 @@ Mit dieser Funktion kann der automatische Ladestopp des go-eChargers aktiviert w
 GOeCharger_SetAutomaticChargeStopKm( $Instanz, 5 ); // aktiviert den automatischen Ladestop nach einer Ladung für 5km Reichweite
 ```
 <b>Achtung!</b> Bei einem go-eCharger ab Hardware Rev. v3 muss die API v2 in den Einstellungen des go-eChargers aktiviert werden!
+
+#### GetLogicMode(int $Instanz)
+Mit dieser Funktion kann der aktuelle Betriebsmodus des go-eChargers ermittelt werden (3=Basic, 4=Eco, 5=Daily Trip).
+
+#### SetLogicMode(int $Instanz, int $logicMode)
+Mit dieser Funktion kann der aktuelle Betriebsmodus des go-eChargers gesetzt werden (3=Basic, 4=Eco, 5=Daily Trip).
+```
+GOeCharger_SetLogicMode( $Instanz, 5 ); // setzt den Betriebsmodus auf 'Daily Trip'
+```
 
 #### GetPowerToCar(int $Instanz)
 Ermittlung der aktuellen Leistung in kw, die zum ladenden Fahrzeug geliefert wird
@@ -452,6 +462,11 @@ Das Skript sollte z.B. minütlich über ein zyklisches Event laufen. Fertig ;)
 
 ## 6. ChangeLog
 Änderungshistorie
+
+### Version 2.2.3
+* Neue Variable und neuer Befehl für den Betriebsmodus
+  * In der neue Variable "Betriebsmodus" wird der aktuelle Modus des Chargers (Eco/Basic/Daily Trip) dargestellt.
+  * Über die neuen Befehle [GetLogicMode](#getlogicmodeint-instanz) / [SetLogicMode](#setlogicmodeint-instanz-int-logicmode) kann der Betriebsmodus gesetzt werden
 
 ### Version 2.2.2
 * Fehlerbebehungen
