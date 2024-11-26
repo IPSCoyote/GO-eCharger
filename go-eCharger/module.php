@@ -520,7 +520,7 @@ class goEChargerHWRevv2 extends IPSModule
             return false;
     }
 
-    public function setLogicMode(integer $logicMode)
+    public function setLogicMode(int $logicMode)
     {
         if ($logicMode >= 3 and $logicMode <= 5) {
             $resultStatus = $this->setValueToeCharger('lmo', $logicMode);
