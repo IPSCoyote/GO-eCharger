@@ -319,7 +319,7 @@ class goEChargerHWRevv2 extends IPSModule
         }
 
         // no switch of phases, if target is below absolut minimum charge (5A 1phase), as this means anyhow "Switch of charging"
-        if (($wattToSet < 1100) && ($minimumChargingAmperage <= 0 )) {
+        if (($wattToSet < 1100) && ($minimumChargingAmperage <= 0)) {
             $switchUsedPhasesAllowed = false;
         }
 
@@ -507,6 +507,28 @@ class goEChargerHWRevv2 extends IPSModule
         if ($this->ReadPropertyFloat("AverageConsumption") > 0) {
             $chargeStopKwh = $this->ReadPropertyFloat("AverageConsumption") / 100 * $chargeStopKm;
             return $this->setAutomaticChargeStop($chargeStopKwh);
+        } else
+            return false;
+    }
+
+    public function getLogicMode()
+    {
+        $goEChargerStatus = $this->getStatusFromCharger();
+        if (isset($goEChargerStatus->{'lmo'})) {
+            return $goEChargerStatus->{'lmo'};
+        } else
+            return false;
+    }
+
+    public function setLogicMode(integer $logicMode)
+    {
+        if ($logicMode >= 3 and $logicMode <= 5) {
+            $resultStatus = $this->setValueToeCharger('lmo', $logicMode);
+            $this->Update();
+            if ($resultStatus <> false and isset($resultLogicMode->{'lmo'}) and $resultLogicMode->{'lmo'} == $logicMode ) {
+                return true;
+            } else
+                return false;
         } else
             return false;
     }
@@ -827,6 +849,10 @@ class goEChargerHWRevv2 extends IPSModule
                 $this->setAutomaticChargeStopKm($Value);
                 break;
 
+            case "logicMode":
+                $this->setLogicMode($Value);
+                break;
+
             case "cableUnlockMode":
                 $this->setCableUnlockMode($Value);
                 break;
@@ -1128,6 +1154,10 @@ class goEChargerHWRevv2 extends IPSModule
             }
         } else
             $this->SetValue("automaticStopKm", 0);
+
+        if (isset($goEChargerStatus->{'lmo'})) {
+            $this->SetValue("logicMode", $goEChargerStatus->{'lmo'});
+        }
 
         //--- DWS (Charged energy in deca-watt seconds) -------------------------------------------
         if (isset($goEChargerStatus->{'dws'})) {
@@ -1471,6 +1501,16 @@ class goEChargerHWRevv2 extends IPSModule
             IPS_SetVariableProfileText('GOECHARGER_AutomaticStopKM', "", "");
         }
 
+        if (!IPS_VariableProfileExists('GOECHARGER_LogicMode')) {
+            IPS_CreateVariableProfile('GOECHARGER_LogicMode', 1);
+            IPS_SetVariableProfileIcon('GOECHARGER_LogicMode', 'EnergyProduction');
+            IPS_SetVariableProfileDigits('GOECHARGER_LogicMode', 0);
+            IPS_SetVariableProfileValues('GOECHARGER_LogicMode', 0, 100, 0);
+            IPS_SetVariableProfileAssociation("GOECHARGER_LogicMode", 3, "Basic", "Gear", 0xFFFFFF);
+            IPS_SetVariableProfileAssociation("GOECHARGER_LogicMode", 4, "Eco", "Leaf", 0xFFFFFF);
+            IPS_SetVariableProfileAssociation("GOECHARGER_LogicMode", 5, "Daily Trip", "Clock", 0xFFFFFF);
+        }
+
         if (!IPS_VariableProfileExists('GOECHARGER_Adapter')) {
             IPS_CreateVariableProfile('GOECHARGER_Adapter', 1);
             IPS_SetVariableProfileIcon('GOECHARGER_Adapter', 'Ok');
@@ -1553,7 +1593,10 @@ class goEChargerHWRevv2 extends IPSModule
         $this->EnableAction("automaticStop");
 
         $this->RegisterVariableInteger("automaticStopKm", "Ladeende nach Energie für x km", "GOECHARGER_AutomaticStopKM", 14);
-        $this->EnableAction("automaticStopKm");
+        $this->EnableAction("lautomaticStopKm");
+
+        $this->RegisterVariableInteger("logicMode", "Betriebsmodus", "GOECHARGER_LogicMode", 15);
+        $this->EnableAction("logicMode");
 
         //--- Informations to the current loading cycle ------------------------------------
         $this->RegisterVariableFloat("powerToCarTotal", "Aktuelle Leistung zum Fahrzeug", "GOECHARGER_Power.1", 31);
