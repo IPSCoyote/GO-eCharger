@@ -83,6 +83,11 @@ class goEChargerHWRevv2 extends IPSModule
 
         // Set Data to Variables (and update timer)
         $this->Update();
+
+        if ($this->ReadPropertyBoolean("Statistical")) {
+            $this->SetStatus(104);
+        }
+
     }
 
     public function Destroy()
