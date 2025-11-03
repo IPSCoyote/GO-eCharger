@@ -1272,7 +1272,7 @@ class goEChargerHWRevv2 extends IPSModule
         //--- ETO (energy_total: Total charged energy in 0.1kWh) ----------------------------------
         if (isset($goEChargerStatus->{'eto'})) {
             $value = $goEChargerStatus->{'eto'}+0.0;
-            if ($this->ReadPropertyInteger("CounterOffset")) {
+            if ($this->ReadPropertyBoolean("CounterOffset")) {
                 $value = $value + $this->ReadPropertyInteger("CounterOffsetMain");
             }
             $this->SetValue("energyTotal", $value / 10);
