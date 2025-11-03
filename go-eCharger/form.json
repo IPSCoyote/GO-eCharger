@@ -394,7 +394,8 @@
               "type": "CheckBox",
               "name": "calculateCorrectedData",
               "caption": "DataCorrection",
-              "value": false
+              "value": false,
+              "width": "300px"
             },
             {
               "type": "Label",
@@ -444,7 +445,8 @@
               "type": "CheckBox",
               "name": "counterOffset",
               "caption": "CounterOffset",
-              "value": false
+              "value": false,
+              "width": "300px"
             },
             {
               "type": "NumberSpinner",
@@ -454,7 +456,21 @@
               "hex": false,
               "suffix": "kWh",
               "value": 0,
-              "witdh": "150px"
+              "width": "150px"
+            }
+          ]
+        },
+        {
+          "type": "RowLayout",
+          "items": [
+            {
+              "type": "Label",
+              "caption": "   ",
+              "width": "300px"
+            },
+            {
+              "type": "Label",
+              "caption": "   "
             },
             {
               "type": "NumberSpinner",
@@ -464,7 +480,7 @@
               "hex": false,
               "suffix": "kWh",
               "value": 0,
-              "witdh": "150px"
+              "width": "150px"
             },
             {
               "type": "NumberSpinner",
@@ -474,7 +490,7 @@
               "hex": false,
               "suffix": "kWh",
               "value": 0,
-              "witdh": "150px"
+              "width": "150px"
             },
             {
               "type": "NumberSpinner",
@@ -484,7 +500,7 @@
               "hex": false,
               "suffix": "kWh",
               "value": 0,
-              "witdh": "150px"
+              "width": "150px"
             },
             {
               "type": "NumberSpinner",
@@ -494,7 +510,7 @@
               "hex": false,
               "suffix": "kWh",
               "value": 0,
-              "witdh": "150px"
+              "width": "150px"
             },
             {
               "type": "NumberSpinner",
@@ -504,7 +520,21 @@
               "hex": false,
               "suffix": "kWh",
               "value": 0,
-              "witdh": "150px"
+              "width": "150px"
+            }
+          ]
+        },
+        {
+          "type": "RowLayout",
+          "items": [
+            {
+              "type": "Label",
+              "caption": "   ",
+              "width": "300px"
+            },
+            {
+              "type": "Label",
+              "caption": "   "
             },
             {
               "type": "NumberSpinner",
@@ -514,7 +544,7 @@
               "hex": false,
               "suffix": "kWh",
               "value": 0,
-              "witdh": "150px"
+              "width": "150px"
             },
             {
               "type": "NumberSpinner",
@@ -524,7 +554,7 @@
               "hex": false,
               "suffix": "kWh",
               "value": 0,
-              "witdh": "150px"
+              "width": "150px"
             },
             {
               "type": "NumberSpinner",
@@ -534,7 +564,7 @@
               "hex": false,
               "suffix": "kWh",
               "value": 0,
-              "witdh": "150px"
+              "width": "150px"
             },
             {
               "type": "NumberSpinner",
@@ -544,7 +574,7 @@
               "hex": false,
               "suffix": "kWh",
               "value": 0,
-              "witdh": "150px"
+              "width": "150px"
             },
             {
               "type": "NumberSpinner",
@@ -554,7 +584,7 @@
               "hex": false,
               "suffix": "kWh",
               "value": 0,
-              "witdh": "150px"
+              "width": "150px"
             }
           ]
         },
