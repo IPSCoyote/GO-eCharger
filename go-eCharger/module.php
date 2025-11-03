@@ -1189,6 +1189,7 @@ class goEChargerHWRevv2 extends IPSModule
             }
         }
 
+
         //--- CLA (Typ2 Cable Ampere encoding) ----------------------------------------------------
         $this->setValueToIdent($goEChargerStatus, "cableCapability", "cbl");
 
