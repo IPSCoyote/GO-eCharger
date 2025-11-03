@@ -1230,50 +1230,90 @@ class goEChargerHWRevv2 extends IPSModule
         //--- ECx (Charged energy per RFID card from 1-10) ----------------------------------------
         // Card 1
         if (isset($goEChargerStatus->{'eca'})) {
-            $this->SetValue("energyChargedCard1", $goEChargerStatus->{'eca'} / 10);
+            $value = $goEChargerStatus->{'eca'}+0.0;
+            if ($this->ReadPropertyBoolean("CounterOffset")) {
+                $value = $value + $this->ReadPropertyInteger("CounterOffset1") * 10;
+            }
+            $this->SetValue("energyChargedCard1", $value / 10);
         }
         // Card 2
         if (isset($goEChargerStatus->{'ecr'})) {
-            $this->SetValue("energyChargedCard2", $goEChargerStatus->{'ecr'} / 10);
+            $value = $goEChargerStatus->{'ecr'}+0.0;
+            if ($this->ReadPropertyBoolean("CounterOffset")) {
+                $value = $value + $this->ReadPropertyInteger("CounterOffset2") * 10;
+            }
+            $this->SetValue("energyChargedCard2", $value / 10);
         }
         // Card 3
         if (isset($goEChargerStatus->{'ecd'})) {
-            $this->SetValue("energyChargedCard3", $goEChargerStatus->{'ecd'} / 10);
+            $value = $goEChargerStatus->{'ecd'}+0.0;
+            if ($this->ReadPropertyBoolean("CounterOffset")) {
+                $value = $value + $this->ReadPropertyInteger("CounterOffset3") * 10;
+            }
+            $this->SetValue("energyChargedCard3", $value / 10);
         }
         // Card 4
         if (isset($goEChargerStatus->{'ec4'})) {
-            $this->SetValue("energyChargedCard4", $goEChargerStatus->{'ec4'} / 10);
+            $value = $goEChargerStatus->{'ec4'}+0.0;
+            if ($this->ReadPropertyBoolean("CounterOffset")) {
+                $value = $value + $this->ReadPropertyInteger("CounterOffset4") * 10;
+            }
+            $this->SetValue("energyChargedCard4", $value / 10);
         }
         // Card 5
         if (isset($goEChargerStatus->{'ec5'})) {
-            $this->SetValue("energyChargedCard5", $goEChargerStatus->{'ec5'} / 10);
+            $value = $goEChargerStatus->{'ec5'}+0.0;
+            if ($this->ReadPropertyBoolean("CounterOffset")) {
+                $value = $value + $this->ReadPropertyInteger("CounterOffset5") * 10;
+            }
+            $this->SetValue("energyChargedCard5", $value / 10);
         }
         // Card 6
         if (isset($goEChargerStatus->{'ec6'})) {
-            $this->SetValue("energyChargedCard6", $goEChargerStatus->{'ec6'} / 10);
+            $value = $goEChargerStatus->{'ec6'}+0.0;
+            if ($this->ReadPropertyBoolean("CounterOffset")) {
+                $value = $value + $this->ReadPropertyInteger("CounterOffset6") * 10;
+            }
+            $this->SetValue("energyChargedCard6", $value / 10);
         }
         // Card 7
         if (isset($goEChargerStatus->{'ec7'})) {
-            $this->SetValue("energyChargedCard7", $goEChargerStatus->{'ec7'} / 10);
+            $value = $goEChargerStatus->{'ec7'}+0.0;
+            if ($this->ReadPropertyBoolean("CounterOffset")) {
+                $value = $value + $this->ReadPropertyInteger("CounterOffset1") * 10;
+            }
+            $this->SetValue("energyChargedCard7", $value / 10);
         }
         // Card 8
         if (isset($goEChargerStatus->{'ec8'})) {
-            $this->SetValue("energyChargedCard8", $goEChargerStatus->{'ec8'} / 10);
+            $value = $goEChargerStatus->{'ec8'}+0.0;
+            if ($this->ReadPropertyBoolean("CounterOffset")) {
+                $value = $value + $this->ReadPropertyInteger("CounterOffset8") * 10;
+            }
+            $this->SetValue("energyChargedCard8", $value / 10);
         }
         // Card 9
         if (isset($goEChargerStatus->{'ec9'})) {
-            $this->SetValue("energyChargedCard9", $goEChargerStatus->{'ec9'} / 10);
+            $value = $goEChargerStatus->{'ec9'}+0.0;
+            if ($this->ReadPropertyBoolean("CounterOffset")) {
+                $value = $value + $this->ReadPropertyInteger("CounterOffset9") * 10;
+            }
+            $this->SetValue("energyChargedCard9", $value / 10);
         }
         // Card 10
         if (isset($goEChargerStatus->{'ec1'})) {
-            $this->SetValue("energyChargedCard10", $goEChargerStatus->{'ec1'} / 10);
+            $value = $goEChargerStatus->{'ec1'}+0.0;
+            if ($this->ReadPropertyBoolean("CounterOffset")) {
+                $value = $value + $this->ReadPropertyInteger("CounterOffset10") * 10;
+            }
+            $this->SetValue("energyChargedCard10", $value / 10);
         }
 
         //--- ETO (energy_total: Total charged energy in 0.1kWh) ----------------------------------
         if (isset($goEChargerStatus->{'eto'})) {
             $value = $goEChargerStatus->{'eto'}+0.0;
             if ($this->ReadPropertyBoolean("CounterOffset")) {
-                $value = $value + $this->ReadPropertyInteger("CounterOffsetMain");
+                $value = $value + $this->ReadPropertyInteger("CounterOffsetMain") * 10;
             }
             $this->SetValue("energyTotal", $value / 10);
         }
