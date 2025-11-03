@@ -60,6 +60,15 @@
               "value": 4
             }
           ]
+        },
+        {
+          "type": "Label",
+          "caption": "   "
+        },
+        {
+          "type": "CheckBox",
+          "name": "Statistical",
+          "caption": "Statistical"
         }
       ]
     },
@@ -425,6 +434,127 @@
               "suffix": "V",
               "value": 230,
               "width": "150px"
+            }
+          ]
+        },
+        {
+          "type": "RowLayout",
+          "items": [
+            {
+              "type": "CheckBox",
+              "name": "counterOffset",
+              "caption": "CounterOffset",
+              "value": false
+            },
+            {
+              "type": "NumberSpinner",
+              "name": "counterOffsetMain",
+              "caption": "Counter Main",
+              "digits": 0,
+              "hex": false,
+              "suffix": "kWh",
+              "value": 0,
+              "witdh": "150px"
+            },
+            {
+              "type": "NumberSpinner",
+              "name": "counterOffset1",
+              "caption": "Counter 1",
+              "digits": 0,
+              "hex": false,
+              "suffix": "kWh",
+              "value": 0,
+              "witdh": "150px"
+            },
+            {
+              "type": "NumberSpinner",
+              "name": "counterOffset2",
+              "caption": "Counter 2",
+              "digits": 0,
+              "hex": false,
+              "suffix": "kWh",
+              "value": 0,
+              "witdh": "150px"
+            },
+            {
+              "type": "NumberSpinner",
+              "name": "counterOffset3",
+              "caption": "Counter 3",
+              "digits": 0,
+              "hex": false,
+              "suffix": "kWh",
+              "value": 0,
+              "witdh": "150px"
+            },
+            {
+              "type": "NumberSpinner",
+              "name": "counterOffset4",
+              "caption": "Counter 4",
+              "digits": 0,
+              "hex": false,
+              "suffix": "kWh",
+              "value": 0,
+              "witdh": "150px"
+            },
+            {
+              "type": "NumberSpinner",
+              "name": "counterOffset5",
+              "caption": "Counter 5",
+              "digits": 0,
+              "hex": false,
+              "suffix": "kWh",
+              "value": 0,
+              "witdh": "150px"
+            },
+            {
+              "type": "NumberSpinner",
+              "name": "counterOffset6",
+              "caption": "Counter 6",
+              "digits": 0,
+              "hex": false,
+              "suffix": "kWh",
+              "value": 0,
+              "witdh": "150px"
+            },
+            {
+              "type": "NumberSpinner",
+              "name": "counterOffset7",
+              "caption": "Counter 7",
+              "digits": 0,
+              "hex": false,
+              "suffix": "kWh",
+              "value": 0,
+              "witdh": "150px"
+            },
+            {
+              "type": "NumberSpinner",
+              "name": "counterOffset8",
+              "caption": "Counter 8",
+              "digits": 0,
+              "hex": false,
+              "suffix": "kWh",
+              "value": 0,
+              "witdh": "150px"
+            },
+            {
+              "type": "NumberSpinner",
+              "name": "counterOffset9",
+              "caption": "Counter 9",
+              "digits": 0,
+              "hex": false,
+              "suffix": "kWh",
+              "value": 0,
+              "witdh": "150px"
+            },
+            {
+              "type": "NumberSpinner",
+              "name": "counterOffset10",
+              "caption": "Counter 10",
+              "digits": 0,
+              "hex": false,
+              "suffix": "kWh",
+              "value": 0,
+              "witdh": "150px"
             }
           ]
         },

@@ -470,6 +470,10 @@ Das Skript sollte z.B. minütlich über ein zyklisches Event laufen. Fertig ;)
 ## 6. ChangeLog
 Änderungshistorie
 
+### Version 2.2.4
+* Neue Einstellung "Statistisch", um das Modul zu Dokumentationszwecken ohne gültige Konfiguration behalten zu können, ohne das es Fehler meldet
+* Neue Einstellung "Zähler Offset", um bei einem Tausch eines Go-eChargers (z.B. bei einem defekt), einen Offset für die Zählerstände hinterlegen zu können, welche auf die ausgelesenen Zählerstände des GO-eCharges aufaddiert werden.
+
 ### Version 2.2.3
 * Neue Variable und neuer Befehl für den Betriebsmodus
   * In der neue Variable "Betriebsmodus" wird der aktuelle Modus des Chargers (Eco/Basic/Daily Trip) dargestellt.

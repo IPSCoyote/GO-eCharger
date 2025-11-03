@@ -18,6 +18,7 @@ class goEChargerHWRevv2 extends IPSModule
         //--- Properties
         $this->RegisterPropertyString("IPAddressCharger", "0.0.0.0");
         $this->RegisterPropertyInteger("HardwareRevision", 2);
+        $this->RegisterPropertyBoolean( "Statistical", false);
         $this->RegisterPropertyInteger("MaxAmperage", 6);
         $this->RegisterPropertyInteger("OutOfBoundAmperage", 17);
 
@@ -43,6 +44,20 @@ class goEChargerHWRevv2 extends IPSModule
         $this->RegisterPropertyInteger("verifiedSupplyPowerL1", 230);
         $this->RegisterPropertyInteger("verifiedSupplyPowerL2", 230);
         $this->RegisterPropertyInteger("verifiedSupplyPowerL3", 230);
+
+        $this->RegisterPropertyBoolean("counterOffset", false);
+        $this->RegisterPropertyInteger( "counterOffsetMain", 0);
+        $this->RegisterPropertyInteger( "counterOffset1", 0);
+        $this->RegisterPropertyInteger( "counterOffset2", 0);
+        $this->RegisterPropertyInteger( "counterOffset3", 0);
+        $this->RegisterPropertyInteger( "counterOffset4", 0);
+        $this->RegisterPropertyInteger( "counterOffset5", 0);
+        $this->RegisterPropertyInteger( "counterOffset6", 0);
+        $this->RegisterPropertyInteger( "counterOffset7", 0);
+        $this->RegisterPropertyInteger( "counterOffset8", 0);
+        $this->RegisterPropertyInteger( "counterOffset9", 0);
+        $this->RegisterPropertyInteger( "counterOffset10", 0);
+
         $this->RegisterPropertyBoolean("debugLog", false);
 
         //--- Register Timer
