@@ -930,6 +930,10 @@ class goEChargerHWRevv2 extends IPSModule
 
     protected function getStatusFromCharger()
     {
+        if ($this->ReadPropertyString("Statistical")) {
+            return true;
+        }
+
         // get IP of go-eCharger
         $IPAddress = trim($this->ReadPropertyString("IPAddressCharger"));
 
