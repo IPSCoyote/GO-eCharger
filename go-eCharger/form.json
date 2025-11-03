@@ -256,7 +256,7 @@
         },
         {
           "type": "Label",
-          "caption": "         "
+          "caption": "   "
         },
         {
           "type": "CheckBox",
@@ -398,10 +398,6 @@
               "width": "300px"
             },
             {
-              "type": "Label",
-              "caption": "   "
-            },
-            {
               "type": "NumberSpinner",
               "name": "verifiedSupplyPowerL1",
               "caption": "Measured Power L1",
@@ -443,14 +439,14 @@
           "items": [
             {
               "type": "CheckBox",
-              "name": "counterOffset",
+              "name": "CounterOffset",
               "caption": "CounterOffset",
               "value": false,
               "width": "300px"
             },
             {
               "type": "NumberSpinner",
-              "name": "counterOffsetMain",
+              "name": "CounterOffsetMain",
               "caption": "Counter Main",
               "digits": 0,
               "hex": false,
@@ -469,12 +465,8 @@
               "width": "300px"
             },
             {
-              "type": "Label",
-              "caption": "   "
-            },
-            {
               "type": "NumberSpinner",
-              "name": "counterOffset1",
+              "name": "CounterOffset1",
               "caption": "Counter 1",
               "digits": 0,
               "hex": false,
@@ -484,7 +476,7 @@
             },
             {
               "type": "NumberSpinner",
-              "name": "counterOffset2",
+              "name": "CounterOffset2",
               "caption": "Counter 2",
               "digits": 0,
               "hex": false,
@@ -494,7 +486,7 @@
             },
             {
               "type": "NumberSpinner",
-              "name": "counterOffset3",
+              "name": "CounterOffset3",
               "caption": "Counter 3",
               "digits": 0,
               "hex": false,
@@ -504,7 +496,7 @@
             },
             {
               "type": "NumberSpinner",
-              "name": "counterOffset4",
+              "name": "CounterOffset4",
               "caption": "Counter 4",
               "digits": 0,
               "hex": false,
@@ -514,7 +506,7 @@
             },
             {
               "type": "NumberSpinner",
-              "name": "counterOffset5",
+              "name": "CounterOffset5",
               "caption": "Counter 5",
               "digits": 0,
               "hex": false,
@@ -533,12 +525,8 @@
               "width": "300px"
             },
             {
-              "type": "Label",
-              "caption": "   "
-            },
-            {
               "type": "NumberSpinner",
-              "name": "counterOffset6",
+              "name": "CounterOffset6",
               "caption": "Counter 6",
               "digits": 0,
               "hex": false,
@@ -548,7 +536,7 @@
             },
             {
               "type": "NumberSpinner",
-              "name": "counterOffset7",
+              "name": "CounterOffset7",
               "caption": "Counter 7",
               "digits": 0,
               "hex": false,
@@ -558,7 +546,7 @@
             },
             {
               "type": "NumberSpinner",
-              "name": "counterOffset8",
+              "name": "CounterOffset8",
               "caption": "Counter 8",
               "digits": 0,
               "hex": false,
@@ -568,7 +556,7 @@
             },
             {
               "type": "NumberSpinner",
-              "name": "counterOffset9",
+              "name": "CounterOffset9",
               "caption": "Counter 9",
               "digits": 0,
               "hex": false,
@@ -578,7 +566,7 @@
             },
             {
               "type": "NumberSpinner",
-              "name": "counterOffset10",
+              "name": "CounterOffset10",
               "caption": "Counter 10",
               "digits": 0,
               "hex": false,

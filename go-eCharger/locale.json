@@ -42,18 +42,18 @@
             "Measured Power L1":  "verifizierte Spannung L1",
             "Measured Power L2": "verifizierte Spannung L2",
             "Measured Power L3": "verifizierte Spannung L3",
-            "CounterOffset": "Zählerkorrektor",
+            "CounterOffset": "Zählerkorrektur (+ Offset)",
             "Counter Main": "Hauptzähler",
-            "Counter 1": "Zähler 1",
-            "Counter 2": "Zähler 2",
-            "Counter 3": "Zähler 3",
-            "Counter 4": "Zähler 4",
-            "Counter 5": "Zähler 5",
-            "Counter 6": "Zähler 6",
-            "Counter 7": "Zähler 7",
-            "Counter 8": "Zähler 8",
-            "Counter 9": "Zähler 9",
-            "Counter 10": "Zähler 10"
+            "Counter 1": "RFID Zähler 1",
+            "Counter 2": "RFID Zähler 2",
+            "Counter 3": "RFID Zähler 3",
+            "Counter 4": "RFID Zähler 4",
+            "Counter 5": "RFID Zähler 5",
+            "Counter 6": "RFID Zähler 6",
+            "Counter 7": "RFID Zähler 7",
+            "Counter 8": "RFID Zähler 8",
+            "Counter 9": "RFID Zähler 9",
+            "Counter 10": "RFID Zähler 10"
         }
     }
 }

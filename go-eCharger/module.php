@@ -45,18 +45,18 @@ class goEChargerHWRevv2 extends IPSModule
         $this->RegisterPropertyInteger("verifiedSupplyPowerL2", 230);
         $this->RegisterPropertyInteger("verifiedSupplyPowerL3", 230);
 
-        $this->RegisterPropertyBoolean("counterOffset", false);
-        $this->RegisterPropertyInteger( "counterOffsetMain", 0);
-        $this->RegisterPropertyInteger( "counterOffset1", 0);
-        $this->RegisterPropertyInteger( "counterOffset2", 0);
-        $this->RegisterPropertyInteger( "counterOffset3", 0);
-        $this->RegisterPropertyInteger( "counterOffset4", 0);
-        $this->RegisterPropertyInteger( "counterOffset5", 0);
-        $this->RegisterPropertyInteger( "counterOffset6", 0);
-        $this->RegisterPropertyInteger( "counterOffset7", 0);
-        $this->RegisterPropertyInteger( "counterOffset8", 0);
-        $this->RegisterPropertyInteger( "counterOffset9", 0);
-        $this->RegisterPropertyInteger( "counterOffset10", 0);
+        $this->RegisterPropertyBoolean("CounterOffset", false);
+        $this->RegisterPropertyInteger( "CounterOffsetMain", 0);
+        $this->RegisterPropertyInteger( "CounterOffset1", 0);
+        $this->RegisterPropertyInteger( "CounterOffset2", 0);
+        $this->RegisterPropertyInteger( "CounterOffset3", 0);
+        $this->RegisterPropertyInteger( "CounterOffset4", 0);
+        $this->RegisterPropertyInteger( "CounterOffset5", 0);
+        $this->RegisterPropertyInteger( "CounterOffset6", 0);
+        $this->RegisterPropertyInteger( "CounterOffset7", 0);
+        $this->RegisterPropertyInteger( "CounterOffset8", 0);
+        $this->RegisterPropertyInteger( "CounterOffset9", 0);
+        $this->RegisterPropertyInteger( "CounterOffset10", 0);
 
         $this->RegisterPropertyBoolean("debugLog", false);
 
@@ -74,8 +74,11 @@ class goEChargerHWRevv2 extends IPSModule
         $this->registerVariables();
 
         // Set Timer
-        if ($this->ReadPropertyInteger("UpdateCharging") >= 0) {
+        if (($this->ReadPropertyInteger("UpdateCharging") >= 0) && (!$this->ReadPropertyBoolean("Statistical"))) {
             $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateCharging") * 1000);
+        } else {
+            // Charger is statistical or no Update Interval is setup
+            $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateCharging") * 0);
         }
 
         // Set Data to Variables (and update timer)
@@ -101,6 +104,11 @@ class goEChargerHWRevv2 extends IPSModule
 
     public function Update()
     {
+        if ($this->ReadPropertyBoolean("Statistical")) {
+            // No Update Data on statistical charger
+            return;
+        }
+
         /* Check the connection to the go-eCharger */
         $goEChargerStatus = $this->getStatusFromCharger();
         if ($goEChargerStatus == false) {
@@ -113,6 +121,10 @@ class goEChargerHWRevv2 extends IPSModule
     public function ReceiveData($JSONString)
     {
         // Data comes from MQTT
+        if ($this->ReadPropertyBoolean("Statistical")) {
+            // No Update Data on statistical charger
+            return;
+        }
 
         if ($this->ReadPropertyBoolean("MQTTUpdateActive") == false) {
             // no handling of MQTT data
@@ -1161,13 +1173,18 @@ class goEChargerHWRevv2 extends IPSModule
         $this->setValueToIdent($goEChargerStatus, "status", "car");
         // Set Update Timer
         if (isset($goEChargerStatus->{'car'})) {
-            if ($goEChargerStatus->{'car'} == "2") {
-                if ($this->ReadPropertyInteger("UpdateCharging") >= 0) {
-                    $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateCharging") * 1000);
-                }
+            if (!$this->ReadPropertyBoolean("Statistical")) {
+                // charger is statistical, so no update timer!
+                $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", 0);
             } else {
-                if ($this->ReadPropertyInteger("UpdateIdle") >= 0) {
-                    $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateIdle") * 1000);
+                if ($goEChargerStatus->{'car'} == "2") {
+                    if ($this->ReadPropertyInteger("UpdateCharging") >= 0) {
+                        $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateCharging") * 1000);
+                    }
+                } else {
+                    if ($this->ReadPropertyInteger("UpdateIdle") >= 0) {
+                        $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateIdle") * 1000);
+                    }
                 }
             }
         }
