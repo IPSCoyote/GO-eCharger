@@ -74,7 +74,7 @@ class goEChargerHWRevv2 extends IPSModule
         $this->registerVariables();
 
         // Set Timer
-        if (($this->ReadPropertyInteger("UpdateCharging") >= 0) && (!$this->ReadPropertyBoolean("Statistical"))) {
+        if (($this->ReadPropertyInteger("UpdateCharging") >= 0) && ($this->ReadPropertyBoolean("Statistical") == false)) {
             $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", $this->ReadPropertyInteger("UpdateCharging") * 1000);
         } else {
             // Charger is statistical or no Update Interval is setup
@@ -1173,7 +1173,7 @@ class goEChargerHWRevv2 extends IPSModule
         $this->setValueToIdent($goEChargerStatus, "status", "car");
         // Set Update Timer
         if (isset($goEChargerStatus->{'car'})) {
-            if (!$this->ReadPropertyBoolean("Statistical")) {
+            if ($this->ReadPropertyBoolean("Statistical")) {
                 // charger is statistical, so no update timer!
                 $this->SetTimerInterval("GOeChargerTimer_UpdateTimer", 0);
             } else {
