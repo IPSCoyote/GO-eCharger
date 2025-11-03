@@ -1280,7 +1280,7 @@ class goEChargerHWRevv2 extends IPSModule
         if (isset($goEChargerStatus->{'ec7'})) {
             $value = $goEChargerStatus->{'ec7'}+0.0;
             if ($this->ReadPropertyBoolean("CounterOffset")) {
-                $value = $value + $this->ReadPropertyInteger("CounterOffset1") * 10;
+                $value = $value + $this->ReadPropertyInteger("CounterOffset7") * 10;
             }
             $this->SetValue("energyChargedCard7", $value / 10);
         }

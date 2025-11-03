@@ -58,7 +58,7 @@ Die Installation des Moduls erfolgt über den IPS Modulstore. Einfach nach "GO-e
 Nachdem eine Instanz des Moduls angelegt wurde, muss diese eingerichtet werden.
 
 <p align="center">
-  <img width="856" height="671" src="./imgs/Configuration.png">
+  <img width="849" height="1213" src="./imgs/Configuration.png">
 </p>
 
 * **IP-Adresse**<br>
@@ -99,6 +99,12 @@ Die Anzahl der Ladephasen dient als Vorgabewert für den Befehl GO-eCharger_SetC
 
 * **Sonderfunktionen - Datenkorrektur anwenden**<br>
 Falls man den vom GO-eCharger ermittelten Spannungen auf L1, L2 und L3 nicht traut, kann man durch diese Option weitere Variablen mit "korrigierten" Werten anlegen lassen. Für die Korrektur muss die "echte" Spannung auf L1, L2 und L3 angegeben werden.
+
+* **Sonderfunktionen - Zählerkorrektur (+ Offset)**<br>
+Sollte ein Austausch eines GO-eChargers notwendig gewesen sein (oder man auf eine neuere Version gewechselt haben), so kann man hier einen Zähler-Offset hinterlegen, wodurch die alten Zählerstände weiter gezählt werden können, da der neue Zähler üblicherweise bei 0 zu zählen beginnt. Auf diese Weise verliert man keine ggf. archivierten Zählerstände
+
+* **Sonderfunktionen - Debug Log**<br>
+Durch die Aktivierung des Debug-Logs werden detaillierte Meldungen in das Log geschrieben, welches man sich unter Debug anschauen kann.
 
 ## 4. Module
 Derzeit bietet das GIT nur das Modul "go-eCharger" für die direkte Steuerung eines einzelnen go-eChargers via API V1 bzw. den Datenempfang via MQTT. 
