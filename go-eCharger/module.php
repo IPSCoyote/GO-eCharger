@@ -931,6 +931,7 @@ class goEChargerHWRevv2 extends IPSModule
     protected function getStatusFromCharger()
     {
         if ($this->ReadPropertyBoolean("Statistical")) {
+            $this->SetStatus(104);
             return true;
         }
 
