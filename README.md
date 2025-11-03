@@ -67,6 +67,9 @@ Statische IP Adresse unter der der go-eCharger im lokalen WLAN erreichbar ist.
 * **Hardware Revision**<br>
   Es wird die Hardware Rev. v2 als Default Wert verwendet. Sollte man eine Hardware Rev. v3 anbinden, sollte unbedingt die richtige Hardware Rev. eingestellt werden!
 
+* **Statistisch (keine aktive Verwendung)**<br>
+Sollte dieser Schalter aktiviert sein, so ist dieses Modul faktisch deaktiviert. Es finden keine Fehlerprüfungen oder aktualisierungen der Daten mehr statt. Dies dient dazu, ggf. noch auf archivierte Daten zugreifen zu können, ohne das Fehlermeldungen in irgendwelche Protokolle geschrieben werden.
+
 * **el. Absicherung und max. 1-phasige Schieflast**<br>
 Die maximale el. Absicherung, die für den go-eCharger vorhanden ist. Wenn dieser an einer 16A abgesicherten Zuleitung abgesichert ist, wären dies 16A. Andere Werte entsprechend.
 Die maximale 1-phasige Schieflast wird für die Berechnung sowie das automatische Umschalten zwischen 1- und 3-phasigem Laden benötigt (Befehl SetCurrentChargingWatt)
