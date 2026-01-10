@@ -1,7 +1,11 @@
 <?php
 
+/*=== COMMON FUNCTIONS ========================== */
+include __DIR__ . '/../libs/goEChargerAPIConverter.php';
+
 class goEChargerHWRevv2 extends IPSModule
 {
+    use goEChargerAPIConverter;
 
     public function __construct($InstanceID)
     {
@@ -18,6 +22,7 @@ class goEChargerHWRevv2 extends IPSModule
         //--- Properties
         $this->RegisterPropertyString("IPAddressCharger", "0.0.0.0");
         $this->RegisterPropertyInteger("HardwareRevision", 2);
+        $this->RegisterPropertyBoolean( "APIV2Only", false);
         $this->RegisterPropertyBoolean( "Statistical", false);
         $this->RegisterPropertyInteger("MaxAmperage", 6);
         $this->RegisterPropertyInteger("OutOfBoundAmperage", 17);
@@ -509,8 +514,9 @@ class goEChargerHWRevv2 extends IPSModule
             ($this->ReadPropertyBoolean("AutoActivateOnStopSet") == true)) {
             // activate Wallbox
             $this->setActive(true);
-        } else
+        } else {
             $this->Update();
+        }
         if ($resultStatus == false or isset($resultStatus->{'dwo'}) == false) {
             return false;
         }
@@ -772,6 +778,11 @@ class goEChargerHWRevv2 extends IPSModule
 
     public function getElectricityPriceMinChargeHours()
     {
+        if ($this->ReadPropertyInteger("HardwareRevision") == 99 ) {
+            // function runs on API v1 Data -> not possible on only API v2
+            return false;
+        }
+
         $goEChargerStatus = $this->getStatusFromCharger();
         if ($goEChargerStatus == false or isset($goEChargerStatus->{'aho'}) == false) {
             return false;
@@ -785,6 +796,11 @@ class goEChargerHWRevv2 extends IPSModule
 
     public function setElectricityPriceMinChargeHours(int $minChargeHours)
     {
+        if ($this->ReadPropertyInteger("HardwareRevision") == 99 ) {
+            // function runs on API v1 Data -> not possible on only API v2
+            return false;
+        }
+
         if ($minChargeHours < 0 or $minChargeHours > 23) {
             return false;
         }
@@ -800,6 +816,11 @@ class goEChargerHWRevv2 extends IPSModule
 
     public function getElectricityPriceChargeTill()
     {
+        if ($this->ReadPropertyInteger("HardwareRevision") == 99 ) {
+            // function runs on API v1 Data -> not possible on only API v2
+            return false;
+        }
+
         $goEChargerStatus = $this->getStatusFromCharger();
         if ($goEChargerStatus == false) {
             return false;
@@ -813,6 +834,11 @@ class goEChargerHWRevv2 extends IPSModule
 
     public function setElectricityPriceChargeTill(int $chargeTill)
     {
+        if ($this->ReadPropertyInteger("HardwareRevision") == 99 ) {
+            // function runs on API v1 Data -> not possible on only API v2
+            return false;
+        }
+
         if ($chargeTill < 0 or $chargeTill > 23) {
             return false;
         }
@@ -958,39 +984,40 @@ class goEChargerHWRevv2 extends IPSModule
             return false;
         }
 
-        // get json from go-eCharger
-        try {
-            $ch = curl_init("http://" . $IPAddress . "/status");
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
-            $json = curl_exec($ch);
-            curl_close($ch);
-        } catch (Exception $e) {
-            $this->SetStatus(203); // no http response
-            return false;
-        };
+        // get status json from go-eCharger by API v1
+        // Newer hardware revision might not support API v1 anymore, which is why we've to avoid using it
+        $goEChargerStatusAPIv1 = null;
+        if (($this->ReadPropertyInteger("HardwareRevision") < 99 )) {
+            try {
+                $ch = curl_init("http://" . $IPAddress . "/status");
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+                $json = curl_exec($ch);
+                curl_close($ch);
+            } catch (Exception $e) {
+                $this->SetStatus(203); // no http response
+                return false;
+            };
 
-        $goEChargerStatusAPIv1 = json_decode($json);
-        if ($goEChargerStatusAPIv1 === null) {
-            $this->SetStatus(203); // no http response
-            return false;
-        } elseif (isset($goEChargerStatusAPIv1->{'sse'}) == false) {
-            $this->SetStatus(204); // no go-eCharger
-            return false;
+            $goEChargerStatusAPIv1 = json_decode($json);
+            if ($goEChargerStatusAPIv1 === null) {
+                $this->SetStatus(203); // no http response
+                return false;
+            } elseif (isset($goEChargerStatusAPIv1->{'sse'}) == false) {
+                $this->SetStatus(204); // no go-eCharger
+                return false;
+            }
         }
 
-        $this->SetStatus(102);
-
+        // get status json from go-eCharger by API v2
+        // API v2 has much more data and also some data is changed compared to API v1
         $goEChargerStatusAPIv2 = null; // default with null as API call might not happen
-
-        if (($this->ReadPropertyInteger("HardwareRevision") >= 3) &&
-            (isset($goEChargerStatusAPIv1->{'fwv'}) == true) &&
-            (floatval(preg_replace("/[^0-9.]/", "", $goEChargerStatusAPIv1->{'fwv'})) >= 50)) {
-            // on Hardware Revision 3 and a Firmware >= 50 try to use the API v2 to support incompatible API V1 issues
+        if (($this->ReadPropertyInteger("HardwareRevision") >= 3)) {
+            // on Hardware Revision 3 and above try to use the API v2 to support incompatible API V1 issues
             // examples: "dwo"
             try {
                 $ch = curl_init("http://" . $IPAddress . "/api/status");
@@ -1008,9 +1035,19 @@ class goEChargerHWRevv2 extends IPSModule
             };
 
             $goEChargerStatusAPIv2 = json_decode($json);
+
+            if ($goEChargerStatusAPIv2 === null) {
+                $this->SetStatus(203); // no http response
+                return false;
+            } elseif (isset($goEChargerStatusAPIv2->{'sse'}) == false) {
+                $this->SetStatus(204); // no go-eCharger
+                return false;
+            }
         }
 
+        $this->SetStatus(102);
 
+        // adopt API v1 data by data from API v2 or, if API v1 is not used, convert API v2 data to API v1
         $this->dataCorrection($goEChargerStatusAPIv1, $goEChargerStatusAPIv2);
 
         return $goEChargerStatusAPIv1;
@@ -1802,7 +1839,13 @@ class goEChargerHWRevv2 extends IPSModule
 
     protected function dataCorrection(&$goEChargerStatus, $goEChargerStatusV2)
     {
-        /* This method maybe used to correct data returned from the Status API
+        if ($this->ReadPropertyInteger("HardwareRevision") == 99) {
+            // On unknown hardware, only convert API v2 and return
+            $goEChargerStatus = $this->convertV2toV1($goEChargerStatusV2);
+            return;
+        }
+
+        /* From here, this method maybe used to correct data returned from the Status API
            Usually these corrections should be only temporary needed */
 
         // issue on "nrg" with to high power factor!! (in FW 52.2)

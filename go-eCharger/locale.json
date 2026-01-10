@@ -12,6 +12,7 @@
             "HardwareRev2": "Hardware Rev. v2 (API v1 aktivieren)",
             "HardwareRev3": "Hardware Rev. v3 (API v1 u. v2! aktivieren)",
             "HardwareRev4": "Hardware Rev. v4 (API v1 u. v2! aktivieren)",
+            "HardwareRevUnknown": "Hardware Rev. zu neu (nur API v2!, Doku Change Log v2.3 lesen!)",
             "Statistical": "Statistisch (keine aktive Verwendung)",
             "Update Intervals": "Update Verhalten",
             "Update Idle": "wartend (0 = deaktiviert)",

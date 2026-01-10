@@ -479,6 +479,16 @@ Das Skript sollte z.B. minütlich über ein zyklisches Event laufen. Fertig ;)
 ## 6. ChangeLog
 Änderungshistorie
 
+### Version 2.3
+* Neue Hardware Revision "Hardware Rev. zu neu (nur API v2!)", um das Modul mit neueren, unbekannten GO-eChargern verwenden zu können, die keine API v1 mehr unterstützen. Diese Einstellung schränkt den Funktionsumfang etwas ein, da es keine komplette Umstellung auf die komplexere API v2 ist, sondern vielmehr die Daten nur noch mittels API v2 ermittelt/überträgt, gleichzeitig aber nicht alle Funktionen auf die API v2 adaptiert. Es entfallen dabei z.B. folgende Variablen und Funktionen
+  * Daten zum zeitbasierten Laden
+    * minimale Ladezeit bei Strompreis-basiertem Laden
+    * Laden beendet bis bei Strompreis-basiertem Laden
+    * Awattar Preiszone
+  * Funktionen zum zeitbasierten Laden
+    * [getElectricityPriceMinChargeHours](#getelectricitypriceminchargehoursint-instanz) / [setElectricityPriceMinChargeHours](#setelectricitypriceminchargehoursint-instanz-int-minchargehours) 
+    * [getElectricityPriceChargeTill](#getelectricitypricechargetill-instanz) / [setElectricityPriceChargeTill](#setelectricitypricechargetillint-instanz-int-chargetill)
+
 ### Version 2.2.4
 * Neue Einstellung "Statistisch", um das Modul zu Dokumentationszwecken ohne gültige Konfiguration behalten zu können, ohne das es Fehler meldet
 * Neue Einstellung "Zähler Offset", um bei einem Tausch eines Go-eChargers (z.B. bei einem defekt), einen Offset für die Zählerstände hinterlegen zu können, welche auf die ausgelesenen Zählerstände des GO-eCharges aufaddiert werden.
@@ -518,7 +528,7 @@ Das Skript sollte z.B. minütlich über ein zyklisches Event laufen. Fertig ;)
 * Funktionserweiterungen
   * Innen-Temperatur wird auch bei multiplen Temperatursensoren aus der Durchschnittstemperatur gebildet (FW 0.51)
   * Reduzierter Ladestrom aufgrund von Temperatur wird angezeigt (ab FW 0.51)
-  * 
+  
 ### Version 1.5.1
 * Fehlerkorrekturen
   * Anpassung falscher Profile.

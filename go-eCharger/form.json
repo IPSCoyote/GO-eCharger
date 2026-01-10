@@ -58,6 +58,10 @@
             {
               "caption": "HardwareRev4",
               "value": 4
+            },
+            {
+              "caption": "HardwareRevUnknown",
+              "value": 99
             }
           ]
         },
