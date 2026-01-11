@@ -1070,6 +1070,7 @@ class goEChargerHWRevv2 extends IPSModule
                     $value = $value * 100;
                     // set dwo to charger
                     try {
+                        $this->debugLog("Special handling for Parameter '".$parameter."' and value '".$value."'");
                         $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?frc=0&lmo=3&dwo=" . $value);
                         $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?frc=0&lmo=3&dwo=" . $value);
                         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
@@ -1081,7 +1082,7 @@ class goEChargerHWRevv2 extends IPSModule
                         $json = curl_exec($ch);
                         curl_close($ch);
                     } catch (Exception $e) {
-                        $this->debugLog("exception on Trigger");
+                        $this->debugLog("exception on Trigger on special logic 'dwo'");
                     };
 
                     // get complete status from eCharger as conversion etc. is needed
@@ -1090,6 +1091,7 @@ class goEChargerHWRevv2 extends IPSModule
                 case "lmo":
                     // set lmo to charger
                     try {
+                        $this->debugLog("Special handling for Parameter '".$parameter."' and value '".$value."'");
                         $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?lmo=" . $value);
                         $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?lmo=" . $value);
                         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
@@ -1101,7 +1103,7 @@ class goEChargerHWRevv2 extends IPSModule
                         $json = curl_exec($ch);
                         curl_close($ch);
                     } catch (Exception $e) {
-                        $this->debugLog("exception on Trigger");
+                        $this->debugLog("exception on Trigger on special logic 'lmo'");
                     };
 
                     // get complete status from eCharger as conversion etc. is needed
@@ -1110,7 +1112,8 @@ class goEChargerHWRevv2 extends IPSModule
                 case "alw":
                     // set DWO to 0 and start/stop Charger via API V2
                     try {
-                        $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/dwo=0");
+                        $this->debugLog("Special handling for Parameter '".$parameter."' and value '".$value."'");
+                        $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?dwo=0");
                         $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?dwo=0");
                         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
                         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
@@ -1121,7 +1124,7 @@ class goEChargerHWRevv2 extends IPSModule
                         $json = curl_exec($ch);
                         curl_close($ch);
                     } catch (Exception $e) {
-                        $this->debugLog("exception on Trigger");
+                        $this->debugLog("exception on Trigger on special logic 'alw'");
                     };
 
                     // and now activate/deactivate via API V1
@@ -1130,6 +1133,7 @@ class goEChargerHWRevv2 extends IPSModule
                 case "frc":
                     // set force mode to charger
                     try {
+                        $this->debugLog("Special handling for Parameter '".$parameter."' and value '".$value."'");
                         $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/frc=".$value);
                         $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?frc=".$value);
                         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
@@ -1141,28 +1145,58 @@ class goEChargerHWRevv2 extends IPSModule
                         $json = curl_exec($ch);
                         curl_close($ch);
                     } catch (Exception $e) {
-                        $this->debugLog("exception on Trigger");
+                        $this->debugLog("exception on Trigger special logic 'frc'");
                     };
                     return $this->getStatusFromCharger();
+
             }
         }
 
 
-        try {
-            $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/mqtt?payload=" . $parameter . "=" . $value);
-            $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/mqtt?payload=" . $parameter . "=" . $value);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
-            $json = curl_exec($ch);
-            curl_close($ch);
-        } catch (Exception $e) {
-            $this->debugLog("exception on Trigger");
-        };
-        return json_decode($json);
+
+        if ($this->ReadPropertyInteger("HardwareRevision") == 99) {
+            // special logic for Hardware Rev. 99 - only API v2
+            try {
+                $parameterToUse = $parameter;
+
+                switch ($parameter) {
+                    case 'amx':
+                        $parameterToUse = 'amp';
+                        $this->debugLog("Parameter '".$parameter."' exchanged to '".$parameterToUse."'");
+                        break;
+                }
+
+                $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?".$parameterToUse."=".$value);
+                $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?".$parameterToUse."=".$value);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+                $json = curl_exec($ch);
+                curl_close($ch);
+            } catch (Exception $e) {
+                $this->debugLog("exception on Trigger (Commend Send für Hardware Rev. 99");
+            };
+            return $this->getStatusFromCharger();
+        } else {
+            try {
+                $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/mqtt?payload=" . $parameter . "=" . $value);
+                $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/mqtt?payload=" . $parameter . "=" . $value);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+                $json = curl_exec($ch);
+                curl_close($ch);
+            } catch (Exception $e) {
+                $this->debugLog("exception on Trigger");
+            };
+            return json_decode($json);
+        }
     }
 
     protected function ping($host, $port, $timeout)
