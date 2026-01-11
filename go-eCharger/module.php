@@ -157,7 +157,6 @@ class goEChargerHWRevv2 extends IPSModule
         if (strpos($jsonData['Buffer'], $needle) === false) {
             return true;
         }
-
         // cut out content
         $remainingContent = $jsonData['Buffer'];
         $whileBreaker = 0;
@@ -1839,7 +1838,7 @@ class goEChargerHWRevv2 extends IPSModule
 
     protected function dataCorrection(&$goEChargerStatus, $goEChargerStatusV2)
     {
-        if ($this->ReadPropertyInteger("HardwareRevision") == 99) {
+        if ($this->ReadPropertyInteger("HardwareRevision") == 99 && $goEChargerStatusV2 != null) {
             // On unknown hardware, only convert API v2 and return
             $goEChargerStatus = $this->convertV2toV1($goEChargerStatusV2);
             return;
