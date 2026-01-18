@@ -1164,6 +1164,15 @@ class goEChargerHWRevv2 extends IPSModule
                         $parameterToUse = 'amp';
                         $this->debugLog("Parameter '".$parameter."' exchanged to '".$parameterToUse."'");
                         break;
+
+                    case 'ast':
+                        if ($value > 1) {
+                            $this->debugLog("Parameter '".$parameter."' with value '".$value."' not supported on HW Rev. 99");
+                            return $this->getStatusFromCharger();
+                        }
+                        $parameterToUse = 'acs';
+                        $this->debugLog("Parameter '".$parameter."' exchanged to '".$parameterToUse."'");
+                        break;
                 }
 
                 $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?".$parameterToUse."=".$value);
