@@ -47,7 +47,7 @@ trait goEChargerAPIConverter
                 $map = ['eca', 'ecr', 'ecd', 'ec4', 'ec5', 'ec6', 'ec7', 'ec8', 'ec9', 'ec1'];
                 foreach ($map as $i => $field) {
                     if (isset($v2->cards[$i]->energy)) {
-                        $result[$field] = (int)round($v2->cards[$i]->energy / 10);
+                        $result[$field] = (int)round($v2->cards[$i]->energy / 100);
                     }
                 }
             }
@@ -57,7 +57,7 @@ trait goEChargerAPIConverter
             $map = ['eca', 'ecr', 'ecd', 'ec4', 'ec5', 'ec6', 'ec7', 'ec8', 'ec9', 'ec1'];
             foreach ($fields as $i => $f) {
                 if (isset($v2->$f)) {
-                    $result[$map[$i]] = (int)round($v2->$f / 10);
+                    $result[$map[$i]] = (int)round($v2->$f / 100);
                 }
             }
         }
@@ -108,6 +108,32 @@ trait goEChargerAPIConverter
 
         return 0; // Default
     }
+
+    protected function convertNrg($v2): array
+    {
+        $result = [
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0
+        ];
+
+        if (isset($v2->nrg)) {
+            $result =$v2->nrg;
+
+            // I (Ampere) für V1 konvertieren (*10)
+            $result[4] = $result[4] * 10;
+            $result[5] = $result[5] * 10;
+            $result[6] = $result[6] * 10;
+
+            // P (kW) für V1 konvertieren (/100)
+            $result[7] = $result[7] / 100;
+            $result[8] = $result[8] / 100;
+            $result[9] = $result[9] / 100;
+            $result[10] = $result[10] / 100;
+            $result[11] = $result[11] / 10;
+        }
+
+        return $result;
+    }
+
 
     /**
      * V2 → V1 Konverter
@@ -212,7 +238,7 @@ trait goEChargerAPIConverter
 
             // n
             'nmo' => isset($v2->nmo) ? $this->boolInt($v2->nmo) : 0,
-            'nrg' => isset($v2->nrg) && is_array($v2->nrg) ? $v2->nrg : [],
+            'nrg' => isset($v2->nrg) && is_array($v2->nrg) ? convertNrg($v2) : [],
 
             // p
             'pha' => isset($v2->pha) && is_array($v2->pha) ? $this->phaToBitmask($v2->pha) : 0,
