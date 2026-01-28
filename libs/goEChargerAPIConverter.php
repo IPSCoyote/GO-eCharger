@@ -238,7 +238,7 @@ trait goEChargerAPIConverter
 
             // n
             'nmo' => isset($v2->nmo) ? $this->boolInt($v2->nmo) : 0,
-            'nrg' => isset($v2->nrg) && is_array($v2->nrg) ? convertNrg($v2) : [],
+            'nrg' => isset($v2->nrg) && is_array($v2->nrg) ? $this->convertNrg($v2) : [],
 
             // p
             'pha' => isset($v2->pha) && is_array($v2->pha) ? $this->phaToBitmask($v2->pha) : 0,
