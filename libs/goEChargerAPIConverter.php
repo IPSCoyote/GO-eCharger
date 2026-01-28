@@ -53,7 +53,7 @@ trait goEChargerAPIConverter
             }
         } else {
             // Werte aus c1e..c0e
-            $fields = ['c1e', 'c2e', 'c3e', 'c4e', 'c5e', 'c6e', 'c7e', 'c8e', 'c9e', 'c0e'];
+            $fields = ['c0e', 'c1e', 'c2e', 'c3e', 'c4e', 'c5e', 'c6e', 'c7e', 'c8e', 'c9e'];
             $map = ['eca', 'ecr', 'ecd', 'ec4', 'ec5', 'ec6', 'ec7', 'ec8', 'ec9', 'ec1'];
             foreach ($fields as $i => $f) {
                 if (isset($v2->$f)) {
@@ -82,7 +82,7 @@ trait goEChargerAPIConverter
             }
         } else {
             // Suche c1i..c0i
-            $fields = ['c1i', 'c2i', 'c3i', 'c4i', 'c5i', 'c6i', 'c7i', 'c8i', 'c9i', 'c0i'];
+            $fields = ['c0e','c1i', 'c2i', 'c3i', 'c4i', 'c5i', 'c6i', 'c7i', 'c8i', 'c9i'];
             foreach ($fields as $i => $f) {
                 if (isset($v2->$f) && $v2->$f === true) {
                     $uby = $i === 9 ? 0 : $i + 1; // 0er Karte → uby = 0
