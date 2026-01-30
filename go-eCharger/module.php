@@ -1158,6 +1158,7 @@ class goEChargerHWRevv2 extends IPSModule
             // special logic for Hardware Rev. 99 - only API v2
             try {
                 $parameterToUse = $parameter;
+                $valueToUse = $value;
 
                 switch ($parameter) {
                     case 'amx':
@@ -1167,16 +1168,26 @@ class goEChargerHWRevv2 extends IPSModule
 
                     case 'ast':
                         if ($value > 1) {
-                            $this->debugLog("Parameter '".$parameter."' with value '".$value."' not supported on HW Rev. 99");
+                            $this->debugLog("Parameter '".$parameter."' with value '".$valueToUse."' not supported on HW Rev. 99");
                             return $this->getStatusFromCharger();
                         }
                         $parameterToUse = 'acs';
                         $this->debugLog("Parameter '".$parameter."' exchanged to '".$parameterToUse."'");
                         break;
+
+                    case 'fsp':
+                        $parameterToUse = 'psm'; // mentioned in incident in git as 1 = singlePhase, 2 = 3phases (fsp is read only)
+                        if ($value == true) {
+                            $valueToUse = 1; // single phase
+                        } else {
+                            $valueToUse = 2; // 3 phases
+                        }
+                        $this->debugLog("Parameter '".$parameter."' exchanged to '".$parameterToUse."' with value '".$valueToUse."'");
+                        break;
                 }
 
-                $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?".$parameterToUse."=".$value);
-                $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?".$parameterToUse."=".$value);
+                $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?".$parameterToUse."=".$valueToUse);
+                $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?".$parameterToUse."=".$valueToUse);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
                 curl_setopt($ch, CURLOPT_HEADER, 0);
