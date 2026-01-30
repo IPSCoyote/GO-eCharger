@@ -1068,6 +1068,7 @@ class goEChargerHWRevv2 extends IPSModule
                 case "dwo":
                     // adopt value
                     $value = $value * 100;
+                    if ($value == 0) $value = 'null'; // deactivate limit
                     // set dwo to charger
                     try {
                         $this->debugLog("Special handling for Parameter '".$parameter."' and value '".$value."'");
@@ -1110,11 +1111,11 @@ class goEChargerHWRevv2 extends IPSModule
                     return $this->getStatusFromCharger();
 
                 case "alw":
-                    // set DWO to 0 and start/stop Charger via API V2
+                    // set DWO to null and start/stop Charger via API V2
                     try {
                         $this->debugLog("Special handling for Parameter '".$parameter."' and value '".$value."'");
-                        $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?dwo=0");
-                        $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?dwo=0");
+                        $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?dwo=null");
+                        $ch = curl_init("http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?dwo=null");
                         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
                         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
                         curl_setopt($ch, CURLOPT_HEADER, 0);
