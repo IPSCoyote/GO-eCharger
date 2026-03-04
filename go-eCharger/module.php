@@ -202,6 +202,15 @@ class goEChargerHWRevv2 extends IPSModule
         return true;
     }
 
+
+    public function GetCompatibleParents() {
+        if ($this->ReadPropertyBoolean("MQTTUpdateActive") == true) {
+            return '{"type": "connect", "moduleIDs": ["{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}"]}';
+        } else {
+            return '{}';
+        }
+    }
+
     public function getPowerToCar()
     {
         return $this->getTotalPowerToCar();
