@@ -622,9 +622,9 @@ class goEChargerHWRevv2 extends IPSModule
     public function setActive(bool $active)
     {
         if ($active == true) {
-            $value = 1;
+            $value = 1; // ON
         } else {
-            $value = 0;
+            $value = 0; // OFF
         }
         $resultStatus = $this->setValueToeCharger('alw', $value);
         // Update all data
@@ -1197,7 +1197,7 @@ class goEChargerHWRevv2 extends IPSModule
 
                     case 'alw':
                         $parameterToUse = 'frc'; // "dwo=null seems not to work on newer Chargers, so we use the forceMode command
-                        if ($value) {
+                        if ($value == 1) {
                             $valueToUse = 2; // ON
                         } else {
                             $valueToUse = 1; // OFF
