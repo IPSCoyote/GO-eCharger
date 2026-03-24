@@ -1194,6 +1194,14 @@ class goEChargerHWRevv2 extends IPSModule
                         }
                         $this->debugLog("Parameter '".$parameter."' exchanged to '".$parameterToUse."' with value '".$valueToUse."'");
                         break;
+
+                    case 'alw':
+                        $parameterToUse = 'frc'; // "dwo=null seems not to work on newer Chargers, so we use the forceMode command
+                        if ($value) {
+                            $valueToUse = 2; // ON
+                        } else {
+                            $valueToUse = 1; // OFF
+                        }
                 }
 
                 $this->debugLog("Trigger http://" . trim($this->ReadPropertyString("IPAddressCharger")) . "/api/set?".$parameterToUse."=".$valueToUse);
