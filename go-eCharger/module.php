@@ -1972,12 +1972,12 @@ class goEChargerHWRevv2 extends IPSModule
            normal logic is based (HTTP-API-V1) */
 
         if (isset($goEChargerStatus->{'eto'})) {
-            // total energy is sent in API V2 in Wh, in API V1 it's .1 kWh, so we've to defice by 10
-            $goEChargerStatus->{'eto'} = $goEChargerStatus->{'eto'} / 10;
+            // total energy is sent in API V2 in Wh, in API V1 it's .1 kWh, so we've to devide by 100
+            $goEChargerStatus->{'eto'} = $goEChargerStatus->{'eto'} / 100;
         }
 
         if (isset($goEChargerStatus->{'dwo'})) {
-            // total energy is sent in API V2 in Wh, in API V1 it's .1 kWh, so we've to defice by 10
+            // total energy is sent in API V2 in Wh, in API V1 it's .1 kWh, so we've to devide by 10
             $goEChargerStatus->{'dwo'} = $goEChargerStatus->{'dwo'} / 100;
         }
     }
